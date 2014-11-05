@@ -1,0 +1,174 @@
+<?php
+gatekeeper();
+
+$db_prefix = elgg_get_config('dbprefix');
+$user = elgg_get_logged_in_user_entity();
+//Cometchat IE warning
+$ie_warning = get_ua_for_cometchat_warning();
+//MOTD
+$message_to_users = get_motd($db_prefix,$user);
+//Get online users and colleagues
+$online = get_online_friends($user);
+$online .= gc_get_online_users($user);
+//Code for marking non viewed stuff
+$offset = get_input('offset');
+if (!isset($offset) || $offset == 0) {
+	$last_viewed = $user->feed_viewed;
+	$user->feed_viewed_previous = $last_viewed;
+	$user->feed_viewed = time();
+	$user->activity_viewed = $user->feed_viewed;
+	//call this to delete unused time stamps right away
+	delete_orphaned_metastrings();
+	elgg_log("BRUNO dashboard:feed_viewed $user->feed_viewed $user->feed_viewed_previous",'NOTICE');
+}
+
+elgg_set_page_owner_guid($user->guid);
+
+$title = elgg_echo('newsfeed');
+
+//$composer = elgg_view('page/elements/composer', array('entity' => $user, 'class' => 'elgg-composer-dashboard'));
+$composer = elgg_view_form('compound/add', array('enctype' => 'multipart/form-data'));
+
+$options = array();
+
+$page_type = preg_replace('[\W]', '', get_input('page_type', 'all'));
+$type = preg_replace('[\W]', '', get_input('type', 'all'));
+$subtype = preg_replace('[\W]', '', get_input('subtype', ''));
+if ($subtype) {
+        $selector = "type=$type&subtype=$subtype";
+} else {
+        $selector = "type=$type";
+}
+//if ($page_type) {
+        //$selector = $selector."&page_type=$page_type";
+//}
+
+if ($type != 'all') {
+        $options['type'] = $type;
+        if ($subtype) {
+                $options['subtype'] = $subtype;
+        }
+}
+
+switch ($page_type) {
+        case 'mine':
+                $title = elgg_echo('river:mine');
+                $page_filter = 'mine';
+                $options['subject_guid'] = elgg_get_logged_in_user_guid();
+                break;
+        case 'friends':
+                $title = elgg_echo('river:friends');
+                $page_filter = 'friends';
+                $options['relationship_guid'] = elgg_get_logged_in_user_guid();
+                $options['relationship'] = 'friend';
+                break;
+        default:
+                $title = elgg_echo('river:all');
+                $page_filter = 'all';
+                break;
+}
+
+$options['wheres']=array("rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'");
+
+$stream = elgg_list_river($options);
+
+$filter = elgg_view('river/dashboard_sort_menu', array('selected' => $page_type));
+
+$content = elgg_view('core/river/filter', array('selector' => $selector));
+
+//$sidebar = elgg_view('core/river/sidebar');
+
+//$body = elgg_view_layout('one_column', array(
+//		'title' => $title, 
+//		'content' => $filter . $content . $composer . $ie_warning . $message_to_users. $stream, 
+//		'filter_context' => $page_filter,
+//));
+$widget_content=$filter . $content . $composer . $ie_warning . $message_to_users. $stream;
+echo $widget_content;
+//elgg_set_page_owner_guid(1);
+
+//echo elgg_view_page($title, $body);
+
+function get_ua_for_cometchat_warning() {
+	$warning='';
+	if (preg_match('/MSIE 7\.0/',$_SERVER['HTTP_USER_AGENT'])) {
+		$warning = '<div class="iewarning"><h4>'.elgg_echo('gc_theme:cometchat:ie_warning').'</h4></div>';
+	}
+	return $warning;
+}
+
+function get_motd($db_prefix,$user) {
+	$mau='';
+	$motd_id = elgg_get_plugin_setting('motd_id', 'gc_theme');	
+	elgg_log('dashboard/motd motd_id '.$motd_id,'NOTICE');
+	if ($motd_id) {
+		$motd_display_duration = elgg_get_plugin_setting('motd_display_duration', 'gc_theme') * 60;	
+                $query = 'SELECT e.time_updated from '.$db_prefix.'entities e where e.guid = '.$motd_id;
+                $motd_entry = get_data_row($query);
+                $motd_last_updated = $motd_entry->time_updated;
+		elgg_log('dashboard/motd motd_last_updated '.$motd_last_updated,'NOTICE');
+		elgg_log('dashboard/motd user->feed_viewed '.$user->feed_viewed,'NOTICE');
+		if ($user->feed_viewed < $motd_last_updated) {
+			$user->motd_viewed = time();
+		}
+		if (sizeof($user->motd_viewed) > 1) {
+			$user->motd_viewed=$user->motd_viewed['0'];
+		}
+		elgg_log('dashboard/motd user->motd_viewed '.$user->motd_viewed,'NOTICE');
+		if ($user->feed_viewed < ($user->motd_viewed + $motd_display_duration)) {
+			elgg_log('dashboard/motd not viewed enough yet','NOTICE');
+			$motd = elgg_get_plugin_setting('motd', 'gc_theme');	
+			$motd_url = elgg_get_plugin_setting('motd_url', 'gc_theme');	
+			elgg_log('dashboard/motd motd motd_url '.$motd.' '.$motd_url,'NOTICE');
+			$mau = '<div class="motd"><h4>'.$motd.'</h4>'.elgg_echo('gc_theme:motd:detail').'<a href="'.$motd_url.'">'.$motd_url.'</a></div>';
+		}
+	}
+	elgg_log('dashboard/motd mau '.$mau,'NOTICE');
+	return $mau;
+}
+
+function get_online_friends($user) {
+	//$friends = $_SESSION['user']->getFriends("",1000);
+	$friends = $user->getFriends("",1000);
+	$friends_online = 0;
+	$of.="<div class=\"elgg-module elgg-module-aside\">\n";
+	$of.="<div class=\"elgg-head\">\n";
+	$of.="<h2 align=\"center\">".elgg_echo('gc_theme:online')."</h2>\n";
+	$of.="<h3 align=\"center\">".elgg_echo('friends')."</h3>\n";
+	$of.= "</div>\n";
+        if (count($friends) > 0)
+	{
+		foreach ($friends as $friend)
+		{
+			if ($friend->last_action > time() - 600)
+			{
+				$icon = elgg_view_entity_icon(get_user($friend->guid), 'tiny',array('class'=> 'tiny-float-left'));
+				//$icon = elgg_view_image_block(elgg_view_entity_icon(get_user($friend->guid), 'small'),"");
+				//$icon = elgg_view("profile/icon", array('entity' => get_user($friend->guid), 'size' => 'small'));
+				$of.= "<div class=\"online\" style=\"float:left;\">\n";
+				$of.= $icon;
+				$of.= "</div>\n";
+			}
+		}
+	}
+	return $of;
+}
+
+function gc_get_online_users($user) {
+        $objects = find_active_users(600, 32, $offset);
+	$of.="<div class=\"elgg-head-onlineusers\">\n";
+	$of.="<h3 align=\"center\">".elgg_echo('admin:users')."</h3>\n";
+	$of.= "</div>\n";
+        if ($objects)
+	{
+		foreach ($objects as $user)
+		{
+				$icon = elgg_view_entity_icon(get_user($user->guid), 'tiny',array('class'=> 'tiny-float-left', 'display_name'=> false));
+				$of.= "<div class=\"online\" style=\"float:left;\">\n";
+				$of.= $icon;
+				$of.= "</div>\n";
+		}
+	}
+	$of.= "</div>\n";
+	return $of;
+}

@@ -1,0 +1,476 @@
+/* line 3, ../sass/site.scss */
+body, .ui-body-c, .ui-overlay-c {
+  background: #d3d3d3;
+}
+
+/* line 7, ../sass/site.scss */
+.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* line 11, ../sass/site.scss */
+#content {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* line 18, ../sass/site.scss */
+img {
+  max-width: auto;
+  height: auto;
+}
+
+/* line 23, ../sass/site.scss */
+.hidden {
+  display: none;
+}
+
+/* line 27, ../sass/site.scss */
+.ui-body-c .ui-link, .ui-body-c .ui-link:visited, a, a:visited {
+  color: #1c4c8c;
+  text-decoration: none;
+}
+
+/* line 32, ../sass/site.scss */
+.ui-body-c .ui-link:hover, a:hover {
+  color: #1f79c7;
+}
+
+/*
+* HEADERS
+*/
+/* line 39, ../sass/site.scss */
+h1, h1:not(.ui-title) {
+  border: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* line 45, ../sass/site.scss */
+#gcwu-gcnb {
+  border: 0;
+}
+
+/* line 48, ../sass/site.scss */
+.agora-banner-en,.agora-banner-fr {
+  height: 94px;
+}
+.agora-banner-en {
+   background: white url(../../images/new-banner-en.jpg) no-repeat 50% 0;
+}
+.agora-banner-fr {
+   background: white url(../../images/new-banner-fr.jpg) no-repeat 50% 0;
+}
+/*
+* ICONS
+*/
+/* line 62, ../sass/site.scss */
+.wb-icon-message,
+.wb-icon-blog,
+.wb-icon-discussion,
+.wb-icon-add-poll,
+.wb-icon-add-file,
+.wb-icon-twitter,
+.wb-icon-linkedin {
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+/* line 71, ../sass/site.scss */
+.wb-icon-message {
+  background-image: url(../images/icons/icon-message.png);
+}
+
+/* line 72, ../sass/site.scss */
+.wb-icon-blog {
+  background-image: url(../images/icons/icon-blog.png);
+}
+
+/* line 73, ../sass/site.scss */
+.wb-icon-discussion {
+  background-image: url(../images/icons/icon-discussion.png);
+}
+
+/* line 74, ../sass/site.scss */
+.wb-icon-add-poll {
+  background-image: url(../images/icons/icon-add-poll.png);
+}
+
+/* line 75, ../sass/site.scss */
+.wb-icon-add-file {
+  background-image: url(../images/icons/icon-add-file.png);
+}
+
+/* line 76, ../sass/site.scss */
+.wb-icon-twitter {
+  background-image: url(../images/icons/icon-twitter.png);
+}
+
+/* line 77, ../sass/site.scss */
+.wb-icon-linkedin {
+  background-image: url(../images/icons/icon-linkedin.png);
+}
+
+/*
+* LINKS
+*/
+/* line 83, ../sass/site.scss */
+a img {
+  border: 0;
+}
+
+/* line 87, ../sass/site.scss */
+p.more-link {
+  margin: 0;
+  text-align: right;
+}
+
+/* line 92, ../sass/site.scss */
+.button {
+  padding: 5px 15px;
+  border-color: #ccc;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fefefe), color-stop(100%, #dcdcdc));
+  background-image: -webkit-linear-gradient(#fefefe, #dcdcdc);
+  background-image: -moz-linear-gradient(#fefefe, #dcdcdc);
+  background-image: -o-linear-gradient(#fefefe, #dcdcdc);
+  background-image: linear-gradient(#fefefe, #dcdcdc);
+}
+/* line 96, ../sass/site.scss */
+.button .badge {
+  padding: 2px;
+  border: 1px solid #ccc;
+  font-size: 9px;
+  line-height: 1em;
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* line 107, ../sass/site.scss */
+.button-icon.with-badge {
+  padding: 5px 8px;
+}
+/* line 110, ../sass/site.scss */
+.button-icon .button-text {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  height: 16px;
+  font-size: 0;
+  text-indent: -9999px;
+}
+/* line 116, ../sass/site.scss */
+.button-icon.icon-home .button-text {
+  width: 14px;
+  background: url(../../images/icon-home.png) no-repeat 0 0;
+}
+/* line 120, ../sass/site.scss */
+.button-icon.icon-messages .button-text {
+  width: 16px;
+  background: url(../../images/icon-message.png) no-repeat 0 0;
+}
+/* line 124, ../sass/site.scss */
+.button-icon.icon-search .button-text {
+  width: 15px;
+  background: url(../../images/icon-search-inactive.png) no-repeat 0 0;
+}
+/* line 128, ../sass/site.scss */
+.button-icon.icon-settings .button-text {
+  width: 15px;
+  background: url(../../images/icon-settings.png) no-repeat 0 0;
+}
+
+/* line 134, ../sass/site.scss */
+.button-more {
+  display: block;
+  border: 0;
+  margin: 0 15px;
+  background: #ebf1f7;
+  text-align: center;
+  color: #1f4e66;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+
+/* line 144, ../sass/site.scss */
+a.tag {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0 0 2px;
+  padding: 0 4px;
+  background: #e6e6e6;
+}
+
+/*
+* LAYOUT
+*/
+/* line 157, ../sass/site.scss */
+#wb-head,
+#wb-head-in,
+#gcwu-bnr,
+#gcwu-bnr-in {
+  overflow: visible;
+}
+
+/* line 160, ../sass/site.scss */
+#gcwu-gcnb-in, #gcwu-bnr-in {
+  /*max-width: 990px;*/
+  max-width: 1190px;
+}
+
+/* line 163, ../sass/site.scss */
+#content {
+  max-width: 1200px;
+  /*max-width: 1010px;*/
+}
+
+/* line 167, ../sass/site.scss */
+.sidebar, .elgg-sidebar, #main-content {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin-right: -0.4em;
+  vertical-align: top;
+}
+
+/* line 173, ../sass/site.scss */
+.sidebar-first, .elgg-sidebar {
+  width: 15%;
+}
+
+/* line 177, ../sass/site.scss */
+.sidebar-second, .elgg-sidebar-alt-river {
+  width: 25%;
+}
+
+/* line 181, ../sass/site.scss */
+.elgg-layout > .elgg-body, #main-content {
+  width: 60%;
+}
+
+/* line 186, ../sass/site.scss */
+.search-form label {
+  display: none;
+}
+/* line 189, ../sass/site.scss */
+.search-form input, .search-form .button, .search-form details {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0 -0.25em 0 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+/* line 194, ../sass/site.scss */
+.search-form details {
+  margin-right: -0.1em;
+}
+/* line 197, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body {
+  width: 397px;
+  border-width: 0 1px 1px;
+  right: -3px;
+  z-index: 50;
+  /*display: none;*/
+}
+/* line 202, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body p {
+  margin: 0;
+  font-weight: bold;
+}
+/* line 206, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body label {
+  margin-top: 10px;
+  display: block;
+}
+/* line 210, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body input {
+  min-width: 384px;
+}
+/* line 213, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body select {
+  min-width: 392px;
+}
+/* line 216, ../sass/site.scss */
+.search-form .advanced-search-cont.toggle-menu-body .button {
+  margin-top: 10px;
+}
+/* line 220, ../sass/site.scss */
+.search-form input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 500px;
+  height: 17px;
+  padding: 4px 4px;
+  border-width: 1px 0 1px 1px;
+}
+/* line 227, ../sass/site.scss */
+.search-form button[type="submit"] {
+  border-width: 1px 1px 1px 0;
+}
+
+/* line 232, ../sass/site.scss */
+.detail-info-cont {
+  border-top: 1px solid #dedede;
+  background: #efefef;
+  padding: 5px 20px 15px;
+}
+/* line 237, ../sass/site.scss */
+.detail-info-cont img {
+  margin: 0;
+  float: left;
+}
+/* line 241, ../sass/site.scss */
+#profile-info-cont>.data-cont {
+  margin-left: 10px;
+}
+.detail-info-cont .data-cont {
+  margin-top: 10px;
+  margin-left: 115px;
+}
+.detail-info-cont .profile-data-cont {
+  max-width: 75%;
+  display: inline-block;
+  margin-left: 25px;
+  vertical-align: top;
+}
+/* line 245, ../sass/site.scss */
+.detail-info-cont .counter-cont {
+  clear: both;
+  text-align: right;
+  font-weight: bold;
+}
+/* line 249, ../sass/site.scss */
+.detail-info-cont .counter-cont a {
+  text-decoration: none;
+}
+/* line 252, ../sass/site.scss */
+.detail-info-cont .counter-cont strong {
+  font-size: 20px;
+}
+/* line 257, ../sass/site.scss */
+.detail-info-cont h2, .detail-info-cont p {
+  margin: 0 0 5px;
+  line-height: 1em;
+}
+/* line 261, ../sass/site.scss */
+.detail-info-cont h2 {
+  font-size: 20px;
+}
+
+/* line 266, ../sass/site.scss */
+.section-controls-cont {
+  padding: 10px 15px;
+  border-bottom: 1px solid #dedede;
+}
+/* line 269, ../sass/site.scss */
+.section-controls-cont .button {
+  font-size: 11px;
+}
+/* line 272, ../sass/site.scss */
+.section-controls-cont .button-accent {
+  margin-left: 10px;
+  float: right;
+}
+
+/*
+* COLLAPSIBLE
+*/
+/* line 282, ../sass/site.scss */
+details summary {
+  font-weight: bold;
+  color: #1c4c8c;
+}
+/* line 285, ../sass/site.scss */
+details summary:hover, details summary:focus {
+  background: transparent;
+}
+
+/* line 291, ../sass/site.scss */
+.toggle-menu {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0;
+  position: relative;
+}
+/* line 295, ../sass/site.scss */
+.toggle-menu .button {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+}
+/* line 298, ../sass/site.scss */
+.toggle-menu .toggle-menu-body {
+  padding: 20px;
+  margin: 0;
+  border: 1px solid #dedede;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+}
+
+@media screen and (max-width: 959px), screen and (max-device-width: 1023px) {
+  /* line 310, ../sass/site.scss */
+  .sidebar, .elgg-sidebar, .elgg-sidebar-alt-river, .elgg-layout > .elgg-body, #main-content {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  /* line 316, ../sass/site.scss */
+  .section-controls-cont .button-accent {
+    float: none;
+  }
+}
+@media screen and (max-width: 700px) {
+  /* line 323, ../sass/site.scss */
+  .agora-banner-en,.agora-banner-fr {
+    display: none;
+  }
+
+  /* line 327, ../sass/site.scss */
+  .section-controls-cont .button {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    margin: 10px 0;
+  }
+}

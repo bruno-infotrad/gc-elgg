@@ -1,0 +1,95 @@
+/* line 3, ../sass/region-sidebar.scss */
+.sidebar {
+  /*
+  * HEADERS
+  */
+}
+/* line 4, ../sass/region-sidebar.scss */
+.sidebar img {
+  margin: 0;
+}
+/* line 7, ../sass/region-sidebar.scss */
+.sidebar .inner {
+  padding: 10px 0;
+}
+/* line 14, ../sass/region-sidebar.scss */
+.sidebar h2, .sidebar h3 {
+  padding: 0 10px;
+  text-transform: uppercase;
+}
+/* line 18, ../sass/region-sidebar.scss */
+.sidebar h2 {
+  margin: 0 0 1em;
+  font-size: 14px;
+  color: #999;
+}
+/* line 23, ../sass/region-sidebar.scss */
+.sidebar h3 {
+  margin-bottom: 4px;
+  font-size: 11px;
+  line-height: 1em;
+}
+
+/* line 30, ../sass/region-sidebar.scss */
+.sidebar-item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 15px;
+}
+/* line 34, ../sass/region-sidebar.scss */
+.sidebar-item .image-list {
+  max-width: 196px;
+  margin: 10px auto 20px;
+}
+/* line 38, ../sass/region-sidebar.scss */
+.sidebar-item .activity-list, .sidebar-item p.more-link {
+  padding: 0 12px;
+}
+
+/* line 43, ../sass/region-sidebar.scss */
+.sidebar-search {
+  padding-bottom: 0;
+}
+/* line 45, ../sass/region-sidebar.scss */
+.sidebar-search input {
+  margin-right: -0.4em;
+}
+/* line 47, ../sass/region-sidebar.scss */
+.sidebar-search input[type="search"] {
+  width: 75%;
+}
+
+/* line 53, ../sass/region-sidebar.scss */
+.curr-user-cont {
+  padding: 0 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+/* line 57, ../sass/region-sidebar.scss */
+.curr-user-cont img {
+  float: left;
+}
+/* line 60, ../sass/region-sidebar.scss */
+.curr-user-cont .user-data {
+  padding-top: 5px;
+  margin-left: 60px;
+}
+/* line 63, ../sass/region-sidebar.scss */
+.curr-user-cont .user-data p {
+  margin: 0;
+}
+/* line 66, ../sass/region-sidebar.scss */
+.curr-user-cont .user-data p.name a {
+  font-weight: bold;
+}
+/* line 70, ../sass/region-sidebar.scss */
+.curr-user-cont .user-data p.edit-link {
+  font-size: 11px;
+}
+
+@media screen and (max-width: 959px), screen and (max-device-width: 1023px) {
+  /* line 78, ../sass/region-sidebar.scss */
+  .sidebar-search {
+    padding-left: 10px;
+  }
+}

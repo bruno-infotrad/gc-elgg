@@ -1,0 +1,32 @@
+/* line 3, ../sass/ie7.scss */
+h1 {
+  line-height: 1.4em;
+}
+
+/* line 7, ../sass/ie7.scss */
+.button {
+  min-height: 18px;
+  line-height: 1em;
+  vertical-align: top;
+}
+
+/* line 13, ../sass/ie7.scss */
+.button-icon .button-text {
+  text-indent: 0;
+}
+
+/* line 19, ../sass/ie7.scss */
+#site-search input {
+  vertical-align: top;
+}
+
+/* line 24, ../sass/ie7.scss */
+#main-contnet {
+  position: relative;
+  background: #fff;
+}
+
+/* line 30, ../sass/ie7.scss */
+.section-controls-cont .button-accent {
+  float: none;
+}

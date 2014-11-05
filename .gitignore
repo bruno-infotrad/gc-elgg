@@ -1,0 +1,14 @@
+cometchat/cache/**
+cometchat/config.php*
+cometchat/error.log
+cometchat-cron*
+engine/settings.php
+engine/settings.php_*
+.htaccess
+htaccess_*
+httpd-config
+httpd-config/**
+httpd_*
+install.hidden-Bazinga
+install.hidden-Bazinga/**
+offline_*

@@ -1,0 +1,157 @@
+/* line 6, ../sass/page-feed.scss */
+ul.creation-list li.active:before, ul.creation-list li.active:after {
+  content: '';
+}
+
+/* line 12, ../sass/page-feed.scss */
+.new-discussion {
+  border: 1px solid #d8dfea;
+  margin: 0 20px 20px;
+}
+/* line 16, ../sass/page-feed.scss */
+.new-discussion .textarea-cont {
+  padding: 10px 10px 0;
+}
+/* line 19, ../sass/page-feed.scss */
+.new-discussion textarea {
+  display: block;
+  width: 100%;
+  height: 75px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+/* line 29, ../sass/page-feed.scss */
+.new-discussion .controls-cont {
+  padding: 8px 10px;
+  background: #e7eef6;
+}
+/* line 32, ../sass/page-feed.scss */
+.new-discussion .controls-cont > div {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  width: 50%;
+  margin-right: -0.25em;
+}
+/* line 37, ../sass/page-feed.scss */
+.new-discussion .controls-cont .buttons-cont {
+  text-align: right;
+}
+/* line 39, ../sass/page-feed.scss */
+.new-discussion .controls-cont .buttons-cont .button {
+  margin-left: 10px;
+}
+/* line 44, ../sass/page-feed.scss */
+.new-discussion .char-count-cont {
+  font-size: 11px;
+}
+/* line 46, ../sass/page-feed.scss */
+.new-discussion .char-count-cont p {
+  margin: 0;
+}
+
+/* line 52, ../sass/page-feed.scss */
+ul.feed-type-list {
+  padding: 5px 20px 0;
+  background: #e7eef6;
+}
+/* line 55, ../sass/page-feed.scss */
+ul.feed-type-list li {
+  padding-bottom: 8px;
+}
+/* line 57, ../sass/page-feed.scss */
+ul.feed-type-list li.active {
+  position: relative;
+}
+/* line 59, ../sass/page-feed.scss */
+ul.feed-type-list li.active:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 8px 5px;
+  border-color: transparent transparent #ffffff transparent;
+  margin-left: -5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+}
+
+/* line 76, ../sass/page-feed.scss */
+ul.feed-activity {
+  padding: 0 15px;
+}
+/* line 78, ../sass/page-feed.scss */
+ul.feed-activity > li {
+  padding: 20px 0 10px;
+  border-bottom: 1px solid #dedede;
+}
+/* line 81, ../sass/page-feed.scss */
+ul.feed-activity > li > img {
+  margin: 0 0 0 10px;
+}
+/* line 84, ../sass/page-feed.scss */
+ul.feed-activity > li .data-cont {
+  margin-left: 70px;
+}
+/* line 88, ../sass/page-feed.scss */
+ul.feed-activity > li .data-cont p.meta-author a {
+  font-weight: bold;
+}
+/* line 92, ../sass/page-feed.scss */
+ul.feed-activity > li .data-cont p.meta-interact {
+  margin: 0;
+  font-size: 11px;
+}
+
+/* line 100, ../sass/page-feed.scss */
+.comment-cont {
+  padding-top: 14px;
+}
+/* line 102, ../sass/page-feed.scss */
+.comment-cont header {
+  background: #d9e3f0;
+  padding: 4px 20px;
+  position: relative;
+  color: #666;
+}
+/* line 107, ../sass/page-feed.scss */
+.comment-cont header:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 6px 8px 6px;
+  border-color: transparent transparent #d9e3f0 transparent;
+  position: absolute;
+  bottom: 100%;
+  left: 20px;
+  z-index: 1;
+}
+
+/* line 121, ../sass/page-feed.scss */
+.comment-body {
+  padding: 20px 10px 5px;
+  background: #e7eef6;
+}
+/* line 124, ../sass/page-feed.scss */
+.comment-body .data-cont {
+  margin-top: 8px;
+}
+/* line 127, ../sass/page-feed.scss */
+.comment-body .name {
+  font-weight: bold;
+}
+/* line 130, ../sass/page-feed.scss */
+.comment-body input {
+  width: 97%;
+  padding: 1%;
+}

@@ -1,0 +1,4 @@
+This plugin will only work if the web server is capable of accessing the 
+PHP_AUTH_USER and AUTH_TYPE SERVER variables. These variables may be obtained
+by using the windind module. For more info on this, search for "php 
+Apache SSO" on you favorite search engine.

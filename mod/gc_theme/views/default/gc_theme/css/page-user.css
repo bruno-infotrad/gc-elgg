@@ -1,0 +1,45 @@
+/* line 4, ../sass/page-user.scss */
+#user-info-cont p {
+  font-weight: bold;
+}
+
+/* line 9, ../sass/page-user.scss */
+#user-details-cont {
+  padding: 20px 10px;
+}
+/* line 12, ../sass/page-user.scss */
+#user-details-cont .info-table {
+  border: 0;
+  margin: 0;
+}
+/* line 15, ../sass/page-user.scss */
+#user-details-cont .info-table th, #user-details-cont .info-table td {
+  border: 0;
+}
+/* line 18, ../sass/page-user.scss */
+#user-details-cont .info-table th {
+  width: 22%;
+  padding: 8px 8px 8px 0;
+  background: transparent;
+  text-align: right;
+}
+/* line 26, ../sass/page-user.scss */
+#user-details-cont h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #000;
+}
+/* line 32, ../sass/page-user.scss */
+#user-details-cont .more-cont {
+  position: relative;
+  z-index: 10;
+  float: right;
+}
+/* line 36, ../sass/page-user.scss */
+#user-details-cont .more-cont .button {
+  padding: 2px 10px;
+}
+/* line 39, ../sass/page-user.scss */
+#user-details-cont .more-cont .toggle-menu-body {
+  width: 80px;
+}

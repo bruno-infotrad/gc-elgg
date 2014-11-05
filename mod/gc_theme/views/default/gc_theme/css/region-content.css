@@ -1,0 +1,27 @@
+/* line 3, ../sass/region-content.scss */
+#main-content {
+  padding-top: 20px;
+  padding-bottom: 150px;
+  border: 1px solid #dedede;
+  border-width: 0 1px 0;
+}
+/* line 9, ../sass/region-content.scss */
+#main-content .inner > header {
+  padding: 0 20px 10px;
+  overflow: hidden;
+}
+/* line 12, ../sass/region-content.scss */
+#main-content .inner > header h1 {
+  float: left;
+}
+/* line 15, ../sass/region-content.scss */
+#main-content .inner > header .button {
+  float: right;
+}
+
+@media screen and (max-width: 959px), screen and (max-device-width: 1023px) {
+  /* line 22, ../sass/region-content.scss */
+  #main-content {
+    padding-bottom: 20px;
+  }
+}

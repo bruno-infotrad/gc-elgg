@@ -1,0 +1,95 @@
+<?php $site_url=elgg_get_site_url();?>
+	<!-- Header begins / Début de l'en-tête -->
+	<div id="cn-head"><div id="cn-head-inner">
+	<!-- clf2-nsi2 theme begins / Début du thème clf2-nsi2 -->
+		<div id="cn-sig">
+			<img src="<?php echo $site_url;?>mod/gc_theme/views/default/images/dfait-maeci-fre.gif" width="386" height="20" alt="Affaires étrangères et Commerce international Canada" title="Affaires étrangères et Commerce international Canada" />
+		</div>
+		<div id="cn-wmms">
+			<img src="<?php echo $site_url;?>mod/gc_theme/views/default/images/wmms.gif" width="83" height="20" alt="Symbole du gouvernement du Canada" title="Symbole du gouvernement du Canada" />
+		</div>
+
+		<!-- Banner begins / Début de la bannière -->
+<!--		<script src="/iwglobal/utilities/FileProcessor.aspx?file=/iwglobal/utilities/scripts/plugins/AC_OETags.js&amp;version=20080405152946" type="text/javascript"></script> -->
+<!--		<div id="cn-leaf"></div> -->
+		<div id="cn-banner" style="background: url('<?php echo $site_url;?>/mod/gc_theme/views/default/images/agora-banner_fr.jpg') no-repeat;background-size: 100%;">
+<!--
+		<div id="cn-banner" style="background: url('<?php echo $site_url;?>/mod/gc_theme/views/default/images/fp_noleaf.jpg') no-repeat;background-size: 100%;">
+		<div id="cn-banner" style="background: url('/iwglobal/utilities/FileProcessor.aspx?file=/iwglobal/element/banner/static/fp_noleaf.jpg&amp;version=20090126151122') no-repeat;"> 
+-->
+			<div id="cn-banner-content">
+			</div>
+			<h1 id="cn-banner-text"></h1>
+
+			<p id="cn-banner-subtext"></p>
+		</div>
+		<!-- Banner ends / Fin de la bannière -->
+		<DIV class=fp><!-- COMMON MENU BAR TITLE BEGINS | DEBUT DU TITRE DE LA BARRE DE MENU COMMUNE -->
+			<H1 class=navaid>Debut de la barre de menu commune</H1><!-- COMMON MENU BAR TITLE ENDS | FIN DU TITRE DE LA BARRE DE MENU COMMUNE -->
+			<DIV class=commonbars>
+				<DIV class=blackcommonbar>
+					<DIV class=blackcommonbarleft>
+						<UL><!-- OTHER OFFICIAL LANGUAGE LINK BEGINS | DÉBUT DU LIEN DE LA DEUXIÈME LANGUE OFFICIEL -->
+  							<LI id=cn-cmb2><A title="Intranet MAECI" href="http://intranet.dfait-maeci.gc.ca/intranet/index.aspx?lang=fra">Intranet MAECI</A><SPAN class=delimiter>|</SPAN></LI>
+                                                                <script language="javascript" type="text/javascript">
+                                                                        function form_submit(){
+                                                                                document.getElementById('formtoggle').submit();
+                                                                        }
+                                                                </script>
+                                                                <form action="<?php echo $vars['url']; ?>action/toggle_language/toggle" method="post" name="formtoggle" id="formtoggle">
+                                                                <?php
+                                                                // security tokens.
+                                                                echo elgg_view('input/securitytoken');
+                                                                ?>
+                                                                </form>
+  							<LI id=cn-cmb1><A lang=en title=English href="javascript:form_submit()" xml:lang="en">English</A><SPAN class=delimiter>|</SPAN></LI>
+							<LI id=cn-cmb5><A title="Internet MAECI" href="http://www.international.gc.ca/international/index.aspx?lang=fra" rel=search>Internet MAECI</A><SPAN class=delimiter>|</SPAN></LI>
+  							<LI id=cn-cmb6><A title=Publiservice href="http://publiservice.gc.ca/menu_f.html">Publiservice</A></LI>
+						</UL>
+					</DIV>
+					<DIV class=blackcommonbarright>
+						<UL>
+							<LI id=cn-cmb7><A title=Nouvelles href="<?php echo $site_url.'pages/view/14530/news-nouvelles';?>">Nouvelles</A><SPAN class=delimiter>|</SPAN></LI>
+							<LI id=cn-cmb7><A title=Aide href="<?php echo $site_url.'pages/view/17898/aidefaq';?>">Aide</A><SPAN class=delimiter>|</SPAN></LI>
+							<LI id=cn-cmb8><A title=Contactez-nous href="<?php echo $site_url.'pages/view/19301/contact-us-contacteznous';?>">Contactez-nous</A></LI>
+						</UL>
+					</DIV>
+				</DIV>
+				<DIV class=greycommonbar>
+					<DIV class=greycommonbarleft>
+  							<SPAN><A title="Accueil" href="<?php echo $site_url;?>">Accueil</A></SPAN><SPAN class=delimiter>|</SPAN></LI>
+<?php
+if ($user = elgg_get_logged_in_user_entity()){
+$profile_url=$site_url.'profile/'.$user->username;
+$settings_url=$site_url.'settings/user/'.$user->username;
+$notifications_url=$site_url.'notifications/personal';
+if (! elgg_is_active_plugin('ntlm_sso')) {
+        $logout_url=$site_url.'action/logout';
+}
+                                                echo "<SPAN><A title='Profil' href=$profile_url>".elgg_echo('profile')."</A></SPAN><SPAN class=delimiter>|</SPAN>";
+                                                echo "<SPAN><A title='Paramètres du compte' href=$settings_url>".elgg_echo('settings')."</A></SPAN><SPAN class=delimiter>|</SPAN>";
+                                                echo "<SPAN><A title='Notifications' href=$notifications_url>".elgg_echo('notifications:subscriptions:changesettings')."</A></SPAN>";
+	if (! elgg_is_active_plugin('ntlm_sso')) {
+                                                echo "<SPAN class=delimiter>|</SPAN><SPAN><A title='Déconnexion' href=$logout_url>".elgg_echo('logout')."</A></SPAN>";
+	}
+}
+?>
+					</DIV>
+					<DIV class=greycommonbarright>
+					</DIV>
+				</DIV>
+			</DIV>
+		</DIV>
+		<!-- COMMON MENU BAR ENDS | FIN DE LA BARRE DE MENU COMMUNE -->
+
+		<!-- Breadcrumb begins / Début du fil d'Ariane -->
+		<!--<div id="cn-bcrumb">
+			<h2>Breadcrumb</h2>
+			<ol>
+				<li><a href="/international/index.aspx?lang=fr" title="Accueil"></a></li>
+			</ol>
+		</div>
+		<!-- Breadcrumb ends / Fin du fil d'Ariane -->
+	<!-- clf2-nsi2 theme ends / Fin du thème clf2-nsi2 -->
+
+	</div></div>

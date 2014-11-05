@@ -1,0 +1,10 @@
+= Version history =
+
+1.0 (????-??-??):
+
+- initial release
+
+0.1 (2012-08-22):
+
+- work started
+

@@ -1,0 +1,125 @@
+/*
+ * CometChat 
+ * Copyright (c) 2012 Inscripts - support@cometchat.com | http://www.cometchat.com | http://www.inscripts.com
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+html, body {
+	overflow: hidden;
+	background: <?php echo $themeSettings['tab_background'];?>;
+	direction: <?php echo $dir;?>;
+}
+
+ul {
+  float: left;
+  width: 100%; 
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-top: 20px;
+}
+ 
+li {
+  
+  float: left;
+  width: 115px;
+  margin: 0;
+  cursor: pointer;
+  font-family: <?php echo $themeSettings['tab_font_family'];?>;
+  font-size: <?php echo $themeSettings['tab_font_size'];?>;
+  color: <?php echo $themeSettings['tab_color'];?>;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 15px;
+  padding-right: 10px;
+  list-style: none;
+} 
+
+li:hover {
+	background-color: <?php echo $themeSettings['bar_border_light'];?>;
+	color: <?php echo $themeSettings['bar_color'];?>;
+}
+
+.catselected {
+	background-color: <?php echo $themeSettings['tab_title_backgroud_light'];?>;
+	color: <?php echo $themeSettings['bar_color'];?>;
+	font-weight: bold;
+}
+
+#container {
+	<?php if (!$rtl):?>
+	margin-right: 2px;
+	<?php endif;?>
+}
+
+#categories {
+	width: 140px;
+	float: left;
+	padding-top: 2px;
+}
+
+#games {
+	width: 360px;
+	float: left;
+	overflow-y:auto;
+	overflow-x:hidden;
+	height: 300px;
+	border-left: 1px dotted <?php echo $themeSettings['bar_border_light'];?>;
+}
+
+#games img {
+	width: 80px;
+	height: 80px;
+	margin-bottom: 2px;
+}
+
+.gamelist {
+	padding:5px;
+	text-align: center;
+	overflow: hidden;
+	font-family: <?php echo $themeSettings['tab_font_family'];?>;
+	font-size: <?php echo $themeSettings['tab_font_size_small'];?>;
+	color: <?php echo $themeSettings['tab_color'];?>;
+	float: left;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+.gamelist:hover {
+	filter: alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+.gameslist:hover {
+	background-color: <?php echo $themeSettings['bar_border_light'];?>;
+}
+
+#loader {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	background-image: url(themes/default/images/loader.gif);
+	width: 16px;
+	height: 16px;
+	display: none;
+}

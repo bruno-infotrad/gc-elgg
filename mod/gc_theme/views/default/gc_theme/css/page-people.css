@@ -1,0 +1,77 @@
+#profile-info-cont {
+        min-height: 110px;
+        /*padding: 30px 20px 20px;*/
+}
+/* line 21, ../sass/page-groups.scss */
+#profile-info-cont .data-cont {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 24, ../sass/page-groups.scss */
+#profile-info-cont h2 {
+  margin-bottom: 10px;
+}
+/* line 27, ../sass/page-groups.scss */
+#profile-info-cont .description {
+  margin-bottom: 10px;
+}
+/* line 30, ../sass/page-groups.scss */
+#profile-info-cont .counter-cont {
+  padding-top: 10px;
+  clear: none;
+}
+
+/* line 3, ../sass/page-people.scss */
+.online-indicator {
+  width: 7px;
+  height: 7px;
+  display: none;
+  background: #65a830;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+}
+
+/* line 14, ../sass/page-people.scss */
+.is-online .online-indicator {
+  display: block;
+}
+
+/* line 21, ../sass/page-people.scss */
+ul.pagination-type-list li.active:before {
+  content: '';
+  border-color: transparent transparent #efefef transparent;
+}
+
+/* line 28, ../sass/page-people.scss */
+ul.people-list {
+  overflow: hidden;
+}
+/* line 30, ../sass/page-people.scss */
+ul.people-list li {
+  width: 260px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 10px;
+  position: relative;
+  float: left;
+}
+/* line 37, ../sass/page-people.scss */
+ul.people-list li.odd {
+  margin-right: 45px;
+}
+
+@media all and (max-width: 990px) {
+  /* line 45, ../sass/page-people.scss */
+  ul.people-list li {
+    width: 100%;
+    margin: 0;
+    float: none;
+  }
+}

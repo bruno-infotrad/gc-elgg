@@ -1,0 +1,55 @@
+/* line 4, ../sass/page-groups.scss */
+.groups-list li {
+  padding: 10px;
+  border: 1px solid #dedede;
+}
+/* line 7, ../sass/page-groups.scss */
+.groups-list li.is-locked {
+  background: url(../images/icons/icon-locked-lrg.png) no-repeat 100% 0;
+}
+/* line 13, ../sass/page-groups.scss */
+.groups-list .data-cont p.name {
+  padding-top: 10px;
+}
+
+#group-info-cont {
+	min-height: 90px;
+	padding: 10px 20px 20px;
+}
+/* line 21, ../sass/page-groups.scss */
+#group-info-cont .data-cont {
+  overflow: hidden;
+}
+/* line 24, ../sass/page-groups.scss */
+#group-info-cont h2 {
+  margin-bottom: 10px;
+}
+/* line 27, ../sass/page-groups.scss */
+#group-info-cont:hover .description {
+  display: inline-block;
+}
+#group-info-cont .briefdescription {
+  clear: both;
+  float: left;
+}
+#group-info-cont .description {
+  display: none;
+  margin-bottom: 10px;
+  padding-top: 40px;
+}
+/* line 30, ../sass/page-groups.scss */
+#group-info-cont .counter-cont {
+  padding-top: 10px;
+  clear: none;
+}
+
+/* line 36, ../sass/page-groups.scss */
+.group-meta {
+  font-weight: bold;
+  float: left;
+}
+
+/* line 41, ../sass/page-groups.scss */
+#tab_discussion-parent {
+  padding: 20px 0 10px;
+}

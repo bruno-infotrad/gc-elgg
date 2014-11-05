@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>DFAIT ADSync</name>
+	<author>Sebastien Routier</author>
+	<version>0.1</version>
+	<description>Imports user profile fields values from DFAIT's Active Directory</description>
+	<website>http://Agora/</website>
+	<copyright>Sebastien Routier 2012</copyright>
+	<license>GNU General Public License version 3</license>
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+
+	<requires>
+		<type>plugin</type>
+		<name>profile_manager</name>
+		<version>7.3</version>
+	</requires>
+	<requires>
+		<type>priority</type>
+		<priority>after</priority>
+		<plugin>profile_manager</plugin>
+	</requires>
+	
+	<requires>
+        <type>plugin</type>
+        <name>flex_log</name>
+        <version>0.1</version>
+	</requires>
+	<requires>
+		<type>priority</type>
+		<priority>after</priority>
+		<plugin>flex_log</plugin>
+	</requires>
+	
+	
+</plugin_manifest>
