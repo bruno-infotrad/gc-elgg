@@ -35,6 +35,10 @@ function gc_theme_init() {
         elgg_register_simplecache_view('js/contribute_to');
         elgg_register_js('elgg.contribute_to', $contribute_to_js, 'footer');
 
+	//Register role config hook for im admins
+	elgg_register_plugin_hook_handler('roles:config', 'role', 'roles_im_admins_config', 600);
+	//Register permissions check hook
+	elgg_register_plugin_hook_handler("permissions_check", "group", "im_admin_can_edit_hook");
 	//Replace with my search tag hook to add brief description and description in search
 	elgg_unregister_plugin_hook_handler('search', 'object', 'search_objects_hook');
 	elgg_register_plugin_hook_handler('search', 'object', 'gc_search_objects_hook');
@@ -176,8 +180,10 @@ function gc_theme_init() {
         elgg_register_plugin_hook_handler('usersettings:save', 'user', 'gc_theme_user_settings_save');
 
 
-	// Add action for compound object on river composer
 	$action_path = elgg_get_plugins_path() . 'gc_theme/actions';
+	//Action for roles
+	elgg_register_action("roles_im_admin/make_im_admin", "$action_path/roles_im_admin/make_im_admin.php");
+	elgg_register_action("roles_im_admin/revoke_im_admin", "$action_path/roles_im_admin/revoke_im_admin.php");
 	elgg_register_action('gc_theme/settings/save',$CONFIG->pluginspath . 'gc_theme/actions/plugins/settings/save.php');
 	//elgg_register_action('',$CONFIG->pluginspath . 'gc_theme/settings/usersettings/save.php');
 	elgg_register_action('gc_theme/settings/save',$CONFIG->pluginspath . 'gc_theme/actions/plugins/settings/save.php');
@@ -196,6 +202,8 @@ function gc_theme_init() {
 	elgg_register_action("comments/add", "$action_path/comments/add.php");
 	elgg_unregister_action("group_tools/mail");
 	elgg_register_action("group_tools/mail", $action_path."/group_tools/mail.php");
+	elgg_unregister_action("group_tools/admin_transfer");
+	elgg_register_action("group_tools/admin_transfer", $action_path."/group_tools/admin_transfer.php");
 	elgg_register_action("gc_theme/pns", $action_path."/gc_theme/pns.php");
 	elgg_register_action("notificationsettings/single_groupsave", $action_path."/notificationsettings/single_groupsave.php");
 	// Remove admin for toggling notification for group

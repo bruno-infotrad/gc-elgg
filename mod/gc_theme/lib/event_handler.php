@@ -530,6 +530,16 @@ function gc_theme_pagesetup_handler() {
 				));
 			}
 			elgg_unregister_menu_item('page', 'site_stats');
+			if(elgg_in_context("groups") && ($owner instanceof ElggGroup)){
+				$user=elgg_get_logged_in_user_entity();
+				if(!empty($user)){
+					// check for admin transfer
+					$admin_transfer = elgg_get_plugin_setting("admin_transfer", "group_tools");
+                        		if(($admin_transfer == "owner") && (roles_has_role($user,'im_admin'))){
+                                		elgg_extend_view("groups/edit", "group_tools/forms/admin_transfer", 400);
+                        		}
+				}
+			}
 		} else {
 	
 				$login_box = elgg_view('core/account/login_box');

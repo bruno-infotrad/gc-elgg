@@ -82,6 +82,11 @@
 		<priority>after</priority>
 		<plugin>file_tools</plugin>
 	</requires>
+	<requires>
+		<type>priority</type>
+		<priority>after</priority>
+		<plugin>roles</plugin>
+	</requires>
 	
 	<suggests>
 		<type>plugin</type>

@@ -140,7 +140,7 @@ function gc_usersettings_page_handler($segments, $handle) {
         }
 
         if (isset($segments[1])) {
-                $user = get_user_by_username($page[1]);
+                $user = get_user_by_username($segments[1]);
                 elgg_set_page_owner_guid($user->guid);
         } else {
                 $user = elgg_get_logged_in_user_guid();
