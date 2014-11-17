@@ -396,12 +396,13 @@ function adsync_sync_one_user($userid = null) {
 			}
 			if ($result) {
 				$result = adsync_update_synced_at($ad_data);
-				adsync_unlockrow($userid);		 
+				//adsync_unlockrow($userid);		 
 			}
 			if ($result) {
 				// Notify of profile update
 				elgg_trigger_event('profileupdate', $elgg_user->type, $elgg_user);
 			}
+			adsync_unlockrow($userid);		 
 		} else {
 			$GLOBALS['ADSYNC_LOG']->warn("Skipping sync for user already being processed: $userid ");
 		}

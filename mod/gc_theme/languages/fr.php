@@ -547,6 +547,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'gc_theme:profile:modify' => "Modifier",
         'gc_theme:profile:edit' => "mon profil",
         'gc_theme:avatar:edit' => "mon avatar",
+	'gc_theme:profile_manager:validate_username_failed' => "Nom d'usager invalide",
 	'topbar:profile' => "Profil",
 	'messages:toggle' => "Tout sélectionner/désélectionner",
 	'messages:answer' => 'Répondre',

@@ -82,7 +82,7 @@ function ldap_auth_check($config, $username,$user_create)
 	{
 		$sql_query0 = "SELECT dfaitedsid FROM `ad2elgg_users` where extensionattribute9='".$username."' and elgg_guid is not null";
         	$signet_elgg_username = get_data($sql_query0);
-		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."') and elgg_guid is not null";
+		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."')";
         	$cida_elgg_username = get_data($sql_query1);
 		// Now check if 1) User never logged in or 2) account is not associated with anything.
 		// If one of these conditions is met check if a corresponding account exists. If it does, log user in as this account
@@ -141,7 +141,7 @@ function ldap_auth_check($config, $username,$user_create)
 		// no duplicates can exist
 		$sql_query0 = "SELECT dfaitedsid FROM `ad2elgg_users` where extensionattribute9='".$username."' and elgg_guid is not null";
         	$signet_elgg_username = get_data($sql_query0);
-		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."') and elgg_guid is not null";
+		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."')";
         	$cida_elgg_username = get_data($sql_query1);
 		elgg_log("BRUNO NTLM_AUTH username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true),'NOTICE');
 		if (count($signet_elgg_username) == 1) {

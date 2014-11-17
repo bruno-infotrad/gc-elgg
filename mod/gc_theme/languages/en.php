@@ -292,6 +292,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'gc_theme:profile:modify' => "Modify",
 	'gc_theme:profile:edit' => "profile",
 	'gc_theme:avatar:edit' => "avatar",
+	'gc_theme:profile_manager:validate_username_failed' => 'Invalid username',
 	'topbar:profile' => "Profile",
 
 	'notifications:subscriptions:changesettings:groups' => 'Group notifications',

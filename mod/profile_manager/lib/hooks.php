@@ -277,6 +277,9 @@
 							}
 						}
 					}
+				} else {
+		    			register_error(elgg_echo("gc_theme:profile_manager:validate_username_failed"));
+		    			forward(REFERER);
 				}
 			}
 		}
