@@ -1,4 +1,20 @@
 <?php
+function fxuwpi_page_handler() {
+        if (elgg_is_admin_logged_in()) {
+        	$base_dir = elgg_get_plugins_path() . 'gc_theme/lib';
+		require_once "$base_dir/find_xCIDA_users_with_profile_info.php";
+        } else {
+                forward('/dashboard');
+        }
+}
+function reassign_objects_page_handler() {
+        if (elgg_is_admin_logged_in()) {
+        	$base_dir = elgg_get_plugins_path() . 'gc_theme/lib';
+		require_once "$base_dir/reassign_objects.php";
+        } else {
+                forward('/dashboard');
+        }
+}
 function delete_unused_accounts_page_handler() {
         if (elgg_is_admin_logged_in()) {
         	$base_dir = elgg_get_plugins_path() . 'gc_theme/lib';

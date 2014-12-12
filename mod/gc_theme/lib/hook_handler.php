@@ -627,7 +627,7 @@ function gc_user_entities($hook, $type, $return, $params) {
         	$user = $params['entity'];
         	$number_of_entities_owned_by_user = elgg_get_entities(array(
 						'types' => 'object',
-						'subtypes' => array('blog','bookmarks','folder','groupforumtopic','page','page_top','poll','poll_choice','thewire'),
+						'subtypes' => array('blog','bookmarks','file','folder','groupforumtopic','page','page_top','poll','poll_choice','thewire'),
 						'owner_guids' => $user->getGUID(),
 						'count' => TRUE,
 						));
@@ -639,7 +639,7 @@ function gc_user_entities($hook, $type, $return, $params) {
 		$nomoobu = $number_of_entities_owned_by_user + $number_of_annotations_owned_by_user;
                 $item = new ElggMenuItem(
                                 'user:number_of_entities',
-                                $nomoobu.' objets');
+                                $nomoobu.' objets',false);
                 $item->setSection('admin');
                 $return[] = $item;
         }
@@ -717,30 +717,34 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 
 function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
         $handler = elgg_extract('handler', $params, false);
-        if ($handler != 'thewire') {
+        if ($handler != 'thewire' && $handler != 'blog') {
                 return $value;
         }
 
-        foreach ($value as $index => $item) {
-                $name = $item->getName();
-                if ($name == 'access' || $name == 'edit') {
-		//Not ready yet
-                //if ($name == 'access' ) {
-                        unset($value[$index]);
-                }
+	if ($handler == 'thewire') {
+        	foreach ($value as $index => $item) {
+        	        $name = $item->getName();
+        	        if ($name == 'access' || $name == 'edit') {
+			//Not ready yet
+        	        //if ($name == 'access' ) {
+        	                unset($value[$index]);
+        	        }
+        	}
         }
 
         $entity = $params['entity'];
 
         if (elgg_is_logged_in()) {
-                $options = array(
-                        'name' => 'comment',
-                        'text' => elgg_echo('thewire:comment'),
-                        'href' => "thewire/thread/$entity->guid",
-                        'priority' => 150,
-                );
+		if ($handler == 'thewire') {
+                	$options = array(
+                	        'name' => 'comment',
+                	        'text' => elgg_echo('thewire:comment'),
+                	        'href' => "thewire/thread/$entity->guid",
+                	        'priority' => 150,
+                	);
                 $value[] = ElggMenuItem::factory($options);
-		if (elgg_is_admin_logged_in()) {
+		}
+		if (elgg_is_admin_logged_in() || roles_has_role(elgg_get_logged_in_user_entity(),'im_admin')) {
 			$post = get_entity($entity->getGuid());
         		if ($post->exec_content == 'true') {
 				$options = array(

@@ -306,7 +306,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'river:comment:group:default' => "%s posted a comment on %s group creation",
 	'members:searchboxvalue' => "Name",
 	'members:label:alphabetical' => "Alphabetical",
-	'gc_theme:duplicate_account' => "You have have two accounts in Agora. Please contact Agora Support to have them merged.",
+	'gc_theme:duplicate_account' => "Please note you have two different accounts on Agora. Please contact Agora Support to arrange migration of your content",
         'gc_theme:elgg_summary' => '<br><div class="whatis"><h4>Use this collaboration tool to</h4><ul>
                                         <li>&nbsp;
                                         <li>&diams;&nbsp;share information across the department quickly (i.e. your personal broadcast/microblog)

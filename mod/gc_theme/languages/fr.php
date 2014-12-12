@@ -569,7 +569,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'members:label:alphabetical' => "Alphabétique",
 	'usersettings:statistics:label:email' => "Courriel",
 	'usersettings:statistics:opt:linktext' => "Statistiques",
-	'gc_theme:duplicate_account' => "Vous avez deux comptes Agora. Communiquez avec le soutien agora pour les fusionner.",
+	'gc_theme:duplicate_account' => "Veuillez noter que vous avez deux comptes actifs dans Agora. Communiquez avec le soutien agora pour les fusionner",
 	'gc_theme:elgg_summary' => "<br><div class=\"whatis\"><h4>Utilisez cet outil de collaboration pour</h4><ul>
 					<li>&nbsp;
 					<li>&diams;&nbsp;échanger rapidement de l’information avec des collègues au sein du Ministère (c.-à-d., diffusion ou microblogue personnel);<br>

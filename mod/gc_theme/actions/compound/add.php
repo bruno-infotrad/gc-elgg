@@ -67,12 +67,14 @@ if ($container_guid == 0) {
 }
 if ($mv_container_guid && $guid == 0) {
 	foreach($container_guids as $container) {
-		elgg_log("multiple post ".$access_id[$container],'NOTICE');
+		elgg_log("multiple post ".$access_ids[$container],'NOTICE');
 		$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
 		if (!$guid) {
 			register_error(elgg_echo("thewire:error"));
 			forward(REFERER);
 		}
+		// Reset guid because of jeditable
+		$guid = 0;
 	}
 } else {
 	$guid = thebetterwire_save_post($guid, $body, $user_id, $container_guid, $access_id, $parent_guid, $method,$exec_content,$jeditable,$river_guid);

@@ -1,4 +1,5 @@
 <?php
+$GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::FATAL);
 
 function gc_theme_init() {
 	require_once 'lib/functions.php';
@@ -230,8 +231,10 @@ function gc_theme_init() {
 	elgg_register_page_handler('friends', 'gc_friends_page_handler');
 	elgg_register_page_handler('friendsof', 'gc_friends_page_handler');
 	elgg_register_page_handler('collections', 'gc_collections_page_handler');
-	// Special page handler for delete unused accounts
+	// Special page handler for AD amalgamation
 	elgg_register_page_handler('delete_unused_accounts', 'delete_unused_accounts_page_handler');
+	elgg_register_page_handler('reassign_objects', 'reassign_objects_page_handler');
+	elgg_register_page_handler('find_xCIDA_users_with_profile_info', 'fxuwpi_page_handler');
 	
 
 	/**

@@ -9,6 +9,8 @@
  * @param unknown_type $object_type
  * @param unknown_type $object 
 */
+$GLOBALS['SSO'] = new FlexLog(FlexLogLevel::INFO);
+
 function ntlm_auth_init()
 {
 	global $CONFIG;
@@ -80,6 +82,7 @@ function ldap_auth_check($config, $username,$user_create)
 {
 	if ($user = get_user_by_username($username))
 	{
+		$GLOBALS['SSO']->info('User '.$username.' exists');
 		$sql_query0 = "SELECT dfaitedsid FROM `ad2elgg_users` where extensionattribute9='".$username."' and elgg_guid is not null";
         	$signet_elgg_username = get_data($sql_query0);
 		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."')";
@@ -87,23 +90,31 @@ function ldap_auth_check($config, $username,$user_create)
 		// Now check if 1) User never logged in or 2) account is not associated with anything.
 		// If one of these conditions is met check if a corresponding account exists. If it does, log user in as this account
                 $nomoobu = gc_theme_get_user_objects($user);
+		$GLOBALS['SSO']->info("last_login=".$user->last_login." num of objects=".$nomoobu." username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true));
 		if ($user->last_login == 0 || $nomoobu == 0) {
-			elgg_log("BRUNO NTLM_AUTH last_login=".$user->last_login." num of objects=".$nomoobu." username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true),'NOTICE');
-			if (count($signet_elgg_username) == 1) {
+			if (count($signet_elgg_username) == 1 and $signet_elgg_username[0]->dfaitedsid) {
 				$linked_username = $signet_elgg_username[0]->dfaitedsid;
-				elgg_log("BRUNO NTLM_AUTH signet linked_username=$linked_username ",'NOTICE');
-				if ($linked_user = get_user_by_username($linked_username))
-				{
-					return login($linked_user);
+				$GLOBALS['SSO']->info("SIGNET linked_username=$linked_username ");
+				if ($linked_user = get_user_by_username($linked_username)) {
+					if (! $linked_user->isBanned()) {
+						$GLOBALS['SSO']->info("User $username exists,Logged in as SIGNET $linked_username ");
+						return login($linked_user);
+					} else {
+						return login($user);
+					}
 				} else {
 					return login($user);
 				}
-			} elseif (count($cida_elgg_username) == 1) {
+			} elseif (count($cida_elgg_username) == 1 and $cida_elgg_username[0]->extensionattribute9) {
 				$linked_username = $cida_elgg_username[0]->extensionattribute9;
-				elgg_log("BRUNO NTLM_AUTH cida linked_username=$linked_username ",'NOTICE');
-				if ($linked_user = get_user_by_username($linked_username))
-				{
-					return login($linked_user);
+				$GLOBALS['SSO']->info("CIDA linked_username=$linked_username ");
+				if ($linked_user = get_user_by_username($linked_username)) {
+					if (! $linked_user->isBanned()) {
+						$GLOBALS['SSO']->info("User $username exists,Logged in as CIDA $linked_username ");
+						return login($linked_user);
+					} else {
+						return login($user);
+					}
 				} else {
 					return login($user);
 				}
@@ -111,27 +122,27 @@ function ldap_auth_check($config, $username,$user_create)
 				return login($user);
 			}
 		} else {
-			elgg_log("BRUNO NTLM_AUTH last_login=".$user->last_login." num of objects=".$nomoobu." username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true),'NOTICE');
-			if (count($signet_elgg_username) == 1) {
+			if (count($signet_elgg_username) == 1 and $signet_elgg_username[0]->dfaitedsid) {
 				$linked_username = $signet_elgg_username[0]->dfaitedsid;
-				elgg_log("BRUNO NTLM_AUTH signet linked_username=$linked_username ",'NOTICE');
+				$GLOBALS['SSO']->info("SIGNET linked_username=$linked_username ");
 				if ($linked_user = get_user_by_username($linked_username))
 				{
 					if(gc_theme_get_user_objects($linked_user)) {
-						register_error(elgg_echo('gc_theme:duplicate_account'));
+						$GLOBALS['SSO']->info("Duplicate Agora active accounts $username and $linked_username, Logged in as CIDA $username");
+						//register_error(elgg_echo('gc_theme:duplicate_account'));
 					} 
 				} 
-			} elseif (count($cida_elgg_username) == 1) {
+			} elseif (count($cida_elgg_username) == 1 and $cida_elgg_username[0]->extensionattribute9) {
 				$linked_username = $cida_elgg_username[0]->extensionattribute9;
-				elgg_log("BRUNO NTLM_AUTH cida linked_username=$linked_username ",'NOTICE');
+				$GLOBALS['SSO']->info("CIDA linked_username=$linked_username ");
 				if ($linked_user = get_user_by_username($linked_username))
 				{
 					if(gc_theme_get_user_objects($linked_user)) {
-						register_error(elgg_echo('gc_theme:duplicate_account'));
+						$GLOBALS['SSO']->info("Duplicate Agora active accounts $username and $linked_username, Logged in as SIGNET $username");
+						//register_error(elgg_echo('gc_theme:duplicate_account'));
 					} 
 				} 
 			}
-			elgg_log("BRUNO NTLM_AUTH username=$username",'NOTICE');
 			return login($user);
 		}
 	}
@@ -139,26 +150,35 @@ function ldap_auth_check($config, $username,$user_create)
 	{
 		// user loging in with username, account does not exist in Agora but association exists in add2elgg_users
 		// no duplicates can exist
+		$GLOBALS['SSO']->info('User '.$username.' does not exists');
 		$sql_query0 = "SELECT dfaitedsid FROM `ad2elgg_users` where extensionattribute9='".$username."' and elgg_guid is not null";
         	$signet_elgg_username = get_data($sql_query0);
 		$sql_query1 = "SELECT extensionattribute9 FROM `ad2elgg_users` where dfaitedsid=lower('".$username."')";
         	$cida_elgg_username = get_data($sql_query1);
-		elgg_log("BRUNO NTLM_AUTH username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true),'NOTICE');
-		if (count($signet_elgg_username) == 1) {
+		$GLOBALS['SSO']->info("username=$username signet_elgg_username ".var_export($signet_elgg_username,true)." cida_elgg_username ".var_export($cida_elgg_username,true));
+		if (count($signet_elgg_username) == 1 and $signet_elgg_username[0]->dfaitedsid) {
 			$linked_username = $signet_elgg_username[0]->dfaitedsid;
-			elgg_log("BRUNO NTLM_AUTH signet linked_username=$linked_username ",'NOTICE');
-			if ($linked_user = get_user_by_username($linked_username))
-			{
-				return login($linked_user);
+			$GLOBALS['SSO']->info("SIGNET linked_username=$linked_username ");
+			if ($linked_user = get_user_by_username($linked_username)) {
+				if (! $linked_user->isBanned()) {
+					$GLOBALS['SSO']->info("User $username does not exist, Logged in as SIGNET $linked_username");
+					return login($linked_user);
+				} else {
+					return login($user);
+				}
 			} else {
 				return false;
 			}
-		} elseif (count($cida_elgg_username) == 1) {
+		} elseif (count($cida_elgg_username) == 1 and $cida_elgg_username[0]->extensionattribute9) {
 			$linked_username = $cida_elgg_username[0]->extensionattribute9;
-			elgg_log("BRUNO NTLM_AUTH cida linked_username=$linked_username ",'NOTICE');
-			if ($linked_user = get_user_by_username($linked_username))
-			{
-				return login($linked_user);
+			$GLOBALS['SSO']->info("CIDA linked_username=$linked_username ");
+			if ($linked_user = get_user_by_username($linked_username)) {
+				if (! $linked_user->isBanned()) {
+					$GLOBALS['SSO']->info("User $username does not exist, Logged in as CIDA $linked_username");
+					return login($linked_user);
+				} else {
+					return login($user);
+				}
 			} else {
 				return false;
 			}
@@ -171,7 +191,7 @@ function gc_theme_get_user_objects($user) {
 	$ia=elgg_set_ignore_access();
 	$number_of_entities_owned_by_user = elgg_get_entities(array(
 						'types' => 'object',
-						'subtypes' => array('blog','bookmarks','folder','groupforumtopic','page','page_top','poll','poll_choice','thewire'),
+						'subtypes' => array('blog','bookmarks','file','folder','groupforumtopic','page','page_top','poll','poll_choice','thewire'),
 						'owner_guids' => $user->getGUID(),
 						'count' => TRUE,
 						));

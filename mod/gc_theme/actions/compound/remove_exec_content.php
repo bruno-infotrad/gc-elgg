@@ -1,5 +1,5 @@
 <?php
-if (elgg_is_admin_logged_in()) {
+if (elgg_is_admin_logged_in() || roles_has_role(elgg_get_logged_in_user_entity(),'im_admin')) {
 	$guid = (int) get_input('guid',0);
 	$post = get_entity($guid);
 	$post->exec_content = false;
