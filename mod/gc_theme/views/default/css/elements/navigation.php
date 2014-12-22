@@ -493,6 +493,9 @@ z-index: 1;
 	padding: 0 8px 3px 9px;
 	height: 19px;
 }
+.group-list-item {
+	padding: 0 7px 3px 9px!important;
+}
 .elgg-menu-filter > li > a {
 	padding: 0 8px 3px 9px;
 }

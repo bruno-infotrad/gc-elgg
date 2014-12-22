@@ -212,6 +212,10 @@ function gc_theme_groups_page_handler($segments, $handle) {
 			require_once "$pages_dir/groups/allgroups.php";
 			return true;
 
+		case 'list':
+			require_once "$pages_dir/groups/groupslist.php";
+			return true;
+
 		case 'invitations':
 			set_input('username', $segments[1]);
 			require_once "$pages_dir/groups/invitations.php";

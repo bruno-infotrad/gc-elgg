@@ -162,7 +162,7 @@ function gc_theme_pagesetup_handler() {
 						'text' => $group_name,
 						'title' => $group->name,
 						'href' => $group->getURL(),
-						'priority' => 31,
+						'priority' => 33,
 						'parent_name' => 'groups:all',
 						'section' => '1communities',
 					));
@@ -185,6 +185,15 @@ function gc_theme_pagesetup_handler() {
 					'parent_name' => 'groups:all',
 					'section' => '1communities',
                 		));
+				elgg_register_menu_item('page', array(
+					'name' => 'groups:groups_list',
+					'text' => elgg_echo('groups:list'),
+					'title' => elgg_echo('groups:list'),
+					'href' => "/groups/list?filter=a",
+                        		'priority' => 31,
+					'parent_name' => 'groups:all',
+					'section' => '1communities',
+                		));
 				if (count($totalgroups) > 10) {
 					elgg_load_js('elgg.all_my_groups');
 					elgg_register_menu_item('page', array(
@@ -192,7 +201,7 @@ function gc_theme_pagesetup_handler() {
 						'text' => '+ '.elgg_echo('groups:yours:more'),
 						'title' => elgg_echo('groups:yours:more'),
 						'href' => "#",
-                        			'priority' => 33,
+                        			'priority' => 34,
 						'parent_name' => 'groups:all',
 						'section' => '1communities',
 						'id' => 'all-my-groups',
@@ -203,7 +212,7 @@ function gc_theme_pagesetup_handler() {
 					'name' => 'groups-add',
 					'text' => elgg_echo('groups:add'),
 					'href' => "/groups/add",
-					'priority' => 30,
+					'priority' => 32,
 					'parent_name' => 'groups:all',
 					'section' => '1communities',
 				));

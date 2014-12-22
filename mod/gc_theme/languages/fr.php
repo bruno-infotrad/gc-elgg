@@ -508,6 +508,8 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'groups:joinrequest:remove:check' => "Êtes-vous certain(e) de vouloir supprimer cette demande d'adhésion?",
 	'groups:invite:remove:check' => "Êtes-vous certain(e) de vouloir supprimer cette invitation?",
 	'groups:membershiprequests:short' => "Demandes",
+	'groups:list' => "Liste des groupes",
+	'groups:list:other' => "Autre",
 	'group_tools:group:edit:profile' => "Profil du groupe",
 	'group_tools:group:edit:other' => "Autres options",
 	'group_tools:multiple_admin:group_admins' => "Propriétaires du groupe",
