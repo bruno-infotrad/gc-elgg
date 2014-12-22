@@ -43,11 +43,11 @@ if (elgg_is_admin_logged_in()) {
 			foreach ($metadatas as $metadata) {
 				$metadata->owner_guid =  $target_user_guid;
 				if ($metadata->save()) {
-					echo "<br>".elgg_echo("Transferred metadata ownership to $target_username for metadata $metadata->guid $metadata->entity_guid");
-					$GLOBALS['DUA_LOG']->FATAL("Transferred metadata ownership to $target_username for metadata $metadata->guid $metadata->entity_guid");
+					echo "<br>".elgg_echo("Transferred metadata ownership to $target_username for metadata $metadata->id $metadata->entity_guid");
+					$GLOBALS['DUA_LOG']->FATAL("Transferred metadata ownership to $target_username for metadata $metadata->id $metadata->entity_guid");
 				} else {
-					echo "<br>".elgg_echo("Could not transfer metadata ownership to $target_username for metadata $metadata->guid $metadata->entity_guid");
-					$GLOBALS['DUA_LOG']->FATAL("Could not transfer metadata ownership to $target_username for metadata $metadata->guid $metadata->entity_guid");
+					echo "<br>".elgg_echo("Could not transfer metadata ownership to $target_username for metadata $metadata->id $metadata->entity_guid");
+					$GLOBALS['DUA_LOG']->FATAL("Could not transfer metadata ownership to $target_username for metadata $metadata->id $metadata->entity_guid");
 				}
 			}
 			echo "<br>".elgg_echo("Processing annotations for $source_username");

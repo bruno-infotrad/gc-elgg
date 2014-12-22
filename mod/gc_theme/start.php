@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::FATAL);
+$GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::DEBUG);
 
 function gc_theme_init() {
 	require_once 'lib/functions.php';
@@ -60,6 +60,8 @@ function gc_theme_init() {
 	elgg_unregister_plugin_hook_handler('output:before', 'layout','elgg_views_add_rss_link');
 	elgg_register_plugin_hook_handler('output:before', 'layout', 'gc_theme_views_add_rss_link');
 	elgg_unregister_plugin_hook_handler('register', 'menu:page', 'bookmarks_page_menu');
+	// Trigger update of ad2elgg_user table when username is changed
+	elgg_register_event_handler("update", "user", "ad2elgg_user_update");
 	// Unregister add colleague event notification (bug 57)
 	elgg_unregister_event_handler('create', 'friend', 'relationship_notification_hook');
 	elgg_register_event_handler('create', 'friend', 'gc_relationship_notification_hook');

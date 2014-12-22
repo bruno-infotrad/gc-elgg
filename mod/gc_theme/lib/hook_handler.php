@@ -1397,3 +1397,13 @@ function im_admin_can_edit_hook($hook, $type, $return_value, $params){
 	}
 	return $result;
 }
+
+function ad2elgg_user_update_forward_hook($hook_name, $entity_type, $return_value, $parameters){
+	$GLOBALS['DUA_LOG']->debug("FORWARD HOOK: ".var_export($parameters,true));
+	$username = get_input("username");
+	$GLOBALS['DUA_LOG']->debug("Username: $username");
+	if(!empty($username)){
+		return elgg_get_site_url() . "/dfait_adsync/sync/" . $username;
+	}
+}
+

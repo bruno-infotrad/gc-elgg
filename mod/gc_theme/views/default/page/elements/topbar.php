@@ -77,7 +77,7 @@ echo <<<_HTML
 			</form>
 		</div>
 		<div class="button-cont site-settings">
-			<a class="button button-icon icon-settings" href="${site_url}settings/user"><span class="button-text">Settings</span></a>
+			<a class="button button-icon icon-settings" href="${site_url}settings/user/$username"><span class="button-text">Settings</span></a>
 			<a class="button" href="$feedback_url">$feedback</a>
 		</div>
 _HTML;

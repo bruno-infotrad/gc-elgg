@@ -20,23 +20,25 @@ if($enable_username_change == "yes" || ($enable_username_change == "admin" && el
 		$("#profile_manager_username .elgg-input-text").live("keyup", function(event){
 			if(event.which != 13){
 				var username = $(this).val();
-				$container = $(this).parent();
-				$container.find(".elgg-icon").hide();
-				
-				if(username !== $(this).attr("rel")){
-					$container.find(".elgg-icon-profile-manager-loading").show();
+				if (username.length > 3 ){
+					$container = $(this).parent();
+					$container.find(".elgg-icon").hide();
 					
-					$.getJSON(elgg.get_site_url() + "profile_manager/validate_username", { "username": username }, function(data){
-						if($("#profile_manager_username .elgg-input-text").val() == username){
-							if(data.valid){
-								$container.find(".elgg-icon-profile-manager-valid").show();
-							} else {
-								$container.find(".elgg-icon-profile-manager-invalid").show();
+					if(username !== $(this).attr("rel")){
+						$container.find(".elgg-icon-profile-manager-loading").show();
+						
+						$.getJSON(elgg.get_site_url() + "profile_manager/validate_username", { "username": username }, function(data){
+							if($("#profile_manager_username .elgg-input-text").val() == username){
+								if(data.valid){
+									$container.find(".elgg-icon-profile-manager-valid").show();
+								} else {
+									$container.find(".elgg-icon-profile-manager-invalid").show();
+								}
+								
+								$("#profile_manager_username .elgg-icon-profile-manager-loading").hide();
 							}
-							
-							$("#profile_manager_username .elgg-icon-profile-manager-loading").hide();
-						}
-					});
+						});
+					}
 				}
 			}
 		});

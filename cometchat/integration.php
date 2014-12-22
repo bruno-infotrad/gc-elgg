@@ -25,6 +25,7 @@ define('DB_NAME',					$CONFIG->dbname								);
 define('TABLE_PREFIX',				$CONFIG->dbprefix										);
 define('DB_USERTABLE',				'users_entity'									);
 define('DB_USERTABLE_NAME',			'name'								);
+define('DB_USERTABLE_USERNAME',			'username'								);
 define('DB_USERTABLE_USERID',		'guid'								);
 define('DB_USERTABLE_LASTACTIVITY',	'last_action'							);
 
@@ -69,7 +70,7 @@ function getFriendsList($userid,$time) {
 	else
 	{
 
-		$sql = "select DISTINCT ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." userid, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." username, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_LASTACTIVITY." lastactivity, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." avatar, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." link, cometchat_status.message, cometchat_status.status from (SELECT guid_one, guid_two  FROM ".TABLE_PREFIX."entity_relationships WHERE relationship = 'friend' UNION SELECT guid_two, guid_one FROM ".TABLE_PREFIX."entity_relationships WHERE relationship = 'friend') friends join ".TABLE_PREFIX.DB_USERTABLE." on  friends.guid_two = ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." left join cometchat_status on ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = cometchat_status.userid where friends.guid_one = '".mysql_real_escape_string($userid)."' order by username asc";
+		$sql = "select DISTINCT ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." userid, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." username, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_LASTACTIVITY." lastactivity, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." avatar, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERNAME." link, cometchat_status.message, cometchat_status.status from (SELECT guid_one, guid_two  FROM ".TABLE_PREFIX."entity_relationships WHERE relationship = 'friend' UNION SELECT guid_two, guid_one FROM ".TABLE_PREFIX."entity_relationships WHERE relationship = 'friend') friends join ".TABLE_PREFIX.DB_USERTABLE." on  friends.guid_two = ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." left join cometchat_status on ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = cometchat_status.userid where friends.guid_one = '".mysql_real_escape_string($userid)."' order by username asc";
 	}
 
 
@@ -77,7 +78,7 @@ function getFriendsList($userid,$time) {
 }
 
 function getUserDetails($userid) {
-	$sql = ("select ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." userid, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." username, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_LASTACTIVITY." lastactivity,  ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." link,  ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." avatar, cometchat_status.message, cometchat_status.status from ".TABLE_PREFIX.DB_USERTABLE." left join cometchat_status on ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = cometchat_status.userid where ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = '".mysql_real_escape_string($userid)."'");
+	$sql = ("select ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." userid, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_NAME." username, ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_LASTACTIVITY." lastactivity,  ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERNAME." link,  ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." avatar, cometchat_status.message, cometchat_status.status from ".TABLE_PREFIX.DB_USERTABLE." left join cometchat_status on ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = cometchat_status.userid where ".TABLE_PREFIX.DB_USERTABLE.".".DB_USERTABLE_USERID." = '".mysql_real_escape_string($userid)."'");
 
 	return $sql;
 }
@@ -94,7 +95,7 @@ function getUserStatus($userid) {
 
 function getLink($link) {
 
-	$url = BASE_URL."../pg/profile/".$link;
+	$url = BASE_URL."../profile/".$link;
     return $url;
 }
 

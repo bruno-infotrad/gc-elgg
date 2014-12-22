@@ -562,3 +562,43 @@ function gc_relationship_notification_hook($event, $type, $object) {
                         elgg_echo("friend:newfriend:body", array($user_one->name, $user_one->getURL(), elgg_get_site_url()))
         );
 }
+
+function ad2elgg_user_update($event, $type, $user) {
+	if(!empty($user) && ($user instanceof ElggUser)){
+		$elgg_guid = $user->getGUID();
+		$sql_dfaitedsid = sanitise_string($user->username);
+		$sql_query = "SELECT * FROM ad2elgg_users where dfaitedsid = '{$sql_dfaitedsid}'";
+		$GLOBALS['DUA_LOG']->debug("SQL: $sql_query");
+		$row = get_data_row($sql_query);
+		if ($row) {
+			if (count($row) != 1) {
+				$GLOBALS['DUA_LOG']->error("SQL: multiple $dfaitedsid already associated with $elgg_guid");
+			} else {
+				$sql_id = $row->id;
+				$sql_elgg_guid = $row->elgg_guid;
+				$dfaitedsid = $row->dfaitedsid;
+				$account_banned = $row->account_banned;
+				$mail = $row->mail;
+				$GLOBALS['DUA_LOG']->debug("ROW: id=$sql_id elgg_guid=$sql_elgg_guid account_banned=$account_banned mail=$mail");
+				//if (!isset($ProcBy) || empty($ProcBy) || $ProcBy == $GLOBALS['ADSYNC_PID']) {
+				if (isset($sql_elgg_guid)) {
+					$GLOBALS['DUA_LOG']->error("SQL: $dfaitedsid already associated with $sql_elgg_guid");
+				} elseif($account_banned == 'yes') {
+					$GLOBALS['DUA_LOG']->error("SQL: account for $dfaitedsid is banned");
+				} elseif(! isset($mail)) {
+					$GLOBALS['DUA_LOG']->error("SQL: mail for $dfaitedsid is not set");
+				} else {
+					$sql_query = "UPDATE ad2elgg_users SET elgg_guid = {$elgg_guid}, ProcBy = '' WHERE id = {$sql_id};";
+					$GLOBALS['DUA_LOG']->debug("SQL: $sql_query");
+					if (update_data($sql_query)) {
+						$GLOBALS['DUA_LOG']->debug("SQL: $dfaitedsid associated with $elgg_guid");
+						// Replace profile_manager forward to automatically sync the modified user
+						 elgg_register_plugin_hook_handler("forward", "system", "ad2elgg_user_update_forward_hook",400);
+					} else {
+						$GLOBALS['DUA_LOG']->error("SQL: could not associate $dfaitedsid with $elgg_guid");
+					}
+				}
+			}
+		}
+	}
+}
