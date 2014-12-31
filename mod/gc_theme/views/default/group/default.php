@@ -34,6 +34,15 @@ if ($vars['full_view']) {
 		$list_body = elgg_view('group/elements/gc_summary', $params);
 
 		echo elgg_view_image_block($icon, $list_body, $vars);
+	} elseif ($vars['full_view']=='gc_list_summary') {
+		$params = array(
+			'entity' => $group,
+			'metadata' => $metadata,
+			'subtitle' => $group->briefdescription,
+		);
+		$params = $params + $vars;
+		echo elgg_view('group/elements/gc_list_summary', $params);
+
 	} else {
 		echo elgg_view('groups/profile/summary', $vars);
 	}

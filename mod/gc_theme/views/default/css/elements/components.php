@@ -133,6 +133,17 @@ li.elgg-item.friendsof {
 .elgg-list > li:last-child {
 	border-bottom: 0;
 }
+.elgg-list > li.groups-list {
+	border: none!important;
+	clear: both;
+}
+.elgg-list > li.groups-list > h4 {
+	float: left;
+	max-width: 70%;
+}
+.elgg-list > li.groups-list > .last-updated {
+	float: right;
+}
 .elgg-list > li[id*='elgg-group-'] {
 	border: 1px solid #E9E9E9;
 	padding: 10px;

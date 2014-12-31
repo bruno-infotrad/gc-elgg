@@ -12,9 +12,10 @@ if ($selected_tab == 'nonalpha') {
 }
 $content = elgg_list_entities(array(
 	'type' => 'group',
-	'full_view' => 'gc_summary',
+	'full_view' => 'gc_list_summary',
 	'joins' => array("JOIN {$db_prefix}groups_entity ge ON e.guid = ge.guid"),
 	'wheres' => array("ge.name $search_filter"),
+	'item_class' => 'groups-list',
 	'order_by' => 'name asc',
 	'limit' => 10000
 ));

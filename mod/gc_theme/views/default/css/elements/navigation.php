@@ -6,6 +6,7 @@
 .elgg-menu-item-add {
   padding-top: 4px;
 }
+.elgg-menu-filter > li.pdg > a {color:#000;}
 #elgg-menu-group-filter-container>.menu-viewport>.menu-overview>ul {min-width: 433px;}
 
 #elgg-menu-group-filter-container .menu-viewport { overflow: hidden; position: relative;height: 40px }
