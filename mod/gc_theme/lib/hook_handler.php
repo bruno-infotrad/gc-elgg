@@ -1407,3 +1407,39 @@ function ad2elgg_user_update_forward_hook($hook_name, $entity_type, $return_valu
 	}
 }
 
+function gc_get_friendly_time($hook, $type, $value, $params) {
+	$time = $params['time'];
+        $diff = time() - (int)$time;
+
+        $minute = 60;
+        $hour = $minute * 60;
+        $day = $hour * 24;
+
+        if ($diff < $minute) {
+                        return elgg_echo("friendlytime:justnow");
+        } else if ($diff < $hour) {
+                $diff = round($diff / $minute);
+                if ($diff == 0) {
+                        $diff = 1;
+                }
+
+                if ($diff > 1) {
+                        return elgg_echo("friendlytime:minutes", array($diff));
+                } else {
+                        return elgg_echo("friendlytime:minutes:singular", array($diff));
+                }
+        } else if ($diff < $day) {
+                $diff = round($diff / $hour);
+                if ($diff == 0) {
+                        $diff = 1;
+                }
+
+                if ($diff > 1) {
+                        return elgg_echo("friendlytime:hours", array($diff));
+                } else {
+                        return elgg_echo("friendlytime:hours:singular", array($diff));
+                }
+        } else {
+                return date('Y-m-d',$time);
+	}
+}

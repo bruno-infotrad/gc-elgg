@@ -277,6 +277,7 @@ function gc_theme_init() {
 	// menu for pages
 	elgg_unregister_plugin_hook_handler('register', 'menu:entity', 'pages_entity_menu_setup');
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'gc_pages_entity_menu_setup');
+	elgg_register_plugin_hook_handler('format', 'friendly:time', 'gc_get_friendly_time');
 		
 	//@todo report some of the extra patterns to be included in Elgg core
 	elgg_extend_view('css/elgg', 'gc_theme/css');
