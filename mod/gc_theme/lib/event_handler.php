@@ -404,6 +404,16 @@ function gc_theme_pagesetup_handler() {
 					'priority' => 76,
 				));
 			}
+
+			if (elgg_is_active_plugin('event_manager')) {
+				elgg_register_menu_item('page', array(
+					'name' => 'event_manager',
+					'text' => elgg_view_agora_icon('eventmanager').elgg_echo('event_manager:menu:title'),
+					'href' => "/events/event/list",
+					'section' => '2contributions',
+					'priority' => 77,
+				));
+			}
 			
 			if (elgg_is_active_plugin('tagcloud')) {
 				elgg_register_menu_item('page', array(

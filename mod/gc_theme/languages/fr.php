@@ -326,6 +326,7 @@ $french = array(
 	'gc_theme:tabnav:messages' => 'Messages',
 	'gc_theme:tabnav:bookmarks' => 'Signets',
 	'gc_theme:tabnav:widgets' => 'Révisions de la page',
+	'gc_theme:tabnav:events' => 'Evènements',
 	'gc_theme:search:groups' => 'Trouvez un groupe',
 	'gc_theme:mygroups:none' => 'Joignez des groupes et suivez les activités associées',
 	'gc_theme:colleagues:none' => 'Ajoutez des collègues et suivez leurs activités',

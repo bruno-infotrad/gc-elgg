@@ -206,6 +206,14 @@
 			"selected" => ($selected_tab == "blogs") ? true: false
 		);
 	}
+	if ($group->event_manager_enable != "no") {
+		$tabs[] = array(
+			"text" => elgg_echo("event_manager:menu:title"),
+			"href" => "events/event/list/" . $page_owner_guid,
+			"link_id" => "eventmanager-single-form-link",
+			"selected" => ($selected_tab == "events") ? true: false
+		);
+	}
 	$tabs[] = array(
 		"text" => elgg_echo("thewire"),
 		"href" => "thewire_group/group/" . $page_owner_guid . "/all",

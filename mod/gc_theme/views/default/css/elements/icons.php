@@ -74,6 +74,9 @@
 .elgg-agora-icon-addfile {
 	background-position: -18px -558px;
 }
+.elgg-agora-icon-eventmanager {
+	background-position: -18px -594px;
+}
 
 /* ***************************************
 	ICONS

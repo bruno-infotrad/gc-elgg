@@ -109,7 +109,7 @@ switch ($page_type) {
         case 'all':
                 $title = elgg_echo('river:all');
                 $page_filter = 'all';
-		$options['wheres']=array("rv.type != 'user' AND rv.type != 'site' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'");
+		$options['wheres']=array("rv.type != 'user' AND rv.type != 'site' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND rv.action_type != 'event_relationship'");
 		$stream = elgg_list_river($options);
                 break;
 	case 'intro':
