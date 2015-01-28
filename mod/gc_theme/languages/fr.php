@@ -16,6 +16,8 @@ $french = array(
 	'messages:to' => "À",
 	'reportedcontent:areyousure' => "Êtes-vous certain(e) de vouloir l'effacer ?",
 	'bookmarks:delete:confirm' => "Êtes-vous certain(e) de vouloir supprimer cette ressource ?",
+	'event_manager:list:navigation:list' => 'Tous',
+	'event_manager:list:navigation:mine' => 'Moi',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',

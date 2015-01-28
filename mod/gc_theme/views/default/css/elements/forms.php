@@ -248,7 +248,7 @@ input[type="radio"] {
 .ui-datepicker-calendar th {
 	background: #F2F2F2;
 	border-bottom: 1px solid #BBB;
-	font-size: 9px;
+	/*font-size: 9px;*/
 	font-weight: bold;
 	padding: 3px 2px;
 	text-align: center;

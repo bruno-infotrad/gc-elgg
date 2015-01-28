@@ -9,6 +9,8 @@ add_translation('en', array(
 	'composer:object:blog' => "Blog",
 	'composer:annotation:messageboard' => "Post",
 	'composer:object:file' => 'Add a file',
+	'event_manager:list:navigation:list' => 'All',
+	'event_manager:list:navigation:mine' => 'Mine',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",

@@ -8,6 +8,10 @@
  *
  */
 ?>
+.gc-datepicker {width:96%;margin:1.2em 0.3em}
+.gc-datepicker>#my-events {display:none}
+.gc-datepicker>#all-events>h4 {margin-left:45%}
+.gc-datepicker>#my-events>h4 {margin-left:35%}
 .pvs .elgg-body {max-width:65%;}
 li#intro-tell-us-join {padding-bottom: 5px;}
 #gc_theme-avatar-upload .elgg-button-submit,

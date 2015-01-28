@@ -18,11 +18,15 @@ function gc_theme_init() {
 	elgg_register_js('jquery.scrollto', '/mod/gc_theme/vendors/jquery.scrollTo-1.4.3.1-min.js','head');
 	elgg_register_js('jquery.scrollabletab', '/mod/gc_theme/vendors/simplescrolltab.js','head');
 	elgg_register_js('jquery.jeditable', '/mod/gc_theme/vendors/jquery.jeditable.mini.js','head');
+	elgg_register_js('jquery.multidatespicker', '/mod/gc_theme/vendors/jquery-ui.multidatespicker/jquery-ui.multidatespicker.js','head');
+	elgg_register_css('multidatespicker', '/mod/gc_theme/vendors/jquery-ui.multidatespicker/css/mdp.css','head');
+        elgg_load_css('multidatespicker');
 	//elgg_register_js('jquery.tinyscrollbar', '/mod/gc_theme/vendors/jquery.tinyscrollbar.js','head');
 	//elgg_register_js('jquery.scrollabletab', '/mod/gc_theme/vendors/jquery.scrollabletab.js','head');
 	elgg_load_js('jquery.scrollto');
 	elgg_load_js('jquery.scrollabletab');
 	elgg_load_js('jquery.jeditable');
+	elgg_load_js('jquery.multidatespicker');
 	elgg_load_js('elgg.contributed_by');
 	//elgg_load_js('jquery.tinyscrollbar');
 	elgg_load_js('lightbox');
@@ -90,6 +94,7 @@ function gc_theme_init() {
 	elgg_unregister_page_handler('search', 'search_page_handler');
 	elgg_register_page_handler('search', 'gc_theme_search_page_handler');
 	elgg_register_page_handler('pages', 'gc_pages_page_handler');
+	elgg_register_page_handler('events', 'gc_event_manager_page_handler');
 	elgg_register_page_handler('messages', 'gc_messages_page_handler');
 	elgg_register_page_handler('multi_invite_autocomplete', 'multi_invite_autocomplete');
 	elgg_register_page_handler('groups_autocomplete', 'groups_autocomplete');
@@ -100,6 +105,7 @@ function gc_theme_init() {
 	elgg_register_page_handler('intro_join_groups', 'intro_join_groups_page_handler');
 	elgg_register_page_handler('intro_upload_avatar', 'intro_upload_avatar_page_handler');
 	//Pages for getting extra comments and replies via ajax elgg.get
+	elgg_register_page_handler('event_list', 'event_list','header');
 	elgg_register_page_handler('extra_feed_comments', 'extra_feed_comments','header');
 	elgg_register_page_handler('extra_feed_replies', 'extra_feed_replies','header');
 	elgg_register_page_handler('all_my_groups', 'all_my_groups','header');
@@ -157,6 +163,9 @@ function gc_theme_init() {
 	elgg_extend_view('groups/tool_latest', 'file/group_module',601);
 	elgg_unextend_view('groups/tool_latest', 'bookmarks/group_module');
 	elgg_extend_view('groups/tool_latest', 'bookmarks/group_module',602);
+	//Replace event_manager js
+	elgg_unextend_view("js/elgg", "js/event_manager/site");
+	elgg_extend_view("js/elgg", "js/event_manager/site");
 	//Replace to add additional tab in group edit to toggle admin notifications
 	elgg_extend_view("groups/edit", "group_tools/forms/group_admin_notifications", 376);
 	//Same presentation for profile

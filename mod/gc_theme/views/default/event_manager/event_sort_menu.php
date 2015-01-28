@@ -4,5 +4,8 @@
 		<li class="elgg-state-selected">	
 			<a href="javascript:void(0);" rel="list"><?php echo elgg_echo('event_manager:list:navigation:list'); ?></a>
 		</li>
+		<li>
+			<a href="javascript:void(0);" rel="attending"><?php echo elgg_echo('event_manager:event:relationship:event_attending'); ?></a>
+		</li>
 	</ul>
 </div>

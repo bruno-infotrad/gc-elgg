@@ -66,6 +66,20 @@ function contribute_to_page_handler($page) {
 		exit;
         }
 }
+function gc_event_manager_page_handler($page) {
+        if (! elgg_is_logged_in()) {
+                forward('/dashboard');
+        } else {
+        	if (isset($page[0]) && $page[0] == 'event' && isset($page[1])&& $page[1] == 'list') {
+        		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/event';
+                	set_input('guid', $page[2]);
+			include "$base_dir/list.php";
+        	} else {
+                	return event_manager_page_handler($page);
+        	}
+       		return true;
+        }
+}
 function gc_messages_page_handler($page) {
         if (! elgg_is_logged_in()) {
                 forward('/dashboard');
@@ -464,6 +478,10 @@ function gc_collections_page_handler($page_elements) {
 
 function all_my_groups() {
         require_once elgg_get_plugins_path() . 'gc_theme/lib/all_my_groups.php';
+        return true;
+}
+function event_list() {
+        require_once elgg_get_plugins_path() . 'gc_theme/lib/event_list.php';
         return true;
 }
 function extra_feed_comments() {
