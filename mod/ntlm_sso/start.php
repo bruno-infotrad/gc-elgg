@@ -28,6 +28,7 @@ function ntlm_auth_init()
 		$username = preg_replace('/@.+/','',$username);
 	        $result=elgg_authenticate($username,'dummy');
 		if ($result !== true) {
+			$GLOBALS['SSO']->error('User '.$username.' WAS NOT LOGGED IN');
 			register_error($result);
 		}
 		else

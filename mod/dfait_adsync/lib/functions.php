@@ -951,7 +951,8 @@ function adsync_save_elgg_data ($elgg_user, $elgg_data) {
 		foreach ($elgg_data as $shortname => $value) {
 			$options = array(
 					'guid' => $elgg_user->guid,
-					'metadata_name' => $shortname
+					'metadata_name' => $shortname,
+					'limit' => false
 			);
 			elgg_delete_metadata($options);
 			// This block gets the access level from the HTTP POST for the form, set by the user for each

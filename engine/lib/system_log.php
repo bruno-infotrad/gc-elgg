@@ -216,7 +216,7 @@ function system_log($object, $event) {
 				('$object_id','$object_class','$object_type', '$object_subtype', '$event',
 				$performed_by, $owner_guid, $access_id, '$enabled', '$time', '$ip_address')";
 
-			insert_data($query);
+			//insert_data($query);
 
 			$log_cache[$time][$object_id][$event] = true;
 			$cache_size += 1;

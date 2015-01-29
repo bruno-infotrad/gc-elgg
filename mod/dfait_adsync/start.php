@@ -116,16 +116,17 @@ function adsync_handler($page, $identifier) {
  */
 function adsync_profile_handler($hook, $type, $value, $params) {
 	$GLOBALS['ADSYNC_LOG']->debug("== STARTING: " . __METHOD__);
-	
-	// file path to the page scripts
-	$lib_path = elgg_get_plugins_path() . 'dfait_adsync/lib';
-	$username = $value[segments][0];
-	
-	require("$lib_path/functions.php");
-	$result = adsync_refresh_profile($username);
-	
+	$user = elgg_get_logged_in_user_entity();
+	$username = $user->username;
+	$target_username = $value[segments][0];
+	if ($username == $target_username || elgg_is_admin_logged_in()) {
+		// file path to the page scripts
+		$lib_path = elgg_get_plugins_path() . 'dfait_adsync/lib';
+		require("$lib_path/functions.php");
+		$result = adsync_refresh_profile($target_username);
+	} else {
+		$GLOBALS['ADSYNC_LOG']->debug("Logged in user not allowed to update profile, skipping...");
+	}
 	// return true to let Elgg know that a page was sent to browser
 	return $value;
 }
-
-
