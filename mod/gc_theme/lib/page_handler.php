@@ -72,7 +72,9 @@ function gc_event_manager_page_handler($page) {
         } else {
         	if (isset($page[0]) && $page[0] == 'event' && isset($page[1])&& $page[1] == 'list') {
         		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/event';
-                	set_input('guid', $page[2]);
+			if (isset($page[2])) {
+                		set_input('owner_guid', $page[2]);
+			}
 			include "$base_dir/list.php";
         	} else {
                 	return event_manager_page_handler($page);
