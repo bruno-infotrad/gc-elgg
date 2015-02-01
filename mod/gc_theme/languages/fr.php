@@ -18,6 +18,8 @@ $french = array(
 	'bookmarks:delete:confirm' => "Êtes-vous certain(e) de vouloir supprimer cette ressource ?",
 	'event_manager:list:navigation:list' => 'Tous',
 	'event_manager:list:navigation:mine' => 'Moi',
+	'event_manager:event:relationship:event_interested' => 'Provisoire',
+	'event_manager:event:relationship:event_interested:label' => 'Provisoire',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',

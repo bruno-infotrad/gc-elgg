@@ -11,6 +11,8 @@ add_translation('en', array(
 	'composer:object:file' => 'Add a file',
 	'event_manager:list:navigation:list' => 'All',
 	'event_manager:list:navigation:mine' => 'Mine',
+	'event_manager:event:relationship:event_interested' => 'Tentative',
+	'event_manager:event:relationship:event_interested:label' => 'Tentative',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
