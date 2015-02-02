@@ -83,7 +83,6 @@
 	
 	elgg_clear_sticky_form('event');
 	
-	$form_body = '<a class="hidden" href="' . elgg_get_site_url() . 'events/event/googlemaps/' . $fields["guid"] . '" id="openGoogleMaps">google maps</a>';
 	$form_body .= elgg_view('input/hidden', array('name' => 'latitude', 'id' => 'event_latitude', 'value' => $fields["latitude"]));
 	$form_body .= elgg_view('input/hidden', array('name' => 'longitude', 'id' => 'event_longitude', 'value' => $fields["longitude"]));
 	$form_body .= elgg_view('input/hidden', array('name' => 'guid', 'value' => $fields["guid"]));
@@ -125,9 +124,9 @@
 	$form_body .= "</td></tr>";
 
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:venue') . "</td><td>" . elgg_view('input/text', array('name' => 'venue', 'value' => $fields["venue"])) . "</td></tr>";
-	
+/*	
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:location') . "</td><td>" . elgg_view('input/text', array('name' => 'location', 'id' => 'openmaps', 'value' => $fields["location"], 'readonly' => true)) . "</td></tr>";
-	
+*/	
 	if ($region_options)	{
 		$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:region') . "</td><td>" . elgg_view('input/dropdown', array('name' => 'region', 'value' => $fields["region"], 'options' => $region_options)) . "</td></tr>";
 	}

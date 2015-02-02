@@ -45,7 +45,8 @@
 	z-index: 9999;
 	margin-bottom: 0;
 
-	box-shadow: 0 0 0 10px rgba(82, 82, 82, 0.7);
+	/*box-shadow: 0 0 0 10px rgba(82, 82, 82, 0.7);*/
+	box-shadow: 0 0 0 5px rgba(82, 82, 82, 0.7);
 	border-radius: 8px;
 	width: 400px;
 }

@@ -76,6 +76,10 @@ function gc_event_manager_page_handler($page) {
                 		set_input('owner_guid', $page[2]);
 			}
 			include "$base_dir/list.php";
+        	} elseif (isset($page[0]) && $page[0] == 'registrationform' && isset($page[1])&& $page[1] == 'edit' && isset($page[2])) {
+        		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/registrationform';
+                	set_input('guid', $page[2]);
+			include "$base_dir/edit.php";
         	} else {
                 	return event_manager_page_handler($page);
         	}

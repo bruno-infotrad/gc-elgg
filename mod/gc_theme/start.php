@@ -166,6 +166,10 @@ function gc_theme_init() {
 	//Replace event_manager js
 	elgg_unextend_view("js/elgg", "js/event_manager/site");
 	elgg_extend_view("js/elgg", "js/event_manager/site");
+	// Unregister Google map
+	elgg_register_simplecache_view("js/event_manager/googlemaps");
+	elgg_unregister_js("event_manager.maps.helper");
+	elgg_unregister_js("event_manager.maps.base");
 	//Replace to add additional tab in group edit to toggle admin notifications
 	elgg_extend_view("groups/edit", "group_tools/forms/group_admin_notifications", 376);
 	//Same presentation for profile

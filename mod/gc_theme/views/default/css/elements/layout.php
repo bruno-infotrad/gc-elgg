@@ -8,6 +8,8 @@
  *
  */
 ?>
+.gc-event_manager_registrationform_fields {padding: 1em}
+.gc-event_manager_registrationform_fields.elgg-module-popup 
 .gc-datepicker {width:96%;margin:1.2em 0.3em}
 .gc-datepicker>#my-events {display:none}
 .gc-datepicker>#all-events>h4 {margin-left:45%}
