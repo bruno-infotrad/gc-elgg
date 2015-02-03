@@ -62,6 +62,7 @@
 .ui-widget-content { border: 1px solid #d9d6c4; background: #eceadf url(images/ui-bg_fine-grain_10_eceadf_60x60.png) 50% 50% repeat; color: #1f1f1f; }
 .ui-widget-content a { color: #1f1f1f; }
 /*.ui-widget-header { border: 1px solid #d4d1bf; background: #ffffff url(images/ui-bg_fine-grain_15_ffffff_60x60.png) 50% 50% repeat; color: #453821; font-weight: bold; }*/
+.ui-widget-header {background: #ffffff url(images/ui-bg_fine-grain_15_ffffff_60x60.png) 50% 50% repeat; color: #453821; font-weight: bold; }
 .ui-widget-header a { color: #453821; }
 
 /* Interaction states
