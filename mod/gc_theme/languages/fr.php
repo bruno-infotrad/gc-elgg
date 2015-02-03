@@ -20,6 +20,13 @@ $french = array(
 	'event_manager:list:navigation:mine' => 'Moi',
 	'event_manager:event:relationship:event_interested' => 'Provisoire',
 	'event_manager:event:relationship:event_interested:label' => 'Provisoire',
+	'event_manager:event:notify_colleagues' => 'Envoyer un courriel de notification à vos collègues',
+	'event_manager:notify_colleagues:subject' => "Nouvel événement: %s",
+	'event_manager:notify_colleagues:body' => "Bonjour %s<br>%s vous invite à l'événement:<br>TITRE: %s<br>DATE: %s<br>LIEU: %s><br>. Pour plus de détails et RSVP, suivez le lien suivant:<br>%s",
+	'event_manager:action:notify_colleagues:ok' => "Courriels envoyé",
+	'event_manager:event:notify_groups' => 'Publicisez dans vos groupes',
+	'event_manager:notify:groups:button' => 'Publicisez',
+	'event_manager:notify:groups:missing_event_or_container' => 'Evénement ou groupe manquant',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',

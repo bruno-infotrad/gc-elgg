@@ -100,6 +100,7 @@ function gc_theme_init() {
 	elgg_register_page_handler('groups_autocomplete', 'groups_autocomplete');
 	elgg_register_page_handler('user_autocomplete', 'user_autocomplete');
 	elgg_register_page_handler('contribute_to', 'contribute_to_page_handler');
+	elgg_register_page_handler('notify_groups', 'notify_groups_page_handler');
 	elgg_register_page_handler('pns', 'pns_page_handler');
 	elgg_register_page_handler('intro_add_colleagues', 'intro_add_colleagues_page_handler');
 	elgg_register_page_handler('intro_join_groups', 'intro_join_groups_page_handler');
@@ -197,6 +198,9 @@ function gc_theme_init() {
 
 
 	$action_path = elgg_get_plugins_path() . 'gc_theme/actions';
+	//Action for sending event notification email to colleagues and post bookmarks to books
+	elgg_register_action("event_manager/notify_colleagues", "$action_path/event_manager/notify_colleagues.php");
+	elgg_register_action("gc_theme/notify_groups", "$action_path/gc_theme/notify_groups.php");
 	//Action for roles
 	elgg_register_action("roles_im_admin/make_im_admin", "$action_path/roles_im_admin/make_im_admin.php");
 	elgg_register_action("roles_im_admin/revoke_im_admin", "$action_path/roles_im_admin/revoke_im_admin.php");

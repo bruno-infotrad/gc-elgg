@@ -66,6 +66,15 @@ function contribute_to_page_handler($page) {
 		exit;
         }
 }
+function notify_groups_page_handler($page) {
+        if (! elgg_is_logged_in()) {
+                forward('/dashboard');
+        } else {
+		echo elgg_view("gc_theme/notify_groups",array('event_guid' => $page[0]));
+        	// exit because this is in a modal display.
+		exit;
+        }
+}
 function gc_event_manager_page_handler($page) {
         if (! elgg_is_logged_in()) {
                 forward('/dashboard');

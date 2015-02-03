@@ -1,5 +1,4 @@
 <?php
-
 	// defaults
 	$fields = array(
 			"guid" => ELGG_ENTITIES_ANY_VALUE,

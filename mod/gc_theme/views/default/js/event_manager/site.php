@@ -583,6 +583,11 @@ elgg.event_manager.init = function() {
 	$("#event-manager-new-slot-set-name-button").live("click", function(){
 		elgg.event_manager.add_new_slot_set_name($("#event-manager-new-slot-set-name").val());
 	});
+	$(".event-manager-notify-groups").live('click', function() {
+                event_guid = $(this).attr("rel");
+                $.fancybox({'href': elgg.get_site_url() + 'notify_groups/' + event_guid});
+                return false;
+        });
 };
 
 elgg.register_hook_handler('init', 'system', elgg.event_manager.init);
