@@ -69,7 +69,14 @@
 					onSelect : function(dateText, inst) {
 						var d = new Date();
 						var start_day = dateConvert.call(this,dateText,'number')- 60*1000*d.getTimezoneOffset();
-						var params = {'start_day': start_day};
+						var params;
+						var all_events = $('#all-events').css('display');
+						if (all_events == 'block') {
+							params = {'start_day': start_day};
+						} else {
+							params = {'start_day': start_day, 'events' : 'mine'};
+						}
+							
 						$('#event_manager_event_listing').replaceWith('<div id ="event_manager_event_listing"><div class="elgg-ajax-loader"></div>');
 						elgg.get('event_list', {
 							data: params,

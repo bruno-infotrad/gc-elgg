@@ -5,7 +5,11 @@ if (elgg_is_logged_in()) {
         }
 	$start_day=intval($start_day/1000);
 	$end_day = $start_day+24*3600;
-	$event_options = array('start_day'=>$start_day,'end_day'=>$end_day);
+	if (get_input('events') =='mine') {
+		$event_options = array('start_day'=>$start_day,'end_day'=>$end_day,'meattending' => true);
+	} else {
+		$event_options = array('start_day'=>$start_day,'end_day'=>$end_day);
+	}
 	$events = event_manager_search_events($event_options);
 	$entities = $events["entities"];
 	$count = $events["count"];
