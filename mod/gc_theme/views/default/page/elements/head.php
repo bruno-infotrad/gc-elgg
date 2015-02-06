@@ -65,8 +65,8 @@ $release = get_version(true);
 	<![endif]-->
 	<!--[if gt IE 8]><!-->
 	<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/jquery.min.js"></script>
-	<script src="<?php echo $site_url;?>/mod/gc_theme/views/default/gc_theme/compound.js"></script>
-        <script src="<?php echo $site_url;?>/mod/gc_theme/views/default/gc_theme/misc.js"></script>
+	<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/compound.js"></script>
+        <script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/misc.js"></script>
 	<link rel="stylesheet" href="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/grids/css/util-min.css"/>
 	<link rel="stylesheet" href="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/css/pe-ap-min.css"/>
 	<link rel="stylesheet" href="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/theme-gcwu-intranet/css/theme-min.css"/>

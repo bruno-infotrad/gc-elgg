@@ -26,7 +26,7 @@ function gc_theme_init() {
 	elgg_load_js('jquery.scrollto');
 	elgg_load_js('jquery.scrollabletab');
 	elgg_load_js('jquery.jeditable');
-	elgg_load_js('jquery.multidatespicker');
+	//elgg_load_js('jquery.multidatespicker');
 	elgg_load_js('elgg.contributed_by');
 	//elgg_load_js('jquery.tinyscrollbar');
 	elgg_load_js('lightbox');

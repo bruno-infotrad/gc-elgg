@@ -17,8 +17,8 @@ add_translation('en', array(
 	'event_manager:notify_colleagues:subject' => "New event: %s",
         'event_manager:notify_colleagues:body' => "Hi %s<br>%s invited you to the event:<br>EVENT NAME: %s<br>DATE: %s<br>LOCATION: %s><br>.To see more details and RSVP, follow the link below:<br>%s",
 	'event_manager:action:notify_colleagues:ok' => "Emails sent",
-	'event_manager:event:notify_groups' => 'Advertize in your groups',
-	'event_manager:notify:groups:button' => 'Advertize',
+	'event_manager:event:notify_groups' => 'Advertise in your groups',
+	'event_manager:notify:groups:button' => 'Advertise',
 	'event_manager:notify:groups:missing_event_or_container' => 'Missing event or container',
 	
 	'file:river:create' => 'uploaded a file',

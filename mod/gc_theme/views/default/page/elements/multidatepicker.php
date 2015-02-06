@@ -1,4 +1,5 @@
 <?php 
+elgg_load_js('jquery.multidatespicker');
 foreach ($vars["entities"] as $entity) {
 	if ($setdates) {
 		$setdates .= ',"'.date('y-n-d',$entity->start_day).'"';
@@ -57,12 +58,13 @@ foreach ($vars["entities"] as $entity) {
 }
 if (! $startdate) {$startdate = date('y-n-d');}
 if (! $mystartdate) {$mystartdate = $startdate;}
-$of ='<div class="gc-datepicker"><div id="all-events"><h4>'.elgg_echo('event_manager:list:navigation:list').'</h4></div><div id="my-events"><h4>'.elgg_echo('event_manager:event:relationship:event_attending').'</div>';
+$of ='<div class="gc-datepicker"><div id="all-events" class="elgg-input-date"><h4>'.elgg_echo('event_manager:list:navigation:list').'</h4></div><div id="my-events"><h4>'.elgg_echo('event_manager:event:relationship:event_attending').'</div></div>';
 $of .=<<<__HTML
 <script>
-$('#all-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setdates] }).datepicker("setDate", $startdate );
-$('#my-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setmydates] }).datepicker("setDate", $mystartdate );
+setTimeout(function(){
+	$('#all-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setdates]}).datepicker("setDate", $startdate );
+	$('#my-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setmydates] }).datepicker("setDate", $mystartdate );
+},3000);
 </script>
-</div>
 __HTML;
 echo $of;
