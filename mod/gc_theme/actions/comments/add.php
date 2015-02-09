@@ -30,6 +30,8 @@ if (count($river_item) == 0) {
 }
 
 $user = elgg_get_logged_in_user_entity();
+// links
+$comment_text = parse_urls($comment_text);
 //Filter text for email addresses twitter IDs and hastags
 // usernames
 //$comment_text = preg_replace('/(^|[^\w])@([\w]+)/', '$1<a href="' . $CONFIG->wwwroot . 'profile/$2">@$2</a>', $comment_text);
@@ -38,8 +40,7 @@ if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
                 $username=preg_replace('/^@/','',$atom,-1,$count);
                 if ($count) {
                         if($to_user=get_user_by_username($username)) {
-				$pat='/@'.$username.'/';
-                        	$comment_text = preg_replace($pat, '<a href="profile/'.$username.'">@'.$username.'</a>', $comment_text);
+                        	$comment_text = preg_replace('/@'.$username.'/', '<a href="profile/'.$username.'">@'.$username.'</a>', $comment_text);
 				if ($to_user->guid != $entity->owner_guid && $to_user->guid != $user->guid) {
 					$from = $user->guid;
 					$subject = elgg_echo("gc_theme:comment:notify_ref:subject");
@@ -54,14 +55,10 @@ if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
 }
 // email addresses
 $comment_text = preg_replace('/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i', '$1<a href="mailto:$2@$3">$2@$3</a>', $comment_text);
-// links
-$comment_text = parse_urls($comment_text);
 // hashtags
 $comment_text = preg_replace('/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/', '$1<a href="' . $CONFIG->wwwroot . 'thewire/tag/$2">#$2</a>', $comment_text);
 $comment_text = trim($comment_text);
-
 $annotation = create_annotation($entity->guid, 'generic_comment', $comment_text, "", $user->guid, $entity->access_id);
-
 // tell user annotation posted
 if (!$annotation) {
 	register_error(elgg_echo("generic_comment:failure"));

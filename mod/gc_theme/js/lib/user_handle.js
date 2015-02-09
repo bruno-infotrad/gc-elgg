@@ -37,11 +37,12 @@ elgg.user_handle = function(id){
 					},
 					search: function() {
 						// minLength = 2
-						var term = this.value.match(/^@\w{2,}|\s+@\w{2,}/g);
+						var term = this.value.match(/^@\w{3,}|\s+@\w{3,}/g);
 						if (term === null){
 							return false;
 						} else {
-							var term2 = this.value.match(/^@\w+\s+|\s+@\w+\s+/g);
+							var term2 = this.value.match(/^@\w+\W+|\s+@\w+\W+/g);
+							//var term2 = this.value.match(/^@\w+\s+|\s+@\w+\s+/g);
 							if (term2 !== null && term2.length == term.length){
 								return false;
 							} else {
@@ -55,7 +56,7 @@ elgg.user_handle = function(id){
 					},
 					select: function( event, ui ) {
 						//Mean regexp for multiline support
-						this.value = this.value.replace(/(.*)(\W?)@\w+$/g,"$1$2@"+ui.item.value+' ');
+						this.value = this.value.replace(/(.*)(\W?)@\w+$/g,"$1$2@"+ui.item.value);
 						return false;
 					},
 					autoFocus: true
