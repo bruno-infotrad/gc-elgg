@@ -25,7 +25,7 @@ elgg_load_js('elgg.new_messages');
 elgg_load_js('elgg.contributed_by');
 $hide_advanced = '';
 // Horrible hack to remove advanced search for MSIE and Firefox
-if ((preg_match('/MSIE/',$_SERVER['HTTP_USER_AGENT']))||(preg_match('/Firefox/',$_SERVER['HTTP_USER_AGENT']))) {
+if ((preg_match('/MSIE/',$_SERVER['HTTP_USER_AGENT']))||(preg_match('/rv:11/',$_SERVER['HTTP_USER_AGENT']))||(preg_match('/Firefox/',$_SERVER['HTTP_USER_AGENT']))) {
 	$hide_advanced = "style='display: none'";
 }
 echo <<<_HTML

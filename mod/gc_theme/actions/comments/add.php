@@ -9,6 +9,7 @@
 
 $entity_guid = (int) get_input('entity_guid');
 $comment_text = get_input('generic_comment');
+$raw_comment_text = $comment_text;
 
 if (empty($comment_text)) {
 	register_error(elgg_echo("generic_comment:blank"));
@@ -30,22 +31,36 @@ if (count($river_item) == 0) {
 
 $user = elgg_get_logged_in_user_entity();
 //Filter text for email addresses twitter IDs and hastags
+// usernames
+//$comment_text = preg_replace('/(^|[^\w])@([\w]+)/', '$1<a href="' . $CONFIG->wwwroot . 'profile/$2">@$2</a>', $comment_text);
+if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
+        foreach ($atoms as $atom) {
+                $username=preg_replace('/^@/','',$atom,-1,$count);
+                if ($count) {
+                        if($to_user=get_user_by_username($username)) {
+				$pat='/@'.$username.'/';
+                        	$comment_text = preg_replace($pat, '<a href="profile/'.$username.'">@'.$username.'</a>', $comment_text);
+				if ($to_user->guid != $entity->owner_guid && $to_user->guid != $user->guid) {
+					$from = $user->guid;
+					$subject = elgg_echo("gc_theme:comment:notify_ref:subject");
+					$to = $to_user->guid;
+					$body = elgg_echo("gc_theme:comment:notify_ref:body",array($user->name,$entity->getURL()));
+					notify_user($to, $from, $subject, $body,NULL,'site');
+					//notify_user($from, $to, $subject, $body,NULL,array('email','site'));
+				}
+			}
+                }
+        }
+}
 // email addresses
 $comment_text = preg_replace('/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i', '$1<a href="mailto:$2@$3">$2@$3</a>', $comment_text);
 // links
 $comment_text = parse_urls($comment_text);
-// usernames
-$comment_text = preg_replace('/(^|[^\w])@([\w]+)/', '$1<a href="' . $CONFIG->wwwroot . 'profile/$2">@$2</a>', $comment_text);
 // hashtags
 $comment_text = preg_replace('/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/', '$1<a href="' . $CONFIG->wwwroot . 'thewire/tag/$2">#$2</a>', $comment_text);
 $comment_text = trim($comment_text);
 
-$annotation = create_annotation($entity->guid,
-								'generic_comment',
-								$comment_text,
-								"",
-								$user->guid,
-								$entity->access_id);
+$annotation = create_annotation($entity->guid, 'generic_comment', $comment_text, "", $user->guid, $entity->access_id);
 
 // tell user annotation posted
 if (!$annotation) {
@@ -55,19 +70,7 @@ if (!$annotation) {
 
 // notify if poster wasn't owner
 if ($entity->owner_guid != $user->guid) {
-
-	notify_user($entity->owner_guid,
-				$user->guid,
-				elgg_echo('generic_comment:email:subject'),
-				elgg_echo('generic_comment:email:body', array(
-					$entity->title,
-					$user->name,
-					$comment_text,
-					$entity->getURL(),
-					$user->name,
-					$user->getURL()
-				))
-			);
+	notify_user($entity->owner_guid, $user->guid, elgg_echo('generic_comment:email:subject'), elgg_echo('generic_comment:email:body', array( $entity->title, $user->name, $comment_text, $entity->getURL(), $user->name, $user->getURL())));
 }
 
 system_message(elgg_echo("generic_comment:posted"));

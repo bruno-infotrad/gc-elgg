@@ -182,6 +182,8 @@ add_translation('en', array(
 	'gc_theme:notification:method:site' => 'Click to select/deselect site notification for this group',
 	'gc_theme:sidebar_link:faqs' => 'FAQs',
 	'gc_theme:sidebar_link:training' => 'Training',
+	'gc_theme:comment:notify_ref:subject' => 'Agora comment',
+	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment %s",
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",
