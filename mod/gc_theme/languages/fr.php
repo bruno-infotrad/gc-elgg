@@ -27,6 +27,7 @@ $french = array(
 	'event_manager:event:notify_groups' => 'Publicisez dans vos groupes',
 	'event_manager:notify:groups:button' => 'Publicisez',
 	'event_manager:notify:groups:missing_event_or_container' => 'Evénement ou groupe manquant',
+	'event_manager:event:relationship:my_events' => 'Mes événements',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',
@@ -367,6 +368,7 @@ $french = array(
 	'gc_theme:sidebar_link:training' => 'Formation',
 	'gc_theme:comment:notify_ref:subject' => 'Commentaire Agora',
 	'gc_theme:comment:notify_ref:body' => "%s vous a cité dans le commentaire %s",
+	'gc_theme:done' => 'Retour',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",

@@ -95,7 +95,7 @@ li[class*="elgg-menu-item-user-"] {
 }
 
 .section-controls-cont .elgg-menu-title {float:none;}
-.elgg-menu-item-groups-invite {float:right;}
+.elgg-menu-item-groups-invite,#event-manager-file-upload {float:right;}
 
 .elgg-sidebar {
 	font-family: Verdana, Arial, Helvetica, sans-serif;

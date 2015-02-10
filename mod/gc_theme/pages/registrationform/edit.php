@@ -29,7 +29,7 @@
 			$output .= '<br /><a rel="'.$guid.'" id="event_manager_questions_add" href="javascript:void(0);" class="elgg-button elgg-button-action">' . elgg_echo('event_manager:editregistration:addfield') . '</a>';
 			//$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-menu-item-groups-invite elgg-button">' . elgg_echo('Done') . '</a>';
 			$output .= '<div class="elgg-menu-item-groups-invite">';
-			$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-button">' . elgg_echo('Done') . '</a>';
+			$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-button">' . elgg_echo('gc_theme:done') . '</a>';
 			$output .= '</div>';
 			$output .= '</div>';
 			

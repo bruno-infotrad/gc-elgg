@@ -71,8 +71,11 @@
 						var start_day = dateConvert.call(this,dateText,'number')- 60*1000*d.getTimezoneOffset();
 						var params;
 						var all_events = $('#all-events').css('display');
+						var att_events = $('#att-events').css('display');
 						if (all_events == 'block') {
 							params = {'start_day': start_day};
+						} else if (att_events == 'block') {
+							params = {'start_day': start_day, 'events' : 'attending'};
 						} else {
 							params = {'start_day': start_day, 'events' : 'mine'};
 						}

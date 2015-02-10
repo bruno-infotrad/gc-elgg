@@ -142,7 +142,7 @@
 	
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:fee') . "</td><td>" . elgg_view('input/text', array('name' => 'fee', 'value' => $fields["fee"])) . "</td></tr>";
 
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:max_attendees') . "</td><td>" . elgg_view('input/text', array('name' => 'max_attendees', 'value' => $fields["max_attendees"])) . "</td></tr>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:max_attendees') . "</td><td>" . elgg_view('input/text', array('name' => 'max_attendees', 'value' => $fields["max_attendees"], 'maxlength' => 5, 'onkeypress' =>"return event.charCode >= 48 && event.charCode <= 57")) . "</td></tr>";
 
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:options') . "</td><td>";
 	

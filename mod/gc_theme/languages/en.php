@@ -20,6 +20,7 @@ add_translation('en', array(
 	'event_manager:event:notify_groups' => 'Advertise in your groups',
 	'event_manager:notify:groups:button' => 'Advertise',
 	'event_manager:notify:groups:missing_event_or_container' => 'Missing event or container',
+	'event_manager:event:relationship:my_events' => 'My events',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
@@ -184,6 +185,7 @@ add_translation('en', array(
 	'gc_theme:sidebar_link:training' => 'Training',
 	'gc_theme:comment:notify_ref:subject' => 'Agora comment',
 	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment %s",
+	'gc_theme:done' => 'Done',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

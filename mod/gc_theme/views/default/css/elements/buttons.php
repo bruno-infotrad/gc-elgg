@@ -144,7 +144,7 @@ a#select-contribute-to {margin-left: 36%;}
   border-radius: 4px;
 }
 
-.elgg-menu-item-addfriend .elgg-button,.elgg-menu-item-editprofile .elgg-button, .elgg-menu-item-editavatar .elgg-button, .pvs .elgg-button-submit  {
+#event-manager-file-upload, .elgg-menu-item-addfriend .elgg-button,.elgg-menu-item-editprofile .elgg-button, .elgg-menu-item-editavatar .elgg-button, .pvs .elgg-button-submit  {
   background-color: #176ca7;
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
@@ -164,6 +164,7 @@ a#select-contribute-to,
 #message-friendsof,
 #new-colleague-collection,
 #thewire-submit-button,
+#event-manager-file-upload,
 .elgg-menu-item-groups-invite .elgg-button { 
   background-color: #176ca7;
   border-color: #0e4164 #0e4164 #0b324d;

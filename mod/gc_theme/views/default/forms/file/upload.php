@@ -15,7 +15,7 @@ $container_guid = elgg_extract('container_guid', $vars);
 if (!$container_guid) {
 	$container_guid = elgg_get_logged_in_user_guid();
 }
-$embed = elgg_extract('embed', $vars);
+$embed = elgg_extract('embed', $vars,0);
 $guid = elgg_extract('guid', $vars, null);
 
 if ($guid) {
@@ -39,12 +39,18 @@ $(document).ready(function() {
 function check_file(){
 	var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
 	var allowed_extensions = allowed_extensions_settings.split(/, */);
-        var ext = $('.elgg-input-file').val().split('.').pop().toLowerCase();
+        var ext,filename;
+	if (<?php echo $embed; ?>){
+        	filename = $('.elgg-input-file-embed').val().split('\\').pop().toLowerCase();
+        	ext = $('.elgg-input-file-embed').val().split('.').pop().toLowerCase();
+	} else {
+        	filename = $('.elgg-input-file').val().split('\\').pop().toLowerCase();
+        	ext = $('.elgg-input-file').val().split('.').pop().toLowerCase();
+	}
         if($.inArray(ext, allowed_extensions) == -1) {
                 alert(elgg.echo('gc_theme:file:not_allowed'));
                 $('.elgg-input-file').val('');
         }
-        var filename = $('.elgg-input-file').val().split('\\').pop().toLowerCase();
 	if (filename.length > 30) {
     		filename =  filename.substr(0, 15) + '...' + filename.substr(filename.length-10, filename.length);
   	}
@@ -57,7 +63,15 @@ function check_file(){
 <div class="gc-input-file-row">
 	<div class="gc-input-file-2em"><label><?php echo elgg_echo('title'); ?></label></div>
 	<div class="gc-input-file-ib"><?php echo elgg_view('input/text', array('name' => 'title', 'value' => $title)); ?></div>
-	<div class="gc-input-file-browse"><?php echo elgg_view('input/file', array('name' => 'upload','js' => 'onchange="check_file()"')); ?></div>
+	<div class="gc-input-file-browse">
+<?php
+if ($embed) {
+	echo elgg_view('input/file', array('class' => 'elgg-input-file-embed', 'name' => 'upload','js' => 'onchange="check_file()"'));
+} else {
+	echo elgg_view('input/file', array('name' => 'upload','js' => 'onchange="check_file()"'));
+}
+?>
+</div>
 	<div class="gc-input-file-1em" id="gc-file-selected"><?php echo $file_selected; ?></div>
 </div>
 <div class="gc-input-file-row">

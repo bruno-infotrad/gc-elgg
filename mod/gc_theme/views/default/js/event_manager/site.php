@@ -187,7 +187,13 @@ function event_manager_execute_search(){
 		$("#distance_latitude").val(distance_latitude);
 		$("#distance_longitude").val(distance_longitude);
 	} else if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "attending"){
-		$('#attending input[type="checkbox"]').attr("checked", "checked");
+		$('#attending input[type="checkbox"]').prop("checked", true);
+		$('#owning input[type="checkbox"]').prop("checked", false);
+		$('#search_type').val('list');
+		$('#advanced_search').val('1');
+	} else if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "mine"){
+		$('#attending input[type="checkbox"]').prop("checked", false);
+		$('#owning input[type="checkbox"]').prop("checked", true);
 		$('#search_type').val('list');
 		$('#advanced_search').val('1');
 	}
@@ -403,12 +409,10 @@ elgg.event_manager.init = function() {
 
 		if($('#past_events').is(":hidden"))
 		{
-			console.log('advanced');
 			$('#advanced_search').val('1');
 		}
 		else
 		{
-			console.log('simple');
 			$('#advanced_search').val('0');
 		}
 	});
@@ -443,10 +447,30 @@ elgg.event_manager.init = function() {
 	$("#event_manager_result_navigation li a").click(function() {
 		if(!($(this).parent().hasClass("elgg-state-selected"))){
 			selected = $(this).attr("rel");
+			if (selected == 'list') {
+				$("#event_manager_result_navigation li#list").addClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#attending").removeClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#mine").removeClass("elgg-state-selected");
+				$("#all-events").css('display', 'block');
+				$("#att-events").css('display', 'none');
+				$("#my-events").css('display', 'none');
+			} else if (selected == 'attending') {
+				$("#event_manager_result_navigation li#list").removeClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#attending").addClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#mine").removeClass("elgg-state-selected");
+				$("#all-events").css('display', 'none');
+				$("#att-events").css('display', 'block');
+				$("#my-events").css('display', 'none');
+			} else if (selected == 'mine') {
+				$("#event_manager_result_navigation li#list").removeClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#attending").removeClass("elgg-state-selected");
+				$("#event_manager_result_navigation li#mine").addClass("elgg-state-selected");
+				$("#all-events").css('display', 'none');
+				$("#att-events").css('display', 'none');
+				$("#my-events").css('display', 'block');
+			}
 
-			$("#event_manager_result_navigation li").toggleClass("elgg-state-selected");
-			//$("#event_manager_event_map, #event_manager_event_listing").toggle();
-			$("#all-events, #my-events").toggle();
+				$(this).addClass("elgg-state-selected");
 
 			$('#search_type').val(selected);
 			
