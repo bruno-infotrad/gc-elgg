@@ -1,5 +1,8 @@
 <?php 
 elgg_load_js('jquery.multidatespicker');
+$setdates=0;
+$setattdates=0;
+$setmydates=0;
 foreach ($vars["entities"] as $entity) {
 	if ($setdates) {
 		$setdates .= ',"'.date('y-n-d',$entity->start_day).'"';
@@ -14,7 +17,7 @@ foreach ($vars["entities"] as $entity) {
 			}
 		}
 	} else {
-		$setdates .= '"'.date('y-n-d',$entity->start_day).'"';
+		$setdates = '"'.date('y-n-d',$entity->start_day).'"';
 		$startdate = $setdates;
 		if (($entity->end_ts - $entity->start_day)/(24*3600) >= 1) {
 			$numeric_sd = date('U',$entity->start_day);
@@ -41,7 +44,7 @@ foreach ($vars["entities"] as $entity) {
 				}
 			}
 		} else {
-			$setattdates .= '"'.date('y-n-d',$entity->start_day).'"';
+			$setattdates = '"'.date('y-n-d',$entity->start_day).'"';
 			$attstartdate = $setattdates;
 			if (($entity->end_ts - $entity->start_day)/(24*3600) >= 1) {
 				$numeric_sd = date('U',$entity->start_day);
@@ -69,7 +72,7 @@ foreach ($vars["entities"] as $entity) {
 				}
 			}
 		} else {
-			$setmydates .= '"'.date('y-n-d',$entity->start_day).'"';
+			$setmydates = '"'.date('y-n-d',$entity->start_day).'"';
 			$mystartdate = $setmydates;
 			if (($entity->end_ts - $entity->start_day)/(24*3600) >= 1) {
 				$numeric_sd = date('U',$entity->start_day);
@@ -90,10 +93,23 @@ if (! $mystartdate) {$mystartdate = $startdate;}
 $of ='<div class="gc-datepicker"><div id="all-events" class="elgg-input-date"><h4>'.elgg_echo('event_manager:list:navigation:list').'</h4></div><div id="att-events"><h4>'.elgg_echo('event_manager:event:relationship:event_attending').'</h4></div><div id="my-events"><h4>'.elgg_echo('event_manager:event:relationship:my_events').'</h4></div></div>';
 $of .=<<<__HTML
 <script>
+var setdates='$setdates', setattdates='$setattdates', setmydates='$setmydates';
 setTimeout(function(){
-	$('#all-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setdates]}).datepicker("setDate", $startdate );
-	$('#my-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setmydates] }).datepicker("setDate", $mystartdate );
-	$('#att-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setattdates] }).datepicker("setDate", $attstartdate );
+	if (setdates) {
+		$('#all-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setdates]}).datepicker("setDate", $startdate );
+	} else {
+		$('#all-events').multiDatesPicker({ dateFormat: "y-m-d"}).datepicker("setDate", $startdate );
+	}
+	if (setattdates) {
+		$('#att-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setattdates]}).datepicker("setDate", $attstartdate );
+	} else {
+		$('#att-events').multiDatesPicker({ dateFormat: "y-m-d"}).datepicker("setDate", $attstartdate );
+	}
+	if (setmydates) {
+		$('#my-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setmydates] }).datepicker("setDate", $mystartdate );
+	} else {
+		$('#my-events').multiDatesPicker({ dateFormat: "y-m-d"}).datepicker("setDate", $mystartdate );
+	}
 },3500);
 </script>
 __HTML;
