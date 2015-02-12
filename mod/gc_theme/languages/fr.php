@@ -117,6 +117,7 @@ $french = array(
 	'event_manager:event:editquestions' => 'Modifier les questions de l\'inscription',
 	'event_manager:edit:form:registration_completed' => 'Texte une fois l\'inscription terminée',
 	'event_manager:edit:form:rsvp_options' => 'Options R.S.V.P.',
+	'event_manager:list:friendsattending' => 'Montrer les évènements auquels mes collègues participent',
 	'search_types:tags' => "Mots-clé",
 	'pages:tags' => "Mots-clé",
 	'file:tags' => "Mots-clé",

@@ -21,6 +21,7 @@ add_translation('en', array(
 	'event_manager:notify:groups:button' => 'Advertise',
 	'event_manager:notify:groups:missing_event_or_container' => 'Missing event or container',
 	'event_manager:event:relationship:my_events' => 'My events',
+	'event_manager:list:friendsattending' => 'Show events my colleagues are attending',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
