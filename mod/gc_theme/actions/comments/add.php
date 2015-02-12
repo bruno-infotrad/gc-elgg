@@ -46,8 +46,8 @@ if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
 					$subject = elgg_echo("gc_theme:comment:notify_ref:subject");
 					$to = $to_user->guid;
 					$body = elgg_echo("gc_theme:comment:notify_ref:body",array($user->name,$entity->getURL()));
-					notify_user($to, $from, $subject, $body,NULL,'site');
-					//notify_user($from, $to, $subject, $body,NULL,array('email','site'));
+					notify_user($to, $from, $subject, $body);
+					//notify_user($to, $from, $subject, $body,NULL,'site');
 				}
 			}
                 }

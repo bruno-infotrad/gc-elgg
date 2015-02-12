@@ -79,12 +79,16 @@ function gc_event_manager_page_handler($page) {
         if (! elgg_is_logged_in()) {
                 forward('/dashboard');
         } else {
-        	if (isset($page[0]) && $page[0] == 'event' && isset($page[1])&& $page[1] == 'list') {
+        	if (isset($page[0]) && $page[0] == 'event' && isset($page[1])&& ($page[1] == 'list' || $page[1] == 'view')) {
         		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/event';
 			if (isset($page[2])) {
-                		set_input('owner_guid', $page[2]);
+				if ($page[1] == 'list'){
+                			set_input('owner_guid', $page[2]);
+				} elseif ($page[1] == 'view'){
+                			set_input('guid', $page[2]);
+				}
 			}
-			include "$base_dir/list.php";
+			include "$base_dir/$page[1].php";
         	} elseif (isset($page[0]) && $page[0] == 'registrationform' && isset($page[1])&& $page[1] == 'edit' && isset($page[2])) {
         		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/registrationform';
                 	set_input('guid', $page[2]);

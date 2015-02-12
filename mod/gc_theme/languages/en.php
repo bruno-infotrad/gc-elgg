@@ -33,7 +33,7 @@ add_translation('en', array(
 	'groups:invitations:left_menu' => "invitations",
 	'groups:invitations:short' => "Invitations",
 	'groups:membershiprequests:short' => 'Join requests',
-	'groups:list' => 'Group List',
+	'groups:list' => 'A-Z Groups',
 	'groups:list:other' => 'Other',
 	'home' => 'Home',
 	

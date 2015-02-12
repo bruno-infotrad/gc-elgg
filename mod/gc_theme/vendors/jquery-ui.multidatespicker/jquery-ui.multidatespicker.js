@@ -70,6 +70,14 @@
 						var d = new Date();
 						var start_day = dateConvert.call(this,dateText,'number')- 60*1000*d.getTimezoneOffset();
 						var params;
+						if ($('#advanced_search').val()==1){
+							$('#event_manager_event_search_advanced_container, #past_events, #event_manager_event_search_advanced_enable span').toggle();
+							$('#attending input[type="checkbox"]').prop("checked", false);
+							$('#owning input[type="checkbox"]').prop("checked", false);
+							$('#friendsattending input[type="checkbox"]').prop("checked", false);
+							$('.elgg-tabs #attending').show();
+							$('.elgg-tabs #mine').show();
+						}
 						var all_events = $('#all-events').css('display');
 						var att_events = $('#att-events').css('display');
 						if (all_events == 'block') {

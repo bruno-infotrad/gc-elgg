@@ -170,7 +170,6 @@ function event_manager_execute_search(){
 	$("#event_manager_result_refreshing").show();
 	
 	map_data_only = false;
-	$('#advanced_search').val('0');
 	if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "onthemap"){
 		map_data_only = true;
 		mapBounds = event_manager_gmap.getBounds();
@@ -186,6 +185,13 @@ function event_manager_execute_search(){
 		$("#longitude").val(longitude);
 		$("#distance_latitude").val(distance_latitude);
 		$("#distance_longitude").val(distance_longitude);
+	} else if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "list"){
+		if($('#event_manager_event_search_advanced_container').is(":hidden")) {
+			$('#attending input[type="checkbox"]').prop("checked", false);
+			$('#owning input[type="checkbox"]').prop("checked", false);
+			$('#search_type').val('list');
+			$('#advanced_search').val('0');
+		}
 	} else if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "attending"){
 		$('#attending input[type="checkbox"]').prop("checked", true);
 		$('#owning input[type="checkbox"]').prop("checked", false);
@@ -410,10 +416,14 @@ elgg.event_manager.init = function() {
 		if($('#past_events').is(":hidden"))
 		{
 			$('#advanced_search').val('1');
+			$('.elgg-tabs #attending').hide();
+			$('.elgg-tabs #mine').hide();
 		}
 		else
 		{
 			$('#advanced_search').val('0');
+			$('.elgg-tabs #attending').show();
+			$('.elgg-tabs #mine').show();
 		}
 	});
 	
