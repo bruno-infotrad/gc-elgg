@@ -202,9 +202,6 @@ function gc_theme_init() {
 	//Action for sending event notification email to colleagues and post bookmarks to books
 	elgg_register_action("event_manager/notify_colleagues", "$action_path/event_manager/notify_colleagues.php");
 	elgg_register_action("gc_theme/notify_groups", "$action_path/gc_theme/notify_groups.php");
-	//replace event manager edit 
-	elgg_unregister_action("event_manager/event/edit");
-	elgg_register_action("event_manager/event/edit","$action_path/event/edit.php");
 	//Action for roles
 	elgg_register_action("roles_im_admin/make_im_admin", "$action_path/roles_im_admin/make_im_admin.php");
 	elgg_register_action("roles_im_admin/revoke_im_admin", "$action_path/roles_im_admin/revoke_im_admin.php");
