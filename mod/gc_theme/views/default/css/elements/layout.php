@@ -8,6 +8,9 @@
  *
  */
 ?>
+.event_manager_event_list_search_input {position: relative; top: -1.1em;}
+#event-manager-search-button {display:inline-block;}
+#event-manager-search-button>.elgg-button {height:28px;}
 .gc-event_manager_registrationform_fields {padding: 1em}
 .gc-event_manager_registrationform_fields.elgg-module-popup 
 .gc-datepicker {width:96%;margin:1.2em 0.3em}

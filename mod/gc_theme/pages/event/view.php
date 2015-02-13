@@ -24,7 +24,8 @@
 			elgg_push_breadcrumb($page_owner->name, "/events/event/list/" . $page_owner->getGUID());
 		}
 		
-		$title_text = '<h3>'.$event->title.'</h3>';
+		$title_text = $event->title;
+		$html_title_text = '<h3>'.$title_text.'</h3>';
 		elgg_push_breadcrumb($title_text);
 		
 		$output = elgg_view_entity($event, array("full_view" => true));
@@ -33,7 +34,7 @@
 		
 		$body = elgg_view_layout('content', array(
 			'filter' => '',
-			'content' => $title_text.$output,
+			'content' => $html_title_text.$output,
 			'title' => $title_text,
 			'sidebar' => $sidebar
 		));
