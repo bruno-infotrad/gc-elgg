@@ -22,6 +22,7 @@ add_translation('en', array(
 	'event_manager:notify:groups:missing_event_or_container' => 'Missing event or container',
 	'event_manager:event:relationship:my_events' => 'My events',
 	'event_manager:list:friendsattending' => 'Show events my colleagues are attending',
+	'event_manager:edit:form:twitter_hash' => 'Twitter hashtag',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
@@ -284,7 +285,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'groups:yours' => "Groups I am in",
 	'groups:user' => '%s\' groups',
 	'groups:onemember' => 'member',
-	'groups:last_updated' => 'Last updated',
+	'groups:last_updated' => 'Last activity',
 	'groups:invite' => 'Invite',
 	'groups:invite:title' => 'Invite colleagues to this group',
 	'groups:inviteto' => "Invite colleagues to '%s'",

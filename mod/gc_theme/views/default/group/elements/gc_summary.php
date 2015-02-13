@@ -3,7 +3,8 @@ $entity = $vars['entity'];
 $user = elgg_get_logged_in_user_entity();
 $site_url = elgg_get_site_url();
 
-if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'list') != false)||(strpos(full_url(), 'filter') === false))) {
+//if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'list') != false)||(strpos(full_url(), 'filter') === false))) {
+if (elgg_instanceof($entity, 'group')) {
 	$last_update=$entity->time_created;
 	$group_activity=elgg_get_entities(array( 'wheres' => array("e.type != 'user' AND e.subtype != '9' AND e.container_guid = $entity->guid"),'order_by' => ('time_created'),'reverse_order_by' => true));
 	if ($group_activity && $group_activity[0]->time_updated > $last_update) {
@@ -82,7 +83,8 @@ echo "<h4>$title_link</h4>";
 echo "<div class=\"elgg-subtext\"><p class='group-size'>$members</p>";
 echo $join_leave_button;
 echo elgg_view('object/summary/extend', $vars);
-if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'list') != false)||(strpos(full_url(), 'filter') === false))) {
+//if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'list') != false)||(strpos(full_url(), 'filter') === false))) {
+if (elgg_instanceof($entity, 'group')) {
 	echo "<div style=\"float:right;\">$last_updated</div>";
 }
 echo "</div>";

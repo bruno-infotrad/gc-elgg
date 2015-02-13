@@ -604,7 +604,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'groups:onemember' => 'membre',
 	'groups:updated' => "Dernière réponse par %s %s",
 	'groups:started' => 'Créé par %s',
-	'groups:last_updated' => 'Actualisé',
+	'groups:last_updated' => 'Dernière activité',
 	'groups:invite' => 'Inviter',
 	'groups:invite:title' => 'Inviter vos collègues dans ce groupe',
 	'groups:inviteto' => "Inviter vos collègues dans '%s'",
