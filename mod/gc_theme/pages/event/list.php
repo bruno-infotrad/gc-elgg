@@ -32,6 +32,9 @@
 		}
 	}
 	
+	$all_events = event_manager_search_events($event_options);
+	$all_entities = $all_events["entities"];
+	$all_count = $all_events["count"];
 	$user_event_preferred_tab = elgg_get_logged_in_user_entity()->event_preferred_tab;
 	if ($user_event_preferred_tab == 'attending') {
         	$event_options['meattending'] = true;
@@ -51,7 +54,7 @@
 	
 	$content = $form . $result;
 	
-	$multidatepicker = elgg_view('page/elements/multidatepicker', array("entities" => $entities, "count" => $count));
+	$multidatepicker = elgg_view('page/elements/multidatepicker', array("entities" => $all_entities, "count" => $all_count));
 
 	$body = elgg_view_layout('content', array(
 		'filter' => '',

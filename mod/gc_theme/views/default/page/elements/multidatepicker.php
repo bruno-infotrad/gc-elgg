@@ -1,8 +1,22 @@
 <?php 
 elgg_load_js('jquery.multidatespicker');
-$setdates=0;
-$setattdates=0;
-$setmydates=0;
+$setdates=$setattdates=$setmydates=0;
+$user_event_preferred_tab = elgg_get_logged_in_user_entity()->event_preferred_tab;
+if (!$user_event_preferred_tab) {
+	$user_event_preferred_tab = 'all';
+	$list=1;
+	$meattending = 0;
+	$owning = 0;
+}
+if ($user_event_preferred_tab == 'attending') {
+	$list=0;
+	$meattending = 1;
+	$owning = 0;
+} elseif ($user_event_preferred_tab == 'mine') {
+	$list=0;
+	$meattending = 0;
+	$owning = 1;
+}
 foreach ($vars["entities"] as $entity) {
 	if ($setdates) {
 		$setdates .= ',"'.date('y-n-d',$entity->start_day).'"';
@@ -94,6 +108,16 @@ $of ='<div class="gc-datepicker"><div id="all-events" class="elgg-input-date"><h
 $of .=<<<__HTML
 <script>
 var setdates='$setdates', setattdates='$setattdates', setmydates='$setmydates';
+if ($list) {
+ $('#att-events').hide();
+ $('#my-events').hide();
+} else if  ($meattending) {
+ $('#all-events').hide();
+ $('#my-events').hide();
+} else if  ($owning) {
+ $('#all-events').hide();
+ $('#att-events').hide();
+}
 setTimeout(function(){
 	if (setdates) {
 		$('#all-events').multiDatesPicker({ dateFormat: "y-m-d", addDates: [$setdates]}).datepicker("setDate", $startdate );
