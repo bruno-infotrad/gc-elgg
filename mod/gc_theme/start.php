@@ -1,6 +1,5 @@
 <?php
 $GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::DEBUG);
-define("EVENT_MANAGER_SEARCH_LIST_LIMIT", 0);
 
 function gc_theme_init() {
 	require_once 'lib/functions.php';

@@ -104,6 +104,7 @@ add_translation('en', array(
 	'gc_theme:userpreferences' => 'Preferences',
 	'gc_theme:userpreferences:ui' => 'User Interface Preferences',
 	'gc_theme:preferred_tab' => 'Default dashboard tab',
+	'gc_theme:event_preferred_tab' => 'Default events page tab',
 	'gc_theme:usersettings:save:ok' => 'Preferences saved',
 	'gc_theme:more' => 'more',
 	'gc_theme:less' => 'less',

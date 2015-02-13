@@ -32,6 +32,13 @@
 		}
 	}
 	
+	$user_event_preferred_tab = elgg_get_logged_in_user_entity()->event_preferred_tab;
+	if ($user_event_preferred_tab == 'attending') {
+        	$event_options['meattending'] = true;
+	} elseif ($user_event_preferred_tab == 'mine') {
+        	$event_options['owning'] = true;
+	}
+
 	$events = event_manager_search_events($event_options);
 	
 	$entities = $events["entities"];
@@ -42,7 +49,7 @@
 	$result = elgg_view('event_manager/event_sort_menu');
 	$result .= elgg_view("event_manager/search_result", array("entities" => $entities, "count" => $count));
 	
-	$content = 	$form . $result;
+	$content = $form . $result;
 	
 	$multidatepicker = elgg_view('page/elements/multidatepicker', array("entities" => $entities, "count" => $count));
 

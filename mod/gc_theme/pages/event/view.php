@@ -10,14 +10,6 @@
 	
 	if($event){
 
-		// add export button
-		
-		elgg_load_js("addthisevent");
-		elgg_register_menu_item("title", ElggMenuItem::factory(array(
-			"name" => "addthisevent",
-			"href" => false,
-			"text" => elgg_view("event_manager/event/addthisevent", array("entity" => $event)))));
-		
 		elgg_set_page_owner_guid($event->getContainerGUID());
 		$page_owner = elgg_get_page_owner_entity();
 		if($page_owner instanceof ElggGroup){

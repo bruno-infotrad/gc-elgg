@@ -70,7 +70,9 @@
 						var d = new Date();
 						var start_day = dateConvert.call(this,dateText,'number')- 60*1000*d.getTimezoneOffset();
 						var params;
-						if ($('#advanced_search').val()==1){
+						$('#event_manager_event_list_search_more').remove();
+						var advanced_search = $('#event_manager_event_search_advanced_container').css('display');
+						if (advanced_search == 'block'){
 							$('#event_manager_event_search_advanced_container, #past_events, #event_manager_event_search_advanced_enable span').toggle();
 							$('#attending input[type="checkbox"]').prop("checked", false);
 							$('#owning input[type="checkbox"]').prop("checked", false);

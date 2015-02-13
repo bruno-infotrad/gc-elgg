@@ -20,7 +20,7 @@
 			"organizer" => ELGG_ENTITIES_ANY_VALUE,
 			"organizer_rsvp" => 0,
 			"start_day" => date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, time()),
-			"end_day" => date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, time()),
+			"end_day" => ELGG_ENTITIES_ANY_VALUE,
 			"start_time" => time(),
 			"end_ts" => time() + 3600,
 			"registration_ended" => ELGG_ENTITIES_ANY_VALUE,
@@ -200,3 +200,14 @@
 	
 	// unset sticky data TODO: replace with sticky forms functionality
 // 	$_SESSION['createevent_values'] = null;
+?>
+<script>
+$("#start_day").datepicker({
+	 dateFormat: "yy-mm-dd" ,
+    onClose: function() {
+        var date = $(this).val();
+        $("#end_day").val(date);
+
+    }
+});
+</script>
