@@ -4,11 +4,12 @@ $setdates=$setattdates=$setmydates=0;
 $user_event_preferred_tab = elgg_get_logged_in_user_entity()->event_preferred_tab;
 if (!$user_event_preferred_tab) {
 	$user_event_preferred_tab = 'all';
+}
+if ($user_event_preferred_tab == 'all') {
 	$list=1;
 	$meattending = 0;
 	$owning = 0;
-}
-if ($user_event_preferred_tab == 'attending') {
+} else if ($user_event_preferred_tab == 'attending') {
 	$list=0;
 	$meattending = 1;
 	$owning = 0;

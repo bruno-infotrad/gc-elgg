@@ -416,6 +416,9 @@ elgg.event_manager.init = function() {
 		if($('#past_events').is(":hidden"))
 		{
 			$('#advanced_search').val('1');
+			$("#event_manager_result_navigation li#list").addClass("elgg-state-selected");
+			$("#event_manager_result_navigation li#attending").removeClass("elgg-state-selected");
+			$("#event_manager_result_navigation li#mine").removeClass("elgg-state-selected");
 			$('.elgg-tabs #attending').hide();
 			$('.elgg-tabs #mine').hide();
 		}
