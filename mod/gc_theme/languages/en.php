@@ -23,6 +23,7 @@ add_translation('en', array(
 	'event_manager:event:relationship:my_events' => 'My events',
 	'event_manager:list:friendsattending' => 'Show events my colleagues are attending',
 	'event_manager:edit:form:twitter_hash' => 'Twitter hashtag',
+	'event_manager:event:relationship:undo' => 'Not Attending',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
