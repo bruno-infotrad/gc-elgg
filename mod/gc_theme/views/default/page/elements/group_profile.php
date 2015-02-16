@@ -4,18 +4,7 @@ if ($group instanceof ElggGroup) {
 	$dbprefix = elgg_get_config("dbprefix");
 	$context = elgg_get_context();
 	$owner = $group->getOwnerEntity();
-	//$members = $group->getMembers(0, 0, TRUE);
-	$members = elgg_get_entities_from_relationship(array(
-                'relationship' => 'member',
-                'relationship_guid' => $group->guid,
-                'inverse_relationship' => TRUE,
-                'type' => 'user',
-        	'joins' => array("JOIN " . $dbprefix . "users_entity u ON e.guid=u.guid"),
-        	'wheres' => array("(u.banned = 'no')"),
-                'limit' => 0,
-                'offset' => 0,
-                'count' => true,
-        ));
+	$members = gc_get_group_members($group->guid,0, 0, 0, TRUE);
 	if ($members == 1) {
 		$members_label = elgg_echo('groups:onemember');
 	} else {

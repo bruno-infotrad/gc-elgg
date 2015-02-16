@@ -10,5 +10,5 @@ $summary = elgg_view('output/url', array(
 		//'text' => $count.' '.$text,
 		'text' => $text,
 	));
-$summary .= '<br>'.$group->getMembers(0,0,true).' '.elgg_echo('groups:member');
+$summary .= '<br>'.gc_get_group_members($group->guid,0,0,0,true).' '.elgg_echo('groups:member');
 echo '<div class="elgg-image-block clearfix"><div class="elgg-image">'.$icon.'</div><div class="elgg-body sidebar-discussion-item">'.$summary.'</div></div>';

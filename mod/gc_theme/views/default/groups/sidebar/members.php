@@ -9,7 +9,7 @@
  */
 
 $limit = elgg_extract('limit', $vars, 10);
-$member_count = $vars['entity']->getMembers(0, 0, TRUE);
+$member_count = gc_get_group_members($vars['entity']->guid, 0, 0, 0, TRUE);
 
 $body = elgg_list_entities_from_relationship(array(
 	'relationship' => 'member',

@@ -31,7 +31,7 @@ $profile_fields = elgg_get_config('group');
 		</p>
 		<p>
 		<?php
-			echo elgg_echo('groups:members') . ": " . $group->getMembers(0, 0, TRUE);
+			echo elgg_echo('groups:members') . ": " . gc_get_group_members($group->guid, 0, 0, 0, TRUE);
 		?>
 		</p>
 <?php

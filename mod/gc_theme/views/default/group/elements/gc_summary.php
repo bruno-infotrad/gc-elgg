@@ -47,7 +47,7 @@ if ($entity->owner_guid == $user->getGUID()) {
 }
 
 $metadata = elgg_extract('metadata', $vars, '');
-$members = $entity->getMembers(0, 0, TRUE);
+$members = gc_get_group_members($entity->guid, 0, 0, 0, TRUE);
 if ($members == 1) {
 	$members = $members.' '.elgg_echo('groups:onemember');
 } else {
