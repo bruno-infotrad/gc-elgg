@@ -70,8 +70,7 @@
 		);
 		$params = $params + $vars;
 		
-		$event_time = '<div class="gc-event-time">'.date('H:i',$event->start_time).'<br>'.date('H:i',$event->end_ts).'</div>';
 		$list_body = elgg_view('object/elements/summary', $params);
 	
-		echo elgg_view_image_block($icon . $event_time, $list_body);
+		echo elgg_view_image_block($icon, $list_body);
     }
