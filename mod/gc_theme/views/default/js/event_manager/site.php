@@ -168,6 +168,7 @@ function event_manager_registrationform_add_field(form) {
 function event_manager_execute_search(){
 	
 	$("#event_manager_result_refreshing").show();
+	$('#event_manager_event_listing').html('<div class="elgg-ajax-loader"></div>');
 	
 	map_data_only = false;
 	if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "onthemap"){
