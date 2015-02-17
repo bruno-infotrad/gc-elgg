@@ -27,9 +27,8 @@
 			
 			$output .= '</ul>';	
 			$output .= '<br /><a rel="'.$guid.'" id="event_manager_questions_add" href="javascript:void(0);" class="elgg-button elgg-button-action">' . elgg_echo('event_manager:editregistration:addfield') . '</a>';
-			//$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-menu-item-groups-invite elgg-button">' . elgg_echo('Done') . '</a>';
 			$output .= '<div class="elgg-menu-item-groups-invite">';
-			$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-button">' . elgg_echo('gc_theme:done') . '</a>';
+			$output .= '<a href="'.elgg_get_site_url().'events/event/view/'.$guid.'" class="elgg-button" id="registration-form-button">' . elgg_echo('gc_theme:done') . '</a>';
 			$output .= '</div>';
 			$output .= '</div>';
 			
@@ -47,3 +46,23 @@
 		register_error(elgg_echo("InvalidParameterException:GUIDNotFound", array($guid)));
 		forward(REFERER);
 	}
+?>
+<script>
+$(document).ready(function() {
+        $('#registration-form-button').css('pointer-events','none');
+        $('#registration-form-button').attr('disabled','disabled');
+        $('#registration-form-button').css('opacity',0.5);
+});
+$('#event_manager_registrationform_fields').bind("DOMSubtreeModified", function() {
+	var count= $('li.elgg-module-popup').length;
+	if (count) {
+        	$('#registration-form-button').css('pointer-events','all');
+        	$('#registration-form-button').removeAttr('disabled','disabled');
+        	$('#registration-form-button').css('opacity',1);
+	} else {
+        	$('#registration-form-button').css('pointer-events','none');
+        	$('#registration-form-button').attr('disabled','disabled');
+        	$('#registration-form-button').css('opacity',0.5);
+	}
+});
+</script>

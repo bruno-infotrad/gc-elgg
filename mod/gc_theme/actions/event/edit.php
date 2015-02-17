@@ -231,7 +231,7 @@
 			elgg_clear_sticky_form('event');
 			
 			system_message(elgg_echo("event_manager:action:event:edit:ok"));
-			if ($event->registration_needed) {
+			if ($event->registration_needed && ! $event->getRegistrationFormQuestions(true)) {
 				$forward_url = "/events/registrationform/edit/".$event->guid;
 			} else {
 				$forward_url = $event->getURL();

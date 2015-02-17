@@ -174,7 +174,7 @@
 /* Event tool links */
 
 .event_manager_event_actions {
-	background: url(<?php echo $graphics_folder; ?>arrows_down.png) right center no-repeat;
+	background: url(<?php echo $graphics_folder; ?>arrows_down.png) right center no-repeat, linear-gradient(#fefefe, #dcdcdc);;
 	padding-right: 15px;
 	cursor: pointer;
 	font-weight: bold;

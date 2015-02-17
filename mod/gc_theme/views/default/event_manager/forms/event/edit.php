@@ -94,11 +94,13 @@
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:start') . " *</td>";
 	$form_body .= "<td>" . elgg_view('input/date', array('name' => 'start_day', 'id' => 'start_day', 'value' => $fields["start_day"], "class" => "event_manager_event_edit_date")) . " ";
 	$form_body .= event_manager_get_form_pulldown_hours('start_time_hours', date('H', $fields["start_time"]));
+	$form_body .= '<div id="heure">H</div>';
 	$form_body .= event_manager_get_form_pulldown_minutes('start_time_minutes', date('i', $fields["start_time"])) . "</td></tr>";
 	
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:end') . " *</td>";
 	$form_body .= "<td>" . elgg_view('input/date', array('name' => 'end_day', 'id' => 'end_day', 'value' => $fields["end_day"], "class" => "event_manager_event_edit_date")) . " ";
 	$form_body .= event_manager_get_form_pulldown_hours('end_time_hours', date('H', $fields["end_ts"]));
+	$form_body .= '<div id="heure">H</div>';
 	$form_body .= event_manager_get_form_pulldown_minutes('end_time_minutes', date('i', $fields["end_ts"])) . "</td></tr>";
 	
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:shortdescription') . "</td><td>" . elgg_view('input/text', array('name' => 'shortdescription', 'value' => $fields["shortdescription"])) . "</td></tr>";
@@ -107,7 +109,7 @@
 
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('tags') . "</td><td>" . elgg_view('input/tags', array('name' => 'tags', 'value' => $fields["tags"])) . "</td></tr>";
 	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:icon') . "</td><td>" . elgg_view('input/file', array('name' => 'icon')) . "</td></tr>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:icon') . "</td><td>" . elgg_view('input/file', array('name' => 'icon', 'js' => 'onchange="check_file()"'))."<div id=\"gc-file-event-selected\"></div></td></tr>";
 	
 	if (!empty($currentIcon)) {
 		$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:currenticon') . "</td><td>".$currentIcon."<br />".
@@ -201,7 +203,7 @@
 	// unset sticky data TODO: replace with sticky forms functionality
 // 	$_SESSION['createevent_values'] = null;
 ?>
-<script>
+<script type="text/javascript">
 $("#start_day").datepicker({
 	 dateFormat: "yy-mm-dd" ,
     onClose: function() {
@@ -210,4 +212,19 @@ $("#start_day").datepicker({
 
     }
 });
+function check_file(){
+        var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
+        var allowed_extensions = allowed_extensions_settings.split(/, */);
+        var ext,filename;
+        filename = $('.elgg-input-file').val().split('\\').pop().toLowerCase();
+        ext = $('.elgg-input-file').val().split('.').pop().toLowerCase();
+        if($.inArray(ext, allowed_extensions) == -1) {
+                alert(elgg.echo('gc_theme:file:not_allowed'));
+                $('.elgg-input-file').val('');
+        }
+        if (filename.length > 30) {
+                filename =  filename.substr(0, 15) + '...' + filename.substr(filename.length-10, filename.length);
+        }
+        $('#gc-file-event-selected').html(filename);
+}
 </script>

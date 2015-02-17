@@ -8,6 +8,8 @@
  *
  */
 ?>
+#heure {display: inline-block; padding-right: 5px;}
+#gc-file-event-selected { margin-left: 9em; top: -1.7em; position: relative;}
 .event_manager_event_list_search_input {position: relative; top: -1.1em;}
 #event-manager-search-button {display:inline-block;}
 #event-manager-search-button>.elgg-button {height:28px;}
