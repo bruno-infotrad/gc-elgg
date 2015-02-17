@@ -25,6 +25,8 @@ add_translation('en', array(
 	'event_manager:list:friendsattending' => 'Show events my colleagues are attending',
 	'event_manager:edit:form:twitter_hash' => 'Twitter hashtag',
 	'event_manager:event:relationship:undo' => 'Not Attending',
+	'event_manager:event:exportwaitinglist' => 'Export waiting list',
+	'event_manager:event:relationship:event_waitinglist:label' => 'On the waiting list',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",
