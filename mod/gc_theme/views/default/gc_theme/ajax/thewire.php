@@ -17,8 +17,18 @@ if ($page_type == 'all') {
 		'type' => 'object',
 		'subtype' => 'thewire',
 		'container_guid' => $user->guid,
-		//'owner_guid' => $page_owner->guid,
 		'limit' => 15,
 	));
         echo $content;
+} elseif ($page_type == 'group') {
+	$group_guid = get_input('group_guid');
+	if ($group_guid) {
+		$content = elgg_list_entities(array(
+			'type' => 'object',
+			'subtype' => 'thewire',
+			'container_guid' => $group_guid,
+			'limit' => 15,
+		));
+        	echo $content;
+	}
 }

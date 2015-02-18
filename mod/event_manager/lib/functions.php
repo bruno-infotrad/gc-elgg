@@ -72,6 +72,10 @@
 			$entities_options['metadata_name_value_pairs'][] = array('name' => 'start_day', 'value' => $options['start_day'], 'operand' => '>=');
 		}
 		
+		if(!empty($options['start_day_before'])) {
+			$entities_options['metadata_name_value_pairs'][] = array('name' => 'start_day', 'value' => $options['start_day_before'], 'operand' => '<=');
+		}
+		
 		if(!empty($options['end_day'])) {
 			$entities_options['metadata_name_value_pairs'][] = array('name' => 'end_ts', 'value' => $options['end_day'], 'operand' => '<=');
 		}

@@ -32,6 +32,7 @@
 		}
 	}
 	
+	$event_options['limit'] = 0;
 	$all_events = event_manager_search_events($event_options);
 	$all_entities = $all_events["entities"];
 	$all_count = $all_events["count"];
@@ -42,6 +43,7 @@
         	$event_options['owning'] = true;
 	}
 
+	$event_options['limit'] = EVENT_MANAGER_SEARCH_LIST_LIMIT;
 	$events = event_manager_search_events($event_options);
 	
 	$entities = $events["entities"];

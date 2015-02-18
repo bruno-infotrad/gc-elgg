@@ -235,9 +235,13 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					ajax_path = 'ajax/view/gc_theme/ajax/blogs';
 					break;
 				case 'thewire':
+				case 'thewire_group':
 					var group_guid;
 					if (page_type == 'group') {
 						group_guid = path_atoms[2];
+					}
+					if (! page_type) {
+						page_type = 'all';
 					}
 					iteration++;
 					delete_marker = elgg.delete_marker(count,iteration,15);
