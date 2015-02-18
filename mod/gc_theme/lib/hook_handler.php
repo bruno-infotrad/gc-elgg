@@ -961,6 +961,8 @@ function gc_theme_profile_menu_handler($hook, $type, $items, $params) {
 		'text' => elgg_echo("profile:user_about"),
 		'priority' => 100,
 		'selected' => true,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'user_workinfo',
@@ -968,24 +970,32 @@ function gc_theme_profile_menu_handler($hook, $type, $items, $params) {
 		'text' => elgg_echo("profile:user_workinfo"),
 		'priority' => 200,
 		'selected' => true,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'user_orgchart',
 		'href' => "/ajax/view/profile/user_orgchart?container_guid=$entity->guid",
 		'text' => elgg_echo("profile:user_orgchart"),
 		'priority' => 300,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'user_colleagues',
 		'href' => "/ajax/view/profile/user_colleagues?container_guid=$entity->guid",
 		'text' => elgg_echo("profile:user_colleagues"),
 		'priority' => 400,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'user_activity',
 		'href' => "/ajax/view/profile/user_activity?container_guid=$entity->guid",
 		'text' => elgg_echo("profile:user_activity"),
 		'priority' => 500,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 
 	$items[] = ElggMenuItem::factory(array(
@@ -993,12 +1003,16 @@ function gc_theme_profile_menu_handler($hook, $type, $items, $params) {
 		'href' => "/ajax/view/profile/user_blog?container_guid=$entity->guid",
 		'text' => elgg_echo("profile:user_blog"),
 		'priority' => 550,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	$items[] = ElggMenuItem::factory(array(
 		'name' => 'user_groups',
 		'href' => "/ajax/view/profile/user_groups?container_guid=$entity->guid",
 		'text' => elgg_echo("profile:user_groups"),
 		'priority' => 600,
+		'item_class' => 'gc-profile-tab-item',
+		'link_class' => 'gc-profile-tab-link',
 	));
 	return $items;
 }

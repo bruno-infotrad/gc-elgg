@@ -4,10 +4,12 @@
              var $tabs = $(this);
              var $tabsNav = $tabs.find('.ui-tabs-nav');
              $tabs.css({'padding':2, 'position':'relative'})
-         .prepend('<div class="sst-tabs-arrows-protector"><span class="ui-icon ui-icon-carat-1-e sst-arrow" data-direction="left"></span><span class="ui-icon ui-icon-carat-1-w sst-arrow" data-direction="right"></span></div>')
+         .prepend('<div class="sst-tabs-arrows-protector"><span class="gc-ui-icon ui-icon-carat-1-e sst-arrow" data-direction="left"></span><span class="gc-ui-icon ui-icon-carat-1-w sst-arrow" data-direction="right"></span></div>')
+         //.prepend('<div class="sst-tabs-arrows-protector"><span class="gc-ui-icon ui-icon ui-icon-carat-1-e sst-arrow" data-direction="left"></span><span class="gc-ui-icon ui-icon ui-icon-carat-1-w sst-arrow" data-direction="right"></span></div>')
          .disableSelection();
        var $arrows = $('.sst-tabs-arrows-protector');
-       $arrows.css({width: '12px', height: '28px', margin: '0', float: 'left'});
+       $arrows.css({width: '12px', margin: '0', float: 'left'});
+       //$arrows.css({width: '12px', height: '28px', margin: '0', float: 'left'});
              $tabsNav.wrap('<div id="sst-nav" class="sst-nav" style="width: 95%;position:relative;overflow:hidden;"/>');
        $tabsNav.css({'width':'9999px','margin-left': 0});
        var $nav = $('div#sst-nav.sst-nav');

@@ -63,20 +63,39 @@ ul.elgg-menu-compound > li.elgg-state-selected > a {
     display: inline-block;
     vertical-align: middle;
 }
-.ui-icon, .ui-widget-content .ui-icon {
+#myTabs {
+    background: none!important;
+    border: 0!important;
+    color: none!important;
+    font-family: Verdana, Arial, Helvetica, sans-serif!important;
+    font-size: 12px!important;
+}
+.gc-profile-tab-item {
+    float: none!important;
+    margin: 0 4px 0!important;
+    padding: 0!important;
+}
+.elgg-menu-profile a.gc-profile-tab-link {
+    line-height: normal;
+    padding: 4px!important;
+    vertical-align: middle;
+}
+.gc-ui-icon, .ui-icon, .ui-widget-content .ui-icon {
     background-image: url('<?php echo elgg_get_site_url();?>/mod/gc_theme/views/default/images/themeroller-icon-set-vector-20px-2010-06-01.png');
     background-color: #fff;
 }
-.ui-icon-carat-1-e {
+.gc-ui-icon.ui-icon-carat-1-e {
     background-position: -179px 0;
-    margin-top: 2px;
+    display: inline-block;
+    margin-top: 5px;
     width: 10px;
     height: 20px;
     left: 3px;
 }
-.ui-icon-carat-1-w {
+.gc-ui-icon.ui-icon-carat-1-w {
     background-position: -49px 0;
-    margin-top: 2px;
+    display: inline-block;
+    margin-top: 5px;
     width: 10px;
     height: 20px;
     position: absolute;

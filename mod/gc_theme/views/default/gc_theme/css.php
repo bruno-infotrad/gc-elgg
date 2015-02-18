@@ -272,7 +272,7 @@ display: none;
 	float: left;
 	width: 70%;
 	min-height:300px;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 #elgg-profile-avatar {
 	float: right;
