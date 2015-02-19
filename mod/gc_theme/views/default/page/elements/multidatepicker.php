@@ -105,7 +105,7 @@ foreach ($vars["entities"] as $entity) {
 if (! $startdate) {$startdate = date('y-n-d');}
 if (! $attstartdate) {$attstartdate = $startdate;}
 if (! $mystartdate) {$mystartdate = $startdate;}
-$of ='<div class="gc-datepicker"><div id="all-events" class="elgg-input-date"><h4>'.elgg_echo('event_manager:list:navigation:list').'</h4></div><div id="att-events"><h4>'.elgg_echo('event_manager:event:relationship:event_attending').'</h4></div><div id="my-events"><h4>'.elgg_echo('event_manager:event:relationship:my_events').'</h4></div></div>';
+$of ='<div class="gc-datepicker"><div id="all-events"><h4>'.elgg_echo('event_manager:list:navigation:list').'</h4></div><div id="att-events"><h4>'.elgg_echo('event_manager:event:relationship:event_attending').'</h4></div><div id="my-events"><h4>'.elgg_echo('event_manager:event:relationship:my_events').'</h4></div></div>';
 $of .=<<<__HTML
 <script>
 var setdates='$setdates', setattdates='$setattdates', setmydates='$setmydates';
