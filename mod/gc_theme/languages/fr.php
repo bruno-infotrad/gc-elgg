@@ -120,6 +120,7 @@ $french = array(
 	'event_manager:list:friendsattending' => 'Montrer les évènements auquels mes collègues participent',
 	'event_manager:event:relationship:event_attending' => 'Je participerai',
 	'event_manager:event:relationship:undo' => 'Je ne participerai pas',
+	'event_manager:edit:form:options' => 'Options avancées',
 	'search_types:tags' => "Mots-clé",
 	'pages:tags' => "Mots-clé",
 	'file:tags' => "Mots-clé",

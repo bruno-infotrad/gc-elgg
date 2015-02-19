@@ -27,6 +27,7 @@ add_translation('en', array(
 	'event_manager:event:relationship:undo' => 'Not Attending',
 	'event_manager:event:exportwaitinglist' => 'Export waiting list',
 	'event_manager:event:relationship:event_waitinglist:label' => 'On the waiting list',
+	'event_manager:edit:form:options' => 'Advanced options',
 	
 	'file:river:create' => 'uploaded a file',
 	'file:friends' => "Colleagues' files",

@@ -89,15 +89,15 @@
 	
 	$form_body .= "<table>";
 	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('title') . " *</td><td>" . elgg_view('input/text', array('name' => 'title', 'value' => $fields["title"])) . "</td></tr>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label gc-required'>" . elgg_echo('title') . " *</td><td>" . elgg_view('input/text', array('name' => 'title', 'value' => $fields["title"])) . "</td></tr>";
 	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:start') . " *</td>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label gc-required'>" . elgg_echo('event_manager:edit:form:start') . " *</td>";
 	$form_body .= "<td>" . elgg_view('input/date', array('name' => 'start_day', 'id' => 'start_day', 'value' => $fields["start_day"], "class" => "event_manager_event_edit_date")) . " ";
 	$form_body .= event_manager_get_form_pulldown_hours('start_time_hours', date('H', $fields["start_time"]));
 	$form_body .= '<div id="heure">H</div>';
 	$form_body .= event_manager_get_form_pulldown_minutes('start_time_minutes', date('i', $fields["start_time"])) . "</td></tr>";
 	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:end') . " *</td>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label gc-required'>" . elgg_echo('event_manager:edit:form:end') . " *</td>";
 	$form_body .= "<td>" . elgg_view('input/date', array('name' => 'end_day', 'id' => 'end_day', 'value' => $fields["end_day"], "class" => "event_manager_event_edit_date")) . " ";
 	$form_body .= event_manager_get_form_pulldown_hours('end_time_hours', date('H', $fields["end_ts"]));
 	$form_body .= '<div id="heure">H</div>';
