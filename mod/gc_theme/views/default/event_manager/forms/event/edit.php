@@ -33,6 +33,7 @@
 			"notify_onsignup" => ELGG_ENTITIES_ANY_VALUE,
 			"max_attendees" => ELGG_ENTITIES_ANY_VALUE,
 			"waiting_list_enabled" => ELGG_ENTITIES_ANY_VALUE,
+			"status" => 'published',
 			"access_id" => get_default_access(),
 			"container_guid" => elgg_get_page_owner_entity()->getGUID(),
 			"event_interested" => 0,
@@ -47,7 +48,12 @@
 	
 	if ($event = $vars['entity']) {
 		// edit mode
+		$draft_warning = $vars['draft_warning'];
+		if ($draft_warning) {
+			$draft_warning = '<span class="mbm elgg-text-help">' . $draft_warning . '</span>';
+		}
 		$fields["guid"] = $event->getGUID();
+		$fields["status"] = $event->status;
 		$fields["location"] = $event->getLocation();
 		$fields["latitude"] = $event->getLatitude();
 		$fields["longitude"] = $event->getLongitude();
@@ -78,6 +84,11 @@
 	if (elgg_is_sticky_form('event')) {
 		// merge defaults with sticky data
 		$fields = array_merge($fields, elgg_get_sticky_values('event'));
+	}
+	if ($event = $vars['entity']) {
+		if ($event->status == 'draft') {
+			$fields['access_id'] = $event->future_access;
+		}
 	}
 	
 	elgg_clear_sticky_form('event');
@@ -183,7 +194,9 @@
 	$form_body .= "</td>";
 	$form_body .= "</tr>";
 	
+	$form_body .= "<tr><td class='event_manager_event_edit_label'>" .elgg_echo('blog:status'). "</td><td>" .  elgg_view('input/dropdown', array( 'name' => 'status', 'id' => 'event_status', 'value' => $fields['status'], 'options_values' => array( 'draft' => elgg_echo('blog:status:draft'), 'published' => elgg_echo('blog:status:published')))) . "</td></tr>";
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('access') . "</td><td>" . elgg_view('input/access', array('name' => 'access_id', 'value' => $fields["access_id"])) . "</td></tr>";
+
 	
 	$form_body .= "</table>";
 					

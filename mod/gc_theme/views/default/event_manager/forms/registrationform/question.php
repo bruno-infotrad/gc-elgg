@@ -2,16 +2,26 @@
 
 	$event_guid = $vars["event_guid"];
 	$question_guid = $vars["question_guid"];
-	
+
+	elgg_log("EVENT_MANAGER event_guid=$event_guid question_guid=$question_guid");	
 	if($event_guid && ($entity = get_entity($event_guid))){
 		// assume new question mode
 		if(!($entity instanceof Event)){
 			unset($entity);
+		} else {
+			if ($entity->canEdit() && $entity->access_id == ACCESS_PRIVATE) {
+				$ia = elgg_set_ignore_access(true);
+			}
 		}
 		
-	} elseif($question_guid && ($entity = get_entity($question_guid))) {
-		// assume question edit mode
-		if(!($entity instanceof EventRegistrationQuestion)){
+	//} elseif($question_guid && ($entity = get_entity($question_guid))) {
+	} elseif ($question_guid ) {
+		// Have to do this because of private event
+		$ia = elgg_set_ignore_access(true);
+		$entity = get_entity($question_guid);
+		$associated_event = get_entity($entity->container_guid);
+		// assume question edit mode and check access
+		if(!($entity instanceof EventRegistrationQuestion) || ! $associated_event->canEdit()){
 			unset($entity);
 		}
 	}
@@ -72,3 +82,6 @@
 		echo elgg_echo("InvalidParameterException:GUIDNotFound", array($guid));
 	}
 	
+if ($ia) {
+	elgg_set_ignore_access($ia);
+}

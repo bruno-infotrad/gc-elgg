@@ -33,6 +33,7 @@
 	$endregistration_day = get_input("endregistration_day");
 	$max_attendees = get_input("max_attendees");
 	$waiting_list = get_input("waiting_list");
+	$status = get_input("status");
 	$access_id = get_input("access_id");
 	$with_program = get_input("with_program");
 	$delete_current_icon = get_input("delete_current_icon");
@@ -51,6 +52,7 @@
 	$start_time_hours = get_input("start_time_hours");
 	$start_time_minutes = get_input("start_time_minutes");
 	$start_time = mktime($start_time_hours, $start_time_minutes, 1, 0, 0, 0);
+	elgg_log("EVENT_MANAGER status=$status",'NOTICE');
 	
 	if (!empty($end_day)) {
 		$end_date = explode('-', $end_day);
@@ -103,26 +105,46 @@
 		if (!isset($event)) {
 			$newEvent = true;
 			$event = new Event();
+		} else {
+			$old_status = $event->status;
 		}
-		
 		$event->title = $title;
 		$event->description = $description;
 		$event->container_guid = $container_guid;
+		//if (($newEvent || $event->status == 'draft') && $status == 'draft') {
+		if ($status == 'draft') {
+        		$event->future_access = $access_id;
+        		$access_id = ACCESS_PRIVATE;
+		}
+		$event->status = $status;
 		$event->access_id = $access_id;
 		$event->save();
 		
 		$event->setLocation($location);
 		$event->setLatLong($latitude, $longitude);
 		$event->tags = $tags;
-		
-		if ($newEvent) {
-			// add event create river event
+
+		// add to river if changing status or published, regardless of new post
+		// because we remove it for drafts.
+		if (($newEvent || $old_status == 'draft') && $status == 'published') {
 			add_to_river('river/object/event/create', 'create', elgg_get_logged_in_user_guid(), $event->getGUID());
-			
 			// add optional organizer relationship
-			if ($organizer_rsvp) {
+			if ($newEvent && $organizer_rsvp) {
 				$event->rsvp(EVENT_MANAGER_RELATION_ORGANIZING, null, true, false);
 			}
+			if (! $newEvent) {
+				// reset the creation time for posts that move from draft to published
+				$event->time_created = time();
+				$event->save();
+				// we only want notifications sent when post published
+				// Only trigger if not new post since the hook catches this case only)
+				elgg_trigger_event('publish', 'object', $event);
+			}
+		} elseif ($old_status == 'published' && $status == 'draft') {
+			elgg_delete_river(array(
+				'object_guid' => $event->guid,
+				'action_type' => 'create',
+			));
 		}
 		
 		$event->shortdescription = $shortdescription;

@@ -14,6 +14,9 @@
 	
 	if($event_guid && ($event = get_entity($event_guid))) {
 		if(($event->getSubtype() == Event::SUBTYPE) && ($event->canEdit())) {
+			if ($event->access_id == ACCESS_PRIVATE) {
+				$ia=elgg_set_ignore_access(true);
+			}
 			if($question_guid && ($question = get_entity($question_guid))) {
 				if(!($question instanceof EventRegistrationQuestion)) {
 					unset($question);
@@ -23,7 +26,6 @@
 				$result['edit'] = 0;
 				$question = new EventRegistrationQuestion();
 			}
-			
 			if($question && !empty($question)) {
 				$question->title			= $questiontext;
 				$question->container_guid	= $event->getGUID();
@@ -46,6 +48,9 @@
 					
 					$result['content'] = elgg_view("event_manager/registration/question", array("entity" => $question));
 				}
+			}
+			if ($event->access_id == ACCESS_PRIVATE) {
+				elgg_set_ignore_access($ia);
 			}
 		}
 	}

@@ -162,14 +162,15 @@ if (!$error) {
 			add_to_river('river/object/blog/create', 'create', $blog->owner_guid, $blog->getGUID());
 
 			// we only want notifications sent when post published
-			// Remove because it will not work with group batch notification. Use blog_object_notifications_intercept hook instead
+			// Remove because it will not work with group batch notification. Use gc_object_notifications_intercept hook instead
 			//register_notification_object('object', 'blog', elgg_echo('blog:newpost'));
-			elgg_trigger_event('publish', 'object', $blog);
 
-			// reset the creation time for posts that move from draft to published
 			if ($guid) {
+				// reset the creation time for posts that move from draft to published
 				$blog->time_created = time();
 				$blog->save();
+				// Only trigger if existing post, new post will be created the usual way since the hook does not catch it
+				elgg_trigger_event('publish', 'object', $blog);
 			}
 		} elseif ($old_status == 'published' && $status == 'draft') {
 			elgg_delete_river(array(

@@ -18,7 +18,9 @@
 			
 			$output  ='<div class="elgg-menu gc-event_manager_registrationform_fields">';
 			$output  .='<ul id="event_manager_registrationform_fields">';
-			
+			if ($event->access_id == ACCESS_PRIVATE) {
+				$ia = elgg_set_ignore_access(true);
+			}
 			if($registration_form = $event->getRegistrationFormQuestions()) {
 				foreach($registration_form as $question) {
 					$output .= elgg_view('event_manager/registration/question', array('entity' => $question));
@@ -37,7 +39,9 @@
 				'content' => $output,
 				'title' => $title_text,
 			));
-			
+			if ($ia) {
+				elgg_set_ignore_access($ia);
+			}
 			echo elgg_view_page($title_text, $body);			
 		} else {
 			forward($event->getURL());

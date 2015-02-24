@@ -1290,17 +1290,18 @@ function gc_theme_views_add_rss_link() {
                 ));
         }
 }
-function blog_object_notifications_intercept($hook, $entity_type, $returnvalue, $params) {
+function gc_object_notifications_intercept($hook, $entity_type, $returnvalue, $params) {
 	if (isset($params)) {
+		elgg_log('BRUNO GC INTERCEPT params '.var_export($params,true),'NOTICE');
 		if ($params['event'] == 'create' && $params['object'] instanceof ElggObject) {
-			elgg_log('BRUNO BLOG INTERCEPT params '.var_export($params,true),'NOTICE');
+			elgg_log('BRUNO GC INTERCEPT params '.var_export($params,true),'NOTICE');
 			$object = $params['object'];
 			elgg_log('BRUNO BLOG INTERCEPT object->subtype '.$object->getSubtype(),'NOTICE');
-			if ($object->getSubtype() == 'blog') {
-				elgg_log('BRUNO BLOG INTERCEPT IT IS A BLOG','NOTICE');
-				elgg_log('BRUNO BLOG INTERCEPT object->status '.$object->status,'NOTICE');
+			if ($object->getSubtype() == 'blog' || $object->getSubtype() == 'event') {
+				elgg_log('BRUNO GC INTERCEPT IT IS A BLOG OR AN EVENT','NOTICE');
+				elgg_log('BRUNO GC INTERCEPT object->status '.$object->status,'NOTICE');
 				if ($object->status != 'published') {
-					elgg_log('BRUNO BLOG INTERCEPT AND IT IS NOT PUBLISHED','NOTICE');
+					elgg_log('BRUNO GC INTERCEPT AND IT IS NOT PUBLISHED','NOTICE');
 					return true;
 				}
 			}
@@ -1456,4 +1457,41 @@ function gc_get_friendly_time($hook, $type, $value, $params) {
         } else {
                 return date('Y-m-d',$time);
 	}
+}
+
+function event_entity_menu_setup($hook, $type, $return, $params) {
+        if (elgg_in_context('widgets')) {
+                return $return;
+        }
+
+        $entity = $params['entity'];
+        $handler = elgg_extract('handler', $params, false);
+        if ($handler != 'event') {
+                return $return;
+        }
+	//Older events don't have a status
+	if (! $entity->status) {
+		$status = 'published';
+	} else {
+		$status = $entity->status;
+	}
+        if ($status != 'published') {
+                // draft status replaces access
+                foreach ($return as $index => $item) {
+                        if ($item->getName() == 'access') {
+                                unset($return[$index]);
+                        }
+                }
+
+                $status_text = elgg_echo("blog:status:{$status}");
+                $options = array(
+                        'name' => 'published_status',
+                        'text' => "<span>$status_text</span>",
+                        'href' => false,
+                        'priority' => 150,
+                );
+                $return[] = ElggMenuItem::factory($options);
+        }
+
+        return $return;
 }

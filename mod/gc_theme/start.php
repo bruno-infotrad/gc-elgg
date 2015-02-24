@@ -13,7 +13,7 @@ function gc_theme_init() {
 	//For batch notification to work:
 	// Reinstate notificcations for blogs but intercept blog notification when created when status not published
 	register_notification_object('object', 'blog', elgg_echo('blog:newpost'));
-	elgg_register_plugin_hook_handler('object:notifications', 'object', 'blog_object_notifications_intercept');
+	elgg_register_plugin_hook_handler('object:notifications', 'object', 'gc_object_notifications_intercept');
 	//elgg_register_js('jquery.scrollabletab', '/mod/gc_theme//vendors/jquery.scrollabletab.js','head');
 	elgg_register_js('jquery.scrollto', '/mod/gc_theme/vendors/jquery.scrollTo-1.4.3.1-min.js','head');
 	elgg_register_js('jquery.scrollabletab', '/mod/gc_theme/vendors/simplescrolltab.js','head');
@@ -279,6 +279,8 @@ function gc_theme_init() {
 
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'gc_theme_owner_block_menu_handler', 600);
 	elgg_register_plugin_hook_handler('register', 'menu:profile', 'gc_theme_profile_menu_handler');
+        elgg_register_plugin_hook_handler('register', 'menu:entity', 'event_entity_menu_setup');
+
 	
 	elgg_register_event_handler('pagesetup', 'system', 'gc_theme_pagesetup_handler', 1000);
 	
