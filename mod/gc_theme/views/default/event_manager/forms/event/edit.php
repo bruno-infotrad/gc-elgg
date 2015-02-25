@@ -41,6 +41,7 @@
 			"event_exhibiting" => 0,
 			"event_organizing" => 0,
 			"registration_completed" => ELGG_ENTITIES_ANY_VALUE,
+			"checked" => FALSE,
 		);
 		
 	$region_options = event_manager_event_region_options();
@@ -48,6 +49,9 @@
 	
 	if ($event = $vars['entity']) {
 		// edit mode
+		if ($event->exec_content == 'true') {
+			$checked = TRUE;
+		}
 		$draft_warning = $vars['draft_warning'];
 		if ($draft_warning) {
 			$draft_warning = '<span class="mbm elgg-text-help">' . $draft_warning . '</span>';
@@ -193,14 +197,15 @@
 	$form_body .= "<div class='elgg-subtext'>" . elgg_echo("event_manager:edit:form:registration_completed:description") . "</div>";
 	$form_body .= "</td>";
 	$form_body .= "</tr>";
-	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" .elgg_echo('blog:status'). "</td><td>" .  elgg_view('input/dropdown', array( 'name' => 'status', 'id' => 'event_status', 'value' => $fields['status'], 'options_values' => array( 'draft' => elgg_echo('blog:status:draft'), 'published' => elgg_echo('blog:status:published')))) . "</td></tr>";
+	$form_body .= "<tr style='display:none;'><td class='event_manager_event_edit_label'>" .elgg_echo('blog:status'). "</td><td>" .  elgg_view('input/dropdown', array( 'name' => 'status', 'id' => 'event_status', 'value' => $fields['status'], 'options_values' => array( 'published' => elgg_echo('blog:status:published'),'draft' => elgg_echo('blog:status:draft'),))) . "</td></tr>";
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('access') . "</td><td>" . elgg_view('input/access', array('name' => 'access_id', 'value' => $fields["access_id"])) . "</td></tr>";
 
 	
 	$form_body .= "</table>";
 					
 	$form_body .= elgg_view('input/submit', array('value' => elgg_echo('save')));
+	$form_body .= '<div id="event-exec-content">'.elgg_echo('gc_theme:exec_content').' ';
+	$form_body .= elgg_view('input/checkbox',array('name'=>'exec_content','value' => 'true','checked' => $checked)).'</div>';
 	$form_body .= '<div class="event_manager_required">(* = '.elgg_echo('requiredfields').')</div>';
 	
 	$form = elgg_view('input/form', array(

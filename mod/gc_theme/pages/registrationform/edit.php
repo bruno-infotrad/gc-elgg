@@ -16,7 +16,8 @@
 			elgg_push_breadcrumb($entity->title, $event->getURL());
 			elgg_push_breadcrumb($title_text);
 			
-			$output  ='<div class="elgg-menu gc-event_manager_registrationform_fields">';
+			$output  ='<div id="registrationform-preamble">'.elgg_echo('gc_theme:registrationform_preamble').'</div>';
+			$output  .='<div class="elgg-menu gc-event_manager_registrationform_fields">';
 			$output  .='<ul id="event_manager_registrationform_fields">';
 			if ($event->access_id == ACCESS_PRIVATE) {
 				$ia = elgg_set_ignore_access(true);

@@ -194,9 +194,9 @@
 			$entity = elgg_extract("entity", $params);
 
 			if (!empty($entity) && elgg_instanceof($entity, "object", Event::SUBTYPE)) {
-				$user = elgg_get_logged_in_user_entity();
+				$user = $entity->getOwnerEntity();
 				if (!$user) {
-					$user = $entity->getOwnerEntity();
+					$user = elgg_get_logged_in_user_entity();
 				}
 
 				$result = elgg_echo("event_manager:notification:body", array($user->name, $entity->title));

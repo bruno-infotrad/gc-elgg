@@ -51,8 +51,8 @@
 	
 	$start_time_hours = get_input("start_time_hours");
 	$start_time_minutes = get_input("start_time_minutes");
+	$exec_content = get_input('exec_content',false);
 	$start_time = mktime($start_time_hours, $start_time_minutes, 1, 0, 0, 0);
-	elgg_log("EVENT_MANAGER status=$status",'NOTICE');
 	
 	if (!empty($end_day)) {
 		$end_date = explode('-', $end_day);
@@ -118,6 +118,11 @@
 		}
 		$event->status = $status;
 		$event->access_id = $access_id;
+		if ($exec_content == 'true') {
+                        $event->exec_content = $exec_content;
+                } else {
+                        $event->exec_content = false;
+                }
 		$event->save();
 		
 		$event->setLocation($location);

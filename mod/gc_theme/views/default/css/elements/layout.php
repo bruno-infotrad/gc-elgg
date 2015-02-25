@@ -8,6 +8,8 @@
  *
  */
 ?>
+#event-exec-content {float: right;padding-right: 1em;}
+#registrationform-preamble {padding: 5px;}
 #heure {display: inline-block; padding-right: 5px;}
 #gc-file-event-selected { margin-left: 9em; top: -1.7em; position: relative;}
 .event_manager_event_list_search_input {position: relative; top: -1.1em;}
