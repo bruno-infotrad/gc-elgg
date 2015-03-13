@@ -45,9 +45,11 @@ if ($context == 'groups') {
 } else {
 	//$header= elgg_view('page/elements/title', $vars);
 	$header= elgg_view_menu('title', array('sort_by' => 'priority'));
-	//if (!(strpos($full_url, 'group') !== false)) {
+	if ((strpos($full_url, 'tag') !== false) && $context == 'thewire') {
+		$header .= '<h1>'.elgg_echo("gc_theme:thewire:tags").'</h1>';
+	} else {
 		$header .= '<h1>'.elgg_echo("gc_theme:tabnav:$context").'</h1>';
-	//}
+	}
 }
 $header = "<div class='title-box'>".$header."</div>";
 $filter = $header.elgg_view('page/layouts/content/filter', $vars);

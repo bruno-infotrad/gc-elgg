@@ -377,16 +377,18 @@ function thewire_gc_page_handler($page) {
 	} else {
 	elgg_log("BRUNO page ".var_export($page,true),'ERROR');
         if (isset($page[0]) && (
-	    $page[0] == 'view' || 
-	    $page[0] == 'thread' || 
-	    $page[0] == 'edit' || 
 	    $page[0] == 'all' || 
+	    $page[0] == 'edit' || 
 	    $page[0] == 'friends' || 
-	    $page[0] == 'owner'
+	    $page[0] == 'owner' ||
+	    $page[0] == 'tag' || 
+	    $page[0] == 'thread' || 
+	    $page[0] == 'view'
 	)) {
         	$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/thewire';
 		if ( isset($page[1])) {
 			set_input('guid', $page[1]);
+			set_input('tag', $page[1]);
 		}
 		include $base_dir.'/'.$page[0].'.php';
         } else {

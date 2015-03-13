@@ -473,6 +473,7 @@ $french = array(
 	'gc_theme:comment:notify_ref:body' => "%s vous a cité dans le commentaire %s",
 	'gc_theme:done' => 'Retour à l\'événement',
 	'gc_theme:registrationform_preamble' => "Personnalisez votre formulaire d'inscription en ajoutant des questions",
+	'gc_theme:thewire:tags' => "Objects étiquetés",
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",

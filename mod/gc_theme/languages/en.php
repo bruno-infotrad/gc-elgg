@@ -195,6 +195,7 @@ add_translation('en', array(
 	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment %s",
 	'gc_theme:done' => 'Back to event',
 	'gc_theme:registrationform_preamble' => "Customize your registration questions to get information from attendees. Click on Add Field to add a registration question.",
+	'gc_theme:thewire:tags' => "Tagged objects",
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",
