@@ -8,6 +8,8 @@
  *
  */
 ?>
+.gc-river-event {display:inline-block;vertical-align:top;}
+.gc-river-event-icon {padding-left:10px;}
 #event-exec-content {float: right;padding-right: 1em;}
 #registrationform-preamble {padding: 5px;}
 #heure {display: inline-block; padding-right: 5px;}
