@@ -17,6 +17,7 @@
 
 $entities = $vars['results']['entities'];
 $count = $vars['results']['count'] - count($entities);
+$thewire_tags = $vars['thewire_tags'];
 
 if (!is_array($entities) || !count($entities)) {
 	return FALSE;
@@ -42,7 +43,7 @@ $url = elgg_get_site_url() . "search?$query";
 $more_items = $vars['results']['count'] - ($vars['params']['offset'] + $vars['params']['limit']);
 
 // get pagination
-if (array_key_exists('pagination', $vars['params']) && $vars['params']['pagination']) {
+if ((array_key_exists('pagination', $vars['params']) && $vars['params']['pagination'])|| $thewire_tags) {
 	$nav = elgg_view('navigation/pagination', array(
 		'base_url' => $url,
 		'offset' => $vars['params']['offset'],
@@ -92,10 +93,9 @@ if ($show_more) {
 }
 
 // @todo once elgg_view_title() supports passing a $vars array use it
-$body = elgg_view('page/elements/title', array(
-	'title' => $type_str,
-	'class' => 'search-heading-category',
-));
+if (! $thewire_tags) {
+	$body = elgg_view('page/elements/title', array( 'title' => $type_str, 'class' => 'search-heading-category',));
+}
 
 $view = search_get_search_view($vars['params'], 'entity');
 if ($view) {
