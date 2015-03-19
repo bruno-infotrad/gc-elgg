@@ -22,6 +22,7 @@ $french = array(
 	'event_manager:event:relationship:event_interested' => 'Provisoire',
 	'event_manager:event:relationship:event_interested:label' => 'Provisoire',
 	'event_manager:event:notify_colleagues' => 'Envoyer un courriel de notification à vos collègues',
+	'event_manager:event:notify_colleagues:confirm' => "La notification va être envoyeé à vos %s collègues. Êtes-vous certain(e)?",
 	'event_manager:notify_colleagues:subject' => "Nouvel événement: %s",
 	'event_manager:notify_colleagues:body' => "Bonjour %s<br>%s vous invite à l'événement:<br>TITRE: %s<br>DATE: %s<br>LIEU: %s><br>. Pour plus de détails et RSVP, suivez le lien suivant:<br>%s",
 	'event_manager:action:notify_colleagues:ok' => "Courriels envoyé",

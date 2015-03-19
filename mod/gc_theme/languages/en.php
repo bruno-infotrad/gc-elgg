@@ -14,6 +14,7 @@ add_translation('en', array(
 	'event_manager:event:relationship:event_interested' => 'Tentative',
 	'event_manager:event:relationship:event_interested:label' => 'Tentative',
 	'event_manager:event:notify_colleagues' => 'Email notification of event to colleagues',
+	'event_manager:event:notify_colleagues:confirm' => "The notification will be sent to your %s colleagues. Are you sure?",
 	'event_manager:notify_colleagues:subject' => "New event: %s",
         'event_manager:notify_colleagues:body' => "Hi %s<br>%s invited you to the event:<br>EVENT NAME: %s<br>DATE: %s<br>LOCATION: %s><br>.To see more details and RSVP, follow the link below:<br>%s",
 	'event_manager:action:notify_colleagues:ok' => "Emails sent",
