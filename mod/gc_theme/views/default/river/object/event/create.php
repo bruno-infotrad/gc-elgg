@@ -7,7 +7,7 @@ $icon .= "<div class='event_manager_event_list_icon_month'>" . strtoupper(date("
 $icon .= "<div class='event_manager_event_list_icon_day'>" . date("d", $unix_start_day) . "</div>";
 $icon .= "</div>";
 if($event->icontime){
-            $icon .= '<div class="gc-river-event gc-river-event-icon"><img src="' . $event->getIcon('small') . '" /></div>';
+            $icon .= '<div class="gc-river-event gc-river-event-icon"><img src="' . $event->getIcon('medium') . '" /></div>';
 }
 $vars['attachments'] = $icon;
 echo elgg_view('river/item', $vars);
