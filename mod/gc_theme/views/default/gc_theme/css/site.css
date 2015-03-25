@@ -329,7 +329,8 @@ a.tag {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  width: 500px;
+/* Francis Fung : 2015-03-24 */
+  width: 400px;
   height: 17px;
   padding: 4px 4px;
   border-width: 1px 0 1px 1px;
@@ -459,6 +460,11 @@ details summary:hover, details summary:focus {
   .section-controls-cont .button-accent {
     float: none;
   }
+
+/* Francis Fung : 2015-03-24 */
+  .search-form input[type="search"] {
+    width: 70%;
+  }
 }
 @media screen and (max-width: 700px) {
   /* line 323, ../sass/site.scss */
@@ -472,5 +478,10 @@ details summary:hover, details summary:focus {
     width: 100%;
     padding: 5px 0;
     margin: 10px 0;
+  }
+
+/* Francis Fung : 2015-03-24 */
+  .search-form input[type="search"] {
+    width: 60%;
   }
 }
