@@ -1,4 +1,22 @@
 <?php
+function gc_event_manager_get_registration_fiedtypes()     {
+/* Very bad but not mine: attaching language dependent field types to metadata/metastring 
+* and used with in_array test in * mod/event/views/default/event_manager/registration/question.php
+* So the strings below have to match the contents of the language file put it cannot be achieved
+* programmatically, hence the hack
+*/
+	$result = array(
+		'Textfield' => 'text',
+		'Texte' => 'text',
+		'Textarea' => 'plaintext',
+		'Boîte de texte' => 'plaintext',
+		'Dropdown' => 'dropdown',
+		'Liste' => 'dropdown',
+		"Radiobutton" => 'radio',
+		"Bouton d'options" => 'radio'
+	);
+	return $result;
+}
 function elgg_view_agora_icon($name, $class = '') {
         if ($class === true) {
                 $class = 'float';

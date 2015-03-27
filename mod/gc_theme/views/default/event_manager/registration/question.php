@@ -12,7 +12,7 @@
 			$tools .= $edit_question . " " . $delete_question;
 		}
 		
-		$fieldtypes = event_manager_get_registration_fiedtypes();
+		$fieldtypes = gc_event_manager_get_registration_fiedtypes();
 		if(array_key_exists($question->fieldtype, $fieldtypes)) {			
 			$field_options = $question->getOptions();
 			

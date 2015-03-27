@@ -54,10 +54,15 @@
 		$form_body .= "</td></tr><tr><td>";
 		$form_body .= '<label>'.elgg_echo('event_manager:editregistration:fieldtype').'</label>';
 		$form_body .= "</td><td>";
-		$form_body .= elgg_view('input/dropdown', array('id' => 'event_manager_registrationform_question_fieldtype', 'value' => $fieldtype, 'name' => 'fieldtype', 'options' => array('Textfield', 'Textarea', 'Dropdown', 'Radiobutton')));
+		$form_body .= elgg_view('input/dropdown', array('id' => 'event_manager_registrationform_question_fieldtype', 'value' => $fieldtype, 'name' => 'fieldtype', 'options' => array(
+																				elgg_echo('event_manager:editregistration:addfield:field_type:textfield'),
+																				elgg_echo('event_manager:editregistration:addfield:field_type:textarea'),
+																				elgg_echo('event_manager:editregistration:addfield:field_type:dropdown'),
+																				elgg_echo('event_manager:editregistration:addfield:field_type:radiobutton')
+																								)));
 		$form_body .= "</td></tr>";
 		
-		if(!in_array($fieldtype, array('Radiobutton', 'Dropdown'))) {
+		if(!in_array($fieldtype, array('Radiobutton', 'Dropdown', "Bouton d'options", 'Liste'))) {
 			$displayNone = ' style="display:none;"';
 		}
 		
