@@ -28,7 +28,7 @@
 				$notification_options["relationship"] = "notifysite";
 				
 				if($site_notification_count = elgg_get_entities_from_relationship($notification_options)){
-					if($site_notification_count > $notification_count){
+					if($site_notification_count < $notification_count){
 						$notification_count = $site_notification_count;
 					}
 				}
