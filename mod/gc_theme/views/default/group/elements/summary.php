@@ -21,11 +21,9 @@ $entity = $vars['entity'];
 
 if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'newest') != false)||(strpos(full_url(), 'filter') === false))) {
 	$last_update=$entity->time_created;
-	$group_activity=elgg_get_entities(array( 'wheres' => array("e.type != 'user' AND e.subtype != '9' AND e.container_guid = $entity->guid"),'order_by' => ('time_created'),'reverse_order_by' => true));
-	elgg_log("BRUNO GROUP_ACTIVITY=".var_export($group_activity,true),'NOTICE');
-	elgg_log("BRUNO FILTER =".full_url(),'NOTICE');
-	if ($group_activity && $group_activity[0]->time_updated > $last_update) {
-		$last_update = $group_activity[0]->time_updated;
+	$last_group_activity=gc_get_last_group_activity($entity->guid);
+	if ($last_group_activity && $last_group_activity > $last_update) {
+		$last_update = $last_group_activity;
 	}
 	$last_updated = elgg_echo('groups:last_updated').' '.elgg_view_friendly_time($last_update);
 }
