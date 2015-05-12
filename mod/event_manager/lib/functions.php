@@ -82,7 +82,8 @@
 		
 		if(!$options['past_events']) {
 			// only show from current day or newer
-			$entities_options['metadata_name_value_pairs'][] = array('name' => 'start_day', 'value' => mktime(0, 0, 1), 'operand' => '>=');
+			// Modified for multi-day events
+			$entities_options['metadata_name_value_pairs'][] = array('name' => 'end_ts', 'value' => mktime(0, 0, 1), 'operand' => '>=');
 		}
 		
 		if($options['meattending']) {
