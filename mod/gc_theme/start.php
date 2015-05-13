@@ -164,6 +164,8 @@ function gc_theme_init() {
 	elgg_extend_view('groups/tool_latest', 'file/group_module',601);
 	elgg_unextend_view('groups/tool_latest', 'bookmarks/group_module');
 	elgg_extend_view('groups/tool_latest', 'bookmarks/group_module',602);
+	//Remove unused options
+	elgg_unextend_view("groups/edit", "group_tools/forms/cleanup");
 	//Replace event_manager js
 	elgg_unextend_view("js/elgg", "js/event_manager/site");
 	elgg_extend_view("js/elgg", "js/event_manager/site");
