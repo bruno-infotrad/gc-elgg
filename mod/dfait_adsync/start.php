@@ -76,7 +76,11 @@ function adsync_handler($page, $identifier) {
 				require("$lib_path/functions.php");
 				$result = adsync_getavatar_handler($target);
 				if (true == $result) {
+					$owner=get_user_by_username($target);
 					system_messages(elgg_echo("adsync:getavatar_completed"), "success");
+					$view = 'river/user/default/profileiconupdate';
+					elgg_delete_river(array('subject_guid' => $owner->guid, 'view' => $view));
+					add_to_river($view, 'update', $owner->guid, $owner->guid);
 				} else {
 					$GLOBALS['ADSYNC_LOG']->error(elgg_echo("adsync:getavatar_failed"));
 					system_messages(elgg_echo("adsync:getavatar_failed"), "error");

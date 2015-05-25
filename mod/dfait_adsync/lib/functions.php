@@ -1114,32 +1114,33 @@ function adsync_get_avatar_from_teaminfo($elgg_user) {
 
 		$tmpfname = tempnam("/tmp", "ti2dc-");
 
-		$teaminfo_url        = elgg_get_plugin_setting('adsync_teaminfo_url', 'dfait_adsync');
-		$teaminfo_domain     = elgg_get_plugin_setting('adsync_teaminfo_domain', 'dfait_adsync');
-		$teaminfo_username   = elgg_get_plugin_setting('adsync_teaminfo_username', 'dfait_adsync');
+		$teaminfo_server = elgg_get_plugin_setting('adsync_teaminfo_server', 'dfait_adsync');
+		$teaminfo_username = elgg_get_plugin_setting('adsync_teaminfo_username', 'dfait_adsync');
 
-		$now = new DateTime();
-		$avatar_url = $teaminfo_url . "/Handler/ReadFile.ashx?dfaitEdsId=" . $elgg_user->username . "&d=" . $now->getTimeStamp();
-		$GLOBALS['ADSYNC_LOG']->debug(elgg_echo("Avatar URL => " . $avatar_url));
-		
 		try {
+			// Download file from TeamInfo using mssql query
 			$key = $CONFIG->dbpass;
 			$passwd = elgg_get_plugin_setting('adsync_teaminfo_password', 'dfait_adsync');
 			$teaminfo_password = mcrypt_decrypt(MCRYPT_3DES, $key, base64_decode($passwd), MCRYPT_MODE_ECB);
 			$block = mcrypt_get_block_size('tripledes', 'ecb');
 			$pad = ord($teaminfo_password[($len = strlen($teaminfo_password)) - 1]);
 			$teaminfo_password = substr($teaminfo_password, 0, strlen($teaminfo_password) - $pad);
+			$link = mssql_connect($teaminfo_server,$teaminfo_username, $teaminfo_password);
+			if (!$link) {
+				throw new Exception("erreur de connection");
+			}
+			if (!mssql_select_db('TeamInfo',$link)) {
+				throw new Exception("Impossible de se connecter a la base de donnees TeamInfo");
+			}
+			$avatar_q=mssql_query('SELECT Picture from dbo.EnterprisePerson where dfaitedsid = "'.$elgg_user->username.'"');
+			$results=mssql_fetch_array($avatar_q);
+			$avatar = $results[0];
+			if ($avatar) {
+				if (!file_put_contents($tmpfname,$avatar)) {
+				 	throw new Exception("Impossible d'ecrire le fichier");
+				}
+			}
 	
-			// Download file from TeamInfo using curl
-			$ch = curl_init($avatar_url);
-			$fp = fopen($tmpfname, 'wb');
-			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_NTLM);
-			curl_setopt($ch, CURLOPT_USERPWD, $teaminfo_domain . "/" . $teaminfo_username . ":" . $teaminfo_password);
-			curl_setopt($ch, CURLOPT_FILE, $fp);
-			curl_setopt($ch, CURLOPT_HEADER, 0);
-			curl_exec($ch);
-			curl_close($ch);
-			fclose($fp);
 			$GLOBALS['ADSYNC_LOG']->debug(elgg_echo("Avatar saved to => " . $tmpfname));
 			
 			// Get mime-type

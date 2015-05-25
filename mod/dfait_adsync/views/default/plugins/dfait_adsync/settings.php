@@ -62,13 +62,9 @@ $ldap_password = substr($ldap_password, 0, strlen($ldap_password) - $pad);
 		    <fieldset style="border: 1px solid; padding: 15px; margin: 0 10px 0 10px">
 		        <legend><?php echo elgg_echo('adsync:settings:label:teaminfo_section');?></legend>
 		        
-				<label for="params[adsync_teaminfo_url]"><?php echo elgg_echo('adsync:settings:label:teaminfo_url');?></label><br/>
-				<div class="example"><?php echo elgg_echo('adsync:settings:help:teaminfo_url');?></div>
-				<input type="text" name="params[adsync_teaminfo_url]" value="<?php echo $vars['entity']->adsync_teaminfo_url;?>"/><br/>
-				
-				<label for="params[adsync_teaminfo_domain]"><?php echo elgg_echo('adsync:settings:label:teaminfo_domain');?></label><br/>
-				<div class="example"><?php echo elgg_echo('adsync:settings:help:teaminfo_domain');?></div>
-				<input type="text" name="params[adsync_teaminfo_domain]" value="<?php echo $vars['entity']->adsync_teaminfo_domain;?>"/><br/>
+				<label for="params[adsync_teaminfo_server]"><?php echo elgg_echo('adsync:settings:label:teaminfo_server');?></label><br/>
+				<div class="example"><?php echo elgg_echo('adsync:settings:help:teaminfo_server');?></div>
+				<input type="text" name="params[adsync_teaminfo_server]" value="<?php echo $vars['entity']->adsync_teaminfo_server;?>"/><br/>
 				
 				<label for="params[adsync_teaminfo_username]"><?php echo elgg_echo('adsync:settings:label:teaminfo_username');?></label><br/>
 				<div class="example"><?php echo elgg_echo('adsync:settings:help:teaminfo_username');?></div>

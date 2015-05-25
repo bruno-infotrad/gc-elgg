@@ -37,6 +37,8 @@ $mapping = array(
 	'adsync:settings:label:profile_type_id'						=> "ID de type de profil",
 	'adsync:settings:help:profile_type_id'						=> "Taper l'ID de type de profil, par exemple <i>'16342'</i>. L'ID numérique du type de profil à attribuer aux utilisateurs est disponible en passant la souris sur les gears pour ce type de profil - l'ID fera partie du URL.",
 	'adsync:settings:label:teaminfo_section'					=> "monÉquipe",
+	'adsync:settings:label:teaminfo_server'						=> "Serveur pour monÉquipe",
+	'adsync:settings:help:teaminfo_server'						=> "Adresse IP ou nom du serveur pour monÉquipe",
 	'adsync:settings:label:teaminfo_url'						=> "URL pour monÉquipe",
 	'adsync:settings:help:teaminfo_url'							=> "Taper l'URL pour extraire les données de monÉquipe, par exemple <i>'http://10.4.32.31/monÉquipe'</i>. Le chemin et le nom d'utilisateur seront ajoutés à l'URL pour former l'URL définitif tel que <i>'http://10.4.32.31/monÉquipe/Handler/ReadFile.ashx?dfaitEdsId=routies'</i>.",
 	'adsync:settings:label:teaminfo_domain'						=> "Domaine utilisateur monÉquipe",
