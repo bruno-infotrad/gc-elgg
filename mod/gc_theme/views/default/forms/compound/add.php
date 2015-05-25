@@ -115,6 +115,14 @@ $("#thewire-textarea").live('keyup', function(){
 		$('#thewire-submit-button').css('opacity','0.5');
 	};
 });
+$('.elgg-form-compound-add').on('submit', function (e){
+	var $form = $(this);
+	if ($form.data('submitted') === true) {
+		e.preventDefault();
+	} else {
+	$form.data('submitted',true);
+	}
+});
 $('input#thewire-exec-content').change(function () {
 	if ($.trim($("#thewire-textarea").val())) {
 		if (!$('input#thewire-exec-content').is(':checked')) {
