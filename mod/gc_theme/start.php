@@ -217,8 +217,6 @@ function gc_theme_init() {
 	elgg_register_action("dashboard/activity_stream", "$action_path/dashboard/activity_stream.php");
 	elgg_register_action("dashboard/new_feeds", "$action_path/dashboard/new_feeds.php");
 	elgg_register_action("dashboard/new_messages", "$action_path/dashboard/new_messages.php");
-	//elgg_unregister_action('likes/delete');
-	//elgg_register_action('likes/delete', "$action_path/likes/delete.php");
 	elgg_register_action('friends/multi_invite', "$action_path/friends/multi_invite.php");
 	elgg_register_action('groups/intro_join_groups', "$action_path/groups/intro_join_groups.php");
 	elgg_unregister_action('blog/save');
