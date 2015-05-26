@@ -717,6 +717,8 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 
 	'river:comment:group:default' => "%s a commenté sur la création du groupe %s",
 	'river:ingroup' => "dans le groupe %s",
+	'river:ingroup:label' => 'dans le groupe',
+	'river:ingroups:label' => 'dans les groupes',
 	'members:searchboxvalue' => "Nom",
 	'members:label:alphabetical' => "Alphabétique",
 	'usersettings:statistics:label:email' => "Courriel",

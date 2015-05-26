@@ -66,6 +66,8 @@ add_translation('en', array(
 	'profile:user_activity' => 'Activity',
 	'profile:user_blog' => 'Blogs',
 	'profile:user_groups' => 'Groups',
+	'river:ingroup:label' => 'in the group',
+	'river:ingroups:label' => 'in the groups',
         'river:messageboard:group:default' => "%s posted on %s's message board",
 	'river:update:user:default' => '%s has a new avatar',
 

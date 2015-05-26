@@ -40,6 +40,9 @@ if (isset($vars['item_class'])) {
 
 $html = "";
 $nav = "";
+$ingroup_label=elgg_echo('river:ingroup:label');
+$ingroups_label=elgg_echo('river:ingroups:label');
+$ingroup_pattern=$ingroups_label.'|'.$ingroup_label.' ';
 
 if ($pagination && $count) {
 	$nav .= elgg_view('navigation/pagination', array(
@@ -55,14 +58,13 @@ if (elgg_get_context() != 'admin') {
 	if (is_array($items) && count($items) > 0) {
 		$previous_item_time_created = 0;
 		$html .= "<ul class=\"$list_class\">";
+		$premier=true;
 		foreach ($items as $item) {
 			$guid=0;
 			$test[$guid]=0;
-		 	//if ($item instanceof ElggRiverItem && $item->action_type == 'comment' && ! $test[$item->object_guid]) {
 		 	if ($item instanceof ElggRiverItem) {
 				// add separation bar to previously loaded content 
 				if (elgg_is_logged_in()) {
-					//if ($user->guid != $previous_item_user_guid && $user_last_action > $item->posted && $user_last_action < $previous_item_time_created) {
 					if ($user_last_action > $item->posted && $user_last_action < $previous_item_time_created) {
 						$html .= "<li class=\"updated-item\">".elgg_echo('gc_theme:previously_loaded')."</li>";
 					}
@@ -100,15 +102,45 @@ if (elgg_get_context() != 'admin') {
 			if (!$test[$guid]) {
 				if (elgg_instanceof($item)) {
 					$id = "elgg-{$item->getType()}-{$item->getGUID()}";
+					$html .= "<li id=\"$id\" class=\"$item_class\">";
+					$html .= elgg_view_list_item($item, $vars);
+					$html .= '</li>';
+					$banned_guid=$item->object_guid;
+					$test[$banned_guid]=1;
 				} else {
 					$id = "item-{$item->getType()}-{$item->id}";
+					$container_guid = get_entity($item->object_guid)->container_guid;
+					if (get_entity($container_guid) instanceof ElggGroup) {
+						$group = $container_guid;
+						$container = get_entity($group);
+						$params = array( 'href' => $container->getURL(), 'text' => $container->name, 'is_trusted' => true,);
+        					$group_link = elgg_view('output/url', $params);
+					} else {
+						$group = 0;
+					}
+					//$html .= "previous_group=$previous_group group=$group"; 
+					if ($premier) {
+						$cached_html .= "<li id=\"$id\" class=\"$item_class\">";
+						$cached_html .= elgg_view_list_item($item, $vars);
+						$cached_html .= '</li>';
+					} elseif ($previous_group && $group && $previous_group <> $group && $item->subject_guid == $previous_subject_guid && ($item->posted-$previous_posted) <=2) {
+						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html);
+						$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html);
+					} else {
+						$html .= $cached_html;
+						$cached_html = '';
+						$html .= "<li id=\"$id\" class=\"$item_class\">";
+						$html .= elgg_view_list_item($item, $vars);
+						$html .= '</li>';
+					}
+					$banned_guid=$item->object_guid;
+					$test[$banned_guid]=1;
+					$previous_subject_guid=$item->subject_guid;
+					$previous_posted=$item->posted;
+					$previous_group = $group;
 				}
-				$html .= "<li id=\"$id\" class=\"$item_class\">";
-				$html .= elgg_view_list_item($item, $vars);
-				$html .= '</li>';
-				$banned_guid=$item->object_guid;
-				$test[$banned_guid]=1;
 			}
+			$premier = $false;
 		}
 		$html .= '</ul>';
 	}
