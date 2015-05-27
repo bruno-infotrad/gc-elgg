@@ -719,6 +719,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'river:ingroup' => "dans le groupe %s",
 	'river:ingroup:label' => 'dans le groupe',
 	'river:ingroups:label' => 'dans les groupes',
+	'river:create:object:thewire:label' => "a affiché un message sur le ",
 	'members:searchboxvalue' => "Nom",
 	'members:label:alphabetical' => "Alphabétique",
 	'usersettings:statistics:label:email' => "Courriel",

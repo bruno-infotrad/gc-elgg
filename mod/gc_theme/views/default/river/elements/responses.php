@@ -52,23 +52,14 @@ if ($comments) {
 	}
 	
 	echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
-
 }
 
 if ($object->canAnnotate(0, 'generic_comment')) {
-	// inline comment form
-?>
-<?php
-	//if ($canwrite) {
+	if (! $vars['skip']||($vars['skip'] && $comment_count)) {
 	$id = "comments-add-{$object->getGUID()}";
 		echo elgg_view_form('comments/add', array(
 			'id' => $id,
 			'class' => 'elgg-river-participation elgg-form-small elgg-form-variable',
 		), array('entity' => $object, 'inline' => true, 'id' => $id, 'canwrite' => $canwrite));
-	//} else {
-		//echo elgg_view_form('comments/add', array(
-			//'id' => $id,
-			//'class' => 'elgg-river-participation elgg-form-small',
-		//), array('entity' => $object, 'inline' => true, 'id' => $id, 'canwrite' => $canwrite));
-	//}
+	}
 }
