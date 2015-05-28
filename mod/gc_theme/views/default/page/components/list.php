@@ -128,16 +128,18 @@ if (elgg_get_context() != 'admin') {
 					} else {
 						$group = 0;
 					}
-					//$html .= "previous_group=$previous_group group=$group"; 
-					//$html .= "<br>posted=".$item->posted."previous_posted=".$previous_posted; 
 					if ($premier) {
 						$vars['skip'] = false;
 						$cached_html .= "<li id=\"$id\" class=\"$item_class$cla_toggle\">";
 						$cached_html .= elgg_view_list_item($item, $vars);
 						$cached_html .= '</li>';
 					} elseif ($previous_group && $group && $previous_group <> $group && $item->subject_guid == $previous_subject_guid && abs($previous_posted - $item->posted) <=2) {
+						$entity_guid = get_entity($item->object_guid)->guid;
+						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html,1);
-						$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
+						//$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
+						$cached_html = preg_replace("/edits\['container_guid'\] = '".$previous_group_string."/","edits['container_guid'] = '".$previous_group_string.",".$group,$cached_html,1);
+						$cached_html = preg_replace("/edits\['guid'\] = '".$previous_item_string."/","edits['guid'] = '".$previous_item_string.",".$entity_guid,$cached_html,1);
 						$cached_html = preg_replace('/'.$river_label.'.+?\>'.$wire_label.'<\/a>/U',$river_label.$wire_label,$cached_html,1);
 						//$cached_html = preg_replace('/<form .+/','',$cached_html,1);
 						$vars['skip'] = true;
@@ -145,10 +147,19 @@ if (elgg_get_context() != 'admin') {
 						if ($responses) {
 							$cached_html = preg_replace('/<\/form\>/U','</form>'.$responses,$cached_html,1);
 						}
+						//if ($previous_group_string) {
+							$previous_group_string = $previous_group_string.','.$group;
+							$previous_item_string = $previous_item_string.','.$entity_guid;
+						//} else {
+							//$previous_group_string = $previous_group;
+						//}
+						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 					} else {
 						$vars['skip'] = false;
 						$html .= $cached_html;
 						$cached_html = '';
+						$previous_group_string = $group;
+						$previous_item_string = get_entity($item->object_guid)->guid;
 						$cached_html .= "<li id=\"$id\" class=\"$item_class$cla_toggle\">";
 						$cached_html .= elgg_view_list_item($item, $vars);
 						$cached_html .= '</li>';

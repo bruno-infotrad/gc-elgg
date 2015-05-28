@@ -15,8 +15,13 @@ if (preg_match('/,/',$container_guid)) {
 	$container_guids = preg_split('/,/',$container_guid);
 }
 $parent_guid = (int) get_input('parent_guid');
-$guid = (int) get_input('guid',0);
+$guid = get_input('guid',0);
+if (preg_match('/,/',$guid)) {
+	$mv_guid = true;
+	$guids = preg_split('/,/',$guid);
+}
 elgg_log("compound/add=".$container_guid,'NOTICE');
+elgg_log("compound/add=".$guid,'NOTICE');
 if ($container_guid) {
 	if ($mv_container_guid) {
 		foreach($container_guids as $container) {
@@ -49,7 +54,7 @@ $river_guid = get_input('river_guid',0);
 if (empty($body)) {
 	$body = get_input('value', '', false);
 	$guid = get_input('guid');
-	$container_guid = get_input('container_guid');
+	//$container_guid = get_input('container_guid');
 	if (! $guid || ! $container_guid || ! $river_guid) {
 		register_error(elgg_echo("thewire:missing_guids"));
 		forward(REFERER);
@@ -65,16 +70,26 @@ if (empty($body)) {
 if ($container_guid == 0) {
 	$container_guid = $user_id;
 }
-if ($mv_container_guid && $guid == 0) {
+if ($mv_container_guid) {
+	$i = 0;
 	foreach($container_guids as $container) {
 		elgg_log("multiple post ".$access_ids[$container],'NOTICE');
-		$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
-		if (!$guid) {
-			register_error(elgg_echo("thewire:error"));
-			forward(REFERER);
+		if ($guid == 0) {
+			$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
+			if (!$guid) {
+				register_error(elgg_echo("thewire:error"));
+				forward(REFERER);
+			}
+			// Reset guid because of jeditable
+			$guid = 0;
+		} else {
+			$guid = thebetterwire_save_post($guids[$i], $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,$jeditable,$river_guid);
+			if (!$guid) {
+				register_error(elgg_echo("thewire:error"));
+				forward(REFERER);
+			}
+			$i++;
 		}
-		// Reset guid because of jeditable
-		$guid = 0;
 	}
 } else {
 	$guid = thebetterwire_save_post($guid, $body, $user_id, $container_guid, $access_id, $parent_guid, $method,$exec_content,$jeditable,$river_guid);
