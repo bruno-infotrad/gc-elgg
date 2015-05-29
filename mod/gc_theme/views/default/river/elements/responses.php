@@ -44,7 +44,8 @@ if ($comments) {
 		elgg_load_js('elgg.extra_feed_comments');
 		$link = elgg_view('output/url', array(
 			'href' => $object->getURL(),
-			'onclick' => "elgg.extra_feed_comments(\"$object_guid\");return false;",
+			//'onclick' => "elgg.extra_feed_comments(\"$object_guid\");return false;",
+			'id' => 'extra-feed-comments-'.$object_guid,
 			'text' => elgg_echo('river:comments:all', array($comment_count)),
 		));
 		
