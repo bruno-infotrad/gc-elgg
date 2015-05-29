@@ -116,7 +116,7 @@ if (elgg_get_context() != 'admin') {
 				} else {
 					$container_guid = get_entity($item->object_guid)->container_guid;
 					if (get_entity($container_guid) instanceof ElggGroup) {
-						if ($container_guid == 25127) {
+						if ($container_guid == 34082) {
 							$cla_toggle .= ' cla-toggle';
 						} else {
 							$cla_toggle = '';
@@ -125,6 +125,7 @@ if (elgg_get_context() != 'admin') {
 						$container = get_entity($group);
 						$params = array( 'href' => $container->getURL(), 'text' => $container->name, 'is_trusted' => true,);
         					$group_link = elgg_view('output/url', $params);
+						$entity_guid = get_entity($item->object_guid)->guid;
 					} else {
 						$group = 0;
 					}
@@ -133,8 +134,9 @@ if (elgg_get_context() != 'admin') {
 						$cached_html .= "<li id=\"$id\" class=\"$item_class$cla_toggle\">";
 						$cached_html .= elgg_view_list_item($item, $vars);
 						$cached_html .= '</li>';
+						$previous_group_string = $group;
+						$previous_item_string = $entity_guid;
 					} elseif ($previous_group && $group && $previous_group <> $group && $item->subject_guid == $previous_subject_guid && abs($previous_posted - $item->posted) <=2) {
-						$entity_guid = get_entity($item->object_guid)->guid;
 						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html,1);
 						//$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
