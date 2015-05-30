@@ -9,6 +9,7 @@ $user = elgg_get_logged_in_user_entity();
 $now = time();
 $jour = 24*3600;
 //$user->pns_viewed = 0;
+elgg_load_js('elgg.toggle_cla');
 if (!isset($user->pns_viewed) || (($now - $user->pns_viewed) > $jour)) {
 	elgg_load_js('lightbox');
 	elgg_load_css('lightbox');

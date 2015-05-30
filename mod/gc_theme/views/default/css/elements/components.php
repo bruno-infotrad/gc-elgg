@@ -24,7 +24,7 @@
 	font-weight: bold;
 	width: 100%;
 }
-#pns-hidden {
+.hide-cla,#pns-hidden {
 	display: none;
 }
 

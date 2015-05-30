@@ -184,6 +184,7 @@ function gc_theme_init() {
 	elgg_register_js('elgg.all_my_groups', '/mod/gc_theme/js/lib/all_my_groups.js');
 	elgg_register_js('elgg.extra_feed_comments', '/mod/gc_theme/js/lib/extra_feed_comments.js');
 	elgg_register_js('elgg.extra_feed_replies', '/mod/gc_theme/js/lib/extra_feed_replies.js');
+	elgg_register_js('elgg.toggle_cla', '/mod/gc_theme/js/lib/toggle_cla.js');
 	elgg_register_js('elgg.activity_stream', '/mod/gc_theme/js/lib/ui.activity_stream.js');
 	elgg_register_js('elgg.new_feeds', '/mod/gc_theme/js/lib/new_feeds.js');
 	elgg_register_js('elgg.new_messages', '/mod/gc_theme/js/lib/new_messages.js');

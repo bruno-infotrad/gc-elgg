@@ -117,7 +117,7 @@ if (elgg_get_context() != 'admin') {
 					$container_guid = get_entity($item->object_guid)->container_guid;
 					if (get_entity($container_guid) instanceof ElggGroup) {
 						if ($container_guid == 34082) {
-							$cla_toggle .= ' cla-toggle';
+							$cla_toggle .= ' hide-cla';
 						} else {
 							$cla_toggle = '';
 						}

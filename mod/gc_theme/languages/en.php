@@ -345,6 +345,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'members:searchboxvalue' => "Name",
 	'members:label:alphabetical' => "Alphabetical",
 	'gc_theme:duplicate_account' => "Please note you have two different accounts on Agora. Please contact Agora Support to arrange migration of your content",
+	'gc_theme:toggle_classified_ads' => 'Show/hide classified ads',
         'gc_theme:elgg_summary' => '<br><div class="whatis"><h4>Use this collaboration tool to</h4><ul>
                                         <li>&nbsp;
                                         <li>&diams;&nbsp;share information across the department quickly (i.e. your personal broadcast/microblog)

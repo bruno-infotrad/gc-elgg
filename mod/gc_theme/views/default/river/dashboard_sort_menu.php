@@ -5,6 +5,11 @@
  */
 $page_type = get_input('page_type');
 $tabs = array(
+	'intro' => array(
+		'text' => elgg_echo('gc_theme:intro:title'),
+		'href' => 'dashboard?page_type=intro',
+		'priority' => 50,
+	), 
 	'friends' => array(
 		'text' => elgg_echo('access:friends:label'),
 		'href' => 'dashboard?page_type=friends',
@@ -25,23 +30,24 @@ $tabs = array(
 		'href' => 'dashboard?page_type=all',
 		'priority' => 500,
 	),
-	'intro' => array(
-		'text' => elgg_echo('gc_theme:intro:title'),
-		'href' => 'dashboard?page_type=intro',
-		'priority' => 50,
-	), 
+	'toggle-cla' => array(
+		'text' => '<span class="elgg-agora-icon control-toggle-cla-off"></span>',
+		'title' => elgg_echo('gc_theme:toggle_classified_ads'),
+		'href' => null,
+		'priority' => 600,
+	),
 	'exec_content' => array(
 		'text' => elgg_echo('gc_theme:exec_content_tab'),
 		'href' => 'dashboard?page_type=exec_content',
 		'id' => 'exec-content-tab',
-		'priority' => 600,
+		'priority' => 700,
 	),
 //Incredible! Looks last the after pseudo-element does not work properly on the last child - could not find why. So add an invisible element for now :-(
 	'crappola' => array(
 		'text' => '',
 		'href' => '',
 		'id' => '',
-		'priority' => 700,
+		'priority' => 800,
 	),
 );
 // sets default selected item
