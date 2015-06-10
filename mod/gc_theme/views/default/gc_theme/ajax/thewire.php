@@ -10,7 +10,15 @@ if ($page_type == 'all') {
 	));
         echo $content;
 } elseif ($page_type == 'friends') {
-	$content = list_user_friends_objects($user->guid, 'thewire', 15, false);
+	$content .= elgg_list_entities_from_relationship(array(
+	        'type' => 'object',
+	        'subtype' => 'thewire',
+	        'full_view' => false,
+	        'relationship' => 'friend',
+	        'relationship_guid' => $user->guid,
+	        'relationship_join_on' => 'container_guid',
+	        'preload_owners' => true,
+	));
         echo $content;
 } elseif ($page_type == 'owner') {
 	$content = elgg_list_entities(array(

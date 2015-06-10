@@ -19,12 +19,23 @@ elgg_register_title_button();
 $title = elgg_echo("file:friends");
 
 // offset is grabbed in list_user_friends_objects
-$content = list_user_friends_objects($owner->guid, 'file', 20, false);
+$content = elgg_list_entities_from_relationship(array(
+	'type' => 'object',
+	'subtype' => 'file',
+	'full_view' => false,
+	'relationship' => 'friend',
+	'relationship_guid' => $owner->guid,
+	'relationship_join_on' => 'container_guid',
+	'no_results' => elgg_echo("file:none"),
+	'preload_owners' => true,
+	'preload_containers' => true,
+	'limit' => 20,
+));
+//$content = list_user_friends_objects($owner->guid, 'file', 20, false);
 if (!$content) {
 	$content = elgg_echo("file:none");
 }
 
-//$sidebar = file_get_type_cloud($owner->guid, true);
 $sidebar = elgg_view('file/sidebar');
 
 $body = elgg_view_layout('content', array(
