@@ -124,7 +124,7 @@
 
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('tags') . "</td><td>" . elgg_view('input/tags', array('name' => 'tags', 'value' => $fields["tags"])) . "</td></tr>";
 	
-	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:icon') . "</td><td>" . elgg_view('input/file', array('name' => 'icon', 'js' => 'onchange="check_file()"'))."<div id=\"gc-file-event-selected\"></div></td></tr>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:icon') . "</td><td>" . elgg_view('input/file', array('name' => 'icon'))."<div id=\"gc-file-event-selected\"></div></td></tr>";
 	
 	if (!empty($currentIcon)) {
 		$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:currenticon') . "</td><td>".$currentIcon."<br />".
@@ -197,7 +197,7 @@
 	$form_body .= "<div class='elgg-subtext'>" . elgg_echo("event_manager:edit:form:registration_completed:description") . "</div>";
 	$form_body .= "</td>";
 	$form_body .= "</tr>";
-	$form_body .= "<tr style='display:none;'><td class='event_manager_event_edit_label'>" .elgg_echo('blog:status'). "</td><td>" .  elgg_view('input/dropdown', array( 'name' => 'status', 'id' => 'event_status', 'value' => $fields['status'], 'options_values' => array( 'published' => elgg_echo('blog:status:published'),'draft' => elgg_echo('blog:status:draft'),))) . "</td></tr>";
+	$form_body .= "<tr><td class='event_manager_event_edit_label'>" .elgg_echo('status'). "</td><td>" .  elgg_view('input/dropdown', array( 'name' => 'status', 'id' => 'event_status', 'value' => $fields['status'], 'options_values' => array( 'published' => elgg_echo('status:published'),'draft' => elgg_echo('status:draft'),))) . "</td></tr>";
 	$form_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('access') . "</td><td>" . elgg_view('input/access', array('name' => 'access_id', 'value' => $fields["access_id"])) . "</td></tr>";
 
 	
@@ -230,6 +230,7 @@ $("#start_day").datepicker({
 
     }
 });
+$('input[type=file]').live('change',function() {check_file();});
 function check_file(){
         var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
         var allowed_extensions = allowed_extensions_settings.split(/, */);

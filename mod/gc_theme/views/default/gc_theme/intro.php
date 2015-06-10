@@ -19,7 +19,7 @@ $content .= elgg_echo('gc_theme:intro');
 $content .= elgg_echo('gc_theme:intro:add_colleagues');
 $content .= elgg_view('output/url', array(
 			'text' => elgg_echo('gc_theme:intro:add_colleagues:title'),
-			'href' => $vars["url"].'intro_add_colleagues',
+			'href' => $site_url.'intro_add_colleagues',
 			'class' => 'elgg-lightbox elgg-button elgg-button-submit elgg-button-fancybox',
 			'id' => 'gc_theme-intro-addcolleagues',
 			));
@@ -53,7 +53,7 @@ if ( $tell_us_group ||  $voice_up_group) {
 $content .= elgg_echo('gc_theme:intro:join_groups3');
 $content .= '<p>'.elgg_view('output/url', array(
 			'text' => elgg_echo('gc_theme:intro:join_group:title'),
-			'href' => $vars["url"].'intro_join_groups',
+			'href' => $site_url.'intro_join_groups',
 			'class' => 'elgg-lightbox elgg-button elgg-button-submit elgg-button-fancybox',
 			'id' => 'gc_theme-intro-joingroup',
 			)).'</p>';
@@ -61,7 +61,7 @@ $content .= '<p>'.elgg_view('output/url', array(
 $content .= elgg_echo('gc_theme:intro:profile_setup');
 $content .= '<p>'.elgg_view('output/url', array(
 			'text' => elgg_echo('gc_theme:intro:upload_avatar:title'),
-			'href' => $vars["url"].'intro_upload_avatar',
+			'href' => $site_url.'intro_upload_avatar',
 			'class' => 'elgg-lightbox elgg-button elgg-button-submit elgg-button-fancybox',
 			'id' => 'gc_theme-intro-uploadavatar-button',
 			)).'</p>';

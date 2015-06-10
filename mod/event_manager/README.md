@@ -5,22 +5,17 @@ Manage events, from a simple appointment to a multi day event with day programs 
 Features
 -----------
 
-- Create site and group events
-- Listing of upcomming events
-- Show events on a (Google) map
-- Search events
-
-- Create simple or advanced events with
- - Registration forms
- - Configure a multiday and multislot programs
- - Waitinglists
- - Different types of attendence
- - Optionally let logged out users register
- - Notifications to organizer and attendees
- - Add files to your event
- - Export attendees
- 
-- RSVP option to confirm attendence to an event
+- Managing sidewide/group events
+- Google maps integration
+- Event (advanced/simple) search (list or google maps)
+- Custom event registration form
+- Specifying daily eventprogram
+- RSVP to an event
+	- Notification option (to organizer and attendee)
 - After RSVP, specify your personal daily program participation
-- Recieve personal program as PDF
-- Add event to your personal calendar software (ical export)
+- Waiting list per event
+- Registration for non-loggedin users
+- Adding files to an event
+- Exporting attendees to csv
+- Import events from "Event calendar"
+- Enable/disable group events
