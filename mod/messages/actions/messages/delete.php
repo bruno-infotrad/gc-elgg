@@ -4,23 +4,23 @@
  */
 
 $guid = (int) get_input('guid');
-$username = elgg_get_logged_in_user_entity()->username;
-$user_guid = elgg_get_logged_in_user_entity()->getGUID();
+$full = (bool) get_input('full', false);
 
 $message = get_entity($guid);
-$message_toid = $message->toId;
-if (!$message || !$message->canEdit()) {
+$forward = REFERER;
+
+if (!elgg_instanceof($message, 'object', 'messages') || !$message->canEdit()) {
 	register_error(elgg_echo('messages:error:delete:single'));
-	forward(REFERER);
+	forward($forward);
 }
 
 if (!$message->delete()) {
 	register_error(elgg_echo('messages:error:delete:single'));
 } else {
+	if ($full) {
+		$forward = 'messages/inbox/' . elgg_get_logged_in_user_entity()->username;
+	}
 	system_message(elgg_echo('messages:success:delete:single'));
 }
-if (preg_match ('/\/send\//',$_SERVER['HTTP_REFERER'])|| $message_toid != $user_guid) {
-	forward("messages/sent/$username");
-} else {
-	forward("messages/inbox/$username");
-}
+
+forward($forward);

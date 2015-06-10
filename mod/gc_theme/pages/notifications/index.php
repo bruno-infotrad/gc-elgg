@@ -30,7 +30,7 @@ if ($people_ents = elgg_get_entities_from_relationship(array(
 	}
 }
 
-$content = elgg_view('notifications/subscriptions/form', array('people' => $people));
+$content = elgg_view('notifications/subscriptions/form', array('people' => $people,'user'=>$user));
 
 $params = array(
         'content' => $content,

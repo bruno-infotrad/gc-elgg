@@ -36,6 +36,7 @@ $(document).ready(function() {
         $('#multi-upload-button').css('opacity',0.5);
 });
 }
+$('input[type=file]').live('change',function() {check_file();});
 function check_file(){
 	var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
 	var allowed_extensions = allowed_extensions_settings.split(/, */);
@@ -47,14 +48,15 @@ function check_file(){
         	filename = $('.elgg-input-file').val().split('\\').pop().toLowerCase();
         	ext = $('.elgg-input-file').val().split('.').pop().toLowerCase();
 	}
-        if($.inArray(ext, allowed_extensions) == -1) {
+        if(ext && $.inArray(ext, allowed_extensions) == -1) {
                 alert(elgg.echo('gc_theme:file:not_allowed'));
                 $('.elgg-input-file').val('');
-        }
-	if (filename.length > 30) {
-    		filename =  filename.substr(0, 15) + '...' + filename.substr(filename.length-10, filename.length);
-  	}
-	$('#gc-file-selected').html(filename);
+        } else {
+		if (filename.length > 30) {
+    			filename =  filename.substr(0, 15) + '...' + filename.substr(filename.length-10, filename.length);
+  		}
+		$('#gc-file-selected').html(filename);
+	}
         $('#multi-upload-button').css('opacity',1);
 	$('#multi-upload-button').css('pointer-events','all');
 	$('#multi-upload-button').removeAttr('disabled','disabled');
@@ -66,9 +68,9 @@ function check_file(){
 	<div class="gc-input-file-browse">
 <?php
 if ($embed) {
-	echo elgg_view('input/file', array('class' => 'elgg-input-file-embed', 'name' => 'upload','js' => 'onchange="check_file()"'));
+	echo elgg_view('input/file', array('class' => 'elgg-input-file-embed', 'name' => 'upload'));
 } else {
-	echo elgg_view('input/file', array('name' => 'upload','js' => 'onchange="check_file()"'));
+	echo elgg_view('input/file', array('name' => 'upload'));
 }
 ?>
 </div>

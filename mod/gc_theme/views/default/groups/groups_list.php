@@ -33,7 +33,7 @@ if ($count) {
 // sets default selected item
 if ($selected) {
 	$tabs[$selected]['selected'] = true;
-} elseif (strpos(full_url(), 'filter') === false) {
+} elseif (strpos(current_page_url(), 'filter') === false) {
 	$tabs['my_groups']['selected'] = true;
 }
 

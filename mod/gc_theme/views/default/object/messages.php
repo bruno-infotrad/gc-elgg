@@ -23,7 +23,7 @@ if ($message->toId == elgg_get_page_owner_guid()) {
 			'text' => $user->name,
 			'is_trusted' => true,
 		));
-		$full_url = full_url();
+		$full_url = current_page_url();
 		if (($user instanceof ElggUser)&&(!(strpos($full_url, 'read') !== false))) {
 			$url=$site_url.'messages/read/'.$message->getGUID().'&show_editor=true';
 			$url_text = elgg_echo('messages:answer');

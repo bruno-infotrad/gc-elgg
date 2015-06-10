@@ -562,8 +562,7 @@ elgg.event_manager.init = function() {
 	});
 	
 	$('#event_manager_registrationform_question_fieldtype').live('change', function() {
-		if($('#event_manager_registrationform_question_fieldtype').val() == 'Radiobutton' || $('#event_manager_registrationform_question_fieldtype').val() == 'Dropdown'||
-		$('#event_manager_registrationform_question_fieldtype').val() == "Bouton d'options" || $('#event_manager_registrationform_question_fieldtype').val() == 'Liste') {
+		if($('#event_manager_registrationform_question_fieldtype').val() == 'Radiobutton' || $('#event_manager_registrationform_question_fieldtype').val() == 'Dropdown') {
 			$('#event_manager_registrationform_select_options').show();
 		} else {
 			$('#event_manager_registrationform_select_options').hide();

@@ -1,4 +1,19 @@
-= Version History =
+Version History
+===============
+
+2.0-rc.1 (2015-01-22):
+
+- If you come from a version < 1.1 please upgrade to version 1.2 before installing version 2.0
+- fixed: WSOD when viewing a folder structure with an empty folder title
+- fixed: wrong function call for folder url's
+
+1.2 (2015-01-05):
+
+- added: max number of files in the listing (plugin setting) with 'show more' button
+- fixed: mimetype detection in ZIP upload doesn't detect all MS Office types correctly
+- fixed: moving a folder doesn't always correclty refreshed the content
+- changed: small css fixes
+
 1.1.2 (2013-04-05):
 
 - fixed: files lost their folder if the access of the folder was updated (thanks to Tauvic Ritter for reporting)

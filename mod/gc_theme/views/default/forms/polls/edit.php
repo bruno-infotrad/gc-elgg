@@ -110,7 +110,7 @@ __HTML;
 <script type="text/javascript">
 $('#polls_edit_cancel').click(
 	function() {
-		window.location.href="<?php echo $vars['url']; ?>";
+		window.location.href="<?php echo elgg_get_site_url(); ?>";
 	}
 );
 </script>

@@ -139,11 +139,20 @@ function gc_pages_page_handler($page) {
 }
 
 function gc_notifications_page_handler($segments, $handle) {
-
+	elgg_gatekeeper();
+	$current_user = elgg_get_logged_in_user_entity();
         // default to personal notifications
         if (!isset($segments[0])) {
                 $segments[0] = 'personal';
         }
+        if (!isset($segments[1])) {
+                forward("notifications/{$segments[0]}/{$current_user->username}");
+        }
+        $user = get_user_by_username($segments[1]);
+        if (($user->guid != $current_user->guid) && !$current_user->isAdmin()) {
+                forward();
+        }
+
 	elgg_register_menu_item('notifications_nav', array(
 		'name' => 'user_settings',
 		'text' => elgg_echo('usersettings:user:opt:linktext'),
@@ -182,8 +191,6 @@ function gc_notifications_page_handler($segments, $handle) {
         return true;
 }
 function gc_usersettings_page_handler($segments, $handle) {
-        global $CONFIG;
-
         if (!isset($segments[0])) {
                 $segments[0] = 'user';
         }
@@ -308,8 +315,6 @@ function gc_theme_groups_page_handler($segments, $handle) {
 }
 
 function gc_theme_profile_page_handler($page) {
-	global $CONFIG;
-
 	if (isset($page[0])) {
 		$username = $page[0];
 		$user = get_user_by_username($username);
@@ -331,7 +336,7 @@ function gc_theme_profile_page_handler($page) {
 	switch ($action) {
 		case 'edit':
 			// use for the core profile edit page
-			require $CONFIG->path . 'pages/profile/edit.php';
+			require get_config('path') . 'pages/profile/edit.php';
 			return true;
 			break;
 		
@@ -450,7 +455,8 @@ function gc_friends_page_handler($page_elements, $handler) {
                 elgg_set_page_owner_guid($user->getGUID());
         }
         if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
-                collections_submenu_items();
+		$user = elgg_get_logged_in_user_entity();
+		elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
         }
 
         switch ($handler) {
@@ -478,7 +484,8 @@ function gc_collections_page_handler($page_elements) {
         if (isset($page_elements[0])) {
                 if ($page_elements[0] == "add") {
                         elgg_set_page_owner_guid(elgg_get_logged_in_user_guid());
-                        collections_submenu_items();
+			$user = elgg_get_logged_in_user_entity();
+			elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
                         require_once "{$base}/collections/add.php";
                         return true;
                 } else {
@@ -486,7 +493,8 @@ function gc_collections_page_handler($page_elements) {
                         if ($user) {
                                 elgg_set_page_owner_guid($user->getGUID());
                                 if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
-                                        collections_submenu_items();
+					$user = elgg_get_logged_in_user_entity();
+					elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
                                 }
                                 require_once "{$base}/collections/view.php";
                                 return true;
@@ -671,6 +679,41 @@ function gc_file_tools_page_handler($page) {
 	}		
 }
 function user_autocomplete() {
-	require_once elgg_get_plugins_path() . 'gc_theme/lib/user_autocomplete.php';
-	return true;
+	$q = sanitize_string(get_input("q"));
+	$limit = (int) get_input("limit", 10);
+	
+	$result = array();
+	
+	if(($user = elgg_get_logged_in_user_entity()) && !empty($q)){
+		// show hidden (unvalidated) users
+		$hidden = access_get_show_hidden_status();
+		access_show_hidden_entities(true);
+		
+		if($relationship = "notfriends"){
+			$dbprefix = elgg_get_config("dbprefix");
+			
+			// find existing users
+			$query_options = array(
+				"type" => "user",
+				"limit" => $limit,
+				"joins" => array("JOIN {$dbprefix}users_entity u ON e.guid = u.guid"),
+				"wheres" => array("(u.name LIKE '%{$q}%' OR u.username LIKE '%{$q}%')", "u.banned = 'no'"),
+				"order_by" => "u.name asc"
+			);
+			
+			if($entities = elgg_get_entities($query_options)){
+				foreach($entities as $entity){
+					$result[] = array("type" => "user", "value" => $entity->username,"content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
+				}
+			}
+		}
+		
+		// restore hidden users
+		access_show_hidden_entities($hidden);
+	}
+	
+	header("Content-Type: application/json");
+	echo json_encode(array_values($result));
+	
+	exit();
 }

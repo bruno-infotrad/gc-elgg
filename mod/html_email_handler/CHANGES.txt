@@ -1,4 +1,40 @@
-= Version history =
+Version history
+===============
+
+x.x:
+
+- added: normalize all URL's in the outgoing mail
+- added: option to embed images directly in the outgoing e-mail #20
+- added: option to send the test page to email
+- changed: test page uses inline CSS, normalized urls and embedded images
+
+3.0 (2014-09-25):
+
+- changes for Elgg 1.9
+- updated the version of Emogrifier
+
+2.6 (2014-07-01):
+
+- added: file attachment support #10 thanks to Facyla
+- fixed: content from a WYSIWYG-editor has a different result in the e-mail
+
+2.5 (2013-12-24):
+
+- added: Spanish translation thanks to Gonzalo (http://community.elgg.org/profile/GEARinvent)
+- changed: html_email_handler_make_rfc822_address() always return an email address, now falls back to site email
+
+2.4 (2013-10-31):
+
+- added: French translation thanks to Facyla (https://github.com/Facyla)(#6)
+- changed: README.txt to README.md for better readability on GitHub
+- changed: CSS definitions of font-size from em to px, for better detection by SpamAssasin
+- changed: encoding of the subject moved to a later stage for more support #7
+
+2.3.1 (2013-04-05):
+
+- fixed: problem with pagesetupdone on some Elgg installations
+- fixed: mail message language now set correctly
+
 2.3 (2012-11-06):
 
 - added: custom send date option (thanks to migrax https://github.com/migrax)

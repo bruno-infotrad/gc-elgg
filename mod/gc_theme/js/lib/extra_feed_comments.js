@@ -3,15 +3,8 @@
  *   */
 
 elgg.provide('elgg.extra_feed_comments');
-elgg.extra_feed_comments.init = function(){
-	$('[id^=extra-feed-comments-]').live('click', function (e){
-		e.preventDefault();
-		var guid = this.id.match(/\d+$/);
-		//alert("CA MARCHE"+guid);
-		elgg.fetch_extra_feed_comments(guid);
-	});
-};
-elgg.fetch_extra_feed_comments = function(guid){
+
+elgg.extra_feed_comments = function(guid){
         var data;
         if (elgg.is_logged_in()) {
         	$(document).ready(function() {
@@ -32,5 +25,3 @@ elgg.fetch_extra_feed_comments = function(guid){
 		});
 	};
 };
-
-elgg.register_hook_handler('init', 'system', elgg.extra_feed_comments.init);

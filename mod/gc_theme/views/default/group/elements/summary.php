@@ -19,11 +19,13 @@
 
 $entity = $vars['entity'];
 
-if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'newest') != false)||(strpos(full_url(), 'filter') === false))) {
+if (elgg_instanceof($entity, 'group') && ((strpos(current_page_url(), 'newest') != false)||(strpos(current_page_url(), 'filter') === false))) {
 	$last_update=$entity->time_created;
-	$last_group_activity=gc_get_last_group_activity($entity->guid);
-	if ($last_group_activity && $last_group_activity > $last_update) {
-		$last_update = $last_group_activity;
+	$group_activity=elgg_get_entities(array( 'wheres' => array("e.type != 'user' AND e.subtype != '9' AND e.container_guid = $entity->guid"),'order_by' => ('time_created'),'reverse_order_by' => true));
+	elgg_log("BRUNO GROUP_ACTIVITY=".var_export($group_activity,true),'NOTICE');
+	elgg_log("BRUNO FILTER =".current_page_url(),'NOTICE');
+	if ($group_activity && $group_activity[0]->time_updated > $last_update) {
+		$last_update = $group_activity[0]->time_updated;
 	}
 	$last_updated = elgg_echo('groups:last_updated').' '.elgg_view_friendly_time($last_update);
 }
@@ -58,7 +60,7 @@ if ($metadata) {
 echo "<h3>$title_link</h3>";
 echo "<div class=\"elgg-subtext\">$subtitle";
 echo elgg_view('object/summary/extend', $vars);
-if (elgg_instanceof($entity, 'group') && ((strpos(full_url(), 'newest') != false)||(strpos(full_url(), 'filter') === false))) {
+if (elgg_instanceof($entity, 'group') && ((strpos(current_page_url(), 'newest') != false)||(strpos(current_page_url(), 'filter') === false))) {
 	echo "<div style=\"float:right;\">$last_updated</div>";
 }
 echo "</div>";

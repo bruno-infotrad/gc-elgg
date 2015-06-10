@@ -4,7 +4,7 @@ elgg.user_handle = function(id){
         var data;
         if (elgg.is_logged_in()) {
 		$(document).ready(function() {
-        		var destination = '#'+id+'_autocomplete_results';
+        		var destination = id+'_autocomplete_results';
 			$('[id$=textarea]').each(function(){
 				$(this)
 				// don't navigate away from the field on tab when selecting an item
@@ -19,11 +19,13 @@ elgg.user_handle = function(id){
 						var usagers = request.term.match(/^@\w+|\s+@\w+/g);
 						var usager = usagers[usagers.length-1].replace(/@/,'');
 						var cible = elgg.get_site_url()+"user_autocomplete";
+						jquery_string = "\"#"+destination+" input[name='<?php echo $name; ?>[]']\"";
 						$.getJSON( cible, {
 							q: usager,
 							'user_guids': function() {
 								var result = "";
-								$(destination+" input[name='<?php echo $name; ?>[]']").each(function(index, elem){
+								//$("#"+destination+" input[name='<?php echo $name; ?>[]']").each(function(index, elem){
+								$(jquery_string).each(function(index, elem){
 									if(result == ""){
 										result = $(this).val();
 									} else {
@@ -60,7 +62,7 @@ elgg.user_handle = function(id){
 						return false;
 					},
 					autoFocus: true
-				}).data( "autocomplete" )._renderItem = function( ul, item ) {
+				}).data("ui-autocomplete")._renderItem = function( ul, item ) {
 					var list_body = "";
 					list_body = item.content;
 					

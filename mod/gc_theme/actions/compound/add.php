@@ -15,21 +15,16 @@ if (preg_match('/,/',$container_guid)) {
 	$container_guids = preg_split('/,/',$container_guid);
 }
 $parent_guid = (int) get_input('parent_guid');
-$guid = get_input('guid',0);
-if (preg_match('/,/',$guid)) {
-	$mv_guid = true;
-	$guids = preg_split('/,/',$guid);
-}
-elgg_log("BRUNO compound/add=".$container_guid,'NOTICE');
-elgg_log("BRUNO compound/add=".$guid,'NOTICE');
+$guid = (int) get_input('guid',0);
+elgg_log("compound/add=".$container_guid,'NOTICE');
 if ($container_guid) {
 	if ($mv_container_guid) {
 		foreach($container_guids as $container) {
 			$gguid=get_entity($container);
-			elgg_log("multiple BRUNO compound/add=".$gguid->membership,'NOTICE');
+			elgg_log("multiple compound/add=".$gguid->membership,'NOTICE');
 			if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
 				$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container'");
-				elgg_log("multiple BRUNO compound/add group_access_collections ".$gac->id,'NOTICE');
+				elgg_log("multiple compound/add group_access_collections ".$gac->id,'NOTICE');
 				$access_ids[$container]=$gac->id;
 			} else {
 				$access_ids[$container] = ACCESS_LOGGED_IN;
@@ -37,10 +32,10 @@ if ($container_guid) {
 		}
 	} else {
 		$gguid=get_entity($container_guid);
-		elgg_log("BRUNO compound/add=".$gguid->membership,'NOTICE');
+		elgg_log("compound/add=".$gguid->membership,'NOTICE');
 		if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
 			$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container_guid'");
-			elgg_log("BRUNO compound/add group_access_collections ".$gac->id,'NOTICE');
+			elgg_log("compound/add group_access_collections ".$gac->id,'NOTICE');
 			$access_id=$gac->id;
 		} else {
 			$access_id = ACCESS_LOGGED_IN;
@@ -54,14 +49,13 @@ $river_guid = get_input('river_guid',0);
 if (empty($body)) {
 	$body = get_input('value', '', false);
 	$guid = get_input('guid');
-	//$container_guid = get_input('container_guid');
+	$container_guid = get_input('container_guid');
 	if (! $guid || ! $container_guid || ! $river_guid) {
 		register_error(elgg_echo("thewire:missing_guids"));
 		forward(REFERER);
 	}
 	$jeditable = true;
 }
-elgg_log("BRUNO compound/add jeditable=$jeditable",'NOTICE');
 $method = 'site';
 // make sure the post isn't blank
 if (empty($body)) {
@@ -71,38 +65,22 @@ if (empty($body)) {
 if ($container_guid == 0) {
 	$container_guid = $user_id;
 }
-if ($mv_container_guid) {
-	$i = 0;
+if ($mv_container_guid && $guid == 0) {
 	foreach($container_guids as $container) {
-		elgg_log("BRUNO compound/add multiple post container_guid=$container guid=$guids[$i]",'NOTICE');
-		if ($guid == 0) {
-			elgg_log("BRUNO compound/add multiple post new post in container_guid=$container",'NOTICE');
-			$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
-			if (!$guid) {
-				register_error(elgg_echo("thewire:error"));
-				elgg_log("BRUNO compound/add ERROR multiple post new post in container_guid=$container",'NOTICE');
-				forward(REFERER);
-			}
-			// Reset guid because of jeditable
-			$guid = 0;
-		} else {
-			elgg_log("BRUNO compound/add multiple post jeditable edited post in container_guid=$container guid=$guids[$i]",'NOTICE');
-			$guid = thebetterwire_save_post($guids[$i], $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,$jeditable,$river_guid);
-			if (!$guid) {
-				elgg_log("BRUNO compound/add ERROR multiple post jeditable edited post in container_guid=$container guid=$guids[$i]",'NOTICE');
-				register_error(elgg_echo("thewire:error"));
-				forward(REFERER);
-			}
-			$i++;
+		elgg_log("multiple post ".$access_ids[$container],'NOTICE');
+		$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
+		if (!$guid) {
+			register_error(elgg_echo("thewire:error"));
+			forward(REFERER);
 		}
+		// Reset guid because of jeditable
+		$guid = 0;
 	}
 } else {
-	elgg_log("BRUNO compound/add single post jeditable edited post in container_guid=$container guid=$guid",'NOTICE');
 	$guid = thebetterwire_save_post($guid, $body, $user_id, $container_guid, $access_id, $parent_guid, $method,$exec_content,$jeditable,$river_guid);
 	//$thewire_entity = get_entity($guid);
 	//$thewire_entity->save();
 	if (!$guid) {
-		elgg_log("BRUNO compound/add ERROR single post jeditable edited post in container_guid=$container guid=$guid",'NOTICE');
 		register_error(elgg_echo("thewire:error"));
 		forward(REFERER);
 	}
@@ -183,8 +161,12 @@ function thebetterwire_save_post($guid = 0,$text, $userid, $container_guid, $acc
         	}
 
         	if ($guid) {
-        	        add_to_river('river/object/thewire/create', 'create', $post->owner_guid, $post->guid);
-
+			 elgg_create_river_item(array(
+                                'view' => 'river/object/thewire/create',
+                                'action_type' => 'create',
+                                'subject_guid' => $post->owner_guid,
+                                'object_guid' => $post->getGUID(),
+                        ));
         	        // let other plugins know we are setting a user status
         	        $params = array(
         	                'entity' => $post,

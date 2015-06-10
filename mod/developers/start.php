@@ -14,19 +14,22 @@ function developers_init() {
 	elgg_extend_view('css/admin', 'developers/css');
 	elgg_extend_view('css/elgg', 'developers/css');
 
-	elgg_register_page_handler('theme_preview', 'developers_theme_preview_controller');
+	elgg_register_page_handler('theme_sandbox', 'developers_theme_sandbox_controller');
+	elgg_register_external_view('developers/ajax'); // for lightbox in sandbox
+	$sandbox_css = elgg_get_simplecache_url('css', 'theme_sandbox.css');
+	elgg_register_css('dev.theme_sandbox', $sandbox_css);
 
 	$action_base = elgg_get_plugins_path() . 'developers/actions/developers';
 	elgg_register_action('developers/settings', "$action_base/settings.php", 'admin');
-	elgg_register_action('developers/inspect', "$action_base/inspect.php", 'admin');
 
-	elgg_register_js('jquery.jstree', 'mod/developers/vendors/jsTree/jquery.jstree.js', 'footer');
-	elgg_register_css('jquery.jstree', 'mod/developers/vendors/jsTree/themes/default/style.css');
+	elgg_define_js('jquery.jstree', array(
+		'src' => '/mod/developers/vendors/jsTree/jquery.jstree.js',
+		'exports' => 'jQuery.fn.jstree',
+		'deps' => array('jquery'),
+	));
+	elgg_register_css('jquery.jstree', '/mod/developers/vendors/jsTree/themes/default/style.css');
 
-	elgg_load_js('jquery.form');
-
-	elgg_register_js('elgg.dev', 'js/developers/developers.js', 'footer');
-	elgg_load_js('elgg.dev');
+	elgg_require_js('elgg/dev');
 }
 
 function developers_process_settings() {
@@ -61,8 +64,8 @@ function developers_process_settings() {
 
 function developers_setup_menu() {
 	if (elgg_in_context('admin')) {
-		elgg_register_admin_menu_item('develop', 'inspect', 'develop_tools');
-		elgg_register_admin_menu_item('develop', 'preview', 'develop_tools');
+		elgg_register_admin_menu_item('develop', 'inspect');
+		elgg_register_admin_menu_item('develop', 'sandbox', 'develop_tools');
 		elgg_register_admin_menu_item('develop', 'unit_tests', 'develop_tools');
 
 		elgg_register_menu_item('page', array(
@@ -73,6 +76,18 @@ function developers_setup_menu() {
 			'priority' => 10,
 			'section' => 'develop'
 		));
+		
+		$inspect_options = developers_get_inspect_options();
+		foreach ($inspect_options as $key => $value) {
+			elgg_register_menu_item('page', array(
+				'name' => 'dev_inspect_' . elgg_get_friendly_title($key),
+				'href' => "admin/develop_tools/inspect?inspect_type={$key}",
+				'text' => $value,
+				'context' => 'admin',
+				'section' => 'develop',
+				'parent_name' => 'inspect'
+			));
+		}
 	}
 }
 
@@ -104,7 +119,7 @@ function developers_wrap_views($hook, $type, $result, $params) {
 		return;
 	}
 
-	$excluded_bases = array('css', 'js', 'input', 'output', 'embed', 'icon',);
+	$excluded_bases = array('css', 'js', 'input', 'output', 'embed', 'icon', 'json', 'xml');
 
 	$excluded_views = array(
 		'page/default',
@@ -143,15 +158,28 @@ function developers_log_events($name, $type) {
 		return;
 	}
 
+	// 0 => this function
+	// 1 => call_user_func_array
+	// 2 => hook class trigger
 	$stack = debug_backtrace();
-	if ($stack[2]['function'] == 'elgg_trigger_event') {
+	if (isset($stack[2]['class']) && $stack[2]['class'] == 'Elgg\EventsService') {
 		$event_type = 'Event';
 	} else {
 		$event_type = 'Plugin hook';
 	}
-	$function = $stack[3]['function'] . '()';
-	if ($function == 'require_once' || $function == 'include_once') {
-		$function = $stack[3]['file'];
+
+	if ($stack[3]['function'] == 'elgg_trigger_event' || $stack[3]['function'] == 'elgg_trigger_plugin_hook') {
+		$index = 4;
+	} else {
+		$index = 3;
+	}
+	if (isset($stack[$index]['class'])) {
+		$function = $stack[$index]['class'] . '::' . $stack[$index]['function'] . '()';
+	} else {
+		$function = $stack[$index]['function'] . '()';
+	}
+	if ($function == 'require_once()' || $function == 'include_once()') {
+		$function = $stack[$index]['file'];
 	}
 
 	$msg = elgg_echo('developers:event_log_msg', array(
@@ -160,21 +188,23 @@ function developers_log_events($name, $type) {
 		$type,
 		$function,
 	));
-	elgg_dump($msg, false, 'WARNING');
+	elgg_dump($msg, false);
 
 	unset($stack);
 }
 
 /**
- * Serve the theme preview pages
+ * Serve the theme sandbox pages
  *
  * @param array $page
  * @return bool
  */
-function developers_theme_preview_controller($page) {
+function developers_theme_sandbox_controller($page) {
 	if (!isset($page[0])) {
-		forward('theme_preview/general');
+		forward('theme_sandbox/intro');
 	}
+
+	elgg_load_css('dev.theme_sandbox');
 
 	$pages = array(
 		'buttons',
@@ -182,28 +212,54 @@ function developers_theme_preview_controller($page) {
 		'forms',
 		'grid',
 		'icons',
+		'javascript',
+		'layouts',
 		'modules',
 		'navigation',
 		'typography',
-		'miscellaneous'
 	);
 	
 	foreach ($pages as $page_name) {
-		elgg_register_menu_item('page', array(
+		elgg_register_menu_item('theme_sandbox', array(
 			'name' => $page_name,
-			'text' => elgg_echo("theme_preview:$page_name"),
-			'href' => "theme_preview/$page_name",
+			'text' => elgg_echo("theme_sandbox:$page_name"),
+			'href' => "theme_sandbox/$page_name",
 		));
 	}
 
-	$title = elgg_echo("theme_preview:{$page[0]}");
-	$body =  elgg_view("theme_preview/{$page[0]}");
+	$title = elgg_echo("theme_sandbox:{$page[0]}");
+	$body =  elgg_view("theme_sandbox/{$page[0]}");
 
-	$layout = elgg_view_layout('one_sidebar', array(
+	$layout = elgg_view_layout('theme_sandbox', array(
 		'title' => $title,
 		'content' => $body,
 	));
-	
-	echo elgg_view_page($title, $layout, 'theme_preview');
+
+	echo elgg_view_page("Theme Sandbox : $title", $layout, 'theme_sandbox');
 	return true;
+}
+
+/**
+ * Get the available inspect options
+ * 
+ * @return array
+ */
+function developers_get_inspect_options() {
+	$options = array(
+		'Actions' => elgg_echo('developers:inspect:actions'),
+		'Events' => elgg_echo('developers:inspect:events'),
+		'Menus' => elgg_echo('developers:inspect:menus'),
+		'Plugin Hooks' => elgg_echo('developers:inspect:pluginhooks'),
+		'Simple Cache' => elgg_echo('developers:inspect:simplecache'),
+		'Views' => elgg_echo('developers:inspect:views'),
+		'Widgets' => elgg_echo('developers:inspect:widgets'),
+	);
+	
+	if (elgg_is_active_plugin('web_services')) {
+		$options['Web Services'] = elgg_echo('developers:inspect:webservices');
+	}
+	
+	ksort($options);
+	
+	return $options;
 }

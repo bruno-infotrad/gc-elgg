@@ -1,57 +1,70 @@
 <?php
-	/**
-	* Profile Manager
-	* 
-	* Admin settings
-	* 
-	* @package profile_manager
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
-	*/
+/**
+* Profile Manager
+*
+* Admin settings
+*
+* @package profile_manager
+* @author ColdTrick IT Solutions
+* @copyright Coldtrick IT Solutions 2009
+* @link http://www.coldtrick.com/
+*/
 
-	$yesno_options = array(
-		"yes" => elgg_echo("option:yes"),
-		"no" => elgg_echo("option:no")
-	);
-	
-	$noyes_options = array_reverse($yesno_options);
-	
-	$extra_fields_options = array(
-		"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
-		"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
-	);
+$yesno_options = array(
+	"yes" => elgg_echo("option:yes"),
+	"no" => elgg_echo("option:no")
+);
 
-	$description_position_options = array(
-		"bottom" => elgg_echo("bottom"),
-		"top" => elgg_echo("top")
-	);
-	
-	$enable_username_change_options = array(
-		"no" => elgg_echo("option:no"),
-		"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
-		"yes" => elgg_echo("option:yes")
-	);
-	
-	$profile_types = array();
-	
-	$profile_types_options = array(
-		"type" => "object",
-		"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
-		"owner_guid" => elgg_get_site_entity()->getGUID(),
-		"limit" => false
-	); 
+$noyes_options = array_reverse($yesno_options);
 
-	$profile_type_entities = elgg_get_entities($profile_types_options);
-	
-	if(!empty($profile_type_entities)){
-		$profile_types[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
-		foreach($profile_type_entities as $type){		
-			$profile_types[$type->guid] = $type->getTitle();
-		}
+$profile_icon_options = $noyes_options;
+$profile_icon_options["optional"] = elgg_echo("profile_manager:settings:profile_icon_on_register:option:optional");
+
+$extra_fields_options = array(
+	"extend" => elgg_echo("profile_manager:settings:registration:extra_fields:extend"),
+	"beside" => elgg_echo("profile_manager:settings:registration:extra_fields:beside")
+);
+
+$enable_username_change_options = array(
+	"no" => elgg_echo("option:no"),
+	"admin" => elgg_echo("profile_manager:settings:enable_username_change:option:admin"),
+	"yes" => elgg_echo("option:yes")
+);
+
+$profile_types = array();
+
+$profile_types_options = array(
+	"type" => "object",
+	"subtype" => CUSTOM_PROFILE_FIELDS_PROFILE_TYPE_SUBTYPE,
+	"owner_guid" => elgg_get_site_entity()->getGUID(),
+	"limit" => false
+);
+
+$profile_type_entities = elgg_get_entities($profile_types_options);
+
+if (!empty($profile_type_entities)) {
+	$profile_types[""] = elgg_echo("profile_manager:profile:edit:custom_profile_type:default");
+	foreach ($profile_type_entities as $type) {
+		$profile_types[$type->guid] = $type->getTitle();
 	}
-	
-	echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true));
+}
+
+echo elgg_view("profile_manager/admin/tabs", array("settings_selected" => true));
+
+$group_limit_options = array(
+		"" => elgg_echo("profile_manager:settings:group:limit:unlimited"),
+		0 => elgg_echo("never"),
+		1 => 1,
+		2 => 2,
+		3 => 3,
+		4 => 4,
+		5 => 5,
+		6 => 6,
+		7 => 7,
+		8 => 8,
+		9 => 9,
+		10 => 10
+	);
 ?>
 <table>
 	<tr>
@@ -68,7 +81,21 @@
 			<?php echo elgg_echo('profile_manager:settings:profile_icon_on_register'); ?>
 		</td>
 		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[profile_icon_on_register]", "options_values" => $noyes_options, "value" => $vars['entity']->profile_icon_on_register)); ?>
+			<?php
+				echo elgg_view("input/dropdown", array(
+					"name" => "params[profile_icon_on_register]", 
+					"options_values" => $profile_icon_options, 
+					"value" => $vars['entity']->profile_icon_on_register
+				));
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:show_account_hints'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[show_account_hints]", "options_values" => $noyes_options, "value" => $vars['entity']->show_account_hints)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -89,7 +116,7 @@
 			<?php echo elgg_view("input/dropdown", array("name" => "params[registration_extra_fields]", "options_values" => $extra_fields_options, "value" => $vars['entity']->registration_extra_fields)); ?>
 		</td>
 	</tr>
-	<?php if(!empty($profile_types)){?>
+	<?php if (!empty($profile_types)) {?>
 	<tr>
 		<td>
 			<?php echo elgg_echo('profile_manager:settings:default_profile_type'); ?>
@@ -148,9 +175,9 @@
 		</td>
 		<td>
 			<?php
-				$edit_profile_mode_options = array("list" => elgg_echo('profile_manager:settings:edit_profile_mode:list'), "tabbed" => elgg_echo('profile_manager:settings:edit_profile_mode:tabbed')); 
-				echo elgg_view("input/dropdown", array("name" => "params[edit_profile_mode]", "options_values" => $edit_profile_mode_options, "value" => $vars['entity']->edit_profile_mode)); 
-			?>		
+				$edit_profile_mode_options = array("list" => elgg_echo('profile_manager:settings:edit_profile_mode:list'), "tabbed" => elgg_echo('profile_manager:settings:edit_profile_mode:tabbed'));
+				echo elgg_view("input/dropdown", array("name" => "params[edit_profile_mode]", "options_values" => $edit_profile_mode_options, "value" => $vars['entity']->edit_profile_mode));
+			?>
 		</td>
 	</tr>
 	<tr>
@@ -158,8 +185,8 @@
 			<?php echo elgg_echo('profile_manager:settings:profile_type_selection'); ?>
 		</td>
 		<td>
-			<?php 
-				$profile_type_selection_options = array("user" => elgg_echo('profile_manager:settings:profile_type_selection:option:user'), "admin" => elgg_echo('profile_manager:settings:profile_type_selection:option:admin')); 
+			<?php
+				$profile_type_selection_options = array("user" => elgg_echo('profile_manager:settings:profile_type_selection:option:user'), "admin" => elgg_echo('profile_manager:settings:profile_type_selection:option:admin'));
 				echo elgg_view("input/dropdown", array("name" => "params[profile_type_selection]", "options_values" => $profile_type_selection_options, "value" => $vars['entity']->profile_type_selection));
 			?>
 		</td>
@@ -187,8 +214,8 @@
 		</td>
 		<td>
 			<?php
-				$display_categories_options = array("plain" => elgg_echo('profile_manager:settings:display_categories:option:plain'), "accordion" => elgg_echo('profile_manager:settings:display_categories:option:accordion')); 
-				echo elgg_view("input/dropdown", array("name" => "params[display_categories]", "options_values" => $display_categories_options, "value" => $vars['entity']->display_categories)); 
+				$display_categories_options = array("plain" => elgg_echo('profile_manager:settings:display_categories:option:plain'), "accordion" => elgg_echo('profile_manager:settings:display_categories:option:accordion'));
+				echo elgg_view("input/dropdown", array("name" => "params[display_categories]", "options_values" => $display_categories_options, "value" => $vars['entity']->display_categories));
 			?>
 		</td>
 	</tr>
@@ -198,14 +225,6 @@
 		</td>
 		<td>
 			<?php echo elgg_view("input/dropdown", array("name" => "params[display_system_category]", "options_values" => $noyes_options, "value" => $vars['entity']->display_system_category)); ?>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo elgg_echo('profile_manager:settings:description_position'); ?>
-		</td>
-		<td>
-			<?php echo elgg_view("input/dropdown", array("name" => "params[description_position]", "options_values" => $description_position_options, "value" => $vars['entity']->description_position)); ?>
 		</td>
 	</tr>
 	<tr>
@@ -220,7 +239,37 @@
 		<td colspan="2">
 			<div class='elgg-module-inline'>
 				<div class='elgg-head'>
-				<h3><?php echo elgg_echo("profile_manager:settings:other"); ?></h3>
+				<h3><?php echo elgg_echo("profile_manager:settings:group"); ?></h3>
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:group:group_limit_name'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[group_limit_name]", "options_values" => $group_limit_options, "value" => $vars['entity']->group_limit_name)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo elgg_echo('profile_manager:settings:group:group_limit_description'); ?>
+		</td>
+		<td>
+			<?php echo elgg_view("input/dropdown", array("name" => "params[group_limit_description]", "options_values" => $group_limit_options, "value" => $vars['entity']->group_limit_description)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="elgg-subtext">
+			<?php echo elgg_echo("profile_manager:settings:group:limit:info"); ?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div class='elgg-module-inline'>
+				<div class='elgg-head'>
+				<h3><?php echo elgg_echo("other"); ?></h3>
 				</div>
 			</div>
 		</td>

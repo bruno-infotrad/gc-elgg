@@ -1,6 +1,6 @@
 <?php
 
-$french = array(
+return array(
 
 	/**
 	 * Menu items and titles
@@ -15,13 +15,13 @@ $french = array(
 	'messageboard:num_display' => "Nombre de messages à afficher",
 	'messageboard:desc' => "Ceci est un forum que vous pouvez ajouter sur votre profil, et où les autres utilisateurs peuvent laisse un message.",
 
-	'messageboard:user' => "Forum de %s",
+	'messageboard:user' => "forum de %s",
 
-	'messageboard:replyon' => "réponse sur",
+	'messageboard:replyon' => 'réponse sur',
 	'messageboard:history' => "historique",
 
-	'messageboard:owner' => "forum de %s",
-	'messageboard:owner_history' => "%s a envoyé un message sur le forum de %s",
+	'messageboard:owner' => 'forum de %s',
+	'messageboard:owner_history' => '%s a envoyé un message sur le forum de %s',
 
 	/**
 	 * Message board widget river
@@ -39,7 +39,7 @@ $french = array(
 	 * Email messages
 	 */
 
-	'messageboard:email:subject' => "Vous avez un nouveau message sur le forum !",
+	'messageboard:email:subject' => 'Vous avez un nouveau message sur le forum !',
 	'messageboard:email:body' => "Vous avez reçu un nouveau message de %s sur votre forum. Il est écrit :
 
 
@@ -62,11 +62,9 @@ Vous ne pouvez pas répondre à cet email.",
 
 	'messageboard:blank' => "Désolé, vous devez écrire quelque chose dans le corps du message avant de pouvoir l'enregistrer.",
 	'messageboard:notfound' => "Désolé, l'élément spécifié n'a pu être trouvé.",
-	'messageboard:notdeleted' => "Désolé, le message n'a pu être supprimé.",
+	'messageboard:notdeleted' => "Désolé, ce message n'a pu être effacé.",
 	'messageboard:somethingwentwrong' => "Quelque chose a tourné court lors de l'enregistrement de votre message, veuillez vérifier que vous avez bien écrit un message.",
 
 	'messageboard:failure' => "Une erreur imprévue s'est produite lors de l'ajout de votre message. Veuillez réeessayer.",
 
 );
-
-add_translation("fr", $french);

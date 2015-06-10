@@ -8,12 +8,12 @@ if (elgg_is_logged_in()) {
 	if (!$guid = get_input('guid')) {
                 exit;
         }
-
-	$comments = elgg_get_annotations(array(
-	        'guid' => $guid,
-	        'annotation_name' => 'generic_comment',
+	$comments = elgg_get_entities(array(
+	        'container_guids' => array($guid),
+	        'type' => 'object',
+	        'subtype' => 'comment',
 	        'limit' => 0,
-	        'order_by' => 'n_table.time_created desc'
+	        'order_by' => 'time_created desc'
 	));
 	
 	if ($comments) {

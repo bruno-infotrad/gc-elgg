@@ -24,49 +24,6 @@ if (elgg_is_admin_logged_in()) {
 		} else {
 			echo "<br>".elgg_echo("source_user_guid=$source_user_guid target_user_guid=$target_user_guid");
 			$GLOBALS['DUA_LOG']->FATAL("source_user_guid=$source_user_guid target_user_guid=$target_user_guid");
-			echo "<br>".elgg_echo("Processing groups owned by $source_username");
-			$GLOBALS['DUA_LOG']->FATAL("Processing groups owned by $source_username");
-			$groups_owned = elgg_get_entities(array( 'type' => 'group', 'owner_guid' => $source_user_guid,'limit' => 0));
-			foreach ($groups_owned as $group_owned) {
-				if (is_group_member($group_owned->guid,$target_user_guid)) {
-					echo "<br>".elgg_echo($target_user_guid." is a member of group ".$group_owned->name." ".$group_owned->guid." ,removing membership");
-					$GLOBALS['DUA_LOG']->FATAL($target_user_guid." is a member of group ".$group_owned->name." ".$group_owned->guid." ,removing membership");
-					if (remove_entity_relationship($target_user_guid, 'member', $group_owned->guid)) {
-						echo "<br>".elgg_echo("Removed group membership for group ".$group_owned->name." ".$group_owned->guid." for user ".$target_user_guid." before making him group owner");
-						$GLOBALS['DUA_LOG']->FATAL("Removed group membership for group ".$group_owned->name." ".$group_owned->guid." for user ".$target_user_guid." before making him group owner");
-					} else {
-						echo "<br>".elgg_echo("Could not remove group membership for group ".$group_owned->name." ".$group_owned->guid." for user ".$target_user_guid." before making him group owner");
-						$GLOBALS['DUA_LOG']->FATAL("Could not remove group membership for group ".$group_owned->name." ".$group_owned->guid." for user ".$target_user_guid." before making him group owner");
-					}
-				}
-				$group_owned->owner_guid = $target_user_guid;
-				if ($group_owned->save()) {
-					echo "<br>".elgg_echo("Updated group ownership for group ".$group_owned->name." ".$group_owned->guid);
-					$GLOBALS['DUA_LOG']->FATAL("Updated group ownership for group ".$group_owned->name." ".$group_owned->guid);
-				} else {
-					echo "<br>".elgg_echo("Could not update group ownership for group ".$group_owned->name." ".$group_owned->guid);
-					$GLOBALS['DUA_LOG']->FATAL("Could not update group ownership for group ".$group_owned->name." ".$group_owned->guid);
-				}
-			}
-			echo "<br>".elgg_echo("Processing group memberships for $source_username");
-			$GLOBALS['DUA_LOG']->FATAL("Processing group memberships for $source_username");
-			$groups = elgg_get_entities_from_relationship(array( 'type' => 'group', 'relationship' => 'member', 'relationship_guid' => $source_user_guid, 'inverse_relationship' => false,'limit' => 0));
-			foreach ($groups as $group) {
-				if(! is_group_member($group->guid,$target_user_guid) && $group->owner_guid != $target_user_guid) {
-					echo "<br>".elgg_echo($target_user_guid." is not already the owner or a member of group ".$group->name." ".$group->guid);
-					$GLOBALS['DUA_LOG']->FATAL($target_user_guid." is not already the owner or a member of group ".$group->name." ".$group->guid);
-					if(add_entity_relationship($target_user_guid, 'member', $group->guid) && add_user_to_access_collection($target_user_guid, $group->group_acl)) {
-						echo "<br>".elgg_echo("Updated group membership for group ".$group->name." ".$group->guid);
-						$GLOBALS['DUA_LOG']->FATAL("Updated group membership for group ".$group->name." ".$group->guid);
-					} else {
-						echo "<br>".elgg_echo("Could not update group membership for group ".$group->name." ".$group->guid);
-						$GLOBALS['DUA_LOG']->FATAL("Could not update group membership for group ".$group->name." ".$group->guid);
-					}
-				} else {
-					echo "<br>".elgg_echo($target_user_guid." is already either the owner or a member of group ".$group->name." ".$group->guid);
-					$GLOBALS['DUA_LOG']->FATAL($target_user_guid." is already either the owner or a member of group ".$group->name." ".$group->guid);
-				}
-			}
 			echo "<br>".elgg_echo("Processing entities for $source_username");
 			$GLOBALS['DUA_LOG']->FATAL("Processing entities for $source_username");
 			$entities = elgg_get_entities(array( 'owner_guids' => $source_user_guid,'limit' => 0));

@@ -9,10 +9,14 @@
 
 $guid = get_input('guid');
 $page = get_entity($guid);
-if (elgg_instanceof($page, 'object', 'page') || elgg_instanceof($page, 'object', 'page_top')) {
+if (pages_is_page($page)) {
+	elgg_load_library('elgg:pages');
 	// only allow owners and admin to delete
-	$container = get_entity($page->container_guid);
-	if (elgg_is_admin_logged_in() || elgg_get_logged_in_user_guid() == $page->getOwnerGuid()||(elgg_instanceof($container, 'group')&& $container->canEdit())) {
+	if (elgg_is_admin_logged_in() 
+		|| elgg_get_logged_in_user_guid() == $page->getOwnerGuid()
+		|| pages_can_delete_page($page)) {
+		$container = get_entity($page->container_guid);
+
 		// Bring all child elements forward
 		$parent = $page->parent_guid;
 		$children = elgg_get_entities_from_metadata(array(
@@ -50,7 +54,8 @@ if (elgg_instanceof($page, 'object', 'page') || elgg_instanceof($page, 'object',
 		if ($page->delete()) {
 			system_message(elgg_echo('pages:delete:success'));
 			if ($parent) {
-				if ($parent = get_entity($parent)) {
+				$parent = get_entity($parent);
+				if ($parent) {
 					forward($parent->getURL());
 				}
 			}

@@ -26,7 +26,7 @@ $groupmemberships = elgg_get_entities_from_relationship(array(
 	'limit' => 9999,
 ));
 
-$content = elgg_view_form('notificationsettings/groupsave', array(), array('groups' => $groupmemberships));
+$content = elgg_view_form('notificationsettings/groupsave', array(), array('groups' => $groupmemberships,'user'=>$user));
 
 $params = array(
         'content' => $content,

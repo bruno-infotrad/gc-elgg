@@ -34,7 +34,7 @@ switch ($page_type) {
 	case 'online':
 	default:
 		$offset = get_input('offset', 0);
-		$count = find_active_users(600, 10, $offset, true);
+		$count = find_active_users(array('seconds'=>600, 'limit'=>10, 'offset'=>$offset, 'count'=>true));
 		$objects = gc_find_active_users(600, 10, $offset);
 		if ($objects) {
 			$content = elgg_view_entity_list($objects, array(

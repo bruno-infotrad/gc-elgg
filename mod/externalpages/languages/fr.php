@@ -1,9 +1,5 @@
 <?php
-/**
- * External pages English language file
- */
-
-$french = array(
+return array(
 
 	/**
 	 * Menu items and titles
@@ -23,5 +19,3 @@ $french = array(
 	'expages:posted' => "Votre message de page a bien été posté.",
 	'expages:error' => "Impossible de sauver cette page.",
 );
-
-add_translation("fr", $french);

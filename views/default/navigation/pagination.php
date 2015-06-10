@@ -19,7 +19,7 @@ if (elgg_in_context('widget')) {
 
 $offset = abs((int) elgg_extract('offset', $vars, 0));
 // because you can say $vars['limit'] = 0
-if (!$limit = (int) elgg_extract('limit', $vars, 10)) {
+if (!$limit = (int) elgg_extract('limit', $vars, elgg_get_config('default_limit'))) {
 	$limit = 10;
 }
 
@@ -31,6 +31,8 @@ if (isset($vars['base_url']) && $vars['base_url']) {
 } else if (isset($vars['baseurl']) && $vars['baseurl']) {
 	elgg_deprecated_notice("Use 'base_url' instead of 'baseurl' for the navigation/pagination view", 1.8);
 	$base_url = $vars['baseurl'];
+} elseif (elgg_is_xhr() && !empty($_SERVER['HTTP_REFERER'])) {
+	$base_url = $_SERVER['HTTP_REFERER'];
 } else {
 	$base_url = current_page_url();
 }
@@ -48,12 +50,12 @@ $current_page = ceil($offset / $limit) + 1;
 
 $pages = new stdClass();
 $pages->prev = array(
-	'text' => '&laquo; ' . elgg_echo('previous'),
+	'text' => elgg_echo('previous'),
 	'href' => '',
 	'is_trusted' => true,
 );
 $pages->next = array(
-	'text' => elgg_echo('next') . ' &raquo;',
+	'text' => elgg_echo('next'),
 	'href' => '',
 	'is_trusted' => true,
 );
@@ -62,8 +64,9 @@ $pages->items = array();
 // Add pages before the current page
 if ($current_page > 1) {
 	$prev_offset = $offset - $limit;
-	if ($prev_offset < 0) {
-		$prev_offset = 0;
+	if ($prev_offset < 1) {
+		// don't include offset=0
+		$prev_offset = null;
 	}
 
 	$pages->prev['href'] = elgg_http_add_url_query_elements($base_url, array($offset_key => $prev_offset));
@@ -111,7 +114,11 @@ foreach ($pages->items as $page) {
 	if ($page == $current_page) {
 		echo "<li class=\"elgg-state-selected\"><span>$page</span></li>";
 	} else {
-		$page_offset = (($page - 1) * $limit);
+		$page_offset = (($page - $current_page) * $limit) + $offset;
+		if ($page_offset <= 0) {
+			// don't include offset=0
+			$page_offset = null;
+		}
 		$url = elgg_http_add_url_query_elements($base_url, array($offset_key => $page_offset));
 		$link = elgg_view('output/url', array(
 			'href' => $url,

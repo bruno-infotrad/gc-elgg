@@ -66,9 +66,6 @@ add_translation('en', array(
 	'profile:user_activity' => 'Activity',
 	'profile:user_blog' => 'Blogs',
 	'profile:user_groups' => 'Groups',
-	'river:ingroup:label' => 'in the group',
-	'river:ingroups:label' => 'in the groups',
-	'river:create:object:thewire:label' => "posted to the ",
         'river:messageboard:group:default' => "%s posted on %s's message board",
 	'river:update:user:default' => '%s has a new avatar',
 
@@ -87,6 +84,8 @@ add_translation('en', array(
 	'menu:page:header:2contributions' => 'Contributions',
 
 	'river:comment:object:thewire' => '%s commented on the %s',
+	'river:comment:object:comment' => '%s commented on %s',
+
 	'river:comments:all' => 'View all %d comments',
 	'river:friend:user:default' => "%s is now colleagues with %s",
 	'river:replies:all' => 'View all %d comments',
@@ -198,13 +197,7 @@ add_translation('en', array(
 	'gc_theme:comment:notify_ref:subject' => 'Agora comment',
 	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment %s",
 	'gc_theme:done' => 'Back to event',
-	'gc_theme:registrationform_preamble' => "Customize your registration questions to get information from attendees. Click on \"Add Questions\" to add registration questions.",
-	'event_manager:editregistration:addfield' => 'Add Questions',
-	'event_manager:editregistration:addfield:title' => 'Add question',
-	'event_manager:editregistration:addfield:field_type:textfield' => 'Textfield',
-	'event_manager:editregistration:addfield:field_type:textarea' => 'Textarea',
-	'event_manager:editregistration:addfield:field_type:dropdown' => 'Dropdown',
-	'event_manager:editregistration:addfield:field_type:radiobutton' => 'Radiobutton',
+	'gc_theme:registrationform_preamble' => "Customize your registration questions to get information from attendees. Click on Add Field to add a registration question.",
 	'gc_theme:thewire:tags' => "Tagged objects",
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
@@ -345,7 +338,6 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'members:searchboxvalue' => "Name",
 	'members:label:alphabetical' => "Alphabetical",
 	'gc_theme:duplicate_account' => "Please note you have two different accounts on Agora. Please contact Agora Support to arrange migration of your content",
-	'gc_theme:toggle_classified_ads' => 'Show/hide classified ads',
         'gc_theme:elgg_summary' => '<br><div class="whatis"><h4>Use this collaboration tool to</h4><ul>
                                         <li>&nbsp;
                                         <li>&diams;&nbsp;share information across the department quickly (i.e. your personal broadcast/microblog)

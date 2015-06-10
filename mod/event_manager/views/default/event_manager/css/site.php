@@ -1,5 +1,5 @@
 <?php
-	$graphics_folder = $vars["url"] . "mod/event_manager/_graphics/";
+	$graphics_folder = elgg_get_site_url() . "mod/event_manager/_graphics/";
 ?>
 
 /* Event global */
@@ -8,11 +8,6 @@
 }
 
 /* Event Edit */
-#event_manager_event_edit label{
-	font-weight: normal;
-	font-size: 100%;
-}
-
 #event_manager_event_edit > fieldset > table {
 	width: 100%;
 }
@@ -38,12 +33,11 @@
 	font-weight: normal;
 }
 
-.event_manager_event_list_search_input
-{
+.event_manager_event_list_search_input {
 	width: 300px;
 }
-.event_manager_event_list_owner, .event_manager_event_view_owner
-{
+.event_manager_event_list_owner, 
+.event_manager_event_view_owner {
 	color: #808080;
 	font-size: 11px;
 	border-bottom: 1px solid #CCCCCC;
@@ -81,8 +75,7 @@
     border: 1px solid #4690D6;
 }
 
-.event_manager_event_list_count
-{
+.event_manager_event_list_count {
 	color: #666666;
     font-weight: bold;
     margin: 0 0 5px 4px;
@@ -146,6 +139,10 @@
 	border: 1px solid #CCCCCC;
 }
 
+.event-manager-event-view-attendees .elgg-head h3 a {
+	font-size: 1em;
+}
+
 .event-manager-event-view-attendees .elgg-avatar {
 	float: left;
 	margin-right: 5px;
@@ -174,10 +171,9 @@
 /* Event tool links */
 
 .event_manager_event_actions {
-	background: url(<?php echo $graphics_folder; ?>arrows_down.png) right center no-repeat, linear-gradient(#fefefe, #dcdcdc);;
+	background: url(<?php echo $graphics_folder; ?>arrows_down.png) right center no-repeat;
 	padding-right: 15px;
 	cursor: pointer;
-	font-weight: bold;
 }
 
 .event_manager_event_actions_drop_down {

@@ -1,16 +1,10 @@
 <?php
-/**
- * Elgg garbage collector language pack.
- *
- * @package ElggGarbageCollector
- */
+return array(
+	'garbagecollector:period' => 'A quelle fréquence souhaitez-vous faire tourner le ramasse-miettes ?',
 
-$french = array(
-	'garbagecollector:period' => "A quelle fréquence souhaitez-vous faire tourner le ramasse-miettes ?",
-
-	'garbagecollector:weekly' => "Une fois par semaine",
-	'garbagecollector:monthly' => "Une fois par mois",
-	'garbagecollector:yearly' => "Une fois par an",
+	'garbagecollector:weekly' => 'Une fois par semaine',
+	'garbagecollector:monthly' => 'Une fois par mois',
+	'garbagecollector:yearly' => 'Une fois par an',
 
 	'garbagecollector' => "Ramasse-miettes",
 	'garbagecollector:done' => "Terminé",
@@ -19,7 +13,5 @@ $french = array(
 	'garbagecollector:error' => "Erreur",
 	'garbagecollector:ok' => "Ok",
 
-	'garbagecollector:gc:metastrings' => "Nettoyage des chaînes meta (metastrings) non liées: ",
+	'garbagecollector:gc:metastrings' => 'Nettoyage des chaînes meta (metastrings) non liées: ',
 );
-
-add_translation("fr", $french);

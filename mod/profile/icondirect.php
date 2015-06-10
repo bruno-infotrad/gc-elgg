@@ -6,19 +6,14 @@
  * @package ElggProfile
  */
 
-// Get DB settings
-require_once(dirname(dirname(dirname(__FILE__))). '/engine/settings.php');
-
-global $CONFIG;
-
-// won't be able to serve anything if no joindate and no guid
-if (!isset($_GET['joindate']) && !isset($_GET['guid'])) {
+// won't be able to serve anything if no joindate or guid
+if (!isset($_GET['joindate']) || !isset($_GET['guid'])) {
 	header("HTTP/1.1 404 Not Found");
 	exit;
 }
 
 $join_date = (int)$_GET['joindate'];
-$last_cache = (int)$_GET['lastcache']; // icontime
+$last_cache = empty($_GET['lastcache']) ? 0 : (int)$_GET['lastcache']; // icontime
 $guid = (int)$_GET['guid'];
 
 // If is the same ETag, content didn't changed.
@@ -28,69 +23,73 @@ if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']
 	exit;
 }
 
-$size = strtolower($_GET['size']);
-if (!in_array($size, array('large', 'medium', 'small', 'tiny', 'master', 'topbar'))) {
-	$size = "medium";
+$base_dir = dirname(dirname(dirname(__FILE__)));
+
+// Get DB settings
+require_once $base_dir . '/engine/settings.php';
+require_once $base_dir . '/vendor/autoload.php';
+
+global $CONFIG;
+
+$size = "medium";
+if (!empty($_GET['size'])) {
+	$size = strtolower($_GET['size']);
+	if (!in_array($size, array('large', 'medium', 'small', 'tiny', 'master', 'topbar'))) {
+		$size = "medium";
+	}
 }
 
-$mysql_dblink = @mysql_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true);
+$conf = new \Elgg\Database\Config($CONFIG);
+
+if ($conf->isDatabaseSplit()) {
+	$read_connection = $conf->getConnectionConfig(\Elgg\Database\Config::READ);
+} else {
+	$read_connection = $conf->getConnectionConfig(\Elgg\Database\Config::READ_WRITE);
+}
+
+$mysql_dblink = @mysql_connect($read_connection['host'], $read_connection['user'], $read_connection['password'], true);
 if ($mysql_dblink) {
-	if (@mysql_select_db($CONFIG->dbname, $mysql_dblink)) {
-		$result = mysql_query("select name, value from {$CONFIG->dbprefix}datalists where name='dataroot'", $mysql_dblink);
+	if (@mysql_select_db($read_connection['database'], $mysql_dblink)) {
+		$q = "SELECT name, value FROM {$CONFIG->dbprefix}datalists WHERE name in ('dataroot', 'path')";
+		$result = mysql_query($q, $mysql_dblink);
 		if ($result) {
 			$row = mysql_fetch_object($result);
 			while ($row) {
 				if ($row->name == 'dataroot') {
 					$data_root = $row->value;
+				} elseif ($row->name == 'path') {
+					$elgg_path = $row->value;
 				}
+				
 				$row = mysql_fetch_object($result);
 			}
 		}
 
 		@mysql_close($mysql_dblink);
 
-		if (isset($data_root)) {
+		if (isset($data_root) && isset($elgg_path)) {
+			
+			$locator = new \Elgg\EntityDirLocator($guid);
+			$user_path = $data_root . $locator->getPath();
 
-                        // If $join_date is not provided look it up.
-                        if (!isset($join_date) || empty($join_date)) {
-                                $mysql_dblink = @mysql_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true);
-
-                                if ($mysql_dblink) {
-                                        if (@mysql_select_db($CONFIG->dbname, $mysql_dblink)) {
-                                                $result = mysql_query("select time_created from {$CONFIG->dbprefix}entities where guid={$guid}", $mysql_dblink);
-                                                if ($result) {
-                                                        $row = mysql_fetch_object($result);
-                                                        while ($row) {
-                                                                $join_date = $row->time_created;
-                                                                $row = mysql_fetch_object($result);
-                                                        }
-                                                }
-                                        }
-                                        @mysql_close($mysql_dblink);
-                                }
-                        }
-
-			// this depends on ElggDiskFilestore::makeFileMatrix()
-			$user_path = date('Y/m/d/', $join_date) . $guid;
-
-			$filename = "$data_root$user_path/profile/{$guid}{$size}.jpg";
-			$size = @filesize($filename);
-			if ($size) {
+			$filename = $user_path . "profile/{$guid}{$size}.jpg";
+			$filesize = @filesize($filename);
+			
+			if ($filesize) {
 				header("Content-type: image/jpeg");
 				header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime("+6 months")), true);
 				header("Pragma: public");
 				header("Cache-Control: public");
-				header("Content-Length: $size");
+				header("Content-Length: $filesize");
 				header("ETag: \"$etag\"");
 				readfile($filename);
 				exit;
 			}
 		}
 	}
-
 }
 
 // something went wrong so load engine and try to forward to default icon
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+require_once $base_dir . "/engine/start.php";
 elgg_log("Profile icon direct failed.", "WARNING");
 forward("_graphics/icons/user/default{$size}.gif");

@@ -79,7 +79,7 @@ echo elgg_view('input/submit', array(
 //echo elgg_view_menu('contribute_to');
 echo elgg_view('output/url', array(
 	'text' => elgg_echo('gc_theme:contribute_to'),
-	'href' => $vars["url"].'contribute_to',
+	'href' => elgg_get_site_url().'contribute_to',
 	'class' => 'elgg-lightbox elgg-button elgg-button-submit',
 	//"class" => "elgg-button elgg-button-action profile-manager-popup",
 	'id' => 'thewire-contribute-to',
@@ -114,14 +114,6 @@ $("#thewire-textarea").live('keyup', function(){
 		$('input#thewire-submit-button.elgg-button.elgg-button-submit:disabled').val(true);
 		$('#thewire-submit-button').css('opacity','0.5');
 	};
-});
-$('.elgg-form-compound-add').on('submit', function (e){
-	var $form = $(this);
-	if ($form.data('submitted') === true) {
-		e.preventDefault();
-	} else {
-	$form.data('submitted',true);
-	}
 });
 $('input#thewire-exec-content').change(function () {
 	if ($.trim($("#thewire-textarea").val())) {

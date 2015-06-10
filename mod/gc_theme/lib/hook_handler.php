@@ -1274,7 +1274,7 @@ function gc_file_icon_url_override($hook, $type, $returnvalue, $params) {
 function gc_theme_views_add_rss_link() {
         global $autofeed;
         if (isset($autofeed) && $autofeed == true) {
-                $url = full_url();
+                $url = current_page_url();
                 if (substr_count($url, '?')) {
                         $url .= "&view=rss";
                 } else {
@@ -1391,7 +1391,7 @@ function im_admin_user_menu_setup($hook, $type, $return, $params) {
         $url = elgg_add_action_tokens_to_url($url);
         $item = new ElggMenuItem($action, elgg_echo("roles_im_admin:action:$action"), $url);
         $item->setSection('admin');
-        $item->setLinkClass('elgg-requires-confirmation');
+        $item->setLinkClass('data-confirm');
         $return[] = $item;
 
         return $return;

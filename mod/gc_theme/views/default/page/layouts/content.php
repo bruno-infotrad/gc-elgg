@@ -17,7 +17,7 @@
 
 // navigation defaults to breadcrumbs
 $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
-$full_url = full_url();
+$full_url = current_page_url();
 
 // allow page handlers to override the default filter
 if (isset($vars['filter'])) {

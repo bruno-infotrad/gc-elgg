@@ -1,6 +1,6 @@
 <?php
 function gc_find_active_users($seconds, $limit, $offset, $count = false) {
-        global $CONFIG;
+        $dbprefix = elgg_get_config('dbprefix');
         $seconds = (int)$seconds;
         $limit = (int)$limit;
         $offset = (int)$offset;
@@ -11,7 +11,7 @@ function gc_find_active_users($seconds, $limit, $offset, $count = false) {
                 'limit' => $limit,
                 'offset' => $offset,
                 'count' => $count,
-                'joins' => array("join {$CONFIG->dbprefix}users_entity u on e.guid = u.guid"),
+                'joins' => array("join {$dbprefix}users_entity u on e.guid = u.guid"),
                 'wheres' => array("u.last_action >= {$time}"),
                 'order_by' => "u.username asc"
         ));

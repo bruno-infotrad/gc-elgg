@@ -11,8 +11,7 @@ function gc_theme_init() {
 	elgg_register_library('elgg:pages', elgg_get_plugins_path() . 'pages/lib/pages.php');
 	elgg_register_library('elgg:file_tools', elgg_get_plugins_path() . 'file_tools/lib/functions.php');
 	//For batch notification to work:
-	// Reinstate notificcations for blogs but intercept blog notification when created when status not published
-	register_notification_object('object', 'blog', elgg_echo('blog:newpost'));
+	// Intercept blog notification when created when status not published
 	elgg_register_plugin_hook_handler('object:notifications', 'object', 'gc_object_notifications_intercept');
 	//elgg_register_js('jquery.scrollabletab', '/mod/gc_theme//vendors/jquery.scrollabletab.js','head');
 	elgg_register_js('jquery.scrollto', '/mod/gc_theme/vendors/jquery.scrollTo-1.4.3.1-min.js','head');
@@ -164,8 +163,6 @@ function gc_theme_init() {
 	elgg_extend_view('groups/tool_latest', 'file/group_module',601);
 	elgg_unextend_view('groups/tool_latest', 'bookmarks/group_module');
 	elgg_extend_view('groups/tool_latest', 'bookmarks/group_module',602);
-	//Remove unused options
-	elgg_unextend_view("groups/edit", "group_tools/forms/cleanup");
 	//Replace event_manager js
 	elgg_unextend_view("js/elgg", "js/event_manager/site");
 	elgg_extend_view("js/elgg", "js/event_manager/site");
@@ -184,7 +181,6 @@ function gc_theme_init() {
 	elgg_register_js('elgg.all_my_groups', '/mod/gc_theme/js/lib/all_my_groups.js');
 	elgg_register_js('elgg.extra_feed_comments', '/mod/gc_theme/js/lib/extra_feed_comments.js');
 	elgg_register_js('elgg.extra_feed_replies', '/mod/gc_theme/js/lib/extra_feed_replies.js');
-	elgg_register_js('elgg.toggle_cla', '/mod/gc_theme/js/lib/toggle_cla.js');
 	elgg_register_js('elgg.activity_stream', '/mod/gc_theme/js/lib/ui.activity_stream.js');
 	elgg_register_js('elgg.new_feeds', '/mod/gc_theme/js/lib/new_feeds.js');
 	elgg_register_js('elgg.new_messages', '/mod/gc_theme/js/lib/new_messages.js');
@@ -218,11 +214,13 @@ function gc_theme_init() {
 	elgg_register_action("dashboard/activity_stream", "$action_path/dashboard/activity_stream.php");
 	elgg_register_action("dashboard/new_feeds", "$action_path/dashboard/new_feeds.php");
 	elgg_register_action("dashboard/new_messages", "$action_path/dashboard/new_messages.php");
+	//elgg_unregister_action('likes/delete');
+	//elgg_register_action('likes/delete', "$action_path/likes/delete.php");
 	elgg_register_action('friends/multi_invite', "$action_path/friends/multi_invite.php");
 	elgg_register_action('groups/intro_join_groups', "$action_path/groups/intro_join_groups.php");
 	elgg_unregister_action('blog/save');
 	elgg_register_action('blog/save',"$action_path/blog/save.php");
-	elgg_register_action("comments/add", "$action_path/comments/add.php");
+	//elgg_register_action("comments/add", "$action_path/comments/add.php");
 	elgg_unregister_action("group_tools/mail");
 	elgg_register_action("group_tools/mail", $action_path."/group_tools/mail.php");
 	elgg_unregister_action("group_tools/admin_transfer");
@@ -334,11 +332,12 @@ function gc_theme_init() {
 		}
 	}
 }
+/*
 function batch_group_notifications() {
         require_once 'lib/batch_notifications.php';
         $period = 'minute';
         elgg_register_plugin_hook_handler('cron', $period, 'gc_object_notifications');
 }
-// Register a startup event
-elgg_register_event_handler('init','system','batch_group_notifications');
+*/
+//elgg_register_event_handler('init','system','batch_group_notifications');
 elgg_register_event_handler('init', 'system', 'gc_theme_init');

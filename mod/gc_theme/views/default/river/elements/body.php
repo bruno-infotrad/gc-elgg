@@ -10,7 +10,6 @@
  */
 
 $item = $vars['item'];
-$skip = $vars['skip'];
 
 $menu = elgg_view_menu('river', array(
 	'item' => $item,
@@ -18,7 +17,7 @@ $menu = elgg_view_menu('river', array(
 ));
 
 // river item header
-$timestamp = elgg_get_friendly_time($item->getPostedTime());
+$timestamp = elgg_get_friendly_time($item->getTimePosted());
 
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item'])));
 if ($summary === false) {
@@ -69,20 +68,15 @@ if ($container instanceof ElggGroup && $container->guid != elgg_get_page_owner_g
 	));
 	$group_string = elgg_echo('river:ingroup', array($group_link));
 }
-if (! $skip) {
-	echo "<div class=\"elgg-river-summary\">$summary $group_string</div>$message $attachments <span class=\"elgg-river-timestamp\">$timestamp</span> $menu";
-}
-echo $responses;
-/*
+
 echo <<<RIVER
 <div class="elgg-river-summary">$summary $group_string</div>
-skip $skip $message
+$message
 $attachments
 <span class="elgg-river-timestamp">$timestamp</span>
 $menu
 $responses
 RIVER;
-*/
 ?>
 <script>
 $(".edit_area a").click(function(event) {event.stopPropagation();});

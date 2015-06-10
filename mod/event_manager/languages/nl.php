@@ -1,5 +1,17 @@
 <?php
-$language = array (
+/**
+ * This file was created by Translation Editor v2.0
+ * On 2014-09-03 17:08
+ */
+
+return array (
+  'event_manager:edit:form:tabs:profile' => 'Profile',
+  'event_manager:edit:form:tabs:location' => 'Locatie',
+  'event_manager:edit:form:tabs:registration' => 'Registratie',
+  'event_manager:edit:form:tabs:extra' => 'Extra',
+  'event_manager:event:registration:notification:unsubscribe:linktext' => 'Als je je wilt uitschrijven van dit evenement gebruik dan deze link',
+  'event_manager:event:menu:title:add_to_calendar' => 'Toevoegen aan de kalender',
+  'to' => 'Tonga',
   'event_manager:event:menu:user_hover:resend_confirmation' => 'Herzend bevestigings email',
   'event_manager:event:menu:user_hover:move_to_attendees' => 'Verplaats naar deelnemers',
   'event_manager:event:relationship:event_pending:label' => 'In afwachting van email validatie',
@@ -25,11 +37,11 @@ Om uw registratie af te ronden voor het evenement "%s", klik op deze link
 %s
 
 Indien u zich niet heeft geregistreerd kunt u deze email negeren of de link volgen, waar u de mogelijkheid heeft om de registratie te verwijderen.',
-  'to' => 'Tonga',
   'event_manager:menu:unsubscribe' => 'Uitschrijven',
   'event_manager:menu:unsubscribe_confirm' => 'Bevestig uitschrijving',
   'event_manager:menu:registration:completed' => 'Evenement registratie afgerond',
   'event_manager:notification:subject' => 'Er is een nieuw evenement aangemaakt',
+  'event_manager:notification:summary' => 'Er is een nieuw evenement aangemaakt',
   'event_manager:notification:body' => '%s heeft het volgende evenement aangemaakt %s',
   'event_manager:edit:form:registration_completed' => 'Tekst die getoond wordt als een registratie is afgerond',
   'event_manager:edit:form:registration_completed:description' => '[NAME] wordt vervangen in de tekst door de naam van de registrerende gebruiker. [EVENT] wordt vervangen door de naam van het evenement.',
@@ -48,6 +60,8 @@ Indien u zich niet heeft geregistreerd kunt u deze email negeren of de link volg
   'event_manager:event:relationship:event_exhibiting:label' => 'Exposanten',
   'event_manager:event:relationship:event_organizing:label' => 'Organisatoren',
   'event_manager:widgets:events:title' => 'Evenementen',
+  'event_manager:widgets:events:group' => "Voer een groepsnaam in om de resultaten te beperken (optioneel)",
+  'event_manager:widgets:events:group_guid' => "Voer een groeps guid in om de resultaten te beperken (optionel)",
   'event_manager:action:registration:edit:error_slots' => 'Er kan slechts één slot per set worden geselecteerd. Er zijn er meerdere gedetecteerd voor %s.',
   'event_manager:action:register:email:registration_exists' => 'Er bestaat al een registratie voor dit evenement met opgegeven emailadres. Slechts één registratie per emailadres is toegestaan.',
   'event_manager:unsubscribe:title' => 'Uitschrijven uit: %s',
@@ -97,7 +111,6 @@ Iemand heeft zich afgemeld van het \'%s\' evenement. Je bent van de wachtlijst n
   'event_manager:event:preview' => 'Voorbeeld icoon',
   'event_manager:event:createicon' => 'Maak icoon',
   'event_manager:registrationform:fieldorder:error' => 'Fout tijdens het herordenen van de velden',
-  'event_manager:event:register:no_registrationform' => 'De organisator heeft nog geen registratie formulier aangemaakt<br>Probeer het later nog eens.',
   'event_manager:action:registration:edit:error_fields_with_program' => 'Vul de verplichte velden in en selecteer ten minste 1 activiteiten slot om aan deel te nemen',
   'event_manager:settings:google_maps' => 'Google Maps instellingen',
   'event_manager:settings:other' => 'Overige',
@@ -116,7 +129,7 @@ Iemand heeft zich afgemeld van het \'%s\' evenement. Je bent van de wachtlijst n
   'event_manager:menu:group_events' => 'Groeps evenementen',
   'event_manager:menu:new_event' => 'Nieuw Evenement',
   'event_manager:list:title' => 'Evenementen',
-  'event_manager:list:searchevents' => 'Zoek evenementen',
+  'event_manager:list:group:title' => 'Groeps evenementen',
   'event_manager:list:advancedsearch' => 'Geavanceerd zoeken',
   'event_manager:list:simplesearch' => 'Simpel zoeken',
   'event_manager:list:noresults' => 'Geen evenementen gevonden',
@@ -294,7 +307,6 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'event_manager:event:viewregistrations' => 'Registraties weergeven',
   'event_manager:event:noregistrations' => 'Er zijn nog geen registraties',
   'event_manager:event:exportattendees' => 'Deelnemers exporteren',
-  'event_manager:event:viewwaitinglist' => 'Wachtlijst weergeven',
   'event_manager:event:waitinglist:empty' => 'Wachtlijst is leeg',
   'event_manager:event:currentavatar' => 'Huidige evenements icoon',
   'event_manager:event:editicon' => 'Wijzig icoon',
@@ -342,13 +354,10 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'event_manager:action:event:delete:ok' => 'Evenement verwijdert',
   'event_manager:settings:google_api_key' => 'Voer hier je "Google API Key" in',
   'event_manager:settings:google_maps:enterdefaultlocation' => 'Voer een standaard locatie in waar google maps op moet centreren',
-  'event_manager:settings:google_maps:enterdefaultzoom' => 'Kies een standaard google maps zoom level (0 = volledig ingezoomd, 19 = volledig uitgezoomd)',
+  'event_manager:settings:google_maps:enterdefaultzoom' => 'Kies een standaard google maps zoom level (0 = volledig uitgezoomd, 19 = volledig ingezoomd)',
   'event_manager:settings:google_api_key:clickhere' => 'Ga naar <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/tutorial#api_key">https://developers.google.com/maps/documentation/javascript/tutorial#api_key</a> om een "Google API key" aan te vragen',
   'event_manager:settings:region_list' => 'Voer (komma gescheiden) evenement regio\'s in',
   'event_manager:settings:type_list' => 'Voer (komma gescheiden) evenementtypes in',
-  'event_manager:settings:migration' => 'Importeer %d evenementen vanuit "Event calender"',
-  'event_manager:settings:migration:success' => '%d evenementen geimporteerd',
-  'event_manager:settings:migration:noeventstomigrate' => 'Er zijn geen evenementen te importeren',
   'event_manager:settings:notification_sender' => 'RSVP notificatie afzender (email)',
   'event_manager:settings:migration:site:whocancreate' => 'Wie kan site evenementen aanmaken',
   'event_manager:settings:migration:site:whocancreate:admin_only' => 'alleen beheerders',
@@ -368,4 +377,3 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'disapprove' => 'Afkeuren',
   'requiredfields' => 'Verplichte velden',
 );
-add_translation("nl", $language);

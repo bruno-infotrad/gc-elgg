@@ -92,7 +92,7 @@ var infowindow = null;
 			css_left = $(this).offset().left;
 			$("body > .event_manager_event_actions_drop_down").css({top: css_top, left: css_left}).show();;
         }
-        
+
 		event.stopPropagation();
     });
 
@@ -105,10 +105,10 @@ var infowindow = null;
 
 function event_manager_program_add_day(form){
 	$(form).find("input[type='submit']").hide();
-	
+
 	$.post(elgg.get_site_url() + 'events/proc/day/edit', $(form).serialize(), function(response) {
 		if(response.valid) {
-			$.fancybox.close();
+			$.colorbox.close();
 			guid = response.guid;
 			if(response.edit){
 				$("#day_" + guid + " .event_manager_program_day_details").html(response.content_body);
@@ -124,39 +124,51 @@ function event_manager_program_add_day(form){
 	}, 'json');
 }
 
-function event_manager_program_add_slot(form){
-	$(form).find("input[type='submit']").hide();
-	
-	$.post(elgg.get_site_url() + 'events/proc/slot/edit', $(form).serialize(), function(response) {
-		if(response.valid) {
-			$.fancybox.close();
-			
-			guid = response.guid;
-			parent_guid = response.parent_guid;
-			if(response.edit){
-				$("#" + guid).replaceWith(response.content);
+function event_manager_program_add_slot(event){
+	event.preventDefault();
+
+	var button = $(this).find("input[type='submit']");
+
+	// Prevent accidental double click
+	button.hide();
+
+	var url = $(this).attr('action');
+	var data = $(this).serialize();
+
+	elgg.action(url, {
+		data: data,
+		success: function(json) {
+			if (json.status === 0) {
+				$.colorbox.close();
+
+				guid = json.output.guid;
+				parent_guid = json.output.parent_guid;
+
+				if (json.output.edit) {
+					$("#" + guid).replaceWith(json.output.content);
+				} else {
+					$("#day_" + parent_guid).find("a.event_manager_program_slot_add").before(json.output.content);
+				}
 			} else {
-				$("#day_" + parent_guid).find("a.event_manager_program_slot_add").before(response.content);
+				button.show();
 			}
-		} else {
-			$(form).find("input[type='submit']").show();
 		}
-	}, 'json');
+	});
 }
 
 function event_manager_registrationform_add_field(form) {
 	$(form).find("input[type='submit']").hide();
-	
+
 	$.post(elgg.get_site_url() + 'events/proc/question/edit', $(form).serialize(), function(response){
 		if(response.valid) {
-			$.fancybox.close();
+			$.colorbox.close();
 			guid = response.guid;
 
 			if(response.edit) {
 				$('#question_' + guid).replaceWith(response.content);
 			} else {
 				$("#event_manager_registrationform_fields").append(response.content);
-				
+
 				save_registrationform_question_order();
 			}
 		} else {
@@ -166,9 +178,9 @@ function event_manager_registrationform_add_field(form) {
 }
 
 function event_manager_execute_search(){
-	
+
 	$("#event_manager_result_refreshing").show();
-	
+
 	map_data_only = false;
 	if($("#event_manager_result_navigation li.elgg-state-selected a").attr("rel") == "onthemap"){
 		map_data_only = true;
@@ -186,25 +198,25 @@ function event_manager_execute_search(){
 		$("#distance_latitude").val(distance_latitude);
 		$("#distance_longitude").val(distance_longitude);
 	}
-	
+
 	var formData = $("#event_manager_search_form").serialize();
-	
+
 	$.post(elgg.get_site_url() + 'events/proc/search/events', formData, function(response){
 		if(response.valid){
-		
+
 			if(map_data_only) {
-				
+
 				if(response.markers) {
-					
+
 					infowindow = new google.maps.InfoWindow();
-					
+
 					var shadowIcon = new google.maps.MarkerImage("//chart.apis.google.com/chart?chst=d_map_pin_shadow",
 					        new google.maps.Size(40, 37),
 					        new google.maps.Point(0, 0),
 					        new google.maps.Point(12, 35));
 			        var ownIcon = "//maps.google.com/mapfiles/ms/icons/yellow-dot.png";
 			        var attendingIcon = "//maps.google.com/mapfiles/ms/icons/blue-dot.png";
-										
+
 					$.each(response.markers, function(i, event) {
 						existing = false;
 						if (event_manager_gmarkers) {
@@ -214,7 +226,7 @@ function event_manager_execute_search(){
 					  	}
 					  	if(!existing){
 							var myLatlng = new google.maps.LatLng(event.lat, event.lng);
-	
+
 							markerOptions = {
 									map: event_manager_gmap,
 									position: myLatlng,
@@ -230,12 +242,12 @@ function event_manager_execute_search(){
 								}
 							}
 							var marker = new google.maps.Marker(markerOptions);
-							
+
 							google.maps.event.addListener(marker, 'click', function() {
 								infowindow.setContent(event.html);
 							  	infowindow.open(event_manager_gmap,marker);
 							});
-												
+
 							event_manager_gmarkers[event.guid] = marker;
 					  	}
 					});
@@ -249,7 +261,7 @@ function event_manager_execute_search(){
 				$("#event_manager_result_refreshing").hide();
 			}
 		}
-		
+
 		$("#event_manager_result_refreshing").hide();
 	}, 'json');
 }
@@ -268,7 +280,7 @@ elgg.event_manager.slot_set_init = function() {
 	$form = $("#event_manager_event_register");
 	if ($form.length > 0) {
 		set_names = []; // store processed set names
-		
+
 		$form.find(".event_manager_program_participatetoslot[rel]:checked").each(function(){
 			rel = $(this).attr("rel");
 			if ($.inArray(rel, set_names) < 0) {
@@ -315,24 +327,30 @@ elgg.event_manager.add_new_slot_set_name = function(set_name) {
 elgg.event_manager.init = function() {
 
 	elgg.event_manager.slot_set_init();
-	
+
 	$('.event_manager_program_slot_delete').live('click', function() {
-		if(confirm(elgg.echo('deleteconfirm'))) {
+		if (confirm(elgg.echo('deleteconfirm'))) {
 			slotGuid = $(this).parent().attr("rel");
-			if(slotGuid) {
+			if (slotGuid) {
 				$slotElement = $("#" + slotGuid);
 				$slotElement.hide();
-				$.getJSON(elgg.get_site_url() + 'events/proc/slot/delete', {guid: slotGuid}, function(response) {
-					if(response.valid) {
-						$slotElement.remove();
-					} else {
-						$slotElement.show();
+
+				elgg.action('event_manager/slot/delete', {
+					data: {
+						guid: slotGuid
+					},
+					success: function(json) {
+						if (json.status >= 0) {
+							$slotElement.remove();
+						} else {
+							$slotElement.show();
+						}
 					}
 				});
 			}
 		}
 		return false;
-		
+
 	});
 
 	$('.event_manager_program_day_delete').live('click', function(e) {
@@ -341,21 +359,25 @@ elgg.event_manager.init = function() {
 			if(dayGuid) {
 				$dayElements = $("#day_" + dayGuid + ", #event_manager_event_view_program li.elgg-state-selected");
 				$dayElements.hide();
-				$.getJSON(elgg.get_site_url() + 'events/proc/day/delete', {guid: dayGuid}, function(response) {
-					if(response.valid) {
-						// remove from DOM
-						$dayElements.remove();
-						if($("#event_manager_event_view_program li").length > 1){
-							$("#event_manager_event_view_program li:first a").click();
+
+				elgg.action('event_manager/day/delete', {
+					data: {
+						guid: dayGuid
+					},
+					success: function(json) {
+						if (json.status >= 0) {
+							$dayElements.remove();
+							if($("#event_manager_event_view_program li").length > 1){
+								$("#event_manager_event_view_program li:first a").click();
+							}
+						} else {
+							$dayElements.show();
 						}
-					} else {
-						// revert
-						$dayElements.show();
 					}
 				});
 			}
 		}
-		
+
 		return false;
 	});
 
@@ -376,10 +398,10 @@ elgg.event_manager.init = function() {
 				});
 			}
 		}
-		
+
 		return false;
 	});
-	
+
 	/* Event Manager Search Form */
 	$('#event_manager_registrationform_fields').sortable({
 		axis: 'y',
@@ -391,35 +413,29 @@ elgg.event_manager.init = function() {
 			save_registrationform_question_order();
 		}
 	});
-	
-	$('#event_manager_event_search_advanced_enable').click(function()
-	{
+
+	$('#event_manager_event_search_advanced_enable').click(function() {
 		$('#event_manager_event_search_advanced_container, #past_events, #event_manager_event_search_advanced_enable span').toggle();
 
-		if($('#past_events').is(":hidden"))
-		{
-			console.log('advanced');
+		if($('#past_events').is(":hidden")) {
 			$('#advanced_search').val('1');
-		}
-		else
-		{
-			console.log('simple');
+		} else {
 			$('#advanced_search').val('0');
 		}
 	});
-	
+
 	$('#event_manager_event_list_search_more').live('click', function()	{
 		clickedElement = $(this);
 		clickedElement.html('<div class="elgg-ajax-loader"></div>');
 		offset = parseInt($(this).attr('rel'), 10);
-		
+
 		$("#event_manager_result_refreshing").show();
 		if($('#past_events').is(":hidden") == true) {
 			var formData = $("#event_manager_search_form").serialize();
 		} else {
 			var formData = $($("#event_manager_search_form")[0].elements).not($("#event_manager_event_search_advanced_container")[0].children).serialize();
 		}
-		
+
 		$.post(elgg.get_site_url() + 'events/proc/search/events?offset='+offset, formData, function(response) {
 			if(response.valid) {
 				$('#event_manager_event_list_search_more').remove();
@@ -429,12 +445,12 @@ elgg.event_manager.init = function() {
 			$("#event_manager_result_refreshing").hide();
 		}, 'json');
 	});
-	
+
 	$('#event_manager_search_form').submit(function(e) {
 		event_manager_execute_search();
 		e.preventDefault();
 	});
-	
+
 	$("#event_manager_result_navigation li a").click(function() {
 		if(!($(this).parent().hasClass("elgg-state-selected"))){
 			selected = $(this).attr("rel");
@@ -443,7 +459,7 @@ elgg.event_manager.init = function() {
 			$("#event_manager_event_map, #event_manager_event_listing").toggle();
 
 			$('#search_type').val(selected);
-			
+
 			if(selected == "onthemap"){
 				initMaps('event_manager_onthemap_canvas', true);
 			} else {
@@ -460,65 +476,73 @@ elgg.event_manager.init = function() {
 		$.getJSON(elgg.get_site_url() + 'events/proc/registration/approve', {guid: regId}, function(response) {
 			if(response.valid) {
 				regElmnt.unbind('click');
-				regElmnt.replaceWith('<img border="0" src="/mod/event_manager/_graphics/icons/check_icon.png" />');
+				regElmnt.replaceWith('<img border="0" src="' + elgg.get_site_url() + 'mod/event_manager/_graphics/icons/check_icon.png" />');
 			}
 		});
 	});
-	
+
 	$('.event_manager_program_day_add').live('click', function() {
 		eventGuid = $(this).attr("rel");
-		$.fancybox({
-				'href': elgg.get_site_url() + 'events/program/day?event_guid=' + eventGuid,
-				'onComplete'		: function() {
-						elgg.ui.initDatePicker();
-					}
-			});
-		
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/program/day?event_guid=' + eventGuid,
+			'onComplete': function() {
+				elgg.ui.initDatePicker();
+			}
+		});
+
 		return false;
 	});
 
 	$('.event_manager_program_day_edit').live('click', function() {
 		guid = $(this).attr("rel");
-		$.fancybox({
-				'href': elgg.get_site_url() + 'events/program/day?day_guid=' + guid,
-				'onComplete'		: function() {
-					elgg.ui.initDatePicker();
-				}
-			});
-		
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/program/day?day_guid=' + guid,
+			'onComplete': function() {
+				elgg.ui.initDatePicker();
+			}
+		});
+
 		return false;
 	});
-	
+
 	$('.event_manager_program_slot_add').live('click', function() {
-		dayGuid = $(this).attr("rel");
-		$.fancybox({'href': elgg.get_site_url() + 'events/program/slot?day_guid=' + dayGuid});
-		
+		var dayGuid = $(this).attr("rel");
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/program/slot?day_guid=' + dayGuid
+		});
+
 		return false;
 	});
 
 	$('.event_manager_program_slot_edit').live('click', function() {
-		guid = $(this).attr("rel");
-		$.fancybox({'href': elgg.get_site_url() + 'events/program/slot?slot_guid=' + guid});
-		
+		var guid = $(this).attr("rel");
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/program/slot?slot_guid=' + guid
+		});
+
 		return false;
 	});
-	
+
 	$('#event_manager_questions_add').click(function() {
-		eventGuid = $(this).attr("rel");
-		$.fancybox({'href': elgg.get_site_url() + 'events/registrationform/question?event_guid=' + eventGuid});
+		var eventGuid = $(this).attr("rel");
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/registrationform/question?event_guid=' + eventGuid
+		});
 
 		return false;
 	});
 
 	$('.event_manager_questions_edit').live('click', function()	{
-		guid = $(this).attr("rel");
-		$.fancybox({'href': elgg.get_site_url() + 'events/registrationform/question?question_guid=' + guid});
-		
+		var guid = $(this).attr("rel");
+		$.colorbox({
+			'href': elgg.get_site_url() + 'events/registrationform/question?question_guid=' + guid
+		});
+
 		return false;
 	});
-	
+
 	$('#event_manager_registrationform_question_fieldtype').live('change', function() {
-		if($('#event_manager_registrationform_question_fieldtype').val() == 'Radiobutton' || $('#event_manager_registrationform_question_fieldtype').val() == 'Dropdown') {
+		if ($('#event_manager_registrationform_question_fieldtype').val() == 'Radiobutton' || $('#event_manager_registrationform_question_fieldtype').val() == 'Dropdown') {
 			$('#event_manager_registrationform_select_options').show();
 		} else {
 			$('#event_manager_registrationform_select_options').hide();
@@ -526,44 +550,43 @@ elgg.event_manager.init = function() {
 	});
 
 	$('#event_manager_event_register').submit(function() {
-		if(($("input[name='question_name']").val() == "") || ($("input[name='question_email']").val() == "")){
+		if (($("input[name='question_name']").val() == "") || ($("input[name='question_email']").val() == "")) {
 			elgg.register_error(elgg.echo("event_manager:registration:required_fields"));
 			return false;
 		}
 
-		error_found = false;
-		
+		var error_found = false;
+
 		$("#event_manager_registration_form_fields .required").each(function(index, elem){
-			if($(this).hasClass("elgg-input-radios")){
-				if($(this).find("input[type='radio']:checked").length == 0){
+			if ($(this).hasClass("elgg-input-radios")) {
+				if ($(this).find("input[type='radio']:checked").length == 0) {
 					error_found = true;
 					return false;
 				}
-			} else if($(this).val() == ""){
+			} else if($(this).val() == "") {
 				error_found = true;
 				return false;
-				
 			}
 		});
-		if(error_found){
+
+		if (error_found) {
 			elgg.register_error(elgg.echo("event_manager:registration:required_fields"));
-			
 			return false;
 		}
-		
-		guids = [];
+
+		var guids = [];
 		$.each($('.event_manager_program_participatetoslot'), function(i, value) {
 			elementId = $(value).attr('id');
-			if($(value).is(':checked')) {
+			if ($(value).is(':checked')) {
 				guids.push(elementId.substring(9, elementId.length));
 			}
 		});
 
 		$('#event_manager_program_guids').val(guids.join(','));
 	});
-	
+
 	$('#with_program').change(function() {
-		if($(this).is(':checked')) {
+		if ($(this).is(':checked')) {
 			$('#event_manager_start_time_pulldown').css('display', 'none');
 		} else {
 			$('#event_manager_start_time_pulldown').css('display', 'table-row');
@@ -577,6 +600,22 @@ elgg.event_manager.init = function() {
 	$("#event-manager-new-slot-set-name-button").live("click", function(){
 		elgg.event_manager.add_new_slot_set_name($("#event-manager-new-slot-set-name").val());
 	});
+
+	$("#event-manager-forms-event-edit li").on("click", function(event, elem) {
+		var href = $(this).find("> a").attr("href");
+
+		// First make sure all tabs are hidden
+		$(".event-tab").hide();
+
+		// Now show the selected tab
+		$(href).show();
+
+		$(this).parent().find(".elgg-state-selected").removeClass("elgg-state-selected");
+		$(this).addClass("elgg-state-selected");
+		return false;
+	});
+
+	$('#event_manager_form_program_slot').live('submit', event_manager_program_add_slot);
 };
 
 elgg.register_hook_handler('init', 'system', elgg.event_manager.init);

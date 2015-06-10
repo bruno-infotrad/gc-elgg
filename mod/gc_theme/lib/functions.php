@@ -1,30 +1,4 @@
 <?php
-function gc_get_last_group_activity($group_guid, $site_guid = 0) {
-	$dbprefix = elgg_get_config("dbprefix");
-	$query = "SELECT max(r.posted) as posted FROM ".$dbprefix."river r JOIN ".$dbprefix."entities e ON r.object_guid = e.guid JOIN ".$dbprefix."entities eg ON e.container_guid = eg.guid JOIN ".$dbprefix."groups_entity ge ON eg.guid = ge.guid where e.container_guid = ".$group_guid;
-	$posted = get_data_row($query)->posted;
-	
-	return $posted;
-}
-
-function gc_event_manager_get_registration_fiedtypes()     {
-/* Very bad but not mine: attaching language dependent field types to metadata/metastring 
-* and used with in_array test in * mod/event/views/default/event_manager/registration/question.php
-* So the strings below have to match the contents of the language file put it cannot be achieved
-* programmatically, hence the hack
-*/
-	$result = array(
-		'Textfield' => 'text',
-		'Texte' => 'text',
-		'Textarea' => 'plaintext',
-		'Boîte de texte' => 'plaintext',
-		'Dropdown' => 'dropdown',
-		'Liste' => 'dropdown',
-		"Radiobutton" => 'radio',
-		"Bouton d'options" => 'radio'
-	);
-	return $result;
-}
 function elgg_view_agora_icon($name, $class = '') {
         if ($class === true) {
                 $class = 'float';

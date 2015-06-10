@@ -128,7 +128,7 @@ function gc_theme_pagesetup_handler() {
 				);
                 		$groups = elgg_get_entities_from_relationship($options);
 				//Hack: Use big number to get all groups
-				$totalgroups = $user->getGroups('', 10000);
+				$totalgroups = $user->getGroups(array('subtype'=>''), 10000);
 
 				if ($num_tba) {
 					elgg_register_menu_item('page', array(

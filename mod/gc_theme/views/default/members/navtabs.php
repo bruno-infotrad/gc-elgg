@@ -14,7 +14,7 @@
  * 	'link_id' => string, // ID to pass to the link
  * )
  */
-$options = elgg_clean_vars($vars);
+$options = _elgg_clean_vars($vars);
 $options['class'] = "elgg-menu elgg-menu-filter elgg-menu-hz elgg-menu-filter-default";
 
 unset($options['tabs']);

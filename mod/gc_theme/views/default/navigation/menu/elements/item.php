@@ -56,7 +56,8 @@ if (isset($vars['item_class']) && $vars['item_class']) {
 }
 
 echo "<li class=\"$item_class\">";
-echo $item->getContent();
+echo elgg_view_menu_item($item);
+//echo $item->getContent();
 if ($children && (elgg_get_context() != 'admin')) {
 	if (preg_match('/elgg-menu-item-message/',$item_class)||
 	   (preg_match('/elgg-menu-item-news/',$item_class))||

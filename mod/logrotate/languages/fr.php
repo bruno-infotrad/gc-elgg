@@ -1,28 +1,17 @@
 <?php
-/**
- * Elgg log rotator language pack.
- *
- * @package ElggLogRotate
- */
-
-$french = array(
-	'logrotate:period' => "A quelle fréquence souhaitez-vous archiver les logs du système ?",
-
-	'logrotate:weekly' => "Une fois par semaine",
-	'logrotate:monthly' => "Une fois par mois",
-	'logrotate:yearly' => "Une fois par an",
+return array(
+	'logrotate:period' => 'A quelle fréquence souhaitez-vous archiver les logs du système ?',
 
 	'logrotate:logrotated' => "Rotation du log effectuée\n",
 	'logrotate:lognotrotated' => "Erreur lors de la rotation du log\n",
 	
-	'logrotate:delete' => "Supprimer les journaux archivés plus ancien qu'",
+	'logrotate:delete' => 'Supprimer les journaux archivés plus anciens qu\'',
 
-	'logrotate:week' => "une semaine",
-	'logrotate:month' => "un mois",
-	'logrotate:year' => "une année",
+	'logrotate:week' => 'une semaine',
+	'logrotate:month' => 'un mois',
+	'logrotate:year' => 'une année',
+	'logrotate:never' => 'plus récents',
 		
-	'logrotate:logdeleted' => "Fichier journal supprimé (fichier log)",
-	'logrotate:lognotdeleted' => "Erreur de suppression du journal (fichier log)",
+	'logrotate:logdeleted' => "Fichier journal (fichier log) supprimé\n",
+	'logrotate:lognotdeleted' => "Aucun fichier journal (fichier log) n'a été supprimé\n",
 );
-
-add_translation("fr", $french);

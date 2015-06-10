@@ -3,7 +3,7 @@
 $last_login = strtotime("-3 months");
 
 $date = sanitise_int(get_input("last_login"));
-if($date > 0){
+if ($date > 0) {
 	$last_login = $date;
 }
 
@@ -15,7 +15,7 @@ echo elgg_view("input/form", array("disable_security" => true, "action" => "/adm
 
 $dbprefix = elgg_get_config("dbprefix");
 
-$limit =  max((int) get_input("limit", 50), 0);
+$limit = max((int) get_input("limit", 50), 0);
 $offset = sanitise_int(get_input("offset", 0), false);
 
 $options = array(
@@ -33,7 +33,7 @@ $options = array(
 
 $users = elgg_get_entities_from_relationship($options);
 
-if(!empty($users)){
+if (!empty($users)) {
 	$content = "<table class='elgg-table'>";
 	$content .= "<tr>";
 	$content .= "<th>" . elgg_echo("user") . "</th>";
@@ -41,14 +41,14 @@ if(!empty($users)){
 	$content .= "<th>" . elgg_echo("banned") . "</th>";
 	$content .= "</tr>";
 	
-	foreach($users as $user){
+	foreach ($users as $user) {
 		$content .= "<tr>";
 		$content .= "<td>" . elgg_view("output/url", array("text" => $user->name, "href" => $user->getURL())) . "</td>";
-		$last_login = $user->last_login;
-		if(empty($last_login)){
-			$content .= "<td>" . elgg_echo("profile_manager:admin:users:inactive:never") . "</td>";
+		$user_last_login = $user->last_login;
+		if (empty($user_last_login)) {
+			$content .= "<td>" . elgg_echo("never") . "</td>";
 		} else {
-			$content .= "<td>" . elgg_view_friendly_time($last_login) . "</td>";
+			$content .= "<td>" . elgg_view_friendly_time($user_last_login) . "</td>";
 		}
 		$content .= "<td>" . elgg_echo("option:" . $user->banned) . "</td>";
 		$content .= "</tr>";
@@ -61,9 +61,9 @@ if(!empty($users)){
 	
 	$content .= elgg_view("navigation/pagination", array("offset" => $offset, "limit" => $limit, "count" => $count));
 	
-	$download_link = elgg_add_action_tokens_to_url("/action/profile_manager/users/export_inactive?last_login=" . $last_login);
+	$download_link = elgg_add_action_tokens_to_url("action/profile_manager/users/export_inactive?last_login=" . $last_login);
 	
-	$content .= "<br />" . elgg_view("input/button", array("value" => elgg_echo("profile_manager:admin:users:inactive:download"), "onclick" => "document.location.href='" . $download_link . "'", "class" => "elgg-button-action"));
+	$content .= "<br />" . elgg_view("input/button", array("value" => elgg_echo("download"), "onclick" => "document.location.href='" . $download_link . "'", "class" => "elgg-button-action"));
 	
 } else {
 	$content = elgg_echo("notfound");

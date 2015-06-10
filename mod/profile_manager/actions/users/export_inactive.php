@@ -4,7 +4,7 @@ set_time_limit(0);
 
 $last_login = sanitise_int(get_input("last_login"), false);
 
-if(!empty($last_login)){
+if (!empty($last_login)) {
 	$dbprefix = elgg_get_config("dbprefix");
 	
 	$options = array(
@@ -19,34 +19,42 @@ if(!empty($last_login)){
 		"order_by" => "ue.last_login"
 	);
 	
-	if($users = elgg_get_entities_from_relationship($options)){
+	$users = elgg_get_entities_from_relationship($options);
+	if ($users) {
 		$fields = array("username", "name", "email", "last_login", "banned");
-		$fielddelimiter = ",";
+		
 		// We'll be outputting a CSV
-		header("Content-Type: text/plain; charset: UTF-8");
-		
 		// It will be called export_inactive.csv
-		header('Content-Disposition: attachment; filename="export_inactive.csv"');
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Content-Type: application/force-download");
+		header("Content-Type: application/octet-stream");
+		header("Content-Type: application/download");
+		header("Content-Disposition: attachment;filename=export_inactive.csv");
+		header("Content-Transfer-Encoding: binary");
 		
-		$headers = "";
-		foreach($fields as $field){
-			if(!empty($headers)){
-				$headers .= $fielddelimiter;
-			}
-			$headers .= $field;
-		}
-		echo $headers . PHP_EOL;
+		ob_start();
 		
-		foreach($users as $user){
-			$row = "";
-			foreach($fields as $field){
-				if(!empty($row)){
-					$row .= $fielddelimiter;
-				}
-				$row .=  $user->$field;
-			}
-			echo $row . PHP_EOL;
+		$df = fopen("php://output", 'w');
+		
+		$headers = array();
+		foreach ($fields as $field) {
+			$headers[] = $field;
 		}
+		fputcsv($df, $headers, ";");
+
+		foreach ($users as $user) {
+			$row = array();
+			foreach ($fields as $field) {
+				$row[] = $user->$field;
+			}
+			fputcsv($df, $row, ";");
+		}
+		
+		fclose($df);
+		
+		echo ob_get_clean();
 
 		exit();
 	} else {

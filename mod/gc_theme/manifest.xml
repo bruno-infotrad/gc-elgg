@@ -8,69 +8,29 @@
 		DFAIT intranet theme
 	</description>
 	<license>GNU Public License version 2</license>
-	
 	<requires>
-		<type>elgg_version</type>
-		<version>1.8.3</version>
+		<type>elgg_release</type>
+		<version>1.10</version>
 	</requires>
 	<requires>
 		<type>plugin</type>
-		<name>profile</name>
+		<priority>after</priority>
+		<name>flex_log</name>
 	</requires>
 	<requires>
 		<type>plugin</type>
-		<name>groups</name>
+		<priority>after</priority>
+		<name>profile_manager</name>
 	</requires>
 	<requires>
 		<type>plugin</type>
-		<name>messages</name>
+		<priority>after</priority>
+		<name>group_tools</name>
 	</requires>
 	<requires>
 		<type>plugin</type>
-		<name>search</name>
-	</requires>
-	<requires>
-		<type>plugin</type>
+		<priority>after</priority>
 		<name>thewire</name>
-	</requires>
-	<requires>
-		<type>plugin</type>
-		<name>bookmarks</name>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>profile</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>groups</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>messages</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>search</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>thewire</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>bookmarks</plugin>
-	</requires>
-	<requires>
-		<type>priority</type>
-		<priority>after</priority>
-		<plugin>profile_manager</plugin>
 	</requires>
 	<requires>
 		<type>priority</type>
@@ -87,7 +47,6 @@
 		<priority>after</priority>
 		<plugin>roles</plugin>
 	</requires>
-	
 	<suggests>
 		<type>plugin</type>
 		<name>profile</name>
@@ -97,6 +56,5 @@
 		<type>plugin</type>
 		<name>dfait_teaminfo_importer</name>
 	</suggests>
-	
 	<admin_interface>simple</admin_interface>
 </plugin_manifest>

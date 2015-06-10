@@ -79,8 +79,10 @@ $commetchat_css_url = $site_url . 'cometchat/cometchatcss.php';
 $commetchat_js_url  = $site_url . 'cometchat/cometchatjs.php';
 }
 ?>
+<!--
 <link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
 <script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script>
+-->
 <!-- ScriptsStart -->
 <script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/settings.js"></script>
 <!--[if lte IE 8]>

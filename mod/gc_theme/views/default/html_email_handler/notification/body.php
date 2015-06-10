@@ -95,7 +95,7 @@
 					if (preg_match ('/\/groups\/mail\//',$_SERVER['HTTP_REFERER'])) {
 						$note=elgg_echo("htm_email_handler:group_send");
 					} else {
-						$notification_url = $vars["config"]->site->url.'notifications/personal';
+						$notification_url = elgg_get_site_url().'notifications/personal';
 						$note=elgg_echo("htm_email_handler:note", array($notification_url));
 						$note.=elgg_echo("htm_email_handler:note2");
 					}

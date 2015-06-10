@@ -1,4 +1,5 @@
 <?php 
+$dbprefix = elgg_get_config('dbprefix');
 $user = elgg_get_logged_in_user_entity();
 $time = time() - 600;
 $online_friends_count =  elgg_get_entities_from_relationship(array(
@@ -6,7 +7,7 @@ $online_friends_count =  elgg_get_entities_from_relationship(array(
                 'relationship_guid' => $user->guid,
                 'type' => 'user',
                 'subtype' => ELGG_ENTITIES_ANY_VALUE,
-		'joins' => array("join {$CONFIG->dbprefix}users_entity u on e.guid = u.guid"),
+		'joins' => array("join {$dbprefix}users_entity u on e.guid = u.guid"),
 		'wheres' => array("u.last_action >= {$time}"),
 		'order_by' => "u.last_action desc",
                 'count' => true,
@@ -26,7 +27,7 @@ if ($online_friends_count > 0 ) {
                 'relationship_guid' => $user->guid,
                 'type' => 'user',
                 'subtype' => ELGG_ENTITIES_ANY_VALUE,
-		'joins' => array("join {$CONFIG->dbprefix}users_entity u on e.guid = u.guid"),
+		'joins' => array("join {$dbprefix}users_entity u on e.guid = u.guid"),
 		'wheres' => array("u.last_action >= {$time}"),
 		'order_by' => "u.last_action desc",
                 'limit' => 16,
@@ -41,7 +42,7 @@ if ($online_friends_count > 0 ) {
 if ($online_friends_count > 16 ) {
         $of .= elgg_view('output/url', array(
         'text' => '<p>'.elgg_echo('gc_theme:all_online_colleagues').'</p>',
-        'href' => $vars["url"].'friends/'.$user->username,
+        'href' => elgg_get_site_url().'friends/'.$user->username,
 ));
 }
 $of.="</ul></div></div>";

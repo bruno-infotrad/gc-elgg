@@ -6,6 +6,7 @@
  */
 
 $user = elgg_get_logged_in_user_entity();
+$db_prefix = elgg_get_config('dbprefix');
 $js_polling_control = elgg_get_plugin_setting('js_polling_control', 'gc_theme');
 if ($user->feed_viewed) {
 	if (sizeof($user->feed_viewed) > 1) {
@@ -14,7 +15,7 @@ if ($user->feed_viewed) {
 	$feed_last_viewed = $user->feed_viewed;
 }
 if ($feed_last_viewed) {
-	$query = "SELECT COUNT(*) as total from {$CONFIG->dbprefix}river rv where rv.posted > $feed_last_viewed  AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'";
+	$query = "SELECT COUNT(*) as total from {$db_prefix}river rv where rv.posted > $feed_last_viewed  AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'";
 	$new_feeds = get_data_row($query);
 	//elgg_log("BRUNO new feeds ".var_export($new_feeds,true),'NOTICE');
 	elgg_log("BRUNO new feeds $new_feeds->total",'NOTICE');

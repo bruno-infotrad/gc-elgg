@@ -1,6 +1,4 @@
 <?php 
-	global $CONFIG;
-
 	$q = sanitize_string(get_input("q"));
 	$limit = (int) get_input("limit", 10);
 	

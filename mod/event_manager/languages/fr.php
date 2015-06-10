@@ -1,7 +1,6 @@
 <?php
 $language = array (
   'groups:enableevents' => 'Activer évènements de groupe',
-  'event_manager:event:register:no_registrationform' => 'L\'organisateur de cet évènement n\'a pas encore créé de formulaire d\'inscription.<br>Veuillez essayer plus tard.',
   'event_manager' => 'Event Manager',
   'event_manager:group' => 'Evènements de groupe',
   'event_manager:group:more' => 'Plus d\'évènements',
@@ -160,7 +159,6 @@ une personne s\'est désinscrite de l\'évènement \'%s\' . Vous n\'êtes plus s
   'event_manager:event:program' => 'Programme',
   'event_manager:event:editprogram' => 'Modifier le programme',
   'event_manager:event:editquestions' => 'Modifier les questions pour s\'inscrire',
-  'event_manager:event:viewwaitinglist' => 'Afficher la liste d\'attente',
   'event_manager:event:waitinglist:empty' => 'La liste d\'attente est vide',
   'event_manager:event:viewregistrations' => 'Afficher les inscriptions',
   'event_manager:event:viewregistration' => 'Afficher l\'inscription',
@@ -223,9 +221,6 @@ une personne s\'est désinscrite de l\'évènement \'%s\' . Vous n\'êtes plus s
   'event_manager:settings:other' => 'Autre',
   'event_manager:settings:region_list' => 'Entrez (séparé par une virgule) les régions de l\'évènements',
   'event_manager:settings:type_list' => 'Entrez (séparé par une virgule) les types d\'évènements',
-  'event_manager:settings:migration' => 'Transférer %d évènements depuis le plugin "évènements calender"',
-  'event_manager:settings:migration:success' => 'Tranfère effectué %d évènements',
-  'event_manager:settings:migration:noeventstomigrate' => 'Aucun évènement à transférer',
   'event_manager:settings:notification_sender' => 'Envoi d\'une notification RSVP (email)',
   'event_manager:settings:migration:site:whocancreate' => 'Qui peut créer des évènements',
   'event_manager:settings:migration:site:whocancreate:admin_only' => 'administrateur seulement',

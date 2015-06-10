@@ -3,13 +3,10 @@ gatekeeper();
 
 $db_prefix = elgg_get_config('dbprefix');
 $user = elgg_get_logged_in_user_entity();
-//Cometchat IE warning
-//$ie_warning = get_ua_for_cometchat_warning();
 //PNS
 $now = time();
 $jour = 24*3600;
 //$user->pns_viewed = 0;
-elgg_load_js('elgg.toggle_cla');
 if (!isset($user->pns_viewed) || (($now - $user->pns_viewed) > $jour)) {
 	elgg_load_js('lightbox');
 	elgg_load_css('lightbox');
@@ -154,14 +151,6 @@ elgg_set_page_owner_guid(1);
 
 echo elgg_view_page($title, $body);
 
-function get_ua_for_cometchat_warning() {
-	$warning='';
-	if (preg_match('/MSIE 7\.0/',$_SERVER['HTTP_USER_AGENT'])) {
-		$warning = '<div class="iewarning"><h4>'.elgg_echo('gc_theme:cometchat:ie_warning').'</h4></div>';
-	}
-	return $warning;
-}
-
 function get_exec_content() {
 	$options = array(
 		'type' => 'object',
@@ -188,7 +177,7 @@ function get_exec_content() {
 ?>
 <script>
 $(document).ready(function(){
-        $("#pns-hidden").fancybox({showCloseButton:false}).trigger('click');
+        $("#pns-hidden").colorbox({showCloseButton:false,width:"75%"}).trigger('click');
 });
 </script>
 
