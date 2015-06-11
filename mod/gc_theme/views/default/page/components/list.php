@@ -104,7 +104,7 @@ if (elgg_get_context() != 'admin') {
 				}
 			}
 		} else {
-	 		if ($item instanceof ElggAnnotation) {
+	 		if ($item instanceof ElggAnnotation || $item->getSubtype() == 'comment') {
 				unset($item_class);
 				if (elgg_is_logged_in() && $user->guid != $item->owner_guid && $user_last_action < $item->time_created) {
 					//$item_class=$item_class." marked-as-updated";
