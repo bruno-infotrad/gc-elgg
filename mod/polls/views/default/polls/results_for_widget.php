@@ -13,7 +13,7 @@
 if (isset($vars['entity'])) {
 
 	//set img src
-	$img_src = $vars['url'] . "mod/polls/graphics/poll.gif";
+	$img_src = elgg_get_site_url() . "mod/polls/graphics/poll.gif";
 
 	$question = $vars['entity']->question;
 
@@ -21,7 +21,7 @@ if (isset($vars['entity'])) {
 	$responses = polls_get_choice_array($vars['entity']);
 
 	//get the array of user responses to the poll
-	$user_responses = $vars['entity']->getAnnotations('vote',9999,0,'desc');
+	$user_responses = $vars['entity']->getAnnotations(array('annotation_name' => 'vote','limit' => 9999,'offset' => 0,'order' => 'desc'));
 
 	//get the count of responses
 	$user_responses_count = $vars['entity']->countAnnotations('vote');

@@ -256,7 +256,7 @@ function polls_get_page_list($page_type, $container_guid = NULL) {
 				'name' => 'add',
 				'href' => "polls/add/".$container_guid,
 				'text' => elgg_echo('polls:add'),
-				'class' => 'elgg-button elgg-button-action',
+				'link_class' => 'elgg-button elgg-button-action',
 			));
 		}
 		
@@ -278,7 +278,8 @@ function polls_get_page_list($page_type, $container_guid = NULL) {
 				break;
 			case 'friends':
 				$container_entity = get_user($container_guid);
-				$friends = get_user_friends($container_guid, ELGG_ENTITIES_ANY_VALUE, 0);
+				$friends = $container_entity->getFriends(array('limit' => 0));
+				//$friends = get_user_friends($container_guid, ELGG_ENTITIES_ANY_VALUE, 0);
 				
 				$options['container_guids'] = array();
 				foreach ($friends as $friend) {
@@ -304,7 +305,7 @@ function polls_get_page_list($page_type, $container_guid = NULL) {
 				'name' => 'add',
 				'href' => "polls/add",
 				'text' => elgg_echo('polls:add'),
-				'class' => 'elgg-button elgg-button-action',
+				'link_class' => 'elgg-button elgg-button-action',
 			));
 		}
 	}

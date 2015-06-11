@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin_manifest>
-	<field key="author" value="Kevin Jardine" />
-	<field key="version" value="0.82" />
-	<field key="description" value="Adds polls and poll widgets (rewritten from John Mellberg's original version)" />
-	<field key="website" value="http://radagast.biz/" />
-	<field key="copyright" value="(C) Kevin Jardine 2012" />
-	<field key="licence" value="GNU Public License version 2" />
-	<field key="elgg_version" value="2011021601" />
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>Polls</name>
+	<author>Kevin Jardine (with modifications by Bruno Grossmann)</author>
+	<version>1.0</version>
+	<category>theme</category>
+	<description>
+		Add polls and polls widget
+	</description>
+	<license>GNU Public License version 2</license>
+	<requires>
+		<type>elgg_release</type>
+		<version>1.10</version>
+	</requires>
+	<admin_interface>simple</admin_interface>
 </plugin_manifest>

@@ -4,6 +4,7 @@
 $poll = elgg_extract('poll', $vars);
 $body = '';
 $i = 0;
+$site_url=elgg_get_site_url();
 
 if ($poll) {
 	$choices = polls_get_choices($poll);
@@ -17,7 +18,7 @@ if ($poll) {
 				)
 			);
 			$body .= '<a href="#" alt="'.elgg_echo('polls:delete_choice').'" title="'.elgg_echo('polls:delete_choice').' id="choice_delete_'.$i.'" onclick="javascript:polls_delete_choice('.$i.'); return false;">';
-			$body .= '<img src="'.$vars['url'].'mod/polls/graphics/16-em-cross.png"></a>';
+			$body .= '<img src="'.$site_url.'mod/polls/graphics/16-em-cross.png"></a>';
 			$body .= '</div>';
 			
 			$i += 1;
@@ -53,7 +54,7 @@ $('#add_choice').click(
 		var new_html = '<div id="choice_container_'+cnum+'">';
 		new_html += '<input type="text" class="input-poll-choice" name="choice_text_'+cnum+'"> ';
 		new_html += '<a href="#" title="<?php echo elgg_echo('polls:delete_choice'); ?>" alt="<?php echo elgg_echo('polls:delete_choice'); ?>" id="choice_delete_'+cnum+'" onclick="javascript:polls_delete_choice('+cnum+'); return false;">';
-		new_html += '<img src="<?php echo $vars['url']; ?>mod/polls/graphics/16-em-cross.png"></a>'
+		new_html += '<img src="<?php echo $site_url; ?>mod/polls/graphics/16-em-cross.png"></a>'
 		new_html += '</div>';
 		$('#new_choices_area').append(new_html);
 	}

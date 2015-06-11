@@ -14,7 +14,7 @@ if (elgg_is_logged_in()) {
 	$can_vote = !polls_check_for_previous_vote($poll, $user_guid);
 	
 	//if user has voted, show the results
-	if ($poll->get('owner_guid') == $user_guid) {
+	if ($poll->owner_guid == $user_guid) {
 		$results_display = "block";
 		$poll_display = "block";
 		$show_text = elgg_echo('polls:show_poll');

@@ -24,7 +24,7 @@ function polls_init() {
 	elgg_register_page_handler('polls','polls_page_handler');
 
 	// Register a URL handler for poll posts
-	elgg_register_entity_url_handler('object','poll','polls_url');
+	elgg_register_plugin_hook_handler('entity:url', 'object', 'polls_set_url');
 	
 	// add link to owner block
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'polls_owner_block_menu');
@@ -33,7 +33,8 @@ function polls_init() {
 	elgg_register_entity_type('object','poll');
 	
 	// notifications
-        register_notification_object('object', 'poll', elgg_echo('poll:notify_new_poll'));
+	elgg_register_notification_event('object', 'poll');
+        //register_notification_object('object', 'poll', elgg_echo('poll:notify_new_poll'));
         elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'poll_notify_message');
 
 	// register the JavaScript
@@ -115,9 +116,12 @@ function polls_page_handler($page) {
  * @param ElggEntity $pollpost poll post entity
  * @return string poll post URL
  */
-function polls_url($poll) {
-	$title = elgg_get_friendly_title($poll->title);
-	return  "polls/view/" . $poll->guid . "/" . $title;
+function polls_set_url($hook, $type, $url, $params) {
+	$entity = $params['entity'];
+	if (elgg_instanceof($entity, 'object', 'poll')) {
+		$title = elgg_get_friendly_title($entity->title);
+		return  "polls/view/" . $entity->guid . "/" . $title;
+	}
 }
 
 /**
