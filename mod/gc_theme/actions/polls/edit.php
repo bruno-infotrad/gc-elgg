@@ -141,7 +141,7 @@ if ($guid) {
 		
 		$polls_create_in_river = elgg_get_plugin_setting('create_in_river','polls');
 		if ($polls_create_in_river != 'no') {	
-			add_to_river('river/object/poll/create','create',elgg_get_logged_in_user_guid(),$poll->guid);
+			elgg_create_river_item(array( 'view' => 'river/object/poll/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $poll->getGUID(),));
 		}
 	
 		// Success message

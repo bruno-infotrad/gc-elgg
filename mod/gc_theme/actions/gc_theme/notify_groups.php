@@ -60,8 +60,7 @@ if ($mv_container_guid) {
 		if (! $res) {
 			$failed=true;
 		} else {
-			add_to_river('river/object/bookmarks/create','create', elgg_get_logged_in_user_guid(), $bookmark->getGUID());
-			//add_to_river('river/object/bookmarks/event','create', elgg_get_logged_in_user_guid(), $bookmark->getGUID());
+			elgg_create_river_item(array( 'view' => 'river/object/bookmarks/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $bookmark->getGUID(),));
 		}
 		unset($bookmark);
 	}
@@ -85,8 +84,7 @@ if ($mv_container_guid) {
 	if (! $res) {
 		$failed=true;
 	} else {
-		add_to_river('river/object/bookmarks/create','create', elgg_get_logged_in_user_guid(), $bookmark->getGUID());
-		//add_to_river('river/object/bookmarks/event','create', elgg_get_logged_in_user_guid(), $bookmark->getGUID());
+		elgg_create_river_item(array( 'view' => 'river/object/bookmarks/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $bookmark->getGUID(),));
 	}
 	unset($bookmark);
 }

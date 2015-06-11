@@ -26,7 +26,8 @@ if (!$entity) {
 $options = array('object_guids' => $entity->getGUID(),'action_types' => 'create');
 $river_item = elgg_get_river($options);
 if (count($river_item) == 0) {
-	add_to_river('river/object/'.$entity->getSubtype().'/create', 'create', $entity->owner_guid, $entity->getGUID(),"",$entity->time_created,0);
+	elgg_create_river_item(array( 'view' => 'river/object/'.$entity->getSubtype().'/create', 'action_type' => 'create', 'subject_guid' => $entity->owner_guid, 'object_guid' => $entity->getGUID(),));
+	//add_to_river('river/object/'.$entity->getSubtype().'/create', 'create', $entity->owner_guid, $entity->getGUID(),"",$entity->time_created,0);
 }
 
 $user = elgg_get_logged_in_user_entity();
@@ -73,7 +74,8 @@ if ($entity->owner_guid != $user->guid) {
 system_message(elgg_echo("generic_comment:posted"));
 
 //add to river
-add_to_river('river/annotation/generic_comment/create', 'comment', $user->guid, $entity->guid, "", 0, $annotation);
+elgg_create_river_item(array( 'view' => 'river/annotation/generic_comment/create', 'action_type' => 'comment', 'subject_guid' => $user->getGUID(), 'object_guid' => $entity->getGUID(),));
+//add_to_river('river/annotation/generic_comment/create', 'comment', $user->guid, $entity->guid, "", 0, $annotation);
 
 // Forward to the page the action occurred on
 forward(REFERER);
