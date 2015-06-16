@@ -89,7 +89,7 @@
 			 		$result .= elgg_view("input/submit", array("value" => elgg_echo("group_tools:admin_transfer:submit")));
 			 		
 			 		$result = elgg_view("input/form", array("body" => $result,
-			 												"action" => $vars["url"] . "action/group_tools/admin_transfer",
+			 												"action" => elgg_get_config("wwwroot") . "action/group_tools/admin_transfer",
 			 												"id" => "group_tools_admin_transfer_form"));
 		 		} else {
 		 			$result = elgg_echo("group_tools:admin_transfer:no_users");

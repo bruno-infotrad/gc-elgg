@@ -7,7 +7,7 @@
 
 	$page_owner = elgg_get_page_owner_entity();
 	$container_guid = $page_owner->getGUID();
-	$site_url = elgg_get_sit_url();
+	$site_url = elgg_get_site_url();
 	
 	if(elgg_instanceof($page_owner, "group", null, "ElggGroup")){
 		$return_url = $site_url . "file/group/" . $page_owner->getGUID() . "/all";

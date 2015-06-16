@@ -445,7 +445,8 @@ function gc_search_tags_hook($hook, $type, $value, $params) {
 	$params['joins'][] = "JOIN {$db_prefix}metastrings msn on md.name_id = msn.id";
 	$params['joins'][] = "JOIN {$db_prefix}metastrings msv on md.value_id = msv.id";
 
-	$access = get_access_sql_suffix('md');
+	//$access = get_access_sql_suffix('md');
+	$access = _elgg_get_access_where_sql(array('table_alias' => 'md'));
 	$sanitised_tags = array();
 
 	foreach ($search_tag_names as $tag) {

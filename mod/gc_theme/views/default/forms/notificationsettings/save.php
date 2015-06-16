@@ -6,7 +6,8 @@
  */
 
 /* @var ElggUser $user */
-$user = $vars['user'];
+//$user = $vars['user'];
+$user = elgg_get_logged_in_user_entity();
 
 echo elgg_view('notifications/subscriptions/personal', $vars);
 echo elgg_view('notifications/subscriptions/collections', $vars);
