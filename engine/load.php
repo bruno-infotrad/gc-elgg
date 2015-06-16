@@ -6,24 +6,15 @@
  * @access private
  */
 
+
 $lib_dir = __DIR__ . "/lib";
-
-require_once "$lib_dir/autoloader.php";
-
-$autoload_path = dirname(__DIR__) . '/vendor/autoload.php';
-$autoload_available = include_once($autoload_path);
-if (!$autoload_available) {
-	die("Couldn't include '$autoload_path'. Did you run `composer install`?");
-}
-
-// set up autoloading and DIC
-_elgg_services();
 
 // load the rest of the library files from engine/lib/
 // All on separate lines to make diffs easy to read + make it apparent how much
 // we're actually loading on every page (Hint: it's too much).
 $lib_files = array(
-	// Needs to be loaded first to correctly bootstrap
+	// These need to be loaded first to correctly bootstrap
+	'autoloader.php',
 	'elgglib.php',
 	
 	// The order of these doesn't matter, so keep them alphabetical
@@ -76,25 +67,6 @@ $lib_files = array(
 	'deprecated-1.10.php',
 );
 
-// isolate global scope
-call_user_func(function () use ($lib_dir, $lib_files) {
-
-	$setups = array();
-
-	// include library files, capturing setup functions
-	foreach ($lib_files as $file) {
-		$setup = (require_once "$lib_dir/$file");
-
-		if ($setup instanceof Closure) {
-			$setups[$file] = $setup;
-		}
-	}
-
-	$events = _elgg_services()->events;
-	$hooks = _elgg_services()->hooks;
-
-	// run setups
-	foreach ($setups as $func) {
-		$func($events, $hooks);
-	}
-});
+foreach ($lib_files as $file) {
+	require_once("$lib_dir/$file");
+}

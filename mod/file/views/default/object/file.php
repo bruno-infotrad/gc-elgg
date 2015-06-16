@@ -13,6 +13,7 @@ if (!$file) {
 }
 
 $owner = $file->getOwnerEntity();
+$container = $file->getContainerEntity();
 $categories = elgg_view('output/categories', $vars);
 $excerpt = elgg_get_excerpt($file->description);
 $mime = $file->mimetype;

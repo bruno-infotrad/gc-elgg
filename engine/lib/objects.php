@@ -39,6 +39,4 @@ function _elgg_objects_test($hook, $type, $value, $params) {
 	return $value;
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$hooks->registerHandler('unit_test', 'system', '_elgg_objects_test');
-};
+elgg_register_plugin_hook_handler('unit_test', 'system', '_elgg_objects_test');

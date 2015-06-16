@@ -93,7 +93,6 @@ function blog_get_page_content_list($container_guid = NULL) {
 			$return['filter_context'] = 'none';
 		}
 	} else {
-		$options['preload_containers'] = true;
 		$return['filter_context'] = 'all';
 		$return['title'] = elgg_echo('blog:title:all_blogs');
 		elgg_pop_breadcrumb();
@@ -140,7 +139,6 @@ function blog_get_page_content_friends($user_guid) {
 		'relationship_join_on' => 'container_guid',
 		'no_results' => elgg_echo('blog:none'),
 		'preload_owners' => true,
-		'preload_containers' => true,
 	);
 
 	$return['content'] = elgg_list_entities_from_relationship($options);

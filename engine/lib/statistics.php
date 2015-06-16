@@ -105,6 +105,5 @@ function statistics_init() {
 	elgg_extend_view('core/settings/statistics', 'core/settings/statistics/numentities');
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', 'statistics_init');
-};
+/// Register init function
+elgg_register_event_handler('init', 'system', 'statistics_init');

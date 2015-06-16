@@ -36,21 +36,6 @@ class ViewsService {
 	private $CONFIG;
 
 	/**
-	 * @var PluginHooksService
-	 */
-	private $hooks;
-
-	/**
-	 * @var Logger
-	 */
-	private $logger;
-
-	/**
-	 * @var array
-	 */
-	private $overriden_locations = array();
-
-	/**
 	 * Constructor
 	 *
 	 * @param \Elgg\PluginHooksService $hooks  The hooks service
@@ -75,7 +60,6 @@ class ViewsService {
 				$warning = 'Use elgg_get_logged_in_user_entity() rather than assuming elgg_view() '
 							. 'populates $vars["user"]';
 				$this->user_wrapper = new \Elgg\DeprecationWrapper($user, $warning, 1.8);
-				$this->user_wrapper = $user;
 			}
 			$user = $this->user_wrapper;
 		}
@@ -152,10 +136,6 @@ class ViewsService {
 			$this->CONFIG->views->locations[$viewtype] = array($view => $location);
 
 		} else {
-			if (isset($this->CONFIG->views->locations[$viewtype][$view])) {
-				$this->overriden_locations[$viewtype][$view][] = $this->CONFIG->views->locations[$viewtype][$view];
-			}
-
 			$this->CONFIG->views->locations[$viewtype][$view] = $location;
 		}
 	}
@@ -546,68 +526,5 @@ class ViewsService {
 			// Assume not-cacheable by default
 			return false;
 		}
-	}
-
-	/**
-	 * Register a plugin's views
-	 *
-	 * @param string $path       Base path of the plugin
-	 * @param string $failed_dir This var is set to the failed directory if registration fails
-	 * @return bool
-	 *
-	 * @access private
-	 */
-	public function registerPluginViews($path, &$failed_dir = '') {
-		$view_dir = "$path/views/";
-
-		// plugins don't have to have views.
-		if (!is_dir($view_dir)) {
-			return true;
-		}
-
-		// but if they do, they have to be readable
-		$handle = opendir($view_dir);
-		if (!$handle) {
-			$failed_dir = $view_dir;
-			return false;
-		}
-
-		while (false !== ($view_type = readdir($handle))) {
-			$view_type_dir = $view_dir . $view_type;
-
-			if ('.' !== substr($view_type, 0, 1) && is_dir($view_type_dir)) {
-				if ($this->autoregisterViews('', $view_type_dir, $view_dir, $view_type)) {
-					elgg_register_viewtype($view_type);
-				} else {
-					$failed_dir = $view_type_dir;
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Get views overridden by setViewLocation() calls.
-	 *
-	 * @return array
-	 *
-	 * @access private
-	 */
-	public function getOverriddenLocations() {
-		return $this->overriden_locations;
-	}
-
-	/**
-	 * Set views overridden by setViewLocation() calls.
-	 *
-	 * @param array $locations
-	 * @return void
-	 *
-	 * @access private
-	 */
-	public function setOverriddenLocations(array $locations) {
-		$this->overriden_locations = $locations;
 	}
 }

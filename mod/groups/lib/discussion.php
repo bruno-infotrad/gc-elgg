@@ -19,7 +19,6 @@ function discussion_handle_all_page() {
 		'full_view' => false,
 		'no_results' => elgg_echo('discussion:none'),
 		'preload_owners' => true,
-		'preload_containers' => true,
 	));
 
 	$title = elgg_echo('discussion:latest');

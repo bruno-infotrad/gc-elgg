@@ -29,11 +29,11 @@ $owner = elgg_get_logged_in_user_entity();
 	<label>
 		<?php
 			echo elgg_echo('reportedcontent:address');
-			echo elgg_view('input/url', [
-				'name' => 'address',
-				'value' => $address,
-				'readonly' => (bool)$address,
-			]);
+			echo elgg_view('input/url', array(
+					'name' => 'address',
+							'value' => $address,
+					));
+			
 			?>
 	</label>
 </div>
@@ -42,7 +42,7 @@ $owner = elgg_get_logged_in_user_entity();
 		<?php 	echo elgg_echo('reportedcontent:description'); ?>
 	</label>
 	<?php
-		echo elgg_view('input/plaintext',array(
+		echo elgg_view('input/longtext',array(
 			'name' => 'description',
 			'value' => $description,
 		));
@@ -53,9 +53,5 @@ $owner = elgg_get_logged_in_user_entity();
 		echo elgg_view('input/submit', array(
 			'value' => elgg_echo('reportedcontent:report'),
 		));
-		echo elgg_view('input/button', [
-			'class' => 'elgg-button-cancel mls',
-			'value' => elgg_echo('cancel'),
-		]);
 	?>
 </div>

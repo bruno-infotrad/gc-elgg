@@ -222,7 +222,7 @@ function elgg_get_context() {
  * @since 1.8.0
  */
 function elgg_push_context($context) {
-	_elgg_services()->context->push($context);
+	return _elgg_services()->context->push($context);
 }
 
 /**
@@ -280,6 +280,4 @@ function page_owner_boot() {
 	}
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('boot', 'system', 'page_owner_boot');
-};
+elgg_register_event_handler('boot', 'system', 'page_owner_boot');

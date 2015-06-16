@@ -456,8 +456,9 @@ function _elgg_prefetch_river_entities(array $river_items) {
 		}
 	}
 	if ($guids) {
-		// The entity cache only holds 256. We don't want to bump out any plugins.
-		$guids = array_slice($guids, 0, 200, true);
+		// avoid creating oversized query
+		// @todo how to better handle this?
+		$guids = array_slice($guids, 0, 300, true);
 		// return value unneeded, just priming cache
 		elgg_get_entities(array(
 			'guids' => array_keys($guids),
@@ -466,7 +467,7 @@ function _elgg_prefetch_river_entities(array $river_items) {
 		));
 	}
 
-	// prefetch object containers, in case they were not in the targets
+	// prefetch object containers
 	$guids = array();
 	foreach ($river_items as $item) {
 		$object = $item->getObjectEntity();
@@ -475,20 +476,13 @@ function _elgg_prefetch_river_entities(array $river_items) {
 		}
 	}
 	if ($guids) {
-		$guids = array_slice($guids, 0, 200, true);
+		$guids = array_slice($guids, 0, 300, true);
 		elgg_get_entities(array(
 			'guids' => array_keys($guids),
 			'limit' => 0,
 			'distinct' => false,
-
-			// Why specify? user containers are likely already loaded via the owners, and
-			// specifying groups allows ege() to auto-join the groups_entity table
-			'type' => 'group',
 		));
 	}
-
-	// Note: We've tried combining the above ege() calls into one (pulling containers at the same time).
-	// Although it seems like it would reduce queries, it added some. o_O
 }
 
 /**
@@ -834,8 +828,6 @@ function _elgg_river_init() {
 	elgg_register_plugin_hook_handler('unit_test', 'system', '_elgg_river_test');
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_river_init');
-	$events->registerHandler('disable:after', 'all', '_elgg_river_disable');
-	$events->registerHandler('enable:after', 'all', '_elgg_river_enable');
-};
+elgg_register_event_handler('init', 'system', '_elgg_river_init');
+elgg_register_event_handler('disable:after', 'all', '_elgg_river_disable');
+elgg_register_event_handler('enable:after', 'all', '_elgg_river_enable');

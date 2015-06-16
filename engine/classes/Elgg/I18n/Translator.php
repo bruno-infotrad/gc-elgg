@@ -115,13 +115,11 @@ class Translator {
 	
 		$country_code = strtolower($country_code);
 		$country_code = trim($country_code);
-		if (is_array($language_array) && $country_code != "") {
-			if (sizeof($language_array) > 0) { 
-				if (!isset($this->CONFIG->translations[$country_code])) {
-					$this->CONFIG->translations[$country_code] = $language_array;
-				} else {
-					$this->CONFIG->translations[$country_code] = $language_array + $this->CONFIG->translations[$country_code];
-				}
+		if (is_array($language_array) && sizeof($language_array) > 0 && $country_code != "") {
+			if (!isset($this->CONFIG->translations[$country_code])) {
+				$this->CONFIG->translations[$country_code] = $language_array;
+			} else {
+				$this->CONFIG->translations[$country_code] = $language_array + $this->CONFIG->translations[$country_code];
 			}
 			return true;
 		}
@@ -152,13 +150,9 @@ class Translator {
 		$user = _elgg_services()->session->getLoggedInUser();
 		$language = false;
 	
-		//if (($user) && ($user->language)) {
-			//$language = $user->language;
-		//}
-
-        	if ((!$language) && (isset($_SESSION['language'])) && ($_SESSION['language'])) {
-                	$language = $_SESSION['language'];
-        	}
+		if (($user) && ($user->language)) {
+			$language = $user->language;
+		}
 	
 		if ((!$language) && (isset($this->CONFIG->language)) && ($this->CONFIG->language)) {
 			$language = $this->CONFIG->language;
@@ -248,7 +242,7 @@ class Translator {
 	
 			if (in_array($language, $load_language_files) || $load_all) {
 				$result = include_once($path . $language);
-				if ($result === false) {
+				if (!$result) {
 					$return = false;
 					continue;
 				} elseif (is_array($result)) {

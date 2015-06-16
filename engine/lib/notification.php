@@ -294,6 +294,10 @@ function _elgg_notifications_init() {
 	elgg_register_plugin_hook_handler('usersettings:save', 'user', '_elgg_save_notification_user_settings');
 }
 
+elgg_register_event_handler('init', 'system', '_elgg_notifications_init');
+
+
+
 /**
  * Notify a user via their preferences.
  *
@@ -355,7 +359,7 @@ function _elgg_notify_user($to, $from, $subject, $message, array $params = null,
 					$handler = $notify_service->getDeprecatedHandler($method);
 					/* @var callable $handler */
 					if (!$handler || !is_callable($handler)) {
-						elgg_log("No handler registered for the method $method", 'WARNING');
+						error_log("No handler registered for the method $method", 'WARNING');
 						continue;
 					}
 
@@ -720,8 +724,4 @@ function _elgg_notifications_test($hook, $type, $tests) {
 	return $tests;
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_notifications_init');
-
-	$hooks->registerHandler('unit_test', 'system', '_elgg_notifications_test');
-};
+elgg_register_plugin_hook_handler('unit_test', 'system', '_elgg_notifications_test');

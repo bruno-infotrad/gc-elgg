@@ -525,7 +525,6 @@ select {
 }
 
 .elgg-button {
-	font-size: 100%;
 	text-decoration: none;
 	border-radius: 3px;
 	width: auto;

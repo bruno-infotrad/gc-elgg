@@ -8,6 +8,8 @@
  * @subpackage Friends
  */
 
+elgg_register_event_handler('init', 'system', '_elgg_friends_init');
+
 /**
  * Init friends library
  *
@@ -222,7 +224,3 @@ function _elgg_send_friend_notification($event, $type, $object) {
 
 	return notify_user($user_two->guid, $object->guid_one, $subject, $body);
 }
-
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_friends_init');
-};

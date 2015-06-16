@@ -24,23 +24,9 @@ class ElggGroup extends \ElggEntity
 		parent::initializeAttributes();
 
 		$this->attributes['type'] = "group";
-		$this->attributes += self::getExternalAttributes();
+		$this->attributes['name'] = null;
+		$this->attributes['description'] = null;
 		$this->tables_split = 2;
-	}
-
-	/**
-	 * Get default values for attributes stored in a separate table
-	 *
-	 * @return array
-	 * @access private
-	 *
-	 * @see \Elgg\Database\EntityTable::getEntities
-	 */
-	final public static function getExternalAttributes() {
-		return [
-			'name' => null,
-			'description' => null,
-		];
 	}
 
 	/**

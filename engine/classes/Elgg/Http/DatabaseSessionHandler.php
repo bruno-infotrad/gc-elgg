@@ -9,7 +9,7 @@ namespace Elgg\Http;
  * @package    Elgg.Core
  * @subpackage Http
  */
-class DatabaseSessionHandler implements \SessionHandlerInterface {
+class DatabaseSessionHandler implements \Elgg\Http\SessionHandler {
 
 	/** @var \Elgg\Database $db */
 	protected $db;
@@ -90,4 +90,6 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		$query = "DELETE FROM {$this->db->getTablePrefix()}users_sessions WHERE ts < '$life'";
 		return (bool) $this->db->deleteData($query);
 	}
+
 }
+

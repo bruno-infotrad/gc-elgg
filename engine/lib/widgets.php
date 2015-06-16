@@ -293,7 +293,5 @@ function _elgg_default_widgets_permissions_override($hook, $type, $return, $para
 	return null;
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_widgets_init');
-	$events->registerHandler('ready', 'system', '_elgg_default_widgets_init');
-};
+elgg_register_event_handler('init', 'system', '_elgg_widgets_init');
+elgg_register_event_handler('ready', 'system', '_elgg_default_widgets_init');

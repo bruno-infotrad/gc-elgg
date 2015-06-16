@@ -26,7 +26,6 @@ $content = elgg_list_entities_from_relationship(array(
 	'relationship_join_on' => 'container_guid',
 	'no_results' => elgg_echo('pages:none'),
 	'preload_owners' => true,
-	'preload_containers' => true,
 ));
 
 $params = array(

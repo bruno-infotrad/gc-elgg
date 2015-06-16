@@ -1,10 +1,12 @@
 <?php
-/**
- * Elgg UTF-8 string functions
- *
- * @package Elgg
- * @subpackage Core
- */
+
+// if mb functions are available, set internal encoding to UTF8
+if (is_callable('mb_internal_encoding')) {
+	mb_internal_encoding("UTF-8");
+	if (ini_get("mbstring.internal_encoding")) {
+		ini_set("mbstring.internal_encoding", 'UTF-8');
+	}
+}
 
 /**
  * Parses a string using mb_parse_str() if available.
@@ -25,6 +27,8 @@ function elgg_parse_str($str) {
 
 	return $results;
 }
+
+
 
 /**
  * Wrapper function for mb_split(). Falls back to split() if
@@ -229,13 +233,3 @@ function elgg_substr() {
 	}
 	return call_user_func_array('substr', $args);
 }
-
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	// if mb functions are available, set internal encoding to UTF8
-	if (is_callable('mb_internal_encoding')) {
-		mb_internal_encoding("UTF-8");
-		if (ini_get("mbstring.internal_encoding")) {
-			ini_set("mbstring.internal_encoding", 'UTF-8');
-		}
-	}
-};

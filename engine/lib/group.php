@@ -124,6 +124,4 @@ function _elgg_groups_init() {
 	elgg_register_plugin_hook_handler('unit_test', 'system', '_elgg_groups_test');
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_groups_init');
-};
+elgg_register_event_handler('init', 'system', '_elgg_groups_init');

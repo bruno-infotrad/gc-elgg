@@ -85,7 +85,7 @@ function remove_user_admin($user_guid) {
  * @return \ElggUser|false
  */
 function get_user($guid) {
-	return _elgg_services()->entityTable->get($guid, 'user');
+	return _elgg_services()->usersTable->get($guid);
 }
 
 /**
@@ -799,9 +799,7 @@ function users_test($hook, $type, $value, $params) {
 	return $value;
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', 'users_init', 0);
-	$events->registerHandler('init', 'system', 'elgg_profile_fields_setup', 10000); // Ensure this runs after other plugins
-	$events->registerHandler('pagesetup', 'system', 'users_pagesetup', 0);
-	$hooks->registerHandler('unit_test', 'system', 'users_test');
-};
+elgg_register_event_handler('init', 'system', 'users_init', 0);
+elgg_register_event_handler('init', 'system', 'elgg_profile_fields_setup', 10000); // Ensure this runs after other plugins
+elgg_register_event_handler('pagesetup', 'system', 'users_pagesetup', 0);
+elgg_register_plugin_hook_handler('unit_test', 'system', 'users_test');

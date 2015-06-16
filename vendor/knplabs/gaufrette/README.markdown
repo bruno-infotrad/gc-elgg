@@ -217,6 +217,45 @@ $adapter = new Gaufrette\Adapter\AzureBlobStorage($factory, 'my-container');
 $filesystem = new Gaufrette\Filesystem($adapter);
 ```
 
+Using GoogleCloudStorage
+------------------------
+
+To use the GoogleCloudStorage adapter you will need to create a connection using the [Google APIs Client Library for PHP]
+(https://github.com/google/google-api-php-client) and create a Client ID/Service Account in your [Developers Console]
+(https://console.developers.google.com/). You can then create the `\Google_Service_Storage` which is required for the
+GoogleCloudStorage adapter.
+
+```php
+<?php
+
+use Gaufrette\Filesystem;
+use Gaufrette\Adapter\GoogleCloudStorage;
+
+$client_id = 'xxxxxxxxxxxxxxx.apps.googleusercontent.com';
+$service_account_name = 'xxxxxxxxxxxxxxx@developer.gserviceaccount.com';
+$key_file_location = 'key.p12';
+$bucket_name = 'mybucket';
+
+$client = new \Google_Client();
+$client->setApplicationName('Gaufrette');
+
+$key = file_get_contents($key_file_location);
+$cred = new \Google_Auth_AssertionCredentials(
+    $service_account_name,
+    array(\Google_Service_Storage::DEVSTORAGE_FULL_CONTROL),
+    $key
+);
+$client->setAssertionCredentials($cred);
+if ($client->getAuth()->isAccessTokenExpired()) {
+    $client->getAuth()->refreshTokenWithAssertion($cred);
+}
+
+$service = new \Google_Service_Storage($client);
+$adapter = new GoogleCloudStorage($service, $bucket_name, array(), true);
+
+$filesystem = new Filesystem($adapter);
+```
+
 Using FTP adapters
 ---------------
 
@@ -251,7 +290,7 @@ In your Symfony2 project, add to ``deps``:
 
 # if you want to use Amazon S3
 [aws-sdk]
-    git=https://github.com/aws/aws-sdk-php
+    git=https://github.com/aws/aws-sdk-php.git
 ```
 
 And then, you can simply add them as services of your dependency injection container.
@@ -316,9 +355,11 @@ It will avoid skip a lot of tests.
 In the Gaufrette root directory:
 
 To check if classes specification pass:
+
     $ php bin/phpspec run
 
 To check basic functionality of the adapters (adapters should be configured you will see many skipped tests):
+
     $ phpunit
 
 Is it green?

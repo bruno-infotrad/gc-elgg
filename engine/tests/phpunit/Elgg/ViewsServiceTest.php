@@ -14,7 +14,7 @@ class ViewsServiceTest extends \PHPUnit_Framework_TestCase {
 		$this->views->autoregisterViews('', "$this->viewsDir/default", "$this->viewsDir/", 'default');
 
 		// supports deprecation wrapper for $vars['user'] 
-		_elgg_services()->setValue('session', \ElggSession::getMock());
+		_elgg_services()->setValue('session', new \ElggSession(new \Elgg\Http\MockSessionStorage()));
 	}
 	
 	public function testCanExtendViews() {

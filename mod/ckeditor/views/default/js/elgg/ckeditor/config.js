@@ -10,7 +10,7 @@ define(function(require) {
 		removePlugins: 'contextmenu,tabletools,resize',
 		extraPlugins: 'blockimagepaste',
 		defaultLanguage: 'en',
-		language: elgg.get_language(),
+		language: elgg.config.language,
 		skin: 'moono',
 		uiColor: '#EEEEEE',
 		contentsCss: elgg.get_simplecache_url('css', 'elgg/wysiwyg.css'),

@@ -9,7 +9,7 @@ $guid = (int) get_input('guid');
 
 // Make sure we actually have permission to edit
 $thewire = get_entity($guid);
-if (elgg_instanceof($thewire, 'object', 'thewire') && $thewire->canEdit()) {
+if ($thewire->getSubtype() == "thewire" && $thewire->canEdit()) {
 
 	// unset reply metadata on children
 	$children = elgg_get_entities_from_relationship(array(
@@ -37,5 +37,3 @@ if (elgg_instanceof($thewire, 'object', 'thewire') && $thewire->canEdit()) {
 
 	forward("thewire/owner/" . $owner->username);
 }
-
-forward(REFERER);

@@ -472,6 +472,4 @@ function _elgg_input_init() {
 	}
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_input_init');
-};
+elgg_register_event_handler('init', 'system', '_elgg_input_init');

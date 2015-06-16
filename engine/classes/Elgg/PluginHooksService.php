@@ -1,6 +1,5 @@
 <?php
 namespace Elgg;
-use Elgg\Debug\Inspector;
 
 /**
  * WARNING: API IN FLUX. DO NOT USE DIRECTLY.
@@ -27,9 +26,8 @@ class PluginHooksService extends \Elgg\HooksRegistrationService {
 		foreach ($hooks as $callback) {
 			if (!is_callable($callback)) {
 				if ($this->logger) {
-					$inspector = new Inspector();
 					$this->logger->warn("handler for plugin hook [$hook, $type] is not callable: "
-										. $inspector->describeCallable($callback));
+										. $this->describeCallable($callback));
 				}
 				continue;
 			}

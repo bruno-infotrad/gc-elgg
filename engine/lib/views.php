@@ -442,18 +442,16 @@ function elgg_view_page($title, $body, $page_shell = 'default', $vars = array())
 	array_shift($params['segments']);
 	$page_shell = elgg_trigger_plugin_hook('shell', 'page', $params, $page_shell);
 
-	$system_messages = _elgg_services()->systemMessages;
-
 	$messages = null;
-	if ($system_messages->count()) {
+	if (count_messages()) {
 		// get messages - try for errors first
-		$messages = $system_messages->dumpRegister('error');
+		$messages = system_messages(null, "error");
 		if (count($messages["error"]) == 0) {
 			// no errors so grab rest of messages
-			$messages = $system_messages->dumpRegister();
+			$messages = system_messages(null, "");
 		} else {
 			// we have errors - clear out remaining messages
-			$system_messages->dumpRegister();
+			system_messages(null, "");
 		}
 	}
 
@@ -1657,8 +1655,6 @@ function elgg_views_boot() {
 	}
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('boot', 'system', 'elgg_views_boot');
-	$events->registerHandler('init', 'system', 'elgg_views_handle_deprecated_views');
-	$events->registerHandler('ready', 'system', '_elgg_views_deprecate_removed_views');
-};
+elgg_register_event_handler('boot', 'system', 'elgg_views_boot');
+elgg_register_event_handler('init', 'system', 'elgg_views_handle_deprecated_views');
+elgg_register_event_handler('ready', 'system', '_elgg_views_deprecate_removed_views');

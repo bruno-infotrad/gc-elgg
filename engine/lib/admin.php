@@ -835,6 +835,4 @@ function _elgg_add_admin_widgets($event, $type, $user) {
 	elgg_set_ignore_access(false);
 }
 
-return function(\Elgg\EventsService $events, \Elgg\HooksRegistrationService $hooks) {
-	$events->registerHandler('init', 'system', '_elgg_admin_init');
-};
+elgg_register_event_handler('init', 'system', '_elgg_admin_init');
