@@ -57,7 +57,7 @@ if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
 // email addresses
 $comment_text = preg_replace('/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i', '$1<a href="mailto:$2@$3">$2@$3</a>', $comment_text);
 // hashtags
-$comment_text = preg_replace('/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/', '$1<a href="' . $CONFIG->wwwroot . 'thewire/tag/$2">#$2</a>', $comment_text);
+$comment_text = preg_replace('/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/', '$1<a href="' . elgg_get_config('wwwroot') . 'thewire/tag/$2">#$2</a>', $comment_text);
 $comment_text = trim($comment_text);
 $annotation = create_annotation($entity->guid, 'generic_comment', $comment_text, "", $user->guid, $entity->access_id);
 // tell user annotation posted

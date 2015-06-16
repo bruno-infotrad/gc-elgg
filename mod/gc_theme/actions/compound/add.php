@@ -5,6 +5,7 @@
  */
 
 // don't filter since we strip and filter escapes some characters
+$dbprefix=elgg_get_config('dbprefix');
 $user_id = elgg_get_logged_in_user_guid();
 $access_id = ACCESS_LOGGED_IN;
 $container_guid = get_input('container_guid', 0);
@@ -23,7 +24,7 @@ if ($container_guid) {
 			$gguid=get_entity($container);
 			elgg_log("multiple compound/add=".$gguid->membership,'NOTICE');
 			if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
-				$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container'");
+				$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container'");
 				elgg_log("multiple compound/add group_access_collections ".$gac->id,'NOTICE');
 				$access_ids[$container]=$gac->id;
 			} else {
@@ -34,7 +35,7 @@ if ($container_guid) {
 		$gguid=get_entity($container_guid);
 		elgg_log("compound/add=".$gguid->membership,'NOTICE');
 		if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
-			$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container_guid'");
+			$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container_guid'");
 			elgg_log("compound/add group_access_collections ".$gac->id,'NOTICE');
 			$access_id=$gac->id;
 		} else {

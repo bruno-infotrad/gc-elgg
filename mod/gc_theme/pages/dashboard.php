@@ -96,12 +96,13 @@ switch ($page_type) {
 		}
                 break;
         case 'groups':
+		$dbprefix = elgg_get_config('dbprefix');
 		$title = elgg_echo('groups');
 		$page_filter = 'groups';
 		$options['wheres']=array("rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' or rv.type='group'");
 		$options['joins'] = array("JOIN " . $db_prefix . "entities e ON rv.object_guid=e.guid JOIN " . $db_prefix . "groups_entity ge ON e.container_guid=ge.guid");
 		$options['order_by'] = "rv.posted desc";
-		$query = "SELECT rv.* from {$CONFIG->dbprefix}river rv where rv.object_guid = $item->object_guid ORDER BY rv.annotation_id DESC LIMIT 1";
+		$query = "SELECT rv.* from {$dbprefix}river rv where rv.object_guid = $item->object_guid ORDER BY rv.annotation_id DESC LIMIT 1";
 		$stream = elgg_list_river($options);
                 break;
         case 'all':

@@ -1,4 +1,5 @@
 <?php
+$dbprefix = elgg_get_config('dbprefix');
 $event_guid = get_input('event_guid');
 $container_guid = get_input('container_guid');
 elgg_log("EVENT_MANAGER event_guid=$event_guid container_guid=$container_guid",'NOTICE');
@@ -50,7 +51,7 @@ if ($mv_container_guid) {
 		$gguid=get_entity($container_guid);
 		elgg_log("EVENT_MANAGER notify groups =".$gguid->membership,'NOTICE');
 		if ($gguid instanceof ElggGroup) {
-			$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container_guid'");
+			$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container_guid'");
 			elgg_log("EVENT_MANAGER notiy groups group_access_collections ".$gac->id,'NOTICE');
 			$bookmark->access_id = $gac->id;
 		} else {
@@ -74,7 +75,7 @@ if ($mv_container_guid) {
 	$gguid=get_entity($container_guid);
 	elgg_log("EVENT_MANAGER notify groups =".$gguid->membership,'NOTICE');
 	if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
-		$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$container_guid'");
+		$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container_guid'");
 		elgg_log("EVENT_MANAGER notiy groups group_access_collections ".$gac->id,'NOTICE');
 		$bookmark->access_id = $gac->id;
 	} else {

@@ -29,6 +29,14 @@ function gc_theme_pagesetup_handler() {
 			}
 
 			elgg_unregister_menu_item('extras', 'bookmark');
+			elgg_unregister_menu_item('page', '1_account');
+			elgg_unregister_menu_item('page', '1_plugins');
+			elgg_unregister_menu_item('page', '1_statistics');
+			$active_plugins = elgg_get_plugins();
+			foreach ($active_plugins as $plugin) {
+				$plugin_id = $plugin->getID();
+				elgg_unregister_menu_item('page', $plugin_id);
+			}
 	
 			if (elgg_is_active_plugin('search')) {
 				elgg_unregister_menu_item('page', 'all');
@@ -313,7 +321,8 @@ function gc_theme_pagesetup_handler() {
 					'contexts' => array('profile'),
 					'priority' => 50,
 				));
-				elgg_unregister_menu_item('avatar:edit','avatar:edit');
+				elgg_unregister_menu_item('page','edit_avatar');
+				elgg_unregister_menu_item('page','edit_profile');
 				elgg_unregister_menu_item('extras','avatar:edit');
 				elgg_register_menu_item('title', array(
 					'name' => 'editavatar',

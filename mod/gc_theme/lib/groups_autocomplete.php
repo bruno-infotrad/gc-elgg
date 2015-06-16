@@ -1,6 +1,4 @@
 <?php 
-	global $CONFIG;
-
 	$q = sanitize_string(get_input("q"));
 	$current_groups = sanitize_string(get_input("groups_guids"));
 	$limit = (int) get_input("limit", 50);

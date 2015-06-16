@@ -30,14 +30,14 @@ echo elgg_view_page($title, $body);
 function gc_get_user_friends($user_guid, $subtype = ELGG_ENTITIES_ANY_VALUE, $limit = 10,
 $offset = 0) {
 
-        global $CONFIG;
+        $dbprefix = elgg_get_config('dbprefix');
         return elgg_get_entities_from_relationship(array(
                 'relationship' => 'friend',
                 'relationship_guid' => $user_guid,
                 'type' => 'user',
                 'subtype' => $subtype,
                 'limit' => $limit,
-                'joins' => array("join {$CONFIG->dbprefix}users_entity u on e.guid = u.guid"),
+                'joins' => array("join {$dbprefix}users_entity u on e.guid = u.guid"),
                 'wheres' => array("u.banned = 'no'"),
                 'order_by' => 'u.name asc',
                 'offset' => $offset

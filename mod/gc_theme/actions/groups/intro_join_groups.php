@@ -32,7 +32,7 @@ if(!empty($groups_guids)){
 			} else {
 				add_entity_relationship($user->guid, 'membership_request', $group->guid);
                 		// Notify group owner
-				$url = "{$CONFIG->url}groups/requests/$group->guid";
+				$url = elgg_get_config('wwwroot') . "groups/requests/$group->guid";
 				$subject = elgg_echo('groups:request:subject', array(
 					$user->name,
 					$group->name,

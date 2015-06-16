@@ -9,7 +9,7 @@
 			document.getElementById('formtoggle').submit();
 		}
 	</script>
-		<form action="<?php echo $vars['url']; ?>action/toggle_language/toggle" method="post" name="formtoggle" id="formtoggle">
+		<form action="<?php echo elgg_get_config('wwwroot'); ?>action/toggle_language/toggle" method="post" name="formtoggle" id="formtoggle">
 			
 		<?php
 		// security tokens.

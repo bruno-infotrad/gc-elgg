@@ -2,7 +2,7 @@
 /**
  * Type cloud
  */
-
+/*
 function file_type_cloud_get_url($type, $friends) {
 	$url = elgg_get_site_url() . 'file/search?subtype=file';
 
@@ -24,6 +24,7 @@ function file_type_cloud_get_url($type, $friends) {
 
 	return $url;
 }
+*/
 
 
 $types = elgg_extract('types', $vars, array());

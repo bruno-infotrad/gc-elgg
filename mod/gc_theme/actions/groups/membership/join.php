@@ -10,8 +10,6 @@
  * @package ElggGroups
  */
 
-global $CONFIG;
-
 $user_guid = get_input('user_guid', elgg_get_logged_in_user_guid());
 $group_guid = get_input('group_guid');
 // if js_post no messages and exit at the end
@@ -52,7 +50,7 @@ if (($user instanceof ElggUser) && ($group instanceof ElggGroup)) {
 		add_entity_relationship($user->guid, 'membership_request', $group->guid);
 
 		// Notify group owner
-		$url = "{$CONFIG->url}groups/requests/$group->guid";
+		$url = elgg_get_config('wwwroot') . "groups/requests/$group->guid";
 		$subject = elgg_echo('groups:request:subject', array(
 			$user->name,
 			$group->name,

@@ -1,10 +1,14 @@
 <?php
-$user = $vars['user'];
+$user = elgg_get_logged_in_user_entity();
+//$user = $vars['user'];
 $group = $vars['group'];
 if (! $group->isMember($user)) {
 	return;
 }
-global $NOTIFICATION_HANDLERS;
+//global $NOTIFICATION_HANDLERS;
+$NOTIFICATION_HANDLERS = _elgg_services()->notifications->getMethodsAsDeprecatedGlobal();
+$notification_settings = get_user_notification_settings(elgg_get_page_owner_guid());
+
 foreach ($NOTIFICATION_HANDLERS as $method => $foo) {
 	$subsbig[$method] = elgg_get_entities_from_relationship(array(
 		'relationship' => 'notify' . $method,

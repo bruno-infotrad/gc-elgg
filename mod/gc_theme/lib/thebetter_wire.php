@@ -6,8 +6,6 @@
  * @return string
  */
 function thebetterwire_filter($text) {
-        global $CONFIG;
-
         $text = ' ' . $text;
 
         // email addresses
@@ -23,7 +21,7 @@ function thebetterwire_filter($text) {
 	if(preg_match_all('/@([\w]+)/',$text,$matches)) {
 		foreach ($matches[1] as $match) {
 			if (get_user_by_username($match)){
-        			$text = preg_replace( "/@$match/", '<a href="' . $CONFIG->wwwroot . 'profile/'.$match.'">@'.$match.'</a>', $text);
+        			$text = preg_replace( "/@$match/", '<a href="' . elgg_get_config('wwwroot') . 'profile/'.$match.'">@'.$match.'</a>', $text);
 			}
 		}
 	}
@@ -31,7 +29,7 @@ function thebetterwire_filter($text) {
         // hashtags
         $text = preg_replace(
                                 '/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/',
-                                '$1<a href="' . $CONFIG->wwwroot . 'thewire/tag/$2">#$2</a>',
+                                '$1<a href="' . elgg_get_config('wwwroot') . 'thewire/tag/$2">#$2</a>',
                                 $text);
 
         $text = trim($text);

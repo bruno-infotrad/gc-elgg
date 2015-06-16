@@ -43,8 +43,11 @@ add_translation('en', array(
 	'groups:membershiprequests:short' => 'Join requests',
 	'groups:list' => 'A-Z Groups',
 	'groups:list:other' => 'Other',
+	'groups:newest' => 'Newest',
+
 	'home' => 'Home',
 	
+	'messages:answer' => 'Reply',
 	'messages:toggle' => 'Select/Deselect all',
 	'newsfeed' => 'Feed',
 	

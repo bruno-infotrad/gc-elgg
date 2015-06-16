@@ -1,6 +1,4 @@
 <?php 
-	global $CONFIG;
-
 	$q = sanitize_string(get_input("q"));
 	$current_users = sanitize_string(get_input("user_guids"));
 	$limit = (int) get_input("limit", 50);
