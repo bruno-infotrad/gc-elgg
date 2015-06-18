@@ -2,14 +2,15 @@
 $GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::DEBUG);
 
 function gc_theme_init() {
+	$plugin_paths =  $plugins_path;
 	require_once 'lib/functions.php';
 	require_once 'lib/event_handler.php';
 	require_once 'lib/page_handler.php';
 	require_once 'lib/hook_handler.php';
 	require_once 'lib/thebetter_wire.php';
 	// needed to use some function for view
-	elgg_register_library('elgg:pages', elgg_get_plugins_path() . 'pages/lib/pages.php');
-	elgg_register_library('elgg:file_tools', elgg_get_plugins_path() . 'file_tools/lib/functions.php');
+	elgg_register_library('elgg:pages', $plugins_path . 'pages/lib/pages.php');
+	elgg_register_library('elgg:file_tools', $plugins_path . 'file_tools/lib/functions.php');
 	//For batch notification to work:
 	// Intercept blog notification when created when status not published
 	elgg_register_plugin_hook_handler('object:notifications', 'object', 'gc_object_notifications_intercept');
@@ -110,8 +111,8 @@ function gc_theme_init() {
 	elgg_register_page_handler('extra_feed_replies', 'extra_feed_replies','header');
 	elgg_register_page_handler('all_my_groups', 'all_my_groups','header');
 	//What a hack!  Overriding groups page handler without blowing away other plugins doing the same
-	global $CONFIG, $gc_theme_original_groups_page_handler;
-	$gc_theme_original_groups_page_handler = $CONFIG->pagehandler['groups'];
+	//global $CONFIG, $gc_theme_original_groups_page_handler;
+	//$gc_theme_original_groups_page_handler = $CONFIG->pagehandler['groups'];
 	elgg_register_page_handler('groups', 'gc_theme_groups_page_handler');
 	// New in 1.8.3
 	//elgg_register_ajax_view('blog/composer');
@@ -196,7 +197,7 @@ function gc_theme_init() {
         elgg_register_plugin_hook_handler('usersettings:save', 'user', 'gc_theme_user_settings_save');
 
 
-	$action_path = elgg_get_plugins_path() . 'gc_theme/actions';
+	$action_path = $plugins_path . 'gc_theme/actions';
 	//Action for sending event notification email to colleagues and post bookmarks to books
 	elgg_register_action("event_manager/notify_colleagues", "$action_path/event_manager/notify_colleagues.php");
 	elgg_register_action("gc_theme/notify_groups", "$action_path/gc_theme/notify_groups.php");
@@ -205,9 +206,9 @@ function gc_theme_init() {
 	//Action for roles
 	elgg_register_action("roles_im_admin/make_im_admin", "$action_path/roles_im_admin/make_im_admin.php");
 	elgg_register_action("roles_im_admin/revoke_im_admin", "$action_path/roles_im_admin/revoke_im_admin.php");
-	elgg_register_action('gc_theme/settings/save',$CONFIG->pluginspath . 'gc_theme/actions/plugins/settings/save.php');
+	elgg_register_action('gc_theme/settings/save',$plugins_path . 'gc_theme/actions/plugins/settings/save.php');
 	//elgg_register_action('',$CONFIG->pluginspath . 'gc_theme/settings/usersettings/save.php');
-	elgg_register_action('gc_theme/settings/save',$CONFIG->pluginspath . 'gc_theme/actions/plugins/settings/save.php');
+	elgg_register_action('gc_theme/settings/save',$plugins_path . 'gc_theme/actions/plugins/settings/save.php');
 	elgg_register_action("compound/add", "$action_path/compound/add.php");
 	elgg_register_action("compound/remove_exec_content", "$action_path/compound/remove_exec_content.php");
 	elgg_register_action("file/upload", "$action_path/file/upload.php");
@@ -234,11 +235,11 @@ function gc_theme_init() {
 	elgg_unregister_action("polls/edit");
 	elgg_register_action("polls/edit","$action_path/polls/edit.php");
 	// Override reported content action to send email
-	$action_path = elgg_get_plugins_path() . "gc_theme/actions/reportedcontent";
+	$action_path = $plugins_path . "gc_theme/actions/reportedcontent";
 	elgg_unregister_action('reportedcontent/add');
 	elgg_register_action('reportedcontent/add', "$action_path/add.php");
 	// Override join action for closed group (bug 59)
-	$action_path = elgg_get_plugins_path() . "gc_theme/actions/groups/membership";
+	$action_path = $plugins_path . "gc_theme/actions/groups/membership";
 	elgg_unregister_action("groups/join");
 	elgg_register_action("groups/join", "$action_path/join.php");
 	//Customize existing page handler (for left menu)
@@ -317,7 +318,7 @@ function gc_theme_init() {
 		elgg_extend_view('river/elements/responses', 'likes/river_footer', 1);
 	}
 	
-	elgg_extend_view('river/elements/responses', 'discussion/river_footer');
+	elgg_extend_view('river/elements/responses', 'discussion/discussion_replies');
 	
 	//Elgg only includes the search bar in the header by default,
 	//but we usually don't show the header when the user is logged in

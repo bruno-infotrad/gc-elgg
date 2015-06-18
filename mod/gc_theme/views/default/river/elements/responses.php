@@ -51,7 +51,8 @@ if ($comment_count) {
 		echo elgg_view_image_block(elgg_view_icon('speech-bubble-alt'), $link, array('class' => 'elgg-river-participation-'.$object_guid));
 	}
 	
-	echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
+	echo elgg_view_entity_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
+	//echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
 
 }
 

@@ -80,6 +80,7 @@ if ($inline) {
 			'id' => $id.'-submit',
 		));
 	} else {
+		$submit_input = '';
 		$comment_input= elgg_view('input/plaintext', array(
 			'name' => 'generic_comment',
 			'id' => $id.'-textarea',

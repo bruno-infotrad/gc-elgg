@@ -309,8 +309,9 @@ function gc_theme_groups_page_handler($segments, $handle) {
 			//require_once "$pages_dir/groups/albums.php";
 			return true;
 		default:
-			global $gc_theme_original_groups_page_handler;
-			return call_user_func($gc_theme_original_groups_page_handler, $segments, $handle);
+                	return groups_page_handler($segments);
+			//global $gc_theme_original_groups_page_handler;
+			//return call_user_func($gc_theme_original_groups_page_handler, $segments, $handle);
 	}
 }
 

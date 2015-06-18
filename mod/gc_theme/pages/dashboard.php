@@ -1,7 +1,7 @@
 <?php
 gatekeeper();
 
-$db_prefix = elgg_get_config('dbprefix');
+$dbprefix = elgg_get_config('dbprefix');
 $user = elgg_get_logged_in_user_entity();
 //PNS
 $now = time();
@@ -89,20 +89,18 @@ switch ($page_type) {
 				}
 			}
 			$options['wheres']=array("rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid);
-			$options['joins'] = array("JOIN " . $db_prefix . "entities e ON rv.object_guid=e.guid JOIN " . $db_prefix . "groups_entity ge ON e.container_guid=ge.guid");
+			$options['joins'] = array("JOIN " . $dbprefix . "entities e ON (e.guid=rv.object_guid or e.guid=rv.target_guid) JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
 			$stream = elgg_list_river($options);
 		} else {
 			$stream = '<h3>' . elgg_echo('gc_theme:mygroups:none') . '</h3>';
 		}
                 break;
         case 'groups':
-		$dbprefix = elgg_get_config('dbprefix');
 		$title = elgg_echo('groups');
 		$page_filter = 'groups';
 		$options['wheres']=array("rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' or rv.type='group'");
-		$options['joins'] = array("JOIN " . $db_prefix . "entities e ON rv.object_guid=e.guid JOIN " . $db_prefix . "groups_entity ge ON e.container_guid=ge.guid");
+		$options['joins'] = array("JOIN " . $dbprefix . "entities e ON (e.guid=rv.object_guid or e.guid=rv.target_guid) JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
 		$options['order_by'] = "rv.posted desc";
-		$query = "SELECT rv.* from {$dbprefix}river rv where rv.object_guid = $item->object_guid ORDER BY rv.annotation_id DESC LIMIT 1";
 		$stream = elgg_list_river($options);
                 break;
         case 'all':
