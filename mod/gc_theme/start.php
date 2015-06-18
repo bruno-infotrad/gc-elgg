@@ -2,7 +2,7 @@
 $GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::DEBUG);
 
 function gc_theme_init() {
-	$plugin_paths =  $plugins_path;
+	$plugins_path =  elgg_get_plugins_path();
 	require_once 'lib/functions.php';
 	require_once 'lib/event_handler.php';
 	require_once 'lib/page_handler.php';
