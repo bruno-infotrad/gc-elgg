@@ -37,6 +37,7 @@ $english = array(
 	'profile_manager:settings:view_profile' => 'View Profile',
 	'profile_manager:settings:group' => "Edit Group Profile",
 
+	'profile_manager:settings:generate_username_from_email' => 'Generate username from email',
 	'profile_manager:settings:profile_icon_on_register' => 'Add mandatory profile icon input field on register form',
 	'profile_manager:settings:profile_icon_on_register:option:optional' => 'Optional',
 	'profile_manager:settings:show_account_hints' => 'Show hints for default account registration questions',
@@ -95,6 +96,9 @@ $english = array(
 	'profile_manager:admin:options:multiselect' => 'MultiSelect',
 	'profile_manager:admin:options:file' => 'File',
 	'profile_manager:admin:options:pm_rating' => 'Rating',
+	'profile_manager:admin:options:pm_twitter' => 'Twitter',
+	'profile_manager:admin:options:pm_facebook' => 'Facebook',
+	'profile_manager:admin:options:pm_linkedin' => 'LinkedIn',
 	
 	'profile_manager:admin:additional_options' => 'Additional options',
 	'profile_manager:admin:show_on_register' => 'Show on register form',
@@ -329,6 +333,12 @@ $english = array(
 		<b>Actions</b><br />
 		Various actions related to these profile fields.
 	",
+	
+	// custom input/output views
+	'profile_manager:pm_twitter:input:placeholder' => "Enter your Twitter username here",
+	'profile_manager:pm_twitter:output:follow' => "Follow @%s",
+	'profile_manager:pm_facebook:input:placeholder' => "Enter your Facebook profile url here",
+	'profile_manager:pm_linkedin:input:placeholder' => "Enter your LinkedIn profile url here",
 
 	// widgets
 	'widgets:profile_completeness:title' => 'Profile Completeness',

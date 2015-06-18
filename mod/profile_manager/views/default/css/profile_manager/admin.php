@@ -87,17 +87,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 	margin-right: 5px;
 }
 
-.field_config_title{
-}
-
-.field_config_extra{
-	display:none;
-}
-
-.field_config_metadata {
-	float: right;
-}
-
 .field_config_metadata_option {
 	width: 16px;
 	height: 13px;
@@ -114,18 +103,6 @@ $plugin_graphics_folder = elgg_get_site_url() . "mod/profile_manager/graphics/";
 .field_config_metadata_option_disabled{
 	background-position: 0 -32px;
 	cursor: pointer;
-}
-
-.profile-manager-actions {
-	padding: 5px 0px;
-}
-
-.profile-manager-actions a{
-	margin: 0 5px 5px 0;
-}
-
-#restoreForm {
-	display: none;
 }
 
 .custom_fields_add_form_table,
