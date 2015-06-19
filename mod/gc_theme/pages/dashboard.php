@@ -83,13 +83,19 @@ switch ($page_type) {
 		if (count($group_list)) {
 			foreach($group_list as $group) {
 				if ($group_guid) {
-					$group_guid .= ' OR e.container_guid='.$group->guid;
+					$group_guid .= ' OR e1.container_guid='.$group->guid;
+					$group_guid .= ' OR e2.container_guid='.$group->guid;
 				} else {
-					$group_guid = 'e.container_guid='.$group->guid;
+					$group_guid = 'e1.container_guid='.$group->guid;
+					$group_guid .= ' OR e2.container_guid='.$group->guid;
 				}
 			}
-			$options['wheres']=array("rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid);
-			$options['joins'] = array("JOIN " . $dbprefix . "entities e ON (e.guid=rv.object_guid or e.guid=rv.target_guid) JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
+			$options['joins'] = array("JOIN elgg_entities e1 ON e1.guid = rv.object_guid",
+						"LEFT JOIN elgg_entities e2 ON e2.guid = rv.target_guid",
+						"LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid",
+						"LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"
+						);
+			$options['wheres']=array("(rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid.")", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
 			$stream = elgg_list_river($options);
 		} else {
 			$stream = '<h3>' . elgg_echo('gc_theme:mygroups:none') . '</h3>';
@@ -98,10 +104,64 @@ switch ($page_type) {
         case 'groups':
 		$title = elgg_echo('groups');
 		$page_filter = 'groups';
-		$options['wheres']=array("rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' or rv.type='group'");
+		$options['joins'] = array("JOIN elgg_entities e1 ON e1.guid = rv.object_guid",
+					"LEFT JOIN elgg_entities e2 ON e2.guid = rv.target_guid",
+					"LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid",
+					"LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"
+					);
+		$options['wheres']=array("(rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote')", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
+		$stream = elgg_list_river($options);
+/*
+		$options['wheres']=array("rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'");
+		//$options['joins'] = array("JOIN " . $dbprefix . "entities e ON e.guid=rv.object_guid JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
+		//$options['joins'] = array("JOIN " . $dbprefix . "entities e ON guid=rv.target_guid JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
 		$options['joins'] = array("JOIN " . $dbprefix . "entities e ON (e.guid=rv.object_guid or e.guid=rv.target_guid) JOIN " . $dbprefix . "groups_entity ge ON e.container_guid=ge.guid");
 		$options['order_by'] = "rv.posted desc";
 		$stream = elgg_list_river($options);
+*/
+		//Short circuit because or in left join incurrs a large performance penalty
+/*
+		$querynl = "SELECT DISTINCT rv.* FROM ".$dbprefix."river rv "
+				."JOIN ".$dbprefix."entities e ON e.guid=rv.object_guid "
+				."JOIN ".$dbprefix."groups_entity ge ON e.container_guid=ge.guid  "
+				."JOIN ".$dbprefix."entities oe ON rv.object_guid = oe.guid  "
+				."LEFT JOIN ".$dbprefix."entities te ON rv.target_guid = te.guid  "
+					."WHERE  rv.access_id in('1','2') "
+						."AND rv.type != 'user' "
+						."AND rv.action_type != 'friend' "
+						."AND rv.action_type != 'join' "
+						."AND rv.action_type != 'vote' "
+						."AND  rv.enabled = 'yes' "
+						."AND ((1 = 1) "
+						."AND (oe.enabled = 'yes')) "
+						."AND (((1 = 1) AND (te.enabled = 'yes')) OR te.guid IS NULL) "
+			."UNION SELECT DISTINCT rv.* FROM ".$dbprefix."river rv "
+				."JOIN ".$dbprefix."entities e ON e.guid=rv.target_guid "
+				."JOIN ".$dbprefix."groups_entity ge ON e.container_guid=ge.guid  "
+				."JOIN ".$dbprefix."entities oe ON rv.object_guid = oe.guid  "
+				."LEFT JOIN ".$dbprefix."entities te ON rv.target_guid = te.guid  "
+					."WHERE  rv.access_id in('1','2') "
+						."AND rv.type != 'user' "
+						."AND rv.action_type != 'friend' "
+						."AND rv.action_type != 'join' "
+						."AND rv.action_type != 'vote' "
+						."AND  rv.enabled = 'yes' "
+						."AND ((1 = 1) "
+						."AND (oe.enabled = 'yes')) "
+						."AND (((1 = 1) AND (te.enabled = 'yes')) OR te.guid IS NULL) ";
+		$query = $querynl."ORDER BY posted DESC LIMIT 0, 20";
+		$count_query = "select count(*) as count FROM (".$querynl.") as count";
+		$count = get_data_row($count_query);
+		$river_items = get_data($query,'_elgg_row_to_elgg_river_item');
+		_elgg_prefetch_river_entities($river_items);
+		$options['count'] = $count->count;
+		$options['items'] = $river_items;
+		$options['pagination'] = true;
+                $options['list_class']= 'elgg-list-river';
+                $options['limit']= 20;
+                $options['no_results'] = '';
+		$stream = elgg_view('page/components/list', $options);
+*/
                 break;
         case 'all':
                 $title = elgg_echo('river:all');
