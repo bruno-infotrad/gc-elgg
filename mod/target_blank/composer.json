@@ -1,0 +1,17 @@
+{
+	"name": "coldtrick/target_blank",
+	"description": "Opens all external links in a new window",
+	"type": "elgg-plugin",
+	"keywords": ["elgg", "plugin"],
+	"license": "GPL-2.0",
+	"support": {
+		"source": "https://github.com/ColdTrick/target_blank",
+		"issues": "https://github.com/ColdTrick/target_blank/issues"
+	},
+	"require": {
+		"composer/installers": "^1.0.8"
+	},
+	"require-dev": {
+		"coldtrick/sniffs": "dev-master"
+	}
+}
