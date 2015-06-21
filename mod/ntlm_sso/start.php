@@ -13,15 +13,15 @@ $GLOBALS['SSO'] = new FlexLog(FlexLogLevel::INFO);
 
 function ntlm_auth_init()
 {
-	global $CONFIG;
 	$credentials['username'] = 'dummy';
 	$credentials['password'] = 'user';
 	// Override save method
-	elgg_register_action('ntlm_sso/settings/save',$CONFIG->pluginspath . 'ntlm_sso/actions/plugins/settings/save.php');
+	$pluginspath=elgg_get_plugins_path();
+	elgg_register_action('ntlm_sso/settings/save',$pluginspath . 'ntlm_sso/actions/plugins/settings/save.php');
 	// Unregister username/password handler and register the Kerberos authentication handler
         unregister_pam_handler('pam_auth_userpass');
 	register_pam_handler('ntlm_auth_authenticate');
-	register_translations($CONFIG->pluginspath . "ntlm_sso/languages/");
+	register_translations($pluginspath . "ntlm_sso/languages/");
 	if (!elgg_is_logged_in() && $_SERVER['PHP_AUTH_USER'])
 	{
 		$username = $_SERVER['PHP_AUTH_USER'];
