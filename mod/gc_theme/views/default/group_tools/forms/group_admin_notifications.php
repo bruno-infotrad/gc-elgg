@@ -25,29 +25,33 @@
 			//Enable disable admin notifications
 			$content.='<div class="elgg-group-stats">';
 			$content.='<div class="admin-group-notifications">';
-			$content .= elgg_view("output/confirmlink", array(
+			$content .= elgg_view("output/url", array(
 				"href" => "action/group_tools/notifications?toggle=enable_admins&notification_method=email&guid=" . $group->getGUID(),
 				"text" => elgg_echo("group_tools:notifications:email:admin_enable"),
+				"confirm" => true,
 				"class" => "elgg-button elgg-button-submit mrm"));
 			$content .= '</div>';
 			$content.='<div class="admin-group-notifications">';
-			$content .= elgg_view("output/confirmlink", array(
+			$content .= elgg_view("output/url", array(
 				"href" => "action/group_tools/notifications?toggle=enable_admins&notification_method=site&guid=" . $group->getGUID(),
 				"text" => elgg_echo("group_tools:notifications:site:admin_enable"),
+				"confirm" => true,
 				"class" => "elgg-button elgg-button-submit mrm"));
 			$content.='</div>';
 			$content.='</div>';
 			$content.='<div class="elgg-group-stats">';
 			$content.='<div class="admin-group-notifications">';
-			$content .= elgg_view("output/confirmlink", array(
+			$content .= elgg_view("output/url", array(
 				"href" => "action/group_tools/notifications?toggle=disable_admins&notification_method=email&guid=" . $group->getGUID(),
 				"text" => elgg_echo("group_tools:notifications:email:admin_disable"),
+				"confirm" => true,
 				"class" => "elgg-button elgg-button-submit mrm"));
 			$content.='</div>';
 			$content.='<div class="admin-group-notifications">';
-			$content .= elgg_view("output/confirmlink", array(
+			$content .= elgg_view("output/url", array(
 				"href" => "action/group_tools/notifications?toggle=disable_admins&notification_method=site&guid=" . $group->getGUID(),
 				"text" => elgg_echo("group_tools:notifications:site:admin_disable"),
+				"confirm" => true,
 				"class" => "elgg-button elgg-button-submit mrm"));
 			$content.='</div>';
 			$content.='</div>';

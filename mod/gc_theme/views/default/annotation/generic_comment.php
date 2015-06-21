@@ -33,7 +33,7 @@ if ($full_view) {
 	$delete_button = '';
 	if ($comment->canEdit()) {
 		$url = "action/comments/delete?annotation_id=$comment->id";
-		$delete_button = elgg_view("output/confirmlink", array(
+		$delete_button = elgg_view("output/url", array(
 			'href' => $url,
 			'class' => 'right',
 			'text' => elgg_view_icon('delete'),

@@ -32,6 +32,7 @@ function gc_theme_pagesetup_handler() {
 			elgg_unregister_menu_item('page', '1_account');
 			elgg_unregister_menu_item('page', '1_plugins');
 			elgg_unregister_menu_item('page', '1_statistics');
+			elgg_unregister_menu_item('page', '1_profile');
 			$active_plugins = elgg_get_plugins();
 			foreach ($active_plugins as $plugin) {
 				$plugin_id = $plugin->getID();
@@ -296,22 +297,25 @@ function gc_theme_pagesetup_handler() {
 				));
 			}
 		
-				elgg_register_menu_item('title', array(
-					'name' => 'editprofile',
-					'href' => "/collections/add/$user->guid",
-					'text' => elgg_echo('profile:edit'),
-					'link_class' => 'elgg-button elgg-button-action',
-					'contexts' => array('collections'),
-					'priority' => 50,
-				));
-				elgg_register_menu_item('title', array(
-					'name' => 'multi_invite',
-					'href' => "/friends/multi_invite",
-					'text' => elgg_echo('friends:multi_invite'),
-					'link_class' => 'elgg-button elgg-button-action',
-					'contexts' => array('friends'),
-					'priority' => 40,
-				));
+			elgg_register_menu_item('title', array(
+				'name' => 'editprofile',
+				'href' => "/collections/add/$user->guid",
+				'text' => elgg_echo('profile:edit'),
+				'link_class' => 'elgg-button elgg-button-action',
+				'contexts' => array('collections'),
+				'priority' => 50,
+			));
+			elgg_register_menu_item('title', array(
+				'name' => 'multi_invite',
+				'href' => "/friends/multi_invite",
+				'text' => elgg_echo('friends:multi_invite'),
+				'link_class' => 'elgg-button elgg-button-action',
+				'contexts' => array('friends'),
+				'priority' => 40,
+			));
+			elgg_unregister_menu_item('page','edit_avatar');
+			elgg_unregister_menu_item('page','edit_profile');
+			elgg_unregister_menu_item('extras','avatar:edit');
 			if ($owner->guid == $user->guid) {
 				elgg_register_menu_item('title', array(
 					'name' => 'editprofile',
@@ -321,9 +325,6 @@ function gc_theme_pagesetup_handler() {
 					'contexts' => array('profile'),
 					'priority' => 50,
 				));
-				elgg_unregister_menu_item('page','edit_avatar');
-				elgg_unregister_menu_item('page','edit_profile');
-				elgg_unregister_menu_item('extras','avatar:edit');
 				elgg_register_menu_item('title', array(
 					'name' => 'editavatar',
 					'href' => "/avatar/edit/$user->username",

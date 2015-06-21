@@ -10,7 +10,7 @@
 			if($group instanceof ElggGroup){
 				
 			}
-			$member_count = $group->getMembers(0, 0, true);
+			$member_count = $group->getMembers(array('limit'=>0, 'offset'=>0, 'count'=>true));
 			
 			// count how manyu members are notified by email
 			$notification_options = array(
@@ -41,17 +41,19 @@
 			
 			// enable notification for everyone
 			if($member_count > $notification_count){
-				$content .= elgg_view("output/confirmlink", array(
+				$content .= elgg_view("output/url", array(
 					"href" => "action/group_tools/notifications?toggle=enable&guid=" . $group->getGUID(),
 					"text" => elgg_echo("group_tools:notifications:enable"),
+					"confirm" => true,
 					"class" => "elgg-button elgg-button-submit mrm"));
 			}
 			
 			// disable notification
 			if($notification_count > 0){
-				$content .= elgg_view("output/confirmlink", array(
+				$content .= elgg_view("output/url", array(
 					"href" => "action/group_tools/notifications?toggle=disable&guid=" . $group->getGUID(),
 					"text" => elgg_echo("group_tools:notifications:disable"),
+					"confirm" => true,
 					"class" => "elgg-button elgg-button-submit"));
 			}
 			

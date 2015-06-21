@@ -6,7 +6,7 @@
  */
 
 if (elgg_is_logged_in()) {
-	$db_prefix = elgg_get_config('dbprefix');
+	$dbprefix = elgg_get_config('dbprefix');
 	$debut = get_input("debut");
 	$page_owner_guid = get_input("page_owner_guid");
 	elgg_set_page_owner_guid($page_owner_guid);
@@ -15,7 +15,7 @@ if (elgg_is_logged_in()) {
 	if ($page_owner instanceof ElggGroup) {
 		$activity_label = elgg_echo('gc_theme:group:recent_activity');
 		$group_options = array(
-			'joins' => array("JOIN {$db_prefix}entities e ON e.guid = rv.object_guid"),
+			'joins' => array("JOIN {$dbprefix}entities e ON e.guid = rv.object_guid"),
 			'wheres' => array("(e.container_guid = $page_owner_guid OR rv.object_guid = $page_owner_guid) AND rv.action_type != 'vote'"),
 		);
 	} else {

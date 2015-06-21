@@ -66,7 +66,8 @@ $and_used = preg_split("/ and /i", $query);
 // Check if group is closed and we are displaying the access drowpdown. If so, change the default value to be for the group
 		//if ($options_values[0] == ACCESS_PRIVATE ) {
 		if ($options_values[0] == ACCESS_PRIVATE && $gguid->membership == ACCESS_PRIVATE && $uri_atoms[sizeof($uri_atoms)-2] != 'edit') {
-			$gac=get_data_row("SELECT id FROM {$CONFIG->dbprefix}access_collections WHERE owner_guid='$filter_guid'");
+			$dbprefix = elgg_get_config('dbprefix');
+			$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$filter_guid'");
 			elgg_log("input/dropdown group_access_collections ".$gac->id,'NOTICE');
 			$value=$gac->id;
 		//} else {

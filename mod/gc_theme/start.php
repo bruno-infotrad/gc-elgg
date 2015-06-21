@@ -164,6 +164,7 @@ function gc_theme_init() {
 	elgg_extend_view('groups/tool_latest', 'file/group_module',601);
 	elgg_unextend_view('groups/tool_latest', 'bookmarks/group_module');
 	elgg_extend_view('groups/tool_latest', 'bookmarks/group_module',602);
+
 	//Replace event_manager js
 	elgg_unextend_view("js/elgg", "js/event_manager/site");
 	elgg_extend_view("js/elgg", "js/event_manager/site");
@@ -171,6 +172,8 @@ function gc_theme_init() {
 	elgg_register_simplecache_view("js/event_manager/googlemaps");
 	elgg_unregister_js("event_manager.maps.helper");
 	elgg_unregister_js("event_manager.maps.base");
+	//Remove sidebar cleanup section
+	elgg_unextend_view("groups/edit", "group_tools/forms/cleanup");
 	//Replace to add additional tab in group edit to toggle admin notifications
 	elgg_extend_view("groups/edit", "group_tools/forms/group_admin_notifications", 376);
 	//Same presentation for profile
