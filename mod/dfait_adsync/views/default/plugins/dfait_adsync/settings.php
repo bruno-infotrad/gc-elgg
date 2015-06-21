@@ -1,5 +1,5 @@
 <?php
-$key = $CONFIG->dbpass;
+$key = elgg_get_config('dbpass');
 
 $passwd = $vars['entity']->adsync_teaminfo_password;
 $teaminfo_password = mcrypt_decrypt(MCRYPT_3DES, $key, base64_decode($passwd), MCRYPT_MODE_ECB);
@@ -22,13 +22,13 @@ $ldap_password = substr($ldap_password, 0, strlen($ldap_password) - $pad);
 	</div>
 	<div class="elgg-body profile-manager-actions">
 		<?php 
-			echo elgg_view("output/confirmlink", 
+			echo elgg_view("output/url", 
 							array("text" => elgg_echo("adsync:actions:sync_all"), 
 								  "title" => elgg_echo("adsync:actions:sync_all:description"), 
 								  "href" => "/dfait_adsync/sync/all", 
 								  "confirm" => elgg_echo("adsync:actions:sync_all:confirm"), 
 								  "class" => "elgg-button elgg-button-action")); 
-			echo elgg_view("output/confirmlink",
+			echo elgg_view("output/url",
 							array("text" => elgg_echo("adsync:actions:sync_changes"),
 									"title" => elgg_echo("adsync:actions:sync_changes:description"),
 									"href" => "/dfait_adsync/sync/changes",
