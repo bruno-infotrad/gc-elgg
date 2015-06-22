@@ -9,7 +9,8 @@ $item = $vars['item'];
 
 $subject = $item->getSubjectEntity();
 $object = $item->getObjectEntity();
-$target = $object->getContainerEntity();
+$target = $item->getTargetEntity();
+
 $icon = elgg_view_entity_icon($subject, 'small');
 
 $subject_link = elgg_view('output/url', array(
@@ -38,23 +39,30 @@ if ($subtype == 'thewire' ) {
         $event_url = "<a href=\"" . $event->getURL() . "\">" . $event->title . "</a>";
         $relationtype = $event->getRelationshipByUser($user->getGUID());
         $content = elgg_echo("event_manager:river:event_relationship:create:" . $relationtype, array($subject_link, $event_url));
+} elseif ($subtype == 'comment') {
+	$object_text = $target->title ? $target->title : $target->name;
+	$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => elgg_get_excerpt($object_text, 100), 'class' => 'elgg-river-object', 'is_trusted' => true,));
+	$key = "river:$action:$type:$subtype";
+	$content = elgg_echo($key, array($subject_link, $object_link));
+
+	if ($content == $key) {
+        	$key = "river:$action:$type:default";
+        	$content = elgg_echo($key, array($subject_link, $object_link));
+	}
+} elseif ($subtype == 'discussion_reply') {
+	$object_text = $target->title ? $target->title : $target->name;
+	$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => elgg_get_excerpt($object_text, 100), 'class' => 'elgg-river-object', 'is_trusted' => true,));
+	$content = elgg_echo('river:reply:object:groupforumtopic', array($subject_link, $object_link));
 } else {
-	$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => $object->title ? $object->title : $object->name, 'class' => 'elgg-river-object', 'is_trusted' => true,));
-	$content = elgg_echo("river:$action:$type:$subtype", array($subject_link, $object_link));
-}
-/*
-$container = $object->getContainerEntity();
-if ($container instanceof ElggGroup) {
-	$params = array(
-		'href' => $container->getURL(),
-		'text' => $container->name,
-		'is_trusted' => true,
-	);
-	$group_link = elgg_view('output/url', $params);
-	$group_string = elgg_echo('river:ingroup', array($group_link));
-}
-$view = preg_replace('/\//',':',$item->view);
-*/
+	$object_text = $object->title ? $object->title : $object->name;
+	//$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => elgg_get_excerpt($object_text, 100), 'class' => 'elgg-river-object', 'is_trusted' => true,));
+	$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => $object_text, 'class' => 'elgg-river-object', 'is_trusted' => true,));
+	$key = "river:$action:$type:$subtype";
+	$content = elgg_echo($key, array($subject_link, $object_link));
 
-
+	if ($content == $key) {
+        	$key = "river:$action:$type:default";
+        	$content = elgg_echo($key, array($subject_link, $object_link));
+	}
+}
 echo elgg_view_image_block($icon, $content,array('body_class' => 'sidebar-activity-item'));
