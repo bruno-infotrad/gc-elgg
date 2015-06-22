@@ -40,7 +40,11 @@ if ($subtype == 'thewire' ) {
         $relationtype = $event->getRelationshipByUser($user->getGUID());
         $content = elgg_echo("event_manager:river:event_relationship:create:" . $relationtype, array($subject_link, $event_url));
 } elseif ($subtype == 'comment') {
-	$object_text = $target->title ? $target->title : $target->name;
+	if ($target->getSubtype() == 'thewire') {
+		$object_text = elgg_echo('thewire');
+	} else {
+		$object_text = $target->title ? $target->title : $target->name;
+	}
 	$object_link = elgg_view('output/url', array( 'href' => $object->getURL(), 'text' => elgg_get_excerpt($object_text, 100), 'class' => 'elgg-river-object', 'is_trusted' => true,));
 	$key = "river:$action:$type:$subtype";
 	$content = elgg_echo($key, array($subject_link, $object_link));
