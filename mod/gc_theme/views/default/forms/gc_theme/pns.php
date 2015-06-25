@@ -8,7 +8,7 @@ $content .= elgg_view('input/submit', array(
         'value' => elgg_echo('gc_theme:pns_accept'),
         'class' => 'elgg-button elgg-button-submit',
         'id' => 'select-pns',
-	'onclick' => 'parent.$.fancybox.close();',
+	'onclick' => 'parent.$.colorbox.close();',
 ));
 echo $content;
 ?>

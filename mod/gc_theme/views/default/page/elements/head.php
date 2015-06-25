@@ -48,7 +48,6 @@ $css = elgg_get_loaded_css();
         <meta name="dcterms.subject" title="scheme" content="English subject terms / Termes de sujet en anglais" />
 
         <!--[if gt IE 8]><!-->
-        <script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/jquery.min.js"></script>
         <script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/compound.js"></script>
         <script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/misc.js"></script>
         <link rel="stylesheet" href="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/grids/css/util-min.css"/>

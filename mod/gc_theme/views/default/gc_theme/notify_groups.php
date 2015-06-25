@@ -42,7 +42,7 @@ $('#select-notify-groups').on('click', function() {
 	});
 	if (container_ids && event_guid) {
 		$("#container-guid").val(function (i,v){ return container_ids; });
-		setTimeout(function(){ $.fancybox.close(); },3000);
+		setTimeout(function(){ $.colorbox.close(); },3000);
 	}
 });
 </script>

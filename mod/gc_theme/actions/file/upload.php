@@ -7,14 +7,13 @@
 
 // Get variables
 elgg_load_library('elgg:file_tools');
-$title = get_input("title");
+$title = htmlspecialchars(get_input('title', '', false), ENT_QUOTES, 'UTF-8');
 $desc = get_input("description");
 $access_id = (int) get_input("access_id");
 $container_guid = (int) get_input('container_guid', 0);
 $guid = (int) get_input('file_guid');
 $tags = get_input("tags");
-// Use embed_forward to decide whether a river item should be created or not
-$embed= get_input("embed");
+$embed= get_input("embed",false);
 
 if ($container_guid == 0) {
 	$container_guid = elgg_get_logged_in_user_guid();
@@ -22,9 +21,11 @@ if ($container_guid == 0) {
 
 elgg_make_sticky_form('file');
 
-// check if upload failed
+// check if upload attempted and failed
 if (!empty($_FILES['upload']['name']) && $_FILES['upload']['error'] != 0) {
-	register_error(elgg_echo('file:cannotload'));
+	$error = elgg_get_friendly_upload_error($_FILES['upload']['error']);
+
+	register_error($error);
 	forward(REFERER);
 }
 
@@ -35,6 +36,12 @@ if ($guid > 0) {
 }
 
 if ($new_file) {
+	// must have a file if a new file upload
+	if (empty($_FILES['upload']['name'])) {
+		$error = elgg_echo('file:nofile');
+		register_error($error);
+		forward(REFERER);
+	}
 	$filename=$_FILES['upload']['name'];
 	if ($filename) {
 		$extension_array = explode('.', $filename);
@@ -47,19 +54,12 @@ if ($new_file) {
 		}
 	}
 
-	// must have a file if a new file upload
-	if (empty($_FILES['upload']['name'])) {
-		$error = elgg_echo('file:nofile');
-		register_error($error);
-		forward(REFERER);
-	}
-
 	$file = new FilePluginFile();
 	$file->subtype = "file";
 
 	// if no title on new upload, grab filename
 	if (empty($title)) {
-		$title = $_FILES['upload']['name'];
+		$title = htmlspecialchars($_FILES['upload']['name'], ENT_QUOTES, 'UTF-8');
 	}
 
 } else {
@@ -86,9 +86,7 @@ $file->title = $title;
 $file->description = $desc;
 $file->access_id = $access_id;
 $file->container_guid = $container_guid;
-
-$tags = explode(",", $tags);
-$file->tags = $tags;
+$file->tags = string_to_tag_array($tags);
 
 // we have a file upload, so process it
 if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
@@ -109,11 +107,12 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 		$filestorename = elgg_strtolower(time().$_FILES['upload']['name']);
 	}
 
-	$mime_type = $file->detectMimeType($_FILES['upload']['tmp_name'], $_FILES['upload']['type']);
 	$file->setFilename($prefix . $filestorename);
-	$file->setMimeType($mime_type);
 	$file->originalfilename = $_FILES['upload']['name'];
-	$file->simpletype = file_get_simple_type($mime_type);
+	$mime_type = $file->detectMimeType($_FILES['upload']['tmp_name'], $_FILES['upload']['type']);
+
+	$file->setMimeType($mime_type);
+	$file->simpletype = elgg_get_file_simple_type($mime_type);
 
 	// Open the file to guarantee the directory exists
 	$file->open("write");
@@ -159,6 +158,23 @@ if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name'])) {
 			$file->largethumb = $prefix."largethumb".$filestorename;
 			unset($thumblarge);
 		}
+	} elseif ($file->icontime) {
+		// if it is not an image, we do not need thumbnails
+		unset($file->icontime);
+		
+		$thumb = new ElggFile();
+		
+		$thumb->setFilename($prefix . "thumb" . $filestorename);
+		$thumb->delete();
+		unset($file->thumbnail);
+		
+		$thumb->setFilename($prefix . "smallthumb" . $filestorename);
+		$thumb->delete();
+		unset($file->smallthumb);
+		
+		$thumb->setFilename($prefix . "largethumb" . $filestorename);
+		$thumb->delete();
+		unset($file->largethumb);
 	}
 } else {
 	// not saving a file but still need to save the entity to push attributes to database
@@ -175,7 +191,7 @@ if ($new_file) {
 		$message = elgg_echo("file:saved");
 		system_message($message);
 		if (! $embed) {
-			elgg_create_river_item(array( 'view' => 'river/object/file/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $file->getGUID(),));
+			elgg_create_river_item(array( 'view' => 'river/object/file/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $file->guid,));
 		}
 	} else {
 		// failed to save file object - nothing we can do about this
@@ -198,4 +214,4 @@ if ($new_file) {
 	}
 
 	forward($file->getURL());
-}	
+}

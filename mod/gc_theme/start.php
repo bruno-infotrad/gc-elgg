@@ -17,7 +17,7 @@ function gc_theme_init() {
 	//elgg_register_js('jquery.scrollabletab', '/mod/gc_theme//vendors/jquery.scrollabletab.js','head');
 	elgg_register_js('jquery.scrollto', '/mod/gc_theme/vendors/jquery.scrollTo-1.4.3.1-min.js','head');
 	elgg_register_js('jquery.scrollabletab', '/mod/gc_theme/vendors/simplescrolltab.js','head');
-	elgg_register_js('jquery.jeditable', '/mod/gc_theme/vendors/jquery.jeditable.mini.js','head');
+	//elgg_register_js('jquery.jeditable', '/mod/gc_theme/vendors/jquery.jeditable.mini.js','head');
 	elgg_register_js('jquery.multidatespicker', '/mod/gc_theme/vendors/jquery-ui.multidatespicker/jquery-ui.multidatespicker.js','head');
 	elgg_register_css('multidatespicker', '/mod/gc_theme/vendors/jquery-ui.multidatespicker/css/mdp.css','head');
         elgg_load_css('multidatespicker');
@@ -169,7 +169,7 @@ function gc_theme_init() {
 	elgg_unextend_view("js/elgg", "js/event_manager/site");
 	elgg_extend_view("js/elgg", "js/event_manager/site");
 	// Unregister Google map
-	elgg_register_simplecache_view("js/event_manager/googlemaps");
+	//elgg_register_simplecache_view("js/event_manager/googlemaps");
 	elgg_unregister_js("event_manager.maps.helper");
 	elgg_unregister_js("event_manager.maps.base");
 	//Remove sidebar cleanup section
