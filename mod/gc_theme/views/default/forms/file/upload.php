@@ -55,7 +55,7 @@ function check_file(){
 		if (filename.length > 30) {
     			filename =  filename.substr(0, 15) + '...' + filename.substr(filename.length-10, filename.length);
   		}
-		$('#gc-file-selected').html(filename);
+		$('.gc-file-selected').html(filename);
 	}
         $('#multi-upload-button').css('opacity',1);
 	$('#multi-upload-button').css('pointer-events','all');
@@ -74,7 +74,7 @@ if ($embed) {
 }
 ?>
 </div>
-	<div class="gc-input-file-1em" id="gc-file-selected"><?php echo $file_selected; ?></div>
+	<div class="gc-input-file-1em gc-file-selected"><?php echo $file_selected; ?></div>
 </div>
 <div class="gc-input-file-row">
 	<div class="gc-input-file-2em"><label><?php echo elgg_echo('tags'); ?></label></div>

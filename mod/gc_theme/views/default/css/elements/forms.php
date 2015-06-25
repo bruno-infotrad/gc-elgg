@@ -74,7 +74,7 @@ label[for=blog_description] {
 }
 #file-tools-uploadify-cancel {height: 28px;}
 #uploadify-button-wrapper.uploadify {top: -30px;}
-#gc-file-selected {
+.gc-file-selected {
   border: 1px solid #BDC7D8;
   border-radius: 3px;
   min-width: 15em;
