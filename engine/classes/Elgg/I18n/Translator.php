@@ -150,9 +150,13 @@ class Translator {
 		$user = _elgg_services()->session->getLoggedInUser();
 		$language = false;
 	
-		if (($user) && ($user->language)) {
-			$language = $user->language;
-		}
+		//if (($user) && ($user->language)) {
+		//	$language = $user->language;
+		//}
+
+        	if ((!$language) && (isset($_SESSION['language'])) && ($_SESSION['language'])) {
+                	$language = $_SESSION['language'];
+        	}
 	
 		if ((!$language) && (isset($this->CONFIG->language)) && ($this->CONFIG->language)) {
 			$language = $this->CONFIG->language;
