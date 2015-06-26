@@ -7,10 +7,9 @@ define(function(require) {
 		removeButtons: 'Subscript,Superscript', // To have Underline back
 		allowedContent: true,
 		baseHref: elgg.config.wwwroot,
-		removePlugins: 'contextmenu,tabletools,resize',
 		extraPlugins: 'blockimagepaste',
 		defaultLanguage: 'en',
-		language: elgg.config.language,
+		language: elgg.get_language(),
 		skin: 'moono',
 		uiColor: '#EEEEEE',
 		contentsCss: elgg.get_simplecache_url('css', 'elgg/wysiwyg.css'),
