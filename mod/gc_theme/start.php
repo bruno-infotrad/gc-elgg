@@ -96,6 +96,8 @@ function gc_theme_init() {
 	elgg_register_page_handler('pages', 'gc_pages_page_handler');
 	elgg_register_page_handler('events', 'gc_event_manager_page_handler');
 	elgg_register_page_handler('messages', 'gc_messages_page_handler');
+	elgg_unregister_page_handler('site_notifications', 'site_notifications_page_handler');
+	elgg_register_page_handler('site_notifications', 'gc_site_notifications_page_handler');
 	elgg_register_page_handler('multi_invite_autocomplete', 'multi_invite_autocomplete');
 	elgg_register_page_handler('groups_autocomplete', 'groups_autocomplete');
 	elgg_register_page_handler('user_autocomplete', 'user_autocomplete');
@@ -336,12 +338,4 @@ function gc_theme_init() {
 		}
 	}
 }
-/*
-function batch_group_notifications() {
-        require_once 'lib/batch_notifications.php';
-        $period = 'minute';
-        elgg_register_plugin_hook_handler('cron', $period, 'gc_object_notifications');
-}
-*/
-//elgg_register_event_handler('init','system','batch_group_notifications');
 elgg_register_event_handler('init', 'system', 'gc_theme_init');
