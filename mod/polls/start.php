@@ -34,9 +34,7 @@ function polls_init() {
 	
 	// notifications
 	elgg_register_notification_event('object', 'poll');
-        //register_notification_object('object', 'poll', elgg_echo('poll:notify_new_poll'));
-        elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'poll_notify_message');
-
+	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:page', 'polls_prepare_notification');
 	// register the JavaScript
 	$js = elgg_get_simplecache_url('js', 'polls/js');
 	elgg_register_simplecache_view('js/polls/js');
@@ -193,4 +191,34 @@ function polls_get_friends_polls($user_guid) {
         }
 
         return $return;
+}
+/**
+ * Prepare a notification message about a new poll
+ * 
+ * @param string                          $hook         Hook name
+ * @param string                          $type         Hook type
+ * @param Elgg\Notifications\Notification $notification The notification to prepare
+ * @param array                           $params       Hook parameters
+ * @return Elgg\Notifications\Notification
+ */
+function polls_prepare_notification($hook, $type, $notification, $params) {
+	$entity = $params['event']->getObject();
+	$owner = $params['event']->getActor();
+	$recipient = $params['recipient'];
+	$language = $params['language'];
+	$method = $params['method'];
+
+	$descr = $entity->description;
+	$title = $entity->title;
+
+	$notification->subject = elgg_echo('polls:notify:subject', array($title), $language); 
+	$notification->body = elgg_echo('polls:notify:body', array(
+		$owner->name,
+		$title,
+		$descr,
+		$entity->getURL(),
+	), $language);
+	$notification->summary = elgg_echo('polls:notify:summary', array($entity->title), $language);
+
+	return $notification;
 }
