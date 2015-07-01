@@ -16,13 +16,13 @@ if (!$group->isMember($user)) {
 	system_message(elgg_echo('membershiprequired'));
 	exit();
 }
-global $NOTIFICATION_HANDLERS;
+$NOTIFICATION_HANDLERS = _elgg_services()->notifications->getMethodsAsDeprecatedGlobal();
 foreach ($NOTIFICATION_HANDLERS as $defined_method => $foo) {
 	if ($method == $defined_method) {
 		if ($status == 'on') {
-			add_entity_relationship($user_guid, 'notify'.$method, $group_guid);
+			elgg_add_subscription($user_guid, $method, $group_guid);
 		} else {
-			remove_entity_relationship($user_guid, 'notify'.$method, $group_guid);
+			elgg_remove_subscription($user_guid, $method, $group_guid);
 		}
 	}
 }
