@@ -17,8 +17,9 @@ function site_notifications_init() {
 
 	elgg_extend_view('css/elgg', 'site_notifications/css');
 
-	$js = elgg_get_simplecache_url('js', 'site_notifications');
-	elgg_register_js('elgg.site_notifications', $js, 'footer');
+	//$js = elgg_get_simplecache_url('js', 'site_notifications');
+	//elgg_register_js('elgg.site_notifications', $js, 'footer');
+	elgg_extend_view("js/elgg", "js/site_notifications");
 
 	site_notifications_set_topbar();
 
