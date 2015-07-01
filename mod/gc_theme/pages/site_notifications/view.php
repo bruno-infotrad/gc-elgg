@@ -2,6 +2,7 @@
 /**
  * View a user's site notifications
  */
+
 elgg_load_js('elgg.site_notifications');
 $page_owner = elgg_get_page_owner_entity();
 if (!$page_owner || !$page_owner->canEdit()) {
@@ -33,7 +34,7 @@ $form = elgg_view_form("site_notifications/process", array(), $body_vars);
 $body = elgg_view_layout('content', array(
 	'content' => $form,
 	'title' => $title,
-	'filter' => '',
+	'filter_override' => elgg_view('messages/nav', array('selected' => 'notifications')),
 ));
 
 echo elgg_view_page($title, $body);

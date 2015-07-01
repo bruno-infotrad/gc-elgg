@@ -50,7 +50,7 @@ function site_notifications_page_handler($segments) {
 	}
 
 	elgg_set_page_owner_guid($user->guid);
-	elgg_load_js('elgg.site_notifications');
+	//elgg_load_js('elgg.site_notifications');
 
 	require "$base/view.php";
 

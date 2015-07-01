@@ -74,12 +74,16 @@ a.elgg-button-join,a.elgg-button-leave {
 	margin-right:0;
 	margin-left:4px;
 }
+.site-notifications-buttonbank {text-align: left!important}
+.site-notifications-buttonbank .elgg-button-submit,
 .messages-buttonbank .elgg-button-submit {
     float: none;
 }
+.site-notifications-buttonbank .elgg-button-delete,
 .messages-buttonbank .elgg-button-delete {
     /*margin-right: 65%;*/
 }
+.site-notifications-buttonbank .elgg-button,
 .messages-buttonbank .elgg-button {
     display: inline-block;
 }

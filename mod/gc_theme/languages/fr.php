@@ -1,5 +1,5 @@
 <?php
-$french = array(
+return array(
 	'load' => "Télécharger",
 	'upload' => "Télécharger",
 	'remove' => "Supprimer",
@@ -441,6 +441,7 @@ $french = array(
 	'gc_theme:tabnav:groups' => 'Groupes',
 	'gc_theme:tabnav:settings' => 'Paramètres',
 	'gc_theme:tabnav:messages' => 'Messages',
+	'gc_theme:tabnav:site_notifications' => 'Notifications',
 	'gc_theme:tabnav:bookmarks' => 'Signets',
 	'gc_theme:tabnav:widgets' => 'Révisions de la page',
 	'gc_theme:tabnav:events' => 'Événements',
@@ -768,4 +769,3 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 <p>Tout renseignement diffusé sur Agora est assujetti aux dispositions de la Loi sur l’accès à l’information et à la Loi sur la protection des renseignements personnels. Pour plus d’information, veuillez consulter les Lignes directrices sur la cybercollaboration (Vie privée; Accès à l'information; Gestion des dossiers). Le lien Avis importants, situé au bas de cette page, vous fournira également des renseignements utiles.</p>",
 	'gc_theme:pns_accept' => "J'accepte",
 );
-add_translation("fr", $french);

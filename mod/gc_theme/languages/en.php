@@ -1,5 +1,5 @@
 <?php
-add_translation('en', array(
+return array(
 	'annotation:group_topic_post:value:placeholder' => 'Leave a reply...',
 	'annotation:generic_comment:value:placeholder' => 'Leave a comment...',
 	
@@ -169,6 +169,7 @@ add_translation('en', array(
 	'gc_theme:tabnav:discussion' => 'Discussion topics',
 	'gc_theme:tabnav:settings' => 'Settings',
 	'gc_theme:tabnav:messages' => 'Messages',
+	'gc_theme:tabnav:site_notifications' => 'Notifications',
 	'gc_theme:tabnav:bookmarks' => 'Bookmarks',
 	'gc_theme:tabnav:widgets' => 'Page Revisions',
 	'gc_theme:tabnav:events' => 'Events',
@@ -389,4 +390,4 @@ You can view your pending colleague requests at (Make sure you are logged into t
 <p>Agora is not intended to store information of business value. Information held in Agora will be retained for as long as the employee's account, or e-collaboration tool is active.  All information will then be disposed of. Information resources of business or enduring value are to be treated as per the Treasury Board Directive on Recordkeeping.</p>
 <p>Information shared on Agora is subject to the provisions of the Access to Information Act and the Privacy Act. For further information please refer to the E-Collaboration User Guidelines (Privacy; Access to Information; and Records Management). The Important Notices link located at the bottom of this page will also provide useful information.</p>",
 	'gc_theme:pns_accept' => 'I accept',
-));
+);

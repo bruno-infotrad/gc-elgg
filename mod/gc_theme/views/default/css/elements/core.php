@@ -15,7 +15,7 @@
  */
 ?>
 .elgg-body {
-	padding-bottom: 20px;
+	/* padding-bottom: 20px;*/
 }
 /* Clearfix */
 .clearfix:after,

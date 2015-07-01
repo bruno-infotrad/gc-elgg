@@ -190,9 +190,10 @@ p.namefieldlink {
 }
 
 /* new message format message moved to sidebar */
+.gc-messages,
 .gc-messages-new {
+        color: red;
 /*
-        color: white;
         background-color: red;
 
         -webkit-border-radius: 10px;
@@ -221,6 +222,9 @@ background: #fff;
 -o-border-radius: 2px;
 border-radius: 2px;
 margin-left: 5px;
+display: inline-block;
+}
+.gc-messages-new {
 display: none;
 }
 

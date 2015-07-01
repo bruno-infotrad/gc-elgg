@@ -8,6 +8,7 @@
  *
  */
 ?>
+.elgg-body.gc-notification {display: inline;}
 .gc-river-event {display:inline-block;vertical-align:top;}
 .gc-river-event-icon {padding-left:10px;}
 #event-exec-content {float: right;padding-right: 1em;}
