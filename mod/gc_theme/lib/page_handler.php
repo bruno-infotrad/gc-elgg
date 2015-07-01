@@ -103,7 +103,11 @@ function gc_messages_page_handler($page) {
         if (! elgg_is_logged_in()) {
                 forward('/dashboard');
         } else {
-        	if (isset($page[0]) && $page[0] == 'read' && isset($page[1])) {
+        	if (isset($page[0]) && $page[0] == 'inbox' && isset($page[1])) {
+        		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/messages';
+                	set_input('username', $page[1]);
+			include "$base_dir/inbox.php";
+        	} elseif (isset($page[0]) && $page[0] == 'read' && isset($page[1])) {
 			//need to load js and css for right navigation to work
         		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/messages';
                 	set_input('guid', $page[1]);
@@ -118,6 +122,27 @@ function gc_messages_page_handler($page) {
         	}
        		return true;
         }
+}
+
+function gc_site_notifications_page_handler($segments) {
+        $base = elgg_get_plugins_path() . 'gc_theme/pages/site_notifications';
+
+        elgg_gatekeeper();
+
+        if (!isset($segments[1])) {
+                $segments[1] = elgg_get_logged_in_user_entity()->username;
+        }
+
+        $user = get_user_by_username($segments[1]);
+        if (!$user) {
+                return false;
+        }
+
+        elgg_set_page_owner_guid($user->guid);
+
+        require "$base/view.php";
+
+        return true;
 }
 
 function gc_pages_page_handler($page) {
