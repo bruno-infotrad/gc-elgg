@@ -1,5 +1,5 @@
 <?php
-elgg_load_js('elgg.contribute_to');
+//elgg_load_js('elgg.contribute_to');
 $tabs["thewire"] = array(
 	'text' => elgg_view_agora_icon('wire') . elgg_echo("composer:object:thewire"),
 	"href" => "#",
@@ -8,6 +8,7 @@ $tabs["thewire"] = array(
 	"onclick" => "compound_switch_tab(\"thewire\");",
 	"selected" => true
 );
+//$vars['class'] = 'dropzone';
 $form_data = "<div id='compound_thewire'>";
 $form_data .= elgg_view_form('compound/add',$vars);
 $form_data .= "</div>";

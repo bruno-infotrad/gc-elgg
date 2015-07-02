@@ -127,6 +127,7 @@ function thebetterwire_save_post($guid = 0,$text, $userid, $container_guid, $acc
 		} else {
         		$post->exec_content = false;
 		}
+/*
         	//Hack to allow for line break. First convert to crazy string
         	$text = preg_replace('/\n/',':br:',$text);
 
@@ -134,6 +135,8 @@ function thebetterwire_save_post($guid = 0,$text, $userid, $container_guid, $acc
         	$post->description = htmlspecialchars($text, ENT_NOQUOTES, 'UTF-8');
         	//Hack to allow for line break. now convert back to br
         	$post->description = preg_replace('/:br:/','<br>',$post->description);
+*/
+        	$post->description = $text;
 
         	$post->method = $method; //method: site, email, api, ...
 

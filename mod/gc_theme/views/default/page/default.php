@@ -61,13 +61,6 @@ header("Content-type: text/html; charset=UTF-8");
 <?php
 
 echo elgg_view('page/elements/foot');
-
-$js = elgg_get_loaded_js('footer');
-foreach ($js as $script) { ?>
-	<script type="text/javascript" src="<?php echo $script; ?>"></script>
-<?php
-}
-
 ?>
 
 <!-- SR [2012-10-04] Added for CometChat integration -->
@@ -80,27 +73,5 @@ $commetchat_css_url = $site_url . 'cometchat/cometchatcss.php';
 $commetchat_js_url  = $site_url . 'cometchat/cometchatjs.php';
 }
 ?>
-<!--
-<link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
-<script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script>
--->
-<!-- ScriptsStart -->
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/settings.js"></script>
-<!--[if lte IE 8]>
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/theme-gcwu-intranet/js/theme-ie-min.js"></script>
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/pe-ap-ie-min.js"></script>
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/jquerymobile/jquery.mobile-ie.min.js"></script>
-<![endif]-->
-<!--[if gt IE 8]><!-->
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/theme-gcwu-intranet/js/theme-min.js"></script>
-<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/pe-ap-min.js"></script>
-<!--<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/jquerymobile/jquery.mobile.min.js"></script>
-<!--<![endif]-->
-<!-- ScriptsEnd -->
-
-<!-- CustomScriptsStart -->
-<script type="text/javascript" src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/js/site.js"></script>
-<!-- CustomScriptsEnd -->
-
 </body>
 </html>

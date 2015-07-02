@@ -15,6 +15,7 @@ elgg_load_js('lightbox');
 elgg_load_css('lightbox');
 elgg_load_js('elgg.thewire');
 elgg_load_js('elgg.contribute_to');
+//elgg_require_js('dropzone/dropzone');
 
 $title = elgg_extract('title', $vars, '');
 $desc = elgg_extract('description', $vars, '');
@@ -50,12 +51,12 @@ if ($post) {
 	));
 }
 
-echo elgg_view('input/plaintext', array(
+//echo elgg_view('input/plaintext', array(
+echo elgg_view('input/longtext', array(
 	'name' => 'body',
 	'value' => $post->description,
 	'class' => 'mtm',
 	'id' => 'thewire-textarea',
-	'onfocus' => "elgg.user_handle('thewire-textarea')",
 ));
 ?>
 <div id="browser" class="elgg-foot mts">
@@ -86,46 +87,3 @@ echo elgg_view('output/url', array(
 ));
 ?>
 </div>
-<script>
-var exec_content_warning = "<?php echo elgg_echo('gc_theme:exec_content:warning');?>";
-$('input#thewire-exec-content').live('click',function(event){
-	if ($('input#thewire-exec-content').is(':checked')) {
-		if (confirm(exec_content_warning) == false) {
-        	        event.preventDefault();
-        	        return;
-        	}
-        }
-});
-$('#thewire-contribute-to').attr('disabled','disabled');
-$('#thewire-contribute-to').css('pointer-events','none');
-$("#thewire-textarea").live('keyup', function(){
-	if ($.trim($("#thewire-textarea").val())) {
-		if (!$('input#thewire-exec-content').is(':checked')) {
-			$('#thewire-contribute-to').css('opacity','1.0');
-			$('#thewire-contribute-to').css('pointer-events','all');
-			$('#thewire-contribute-to').removeAttr('disabled');
-		};
-		$('input#thewire-submit-button:disabled').val(false);
-		$('#thewire-submit-button').css('opacity','1.0');
-	} else {
-		$('#thewire-contribute-to').css('opacity','0.5');
-		$('#thewire-contribute-to').css('pointer-events','none');
-		$('#thewire-contribute-to').attr('disabled','disabled');
-		$('input#thewire-submit-button.elgg-button.elgg-button-submit:disabled').val(true);
-		$('#thewire-submit-button').css('opacity','0.5');
-	};
-});
-$('input#thewire-exec-content').change(function () {
-	if ($.trim($("#thewire-textarea").val())) {
-		if (!$('input#thewire-exec-content').is(':checked')) {
-			$('#thewire-contribute-to').css('opacity','1.0');
-			$('#thewire-contribute-to').css('pointer-events','all');
-			$('#thewire-contribute-to').removeAttr('disabled');
-		} else {
-			$('#thewire-contribute-to').css('opacity','0.5');
-			$('#thewire-contribute-to').css('pointer-events','none');
-			$('#thewire-contribute-to').attr('disabled','disabled');
-		};
-	};
-});
-</script>
