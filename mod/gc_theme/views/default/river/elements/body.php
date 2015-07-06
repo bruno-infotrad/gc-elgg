@@ -57,7 +57,7 @@ if ($attachments !== false) {
 
 $responses = elgg_view('river/elements/responses', $vars);
 if ($responses) {
-	$responses = "<div class=\"elgg-river-responses\">$responses</div>";
+	$responses = "<div class=\"elgg-river-responses-$object_guid\">$responses</div>";
 }
 
 $group_string = '';
