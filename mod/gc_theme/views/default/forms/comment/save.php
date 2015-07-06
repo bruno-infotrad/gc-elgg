@@ -22,8 +22,6 @@ $comment = elgg_extract('comment', $vars);
 
 $inline = elgg_extract('inline', $vars, false);
 $is_edit_page = elgg_extract('is_edit_page', $vars, false);
-$id = elgg_extract('id', $vars, false);
-$canwrite = elgg_extract('canwrite', $vars, false);
 
 $entity_guid_input = '';
 if ($entity) {
@@ -48,47 +46,20 @@ if ($comment && $comment->canEdit()) {
 	$submit_input = elgg_view('input/submit', array('value' => elgg_echo('comment')));
 }
 
-$cancel_button = '';
-if ($comment) {
+//$cancel_button = '';
+//if ($comment) {
 	$cancel_button = elgg_view('input/button', array(
 		'value' => elgg_echo('cancel'),
 		'class' => 'elgg-button-cancel mlm',
 		'href' => $entity ? $entity->getURL() : '#',
 	));
-}
+//}
 
 if ($inline) {
-/*
-	$comment_input = 'YO_MAN'.elgg_view('input/text', array(
+	$comment_input = elgg_view('input/text', array(
 		'name' => 'generic_comment',
 		'value' => $comment_text,
 	));
-*/
-	if ($canwrite) {
-		$comment_input= elgg_view('input/plaintext', array(
-			'name' => 'generic_comment',
-			'id' => $id.'-textarea',
-			'style' => 'height:22px;',
-			'onblur' => "changeHeight(\"$id\",'22px',\"$canwrite\")",
-			'onfocus' => "elgg.user_handle(\"$id-textarea\");changeHeight(\"$id\",'60px',\"$canwrite\")",
-			'placeholder' => elgg_echo('annotation:generic_comment:value:placeholder'),
-		));
-		$submit_input = elgg_view('input/submit', array(
-			'value' => elgg_echo('post'),
-			//'style' => 'opacity:0;filter:alpha(opacity=0);width:100%;height:100%;',
-			'style' => 'visibility: hidden;',
-			'id' => $id.'-submit',
-		));
-	} else {
-		$submit_input = '';
-		$comment_input= elgg_view('input/plaintext', array(
-			'name' => 'generic_comment',
-			'id' => $id.'-textarea',
-			'style' => 'height:22px;',
-			'disabled' => 'disabled',
-			'value' => elgg_echo('groups:register_to_comment'),
-		));
-	}
 
 	echo $comment_input . $entity_guid_input . $comment_guid_input . $submit_input;
 } else {

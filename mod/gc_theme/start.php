@@ -39,6 +39,9 @@ function gc_theme_init() {
 	$contribute_to_js = elgg_get_simplecache_url('js', 'contribute_to');
         elgg_register_simplecache_view('js/contribute_to');
         elgg_register_js('elgg.contribute_to', $contribute_to_js, 'footer');
+	$gc_comments_to_js = elgg_get_simplecache_url('js', 'gc_comments');
+        elgg_register_simplecache_view('js/gc_comments');
+        elgg_register_js('elgg.gc_comments', $gc_comments_to_js, 'footer');
 
 	//Register role config hook for im admins
 	elgg_register_plugin_hook_handler('roles:config', 'role', 'roles_im_admins_config', 600);
@@ -116,8 +119,9 @@ function gc_theme_init() {
 	//global $CONFIG, $gc_theme_original_groups_page_handler;
 	//$gc_theme_original_groups_page_handler = $CONFIG->pagehandler['groups'];
 	elgg_register_page_handler('groups', 'gc_theme_groups_page_handler');
-	// New in 1.8.3
 	//elgg_register_ajax_view('blog/composer');
+	elgg_register_ajax_view('gc_theme/ajax/add_gc_comment');
+	elgg_register_ajax_view('gc_theme/ajax/view/comment');
 	elgg_register_ajax_view('compound/composer');
 	elgg_register_ajax_view('file/composer');
 	elgg_register_ajax_view('poll/composer');
@@ -226,7 +230,8 @@ function gc_theme_init() {
 	elgg_register_action('groups/intro_join_groups', "$action_path/groups/intro_join_groups.php");
 	elgg_unregister_action('blog/save');
 	elgg_register_action('blog/save',"$action_path/blog/save.php");
-	//elgg_register_action("comments/add", "$action_path/comments/add.php");
+	elgg_unregister_action("comment/save");
+	elgg_register_action("comment/save", "$action_path/comment/save.php");
 	elgg_unregister_action("group_tools/mail");
 	elgg_register_action("group_tools/mail", $action_path."/group_tools/mail.php");
 	elgg_unregister_action("group_tools/admin_transfer");

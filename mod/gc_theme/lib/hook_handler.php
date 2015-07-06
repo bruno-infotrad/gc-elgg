@@ -678,18 +678,18 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 			
 			$items[] = ElggMenuItem::factory($options);
 		}
-/* Remove comment hyperlink on river page		
 		if ($object->canAnnotate(0, 'generic_comment')) {
 			$items[] = ElggMenuItem::factory(array(
 				'name' => 'comment',
-				'href' => "#comments-add-$object->guid",
+				//'href' => "#comments-add-$object->guid",
 				'text' => elgg_echo('comment'),
 				'title' => elgg_echo('comment:this'),
 				'rel' => "toggle",
 				'priority' => 50,
+				'link_class'=>'elgg-comment-add',
+				'id'=> $object->getGUID(),
 			));
 		}
-*/
 		
 		if (elgg_is_logged_in()) {
 			if ($object instanceof ElggUser && !$object->isFriend()) {

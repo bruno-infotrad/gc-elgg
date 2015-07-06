@@ -309,12 +309,12 @@ ul.elgg-river {
 }
 
 /* The following styles produce the speech-bubble "nub" (triangle) */
-.elgg-river-responses {
+[class^=elgg-river-responses] {
 	position: relative;
 	padding-top: 5px;
 }
 
-.elgg-river-responses:before {
+[class^=elgg-river-responses]:before {
 	width: 0px;
 	height: 0px;
 	font-size: 0px;
@@ -334,9 +334,9 @@ ul.elgg-river {
 /* End speech bubble nub */
 
 /* .elgg-river-responses > :not(ul, ol), */ /* <-- too advanced? */
-.elgg-river-responses > div,
-.elgg-river-responses > form,
-.elgg-river-responses > ul > li {
+[class^=elgg-river-responses] > div,
+[class^=elgg-river-responses] > form,
+[class^=elgg-river-responses] > ul > li {
 	background-color: #EDEFF4;
 	border-bottom: 1px solid #E5EAF1;
 	margin-bottom: 2px;

@@ -55,7 +55,7 @@ if ($comment_count) {
 	//echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
 
 }
-
+/*
 if ($object->canAnnotate(0, 'generic_comment')) {
 	// inline comment form
 ?>
@@ -73,3 +73,4 @@ if ($object->canAnnotate(0, 'generic_comment')) {
 		//), array('entity' => $object, 'inline' => true, 'id' => $id, 'canwrite' => $canwrite));
 	//}
 }
+*/
