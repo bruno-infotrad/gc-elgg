@@ -8,13 +8,14 @@
 
 ?>
 /*[class^=wire-edit-] {*/
+.comment-edit,
 [id^=wire-edit-] {
 	background: url(<?php echo elgg_get_site_url(); ?>mod/gc_theme/graphics/icons/edit16x16.png) no-repeat 100% 0;
 	display: inline-block;
 	float: left;
 	height: 16px;
-	margin-right: 2px;
-	margin-top: 2px;
+	margin-right: 5px;
+	margin-top: 5px;
 	vertical-align: middle;
 	width: 16px;
 }

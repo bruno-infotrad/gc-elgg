@@ -69,16 +69,17 @@ elgg.contribute_to.init = function() {
 	$("#thewire-textarea").on('focus', function() {
 		elgg.user_handle('#thewire-textarea');
 	});
-
+/*
 	CKEDITOR.on('instanceReady', function(event) {
 		for ( var i in CKEDITOR.instances ){
 			var oEditor   = CKEDITOR.instances[i];
 			var id   = $(oEditor).attr('id');
-			console.log("ID="+id);
+			//console.log("i="+i+" id="+id);
 			//elgg.user_handle('#thewire-textarea');
-			elgg.user_handle(id);
+			elgg.user_handle(i);
 		}
 	});
+*/
 	CKEDITOR.on('instanceReady', function(event) {
 		var e = CKEDITOR.instances['thewire-textarea']
 		var editable = e.editable();
@@ -122,17 +123,6 @@ elgg.contribute_to.init = function() {
 				$form.data('submitted',true);
 			}
 		});
-/*
-//var editor = CKEDITOR.inline('cke_thewire-textarea'); 
-var editor = CKEDITOR.inline('thewire-textarea'); 
-
-editor.on( 'contentDom', function() {
-    var editable = editor.editable();
-    editable.attachListener( editable, 'keyup', function() {
-        console.log( editor.getData() );
-    } );
-} );
-*/
 	});
 };
 

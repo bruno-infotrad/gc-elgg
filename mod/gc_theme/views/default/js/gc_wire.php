@@ -1,4 +1,5 @@
-
+<?php
+?>
 elgg.provide('elgg.gc_wire');
 
 /**
@@ -42,7 +43,7 @@ elgg.gc_wire.theWire.prototype = {
 		elgg.ajax('ajax/view/gc_theme/ajax/edit_gc_wire?guid=' + this.guid, {
 			success: function(html) {
 				// Add the form to DOM
-				console.log("IN LOADFORM SUCCESS"+JSON.stringify(that));
+				//console.log("IN LOADFORM SUCCESS"+JSON.stringify(that));
 				that.$item.find('.edit_area').append(html);
 
 				that.showForm();

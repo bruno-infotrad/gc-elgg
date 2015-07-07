@@ -39,11 +39,11 @@ if ($comment && $comment->canEdit()) {
 		'value' => $comment->guid,
 	));
 	$comment_label  = elgg_echo("generic_comments:edit");
-	$submit_input = elgg_view('input/submit', array('value' => elgg_echo('save')));
+	$submit_input = elgg_view('input/submit', array('value' => elgg_echo("generic_comments:edit")));
 	$comment_text = $comment->description;
 } else {
 	$comment_label  = elgg_echo("generic_comments:add");
-	$submit_input = elgg_view('input/submit', array('value' => elgg_echo('comment')));
+	$submit_input = elgg_view('input/submit', array('value' => elgg_echo("generic_comments:add")));
 }
 
 //$cancel_button = '';

@@ -276,7 +276,7 @@ function gc_theme_init() {
 	/**
 	 * Customize menus
 	 */
-	elgg_unregister_plugin_hook_handler('register', 'menu:river', 'likes_river_menu_setup');
+	//elgg_unregister_plugin_hook_handler('register', 'menu:river', 'likes_river_menu_setup');
 	elgg_unregister_plugin_hook_handler('register', 'menu:river', 'elgg_river_menu_setup');
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'groups_activity_owner_block_menu');
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'discussion_owner_block_menu');
@@ -318,8 +318,8 @@ function gc_theme_init() {
 	//@todo report some of the extra patterns to be included in Elgg core
 	elgg_extend_view('css/elgg', 'gc_theme/css');
 	elgg_extend_view('js/elgg', 'js/topbar');
-	elgg_unextend_view('js/elgg', 'likes/js');
-	elgg_extend_view('js/elgg', 'likes/js');
+	//elgg_unextend_view('js/elgg', 'likes/js');
+	//elgg_extend_view('js/elgg', 'likes/js');
 	//File tool
 	elgg_unextend_view("js/elgg", "file_tools/js/site");
 	elgg_extend_view("js/elgg", "file_tools/js/site");

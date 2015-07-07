@@ -655,6 +655,7 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 	$object = $item->getObjectEntity();
 	if (!elgg_in_context('widgets') && !$item->annotation_id && $object instanceof ElggEntity && $item->action_type != 'join') {
 		
+/*
 		if (elgg_is_active_plugin('likes') && $object->canAnnotate(0, 'likes')) {
 			if (!elgg_annotation_exists($object->getGUID(), 'likes')) {
 				// user has not liked this yet
@@ -678,11 +679,13 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 			
 			$items[] = ElggMenuItem::factory($options);
 		}
+*/
 		if ($object->canAnnotate(0, 'generic_comment')) {
 			$items[] = ElggMenuItem::factory(array(
 				'name' => 'comment',
 				//'href' => "#comments-add-$object->guid",
-				'text' => elgg_echo('comment'),
+				//'text' => elgg_echo('comment'),
+				'text' => elgg_view_icon('speech-bubble'),
 				'title' => elgg_echo('comment:this'),
 				'rel' => "toggle",
 				'priority' => 50,
@@ -718,10 +721,10 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 
 function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
         $handler = elgg_extract('handler', $params, false);
-        if ($handler != 'thewire' && $handler != 'blog') {
+        if ($handler != 'thewire' && $handler != 'blog' && $handler != 'comment') {
                 return $value;
         }
-
+        $entity = $params['entity'];
 	if ($handler == 'thewire') {
         	foreach ($value as $index => $item) {
         	        $name = $item->getName();
@@ -733,9 +736,16 @@ function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
         	        }
         	}
         }
-
-        $entity = $params['entity'];
-
+	if ($entity->canEdit() && $handler == 'comment') {
+        	foreach ($value as $index => $item) {
+        	        $name = $item->getName();
+        	        if ($name == 'edit') {
+				//$item->setText('<div id="wire-edit-bla"></div>');
+				$item->setText('');
+				$item->setLinkClass('comment-edit');
+        	        }
+        	}
+        }
         if (elgg_is_logged_in()) {
 		if ($handler == 'thewire') {
                 	$options = array(
@@ -772,7 +782,7 @@ function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
                 );
                 $value[] = ElggMenuItem::factory($options);
         }
-
+/*
         $options = array(
                 'name' => 'thread',
                 'text' => elgg_echo('thewire:thread'),
@@ -780,7 +790,7 @@ function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
                 'priority' => 170,
         );
         $value[] = ElggMenuItem::factory($options);
-
+*/
         return $value;
 }
 
