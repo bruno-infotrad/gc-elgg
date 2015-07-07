@@ -52,6 +52,7 @@ $title = elgg_echo('newsfeed');
 $composer = elgg_view('compound/multi', array("id" => "invite_to_group",));
 //$composer = elgg_view_form('compound/add', array('enctype' => 'multipart/form-data'));
 elgg_load_js('elgg.gc_comments');
+elgg_load_js('elgg.gc_wire');
 $options = array();
 $options['page_type'] = $page_type;
 //$options['limit'] = 100;

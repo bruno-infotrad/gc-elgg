@@ -48,8 +48,9 @@ if (elgg_in_context('widgets')) {
 $params = array(
 	'entity' => $post,
 	'metadata' => $metadata,
+	'title' => false,
 	'subtitle' => $subtitle,
-	'content' => thebetterwire_filter($post->description),
+	'content' => $post->description,
 	'tags' => false,
 );
 $params = $params + $vars;

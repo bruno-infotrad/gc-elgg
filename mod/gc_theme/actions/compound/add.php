@@ -44,7 +44,7 @@ if ($container_guid) {
 	}
 }
 
-$body = get_input('body', '', false);
+$body = get_input('gc_wire', '', false);
 $jeditable = false;
 $river_guid = get_input('river_guid',0);
 if (empty($body)) {

@@ -11,6 +11,7 @@ elgg.embed.init = function() {
 	// caches the current textarea id
 	$(".embed-control").live('click', function() {
 		var textAreaId = /embed-control-(\S)+/.exec($(this).attr('class'))[0];
+		console.log("textAreaId="+textAreaId);
 		elgg.embed.textAreaId = textAreaId.substr("embed-control-".length);
 	});
 
@@ -52,6 +53,7 @@ elgg.embed._deprecated_custom_insert_js = function(hook, type, params, value) {
  */
 elgg.embed.insert = function(event) {
 	var textAreaId = elgg.embed.textAreaId;
+	console.log("textAreaId="+textAreaId);
 	var textArea = $('#' + textAreaId);
 
 	// generalize this based on a css class attached to what should be inserted

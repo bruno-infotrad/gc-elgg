@@ -1,6 +1,4 @@
 <?php
-elgg_load_js('elgg.thewire');
-
 $post = elgg_extract('post', $vars);
 
 $text = elgg_echo('post');
@@ -15,15 +13,12 @@ if ($post) {
 	));
 }
 
-echo elgg_view('input/plaintext', array(
+echo elgg_view('input/longtext', array(
 	'name' => 'body',
 	'class' => 'mtm',
 	'id' => 'thewire-textarea',
 ));
 ?>
-<div id="thewire-characters-remaining">
-	<span>0</span> <?php echo elgg_echo('thewire:chartyped'); ?>
-</div>
 <div class="elgg-foot mts">
 <?php
 

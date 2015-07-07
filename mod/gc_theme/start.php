@@ -42,6 +42,10 @@ function gc_theme_init() {
 	$gc_comments_to_js = elgg_get_simplecache_url('js', 'gc_comments');
         elgg_register_simplecache_view('js/gc_comments');
         elgg_register_js('elgg.gc_comments', $gc_comments_to_js, 'footer');
+	elgg_unregister_js('elgg.thewire');
+	$gc_wire_to_js = elgg_get_simplecache_url('js', 'gc_wire');
+        elgg_register_simplecache_view('js/gc_wire');
+        elgg_register_js('elgg.gc_wire', $gc_wire_to_js, 'footer');
 
 	//Register role config hook for im admins
 	elgg_register_plugin_hook_handler('roles:config', 'role', 'roles_im_admins_config', 600);
@@ -122,6 +126,7 @@ function gc_theme_init() {
 	//elgg_register_ajax_view('blog/composer');
 	elgg_register_ajax_view('gc_theme/ajax/add_gc_comment');
 	elgg_register_ajax_view('gc_theme/ajax/view/comment');
+	elgg_register_ajax_view('gc_theme/ajax/edit_gc_wire');
 	elgg_register_ajax_view('compound/composer');
 	elgg_register_ajax_view('file/composer');
 	elgg_register_ajax_view('poll/composer');

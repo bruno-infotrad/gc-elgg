@@ -10,6 +10,8 @@ if (!$group || !elgg_instanceof($group, 'group')) {
 }
 
 elgg_load_library('elgg:groups');
+elgg_load_js('elgg.gc_comments');
+elgg_load_js('elgg.gc_wire');
 groups_register_profile_buttons($group);
 
 $title = $group->name;
@@ -29,10 +31,20 @@ if (group_gatekeeper(false)) {
 	$db_prefix = elgg_get_config('dbprefix');
 	switch ($context) {
 		case 'profile':
+			$group_guid = 'e1.container_guid='.$group->guid;
+			$group_guid .= ' OR e2.container_guid='.$group->guid;
+			$options['joins'] = array("JOIN elgg_entities e1 ON e1.guid = rv.object_guid",
+						"LEFT JOIN elgg_entities e2 ON e2.guid = rv.target_guid",
+						"LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid",
+						"LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"
+						);
+			$options['wheres']=array("(rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid.")", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
+/*
 			$options = array(
 				'joins' => array("JOIN {$db_prefix}entities e ON e.guid = rv.object_guid"),
 				'wheres' => array("(e.container_guid = $group->guid OR rv.object_guid = $group->guid) AND rv.action_type != 'vote' AND rv.action_type != 'join'"),
 			);
+*/
 
 	}
 	$options['body_class'] = 'new-feed';

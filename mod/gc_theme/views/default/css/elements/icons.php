@@ -7,7 +7,8 @@
  */
 
 ?>
-.wire-edit {
+/*[class^=wire-edit-] {*/
+[id^=wire-edit-] {
 	background: url(<?php echo elgg_get_site_url(); ?>mod/gc_theme/graphics/icons/edit16x16.png) no-repeat 100% 0;
 	display: inline-block;
 	float: left;

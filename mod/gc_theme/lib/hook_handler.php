@@ -725,7 +725,8 @@ function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
 	if ($handler == 'thewire') {
         	foreach ($value as $index => $item) {
         	        $name = $item->getName();
-        	        if ($name == 'access' || $name == 'edit') {
+        	        if ($name == 'access') {
+        	        //if ($name == 'access' || $name == 'edit') {
 			//Not ready yet
         	        //if ($name == 'access' ) {
         	                unset($value[$index]);
