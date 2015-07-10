@@ -55,12 +55,6 @@ if (isset($vars['item_class'])) {
 
 $html = "";
 $nav = "";
-// For contribute to display
-$river_label=elgg_echo('river:create:object:thewire:label');
-$wire_label=elgg_echo('thewire:wire');
-$ingroup_label=elgg_echo('river:ingroup:label');
-$ingroups_label=elgg_echo('river:ingroups:label');
-$ingroup_pattern=$ingroups_label.'|'.$ingroup_label.' ';
 
 if ($pagination && $count) {
 	$nav .= elgg_view('navigation/pagination', array(
@@ -74,8 +68,6 @@ if ($pagination && $count) {
 
 $html .= "<ul class=\"$list_class\">";
 if (elgg_get_context() != 'admin') {
-	$previous_item_time_created = 0;
-	$premier=true;
 	foreach ($items as $item) {
 		if ($test[$item->object_guid]){
 			continue;
@@ -86,7 +78,6 @@ if (elgg_get_context() != 'admin') {
 		$dbprefix = elgg_get_config('dbprefix');
 		$new_item = $item;
 	 	if ($item instanceof ElggRiverItem) {
-			$guid=$item->object_guid;
 			// add separation bar to previously loaded content 
 			if (elgg_is_logged_in()) {
 				//if ($user->guid != $previous_item_user_guid && $user_last_action > $item->posted && $user_last_action < $previous_item_time_created) {
@@ -113,8 +104,7 @@ if (elgg_get_context() != 'admin') {
 				}
 			}
 		} else {
-			$guid=0;
-	 		if ($item instanceof ElggAnnotation||$item->getSubType() == 'comment'||$item->getSubType() == 'discussion_reply') {
+	 		if ($item instanceof ElggAnnotation||$item->getSubtype() == 'comment'||$item->getSubtype() == 'discussion_reply') {
 				unset($item_class);
 				if (elgg_is_logged_in() && $user->guid != $item->owner_guid && $user_last_action < $item->time_created) {
 					//$item_class=$item_class." marked-as-updated";
@@ -139,89 +129,8 @@ if (elgg_get_context() != 'admin') {
 			}
 			
 			$item_classes = implode(" ", $item_classes);
-
-
-
-			//if (!$test[$guid]) {
-				if ($new_item->getType() != 'river' || $new_item ->subtype == 'comment' || strpos(current_page_url(), 'dashboard') === false) {
-					//$html .= "PREMIERE CONDITION TYPE=".$new_item->getType()." SUBTYPE=".$new_item ->getSubType();
-					$html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
-					//$banned_guid=$item->object_guid;
-					//$test[$banned_guid]=1;
-				} else {
-					//$html .= "DEUXIEME CONDITION TYPE=".$new_item->getType()." SUBTYPE=".$new_item ->getSubType();
-					$container_guid = get_entity($new_item->object_guid)->container_guid;
-					if (get_entity($container_guid) instanceof ElggGroup) {
-						if ($container_guid == 34082) {
-							$item_classes .= ' hide-cla';
-						}
-						$group = $container_guid;
-						$container = get_entity($group);
-						$params = array( 'href' => $container->getURL(), 'text' => $container->name, 'is_trusted' => true,);
-        					$group_link = elgg_view('output/url', $params);
-						$entity_guid = $new_item->object_guid;
-						//$entity_guid = get_entity($item->object_guid)->guid;
-					} else {
-						$group = 0;
-					}
-					if ($premier) {
-						$vars['skip'] = false;
-						$cached_html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
-						$previous_group_string = $group;
-						$previous_item_string = $entity_guid;
-						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
-					} elseif ($previous_group && $group && $previous_group <> $group && $new_item->subject_guid == $previous_subject_guid && get_entity($new_item->object_guid)->description == $previous_description && abs($previous_posted - $new_item->posted) <=2) {
-					//} elseif ($previous_group && $group && $previous_group <> $group && $new_item->subject_guid == $previous_subject_guid && abs($previous_posted - $new_item->posted) <=2) {
-						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
-						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html,1);
-						//$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
-						$cached_html = preg_replace("/edits\['container_guid'\] = '".$previous_group_string."/","edits['container_guid'] = '".$previous_group_string.",".$group,$cached_html,1);
-						$cached_html = preg_replace("/edits\['guid'\] = '".$previous_item_string."/","edits['guid'] = '".$previous_item_string.",".$entity_guid,$cached_html,1);
-						$cached_html = preg_replace('/'.$river_label.'.+?\>'.$wire_label.'<\/a>/U',$river_label.$wire_label,$cached_html,1);
-						$cached_html = preg_replace('/<li class="elgg-menu-item-comment"/','<li class="elgg-menu-item-comment" style="display:none;"',$cached_html);
-						//$cached_html = preg_replace('/<form .+/','',$cached_html,1);
-						//$vars['skip'] = true;
-						$responses = elgg_view('river/elements/responses', array('item'=>$new_item,'skip'=>$vars['skip']));
-						if ($responses) {
-							$cached_html = preg_replace('/<div class="gc-multi-group-posts"><\/div>/',$responses.'<div class="gc-multi-group-posts"></div>',$cached_html,1);
-						}
-						//if ($previous_group_string) {
-							$previous_group_string = $previous_group_string.','.$group;
-							$previous_item_string = $previous_item_string.','.$entity_guid;
-						//} else {
-							//$previous_group_string = $previous_group;
-						//}
-						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
-					} else {
-						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
-						$vars['skip'] = false;
-						$html .= $cached_html;
-						$cached_html = '';
-						$previous_group_string = $group;
-						$previous_item_string = $new_item->object_guid;
-						//$previous_item_string = get_entity($item->object_guid)->guid;
-						$cached_html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
-						/*
-						$cached_html .= "<li id=\"$id\" class=\"$item_classes\">";
-						$cached_html .= elgg_view_list_item($new_item, $vars);
-						$cached_html .= '</li>';
-						*/
-					}
-					//$banned_guid=$item->object_guid;
-					//$test[$banned_guid]=1;
-					$previous_=$new_item;
-					$previous_subject_guid=$new_item->subject_guid;
-					$previous_description=get_entity($new_item->object_guid)->description;
-					$previous_posted=$new_item->posted;
-					$previous_group = $group;
-				}
-			//}
-			$premier = $false;
-
-
-
 			
-			//$html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
+			$html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
 		}
 	}
 } else {

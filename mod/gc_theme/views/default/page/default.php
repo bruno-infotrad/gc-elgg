@@ -68,10 +68,10 @@ echo elgg_view('page/elements/foot');
 // Moved up because of JE framework 
 //For language preferences to kick in
 if (elgg_is_logged_in()) {
-$site_url = elgg_get_site_url();
-$commetchat_css_url = $site_url . 'cometchat/cometchatcss.php';
-$commetchat_js_url  = $site_url . 'cometchat/cometchatjs.php';
+	$site_url = elgg_get_site_url();
+	$commetchat_css_url = $site_url . 'cometchat/cometchatcss.php';
+	$commetchat_js_url  = $site_url . 'cometchat/cometchatjs.php';
 }
 ?>
-</body>
-</html>
+<link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
+<script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script>

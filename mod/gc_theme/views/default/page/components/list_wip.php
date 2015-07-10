@@ -165,21 +165,19 @@ if (elgg_get_context() != 'admin') {
 						$group = 0;
 					}
 					if ($premier) {
+						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 						$vars['skip'] = false;
 						$cached_html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
 						$previous_group_string = $group;
 						$previous_item_string = $entity_guid;
-						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 					} elseif ($previous_group && $group && $previous_group <> $group && $new_item->subject_guid == $previous_subject_guid && get_entity($new_item->object_guid)->description == $previous_description && abs($previous_posted - $new_item->posted) <=2) {
-					//} elseif ($previous_group && $group && $previous_group <> $group && $new_item->subject_guid == $previous_subject_guid && abs($previous_posted - $new_item->posted) <=2) {
 						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html,1);
-						//$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
 						$cached_html = preg_replace("/edits\['container_guid'\] = '".$previous_group_string."/","edits['container_guid'] = '".$previous_group_string.",".$group,$cached_html,1);
 						$cached_html = preg_replace("/edits\['guid'\] = '".$previous_item_string."/","edits['guid'] = '".$previous_item_string.",".$entity_guid,$cached_html,1);
 						$cached_html = preg_replace('/'.$river_label.'.+?\>'.$wire_label.'<\/a>/U',$river_label.$wire_label,$cached_html,1);
-						$cached_html = preg_replace('/<li class="elgg-menu-item-comment"/','<li class="elgg-menu-item-comment" style="display:none;"',$cached_html);
-						//$cached_html = preg_replace('/<form .+/','',$cached_html,1);
+						//Remove commenting capabilities on multi-group posts
+						//$cached_html = preg_replace('/<li class="elgg-menu-item-comment"/','<li class="elgg-menu-item-comment" style="display:none;"',$cached_html);
 						//$vars['skip'] = true;
 						$responses = elgg_view('river/elements/responses', array('item'=>$new_item,'skip'=>$vars['skip']));
 						if ($responses) {

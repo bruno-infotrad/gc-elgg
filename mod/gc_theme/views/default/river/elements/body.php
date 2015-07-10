@@ -10,6 +10,7 @@
  */
 
 $item = $vars['item'];
+$skip = $vars['skip'];
 
 $menu = elgg_view_menu('river', array(
 	'item' => $item,
@@ -69,13 +70,8 @@ if ($container instanceof ElggGroup && $container->guid != elgg_get_page_owner_g
 	));
 	$group_string = elgg_echo('river:ingroup', array($group_link));
 }
-
-echo <<<RIVER
-<div class="elgg-river-summary">$summary $group_string</div>
-$message
-$attachments
-<span class="elgg-river-timestamp">$timestamp</span>
-$menu
-$responses
-RIVER;
+if (! $skip) {
+	echo "<div class=\"elgg-river-summary\">$summary $group_string</div>$message $attachments <span class=\"elgg-river-timestamp\">$timestamp</span> $menu";
+}
+echo $responses;
 ?>

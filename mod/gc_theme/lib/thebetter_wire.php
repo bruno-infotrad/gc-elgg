@@ -21,7 +21,7 @@ function thebetterwire_filter($text) {
 	if(preg_match_all('/@([\w]+)/',$text,$matches)) {
 		foreach ($matches[1] as $match) {
 			if (get_user_by_username($match)){
-        			$text = preg_replace( "/@$match/", '<a href="' . elgg_get_config('wwwroot') . 'profile/'.$match.'">@'.$match.'</a>', $text);
+        			$text = preg_replace( "/@$match/", '<a href="' . elgg_get_config('wwwroot') . 'profile/'.$match.'">@'.$match.'</a>&nbsp;', $text);
 			}
 		}
 	}

@@ -117,6 +117,12 @@ switch ($page_type) {
                 $title = elgg_echo('river:all');
                 $page_filter = 'all';
 		$options['wheres']=array("rv.type != 'user' AND rv.type != 'site' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND rv.action_type != 'event_relationship'");
+/*
+//DOES NOT WORK BECAUSE IT SKIPS UNCOMMENTED OBJECTS
+		$options['wheres']=array("rv.subtype != 'comment' AND rv.type != 'user' AND rv.type != 'site' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND rv.action_type != 'event_relationship'","(rv1.subtype = 'comment')");
+		$options['joins'] = array("RIGHT JOIN elgg_river rv1 ON rv1.target_guid = rv.object_guid");
+		$options['order_by'] = 'rv1.posted desc';
+*/
 		$stream = elgg_list_river($options);
                 break;
 	case 'intro':

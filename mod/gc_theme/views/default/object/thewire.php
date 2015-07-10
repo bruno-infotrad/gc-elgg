@@ -50,7 +50,7 @@ $params = array(
 	'metadata' => $metadata,
 	'title' => false,
 	'subtitle' => $subtitle,
-	'content' => $post->description,
+	'content' => thebetterwire_filter($post->description),
 	'tags' => false,
 );
 $params = $params + $vars;

@@ -5,8 +5,9 @@
 
 $object = $vars['item']->getObjectEntity();
 $container_guid = $vars['item']->getObjectEntity();
-$excerpt = strip_tags($object->description,'<br><a><img>');
-//$excerpt = thebetterwire_filter($excerpt);
+//$excerpt = strip_tags($object->description,'<br><a><img>');
+$excerpt = $object->description;
+$excerpt = thebetterwire_filter($excerpt);
 $excerpt_with_embed= elgg_view('output/longtext', array(
                         'value' => $excerpt,
                 ));
@@ -38,4 +39,5 @@ echo elgg_view('river/elements/layout', array(
 	'message' => $excerpt_with_embed,
 	'summary' => $summary,
 	'body_class' => $vars['body_class'],
+	'skip' => $vars['skip']
 ));

@@ -13,9 +13,11 @@ $target = $item->getTargetEntity();
 
 $icon = elgg_view_entity_icon($subject, 'small');
 
+$name = preg_replace('/ -.+/','',$subject->name);
 $subject_link = elgg_view('output/url', array(
 	'href' => $subject->getURL(),
-	'text' => $subject->name,
+	//'text' => $subject->name,
+	'text' => $name,
 	'class' => 'elgg-river-subject',
 	'is_trusted' => true,
 ));

@@ -35,8 +35,6 @@ if (elgg_is_logged_in()) {
 		}
 	}
 	$username=$user->username;
-	elgg_log("BRUNO POST user=$username page_owner=$page_owner_guid activity_last_viewed=$activity_last_viewed",'NOTICE');
-	//$item=array();
 	if ($debut == 'true') {
 		$options=array('limit' => $limit, 'posted_time_lower' => $activity_last_viewed, 'order_by' => 'rv.posted desc');
 		if ($group_options) {
@@ -63,7 +61,6 @@ if (elgg_is_logged_in()) {
 				foreach ($activity as $activity_item) {
 					if ($activity_item->posted == $activity_last_viewed && $activity_item->subject_guid == $user->guid) {continue;}
 					$river_posted=$activity_item->posted;
-					elgg_log('BRUNO POST user='.$username.' river.posted='.$river_posted,'NOTICE');
 					$item[$i] = elgg_view('page/elements/jquery_activity', array('activity' => array($activity_item)));
 					$i++;
 				}
@@ -71,7 +68,6 @@ if (elgg_is_logged_in()) {
 		}
 	}
 	$user_activity_viewed = $user->activity_viewed;
-	elgg_log('BRUNO POST apres user='.$username.' user-activity_viewed='.$user_activity_viewed,'NOTICE');
 	$json = array('success' => TRUE, 'item' => $item,'debut' => $debut);
 	echo json_encode($json);
 }

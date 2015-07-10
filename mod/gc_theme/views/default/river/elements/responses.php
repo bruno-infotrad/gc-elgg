@@ -31,7 +31,6 @@ if ($item->annotation_id != 0 || !$object || elgg_instanceof($target, 'object', 
 }
 
 $comment_count = $object->countComments();
-
 if ($comment_count) {
 	$comments = elgg_get_entities(array( 'type' => 'object', 'subtype' => 'comment', 'container_guid' => $object->getGUID(), 'limit' => 3, 'order_by' => 'e.time_created desc', 'distinct' => false,));
 	$object_guid = $object->getGUID();
@@ -53,6 +52,8 @@ if ($comment_count) {
 	
 	echo elgg_view_entity_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
 	//echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
+	// Empty div, hack for happending response for processing of multi-group posts
+	echo '<div class="gc-multi-group-posts"></div>';
 
 }
 /*
