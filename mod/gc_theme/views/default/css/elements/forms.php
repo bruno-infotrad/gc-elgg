@@ -164,6 +164,10 @@ textarea {
 	text-align: left!important;
 }
 
+#thewire-cancel-button {
+	float: left;
+	margin-top: -2px;
+}
 #thewire-submit-button {
 	float: right;
 	margin-top: -2px;

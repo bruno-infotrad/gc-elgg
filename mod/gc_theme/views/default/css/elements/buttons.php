@@ -141,6 +141,7 @@ a.elgg-button-join,a.elgg-button-leave {
 #thewire-submit-button:disabled {
 	opacity: .5;
 }
+#thewire-cancel-button,
 #thewire-submit-button {
   font-weight: normal;
   text-align: center;
