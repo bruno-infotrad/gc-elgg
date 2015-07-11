@@ -329,9 +329,9 @@ function gc_theme_init() {
 	elgg_extend_view('js/elgg', '/mod/gc_theme/js/lib/extra_feed_replies.js');
 	
 	//Likes summary bar -- "You, John, and 3 others like this"
-	if (elgg_is_active_plugin('likes')) {
-		elgg_extend_view('river/elements/responses', 'likes/river_footer', 1);
-	}
+	//if (elgg_is_active_plugin('likes')) {
+		//elgg_extend_view('river/elements/responses', 'likes/river_footer', 1);
+	//}
 	
 	elgg_extend_view('river/elements/responses', 'discussion/discussion_replies');
 	
