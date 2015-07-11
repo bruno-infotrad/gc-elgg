@@ -8,10 +8,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
         if (elgg.is_logged_in()) {
         	$(document).ready(function() {
 			var ajax_path, context_atoms,new_offset, more_url, params, groups_page_type;
-			var delete_marker = false;
-			var more_marker = 'ul.elgg-pagination';
-			$(more_marker).hide();
-			$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
+			var delete_marker = false, more_marker;
 			var path = base_url.replace(elgg.get_site_url(),'');
 			var path_atoms = path.split("/");
 			//console.log('BEFORE REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
@@ -42,7 +39,17 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 			if (page_type === undefined) {
 				page_type = '';
 			}
+			if (context == 'embed') {
+				more_marker = '#colorbox ul.elgg-pagination';
+				$(more_marker).hide();
+				$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
+			} else {
+				more_marker = 'ul.elgg-pagination';
+				$(more_marker).hide();
+				$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
+			}
 			//console.log('AFTER REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
+			// Fix for colorbox issue (embed)
 			switch(context){
 				case 'search':
 					iteration++;
@@ -315,12 +322,20 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 				data: params, 
 				dataType: 'html', 
 				success: function(data) {
+					//console.log("CONTEXT="+context);
 					data=data.replace(/<ul class="elgg-pagination">.+<\/ul>/,'');
 					//console.log(data);
 					var tmp_more_marker = '#gc-pagination';
 					//var tmp_more_marker = '.elgg-ajax-loader';
  					$(tmp_more_marker).before(data);
- 					$(tmp_more_marker).replaceWith('');
+					if (context == 'embed') {
+						tmp_more_marker = '#colorbox #gc-pagination';
+ 						$(tmp_more_marker).before(data);
+ 						$(tmp_more_marker).replaceWith('');
+					} else {
+ 						$(tmp_more_marker).before(data);
+ 						$(tmp_more_marker).replaceWith('');
+					}
 					if (delete_marker) {
 						$(more_marker).remove();
 					} else {

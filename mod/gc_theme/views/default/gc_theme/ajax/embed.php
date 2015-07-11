@@ -19,5 +19,4 @@ $content = elgg_list_entities(
 	'elgg_get_entities',
 	'embed_list_items'
 );
-//echo "CONTAINER_GUIDS ".var_export($options['container_guids'],true).$content;
 echo $content;
