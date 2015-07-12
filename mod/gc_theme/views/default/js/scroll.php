@@ -327,7 +327,6 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					//console.log(data);
 					var tmp_more_marker = '#gc-pagination';
 					//var tmp_more_marker = '.elgg-ajax-loader';
- 					$(tmp_more_marker).before(data);
 					if (context == 'embed') {
 						tmp_more_marker = '#colorbox #gc-pagination';
  						$(tmp_more_marker).before(data);
