@@ -18,7 +18,8 @@ if (elgg_is_logged_in()) {
 	
 	if ($comments) {
 	        $comments = array_reverse($comments);
-	        echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments', 'item_class' => 'elgg-river-participation', 'body_class' => 'new-feed'));
+	        echo elgg_view_entity_list($comments, array('list_class' => 'elgg-river-comments', 'item_class' => 'elgg-river-participation', 'body_class' => 'new-feed'));
+	        //echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments', 'item_class' => 'elgg-river-participation', 'body_class' => 'new-feed'));
 	
 	}
 }

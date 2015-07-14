@@ -1,6 +1,15 @@
-<script>
-$(document).ready(function() {
-	/*var showMoreText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:more"), showLessText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:less"),*/
+<?php
+?>
+elgg.provide('elgg.toggle_long_posts');
+elgg.toggle_long_posts.init = function() {
+	//This is absolutely needed when using the scroll functionality
+	$(document).bind('ajaxSuccess',function () {
+		elgg.toggle_long_posts.activate();
+	});
+	$(document).ready(elgg.toggle_long_posts.activate);
+}
+elgg.toggle_long_posts.activate = function() {
+	//var showMoreText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:more"), showLessText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:less"),
 	var showMoreText = '&nbsp;&nbsp;&nbsp; <?php echo elgg_echo("gc_theme:more"); ?>',
 	showLessText = '&nbsp;&nbsp;&nbsp; <?php echo elgg_echo("gc_theme:less"); ?>',
         collapsedHeight = $('<div>', {'class': 'text collapsed'}).css('height'),
@@ -31,5 +40,5 @@ $(document).ready(function() {
         	}
     	};
     	$('.text.collapsed').each(addExpander);
-});
-</script>
+};
+elgg.register_hook_handler('init', 'system', elgg.toggle_long_posts.init);

@@ -36,22 +36,26 @@ function gc_theme_init() {
         elgg_register_simplecache_view('js/embed/gc_embed');
         elgg_register_js('elgg.embed', $gc_embed_js, 'footer');
 
+	$toggle_long_posts_js = elgg_get_simplecache_url('js', 'toggle_long_posts');
+        elgg_register_simplecache_view('js/toggle_long_posts');
+        elgg_register_js('elgg.toggle_long_posts', $toggle_long_posts_js, 'footer');
+	elgg_load_js('elgg.toggle_long_posts');
 	$contribute_to_js = elgg_get_simplecache_url('js', 'contribute_to');
         elgg_register_simplecache_view('js/contribute_to');
         elgg_register_js('elgg.contribute_to', $contribute_to_js, 'footer');
-	$gc_comments_to_js = elgg_get_simplecache_url('js', 'gc_comments');
+	$gc_comments_js = elgg_get_simplecache_url('js', 'gc_comments');
         elgg_register_simplecache_view('js/gc_comments');
-        elgg_register_js('elgg.gc_comments', $gc_comments_to_js, 'footer');
-	$gc_gft_to_js = elgg_get_simplecache_url('js', 'gc_gft');
+        elgg_register_js('elgg.gc_comments', $gc_comments_js, 'footer');
+	$gc_gft_js = elgg_get_simplecache_url('js', 'gc_gft');
         elgg_register_simplecache_view('js/gc_gft');
-        elgg_register_js('elgg.gc_gft', $gc_gft_to_js, 'footer');
-	$gc_discussion_to_js = elgg_get_simplecache_url('js', 'gc_discussion');
+        elgg_register_js('elgg.gc_gft', $gc_gft_js, 'footer');
+	$gc_discussion_js = elgg_get_simplecache_url('js', 'gc_discussion');
         elgg_register_simplecache_view('js/gc_discussion');
-        elgg_register_js('elgg.gc_discussion', $gc_discussion_to_js, 'footer');
+        elgg_register_js('elgg.gc_discussion', $gc_discussion_js, 'footer');
 	elgg_unregister_js('elgg.thewire');
-	$gc_wire_to_js = elgg_get_simplecache_url('js', 'gc_wire');
+	$gc_wire_js = elgg_get_simplecache_url('js', 'gc_wire');
         elgg_register_simplecache_view('js/gc_wire');
-        elgg_register_js('elgg.gc_wire', $gc_wire_to_js, 'footer');
+        elgg_register_js('elgg.gc_wire', $gc_wire_js, 'footer');
 
 	//Register role config hook for im admins
 	elgg_register_plugin_hook_handler('roles:config', 'role', 'roles_im_admins_config', 600);
@@ -212,7 +216,7 @@ function gc_theme_init() {
 	elgg_register_js('elgg.user_handle', '/mod/gc_theme/js/lib/user_handle.js');
 	elgg_register_js('elgg.contributed_by', '/mod/gc_theme/js/lib/contributed_by.js');
 	//elgg_register_js('elgg.scroll', '/mod/gc_theme/js/lib/scroll.js');
-	elgg_extend_view('page/components/list', 'js/toggle_long_posts');
+	//elgg_extend_view('page/components/list', 'js/toggle_long_posts');
 	// Tab preferences
 	elgg_extend_view('forms/account/settings', 'core/settings/account/gc_preferences');
 	elgg_unextend_view('core/settings/statistics', 'profile_manager/account/login_history');

@@ -35,7 +35,7 @@ $text = elgg_autop($text);
 
 $attributes = elgg_format_attributes($vars);
 
-if (!(strpos(current_page_url(), 'message') !== false) && !(strpos(current_page_url(), '/view/') !== false) && strlen($text) > 500) {
+if (!(strpos(current_page_url(), 'message') !== false) && !(strpos(current_page_url(), '/view/') !== false && strpos(current_page_url(), '/ajax/') === false) && strlen($text) > 500) {
 	echo "<div $attributes><div class=\"text collapsed\">$text</div></div>";
 } else {
 	echo "<div $attributes>$text</div>";

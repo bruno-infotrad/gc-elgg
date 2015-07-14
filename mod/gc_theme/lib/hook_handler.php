@@ -654,34 +654,8 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 	$object = $item->getObjectEntity();
 
 	if (!elgg_in_context('widgets') && !$item->annotation_id && $object instanceof ElggEntity && $item->action_type != 'join') {
-		
-/*
-		if (elgg_is_active_plugin('likes') && $object->canAnnotate(0, 'likes')) {
-			if (!elgg_annotation_exists($object->getGUID(), 'likes')) {
-				// user has not liked this yet
-				$options = array(
-					'name' => 'like',
-					'href' => "action/likes/add?guid={$object->getGUID()}",
-					'text' => elgg_echo('likes:likethis'),
-					'is_action' => true,
-					'priority' => 100,
-				);
-			} else {
-				// user has liked this
-				$options = array(
-					'name' => 'like',
-					'href' => "action/likes/delete?guid={$object->getGUID()}",
-					'text' => elgg_echo('likes:remove'),
-					'is_action' => true,
-					'priority' => 100,
-				);
-			}
-			
-			$items[] = ElggMenuItem::factory($options);
-		}
-*/
 		if ($object->canAnnotate(0, 'generic_comment')) {
-			if ($object->getSubtype() == 'thewire') {
+			//if ($object->getSubtype() == 'thewire') {
 				$items[] = ElggMenuItem::factory(array(
 					'name' => 'comment',
 					//'href' => "#comments-add-$object->guid",
@@ -693,7 +667,7 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 					'link_class'=>'elgg-comment-add',
 					'id'=> $object->getGUID(),
 				));
-			}
+			//}
 		}
 		if (elgg_instanceof($object, 'object', 'groupforumtopic')) {
 			$group = $object->getContainerEntity();
@@ -731,16 +705,6 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 				));
 			}
 		}
-/*		
-		if (elgg_instanceof($object, 'object', 'groupforumtopic')) {
-			$items[] = ElggMenuItem::factory(array(
-				'name' => 'reply',
-				'href' => "#groups-reply-$object->guid",
-				'title' => elgg_echo('reply:this'),
-				'text' => elgg_echo('reply'),
-			));
-		}
-*/
 	}
 
 	return $items;
