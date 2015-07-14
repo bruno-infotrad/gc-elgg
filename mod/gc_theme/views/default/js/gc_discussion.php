@@ -1,17 +1,17 @@
 <?php
 ?>
-elgg.provide('elgg.gc_comments');
+elgg.provide('elgg.gc_discussion');
 
 /**
  * @param {Number} guid
  * @constructor
  */
-elgg.gc_comments.Comment = function (guid) {
+elgg.gc_discussion.Discussion = function (guid) {
 	this.guid = guid;
 	this.$item = $('#elgg-object-' + guid);
 };
 
-elgg.gc_comments.Comment.prototype = {
+elgg.gc_discussion.Discussion.prototype = {
 	/**
 	 * Get a jQuery-wrapped reference to the form
 	 *
@@ -19,7 +19,7 @@ elgg.gc_comments.Comment.prototype = {
 	 */
 	gc_getForm: function () {
 		//console.log("IN GETFORM "+this.guid);
-		return $('#add-comment-' + this.guid);
+		return $('#add-discussion-reply-' + this.guid);
 	},
 
 	/**
@@ -41,7 +41,7 @@ elgg.gc_comments.Comment.prototype = {
 		var that = this;
 
 		// Get the form using ajax
-		elgg.ajax('ajax/view/gc_theme/ajax/add_gc_comment?guid=' + this.guid, {
+		elgg.ajax('ajax/view/gc_theme/ajax/add_discussion_reply?guid=' + this.guid, {
 			success: function(html) {
 				//console.log("IN LOADFORM SUCCESS"+JSON.stringify(that));
 				// Add the form to DOM
@@ -70,14 +70,13 @@ elgg.gc_comments.Comment.prototype = {
 			$form = this.gc_getForm();
 			//value = $form.find('textarea[name=generic_comment]').val();
 
-		elgg.action('comment/save', {
+		elgg.action('discussion/reply/save', {
 			data: $form.serialize(),
 			success: function(json) {
 				//console.log("COMMENT SAVED "+JSON.stringify(json));
 				if (json.status === 0) {
 					// Update list item content
-					//that.$item.find('[data-role="comment-text"]').html(value);
-					elgg.ajax('ajax/view/gc_theme/ajax/view/comment?guid=' + json.output, {
+					elgg.ajax('ajax/view/gc_theme/ajax/view/discussion_reply?guid=' + json.output, {
 						success: function(html) {
 							//console.log("COMMENT GRABBED "+that.guid);
 							if ($('.elgg-river-responses-'+that.guid).length) {
@@ -126,16 +125,16 @@ elgg.gc_comments.Comment.prototype = {
  * 
  * @return void
  */
-elgg.gc_comments.init = function() {
-	$(document).on('click', 'a.elgg-comment-add', function () {
+elgg.gc_discussion.init = function() {
+	$(document).on('click', 'a.elgg-discussion-reply-add', function () {
 			//console.log('FIRED '+$(this).attr('id'));
 			var guid = $(this).attr('id');
 			// store object as data in the edit link
-			dc = new elgg.gc_comments.Comment(guid);
-			$(this).data('Comment', dc);
+			dc = new elgg.gc_discussion.Discussion(guid);
+			$(this).data('Discussion', dc);
 			dc.gc_toggleEdit();
 			return false;
 	});
 };
 
-elgg.register_hook_handler('init', 'system', elgg.gc_comments.init);
+elgg.register_hook_handler('init', 'system', elgg.gc_discussion.init);

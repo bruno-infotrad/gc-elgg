@@ -651,8 +651,8 @@ function gc_user_entities($hook, $type, $return, $params) {
 function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 	elgg_log("BRUNO gc_theme_river_menu_handler ".var_export($params,true),'NOTICE');
 	$item = $params['item'];
-
 	$object = $item->getObjectEntity();
+
 	if (!elgg_in_context('widgets') && !$item->annotation_id && $object instanceof ElggEntity && $item->action_type != 'join') {
 		
 /*
@@ -681,17 +681,44 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 		}
 */
 		if ($object->canAnnotate(0, 'generic_comment')) {
-			$items[] = ElggMenuItem::factory(array(
-				'name' => 'comment',
-				//'href' => "#comments-add-$object->guid",
-				//'text' => elgg_echo('comment'),
-				'text' => elgg_view_icon('speech-bubble'),
-				'title' => elgg_echo('comment:this'),
-				'rel' => "toggle",
-				'priority' => 50,
-				'link_class'=>'elgg-comment-add',
-				'id'=> $object->getGUID(),
-			));
+			if ($object->getSubtype() == 'thewire') {
+				$items[] = ElggMenuItem::factory(array(
+					'name' => 'comment',
+					//'href' => "#comments-add-$object->guid",
+					//'text' => elgg_echo('comment'),
+					'text' => elgg_view_icon('speech-bubble'),
+					'title' => elgg_echo('comment:this'),
+					'rel' => "toggle",
+					'priority' => 50,
+					'link_class'=>'elgg-comment-add',
+					'id'=> $object->getGUID(),
+				));
+			}
+		}
+		if (elgg_instanceof($object, 'object', 'groupforumtopic')) {
+			$group = $object->getContainerEntity();
+
+			if ($group && ($group->canWriteToContainer() || elgg_is_admin_logged_in())) {
+				$items[] = ElggMenuItem::factory($options = array(
+					'name' => 'reply',
+					//'href' => "#discussion-reply-{$object->guid}",
+					'text' => elgg_view_icon('speech-bubble'),
+					'title' => elgg_echo('reply:this'),
+					'rel' => 'toggle',
+					'priority' => 50,
+					'link_class'=>'elgg-discussion-reply-add',
+					'id'=> $object->getGUID(),
+				));
+			}
+		} else {
+			if (elgg_instanceof($object, 'object', 'discussion_reply', 'ElggDiscussionReply')) {
+				// Group discussion replies cannot be commented
+				foreach ($return as $key => $item) {
+					if ($item->getName() === 'comment') {
+						unset($return[$key]);
+					}
+				}
+			}
 		}
 		
 		if (elgg_is_logged_in()) {
@@ -719,9 +746,9 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 	return $items;
 }
 
-function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
+function gc_thewire_discussion_reply_setup_entity_menu_items($hook, $type, $value, $params) {
         $handler = elgg_extract('handler', $params, false);
-        if ($handler != 'thewire' && $handler != 'blog' && $handler != 'comment') {
+        if ($handler != 'thewire' && $handler != 'blog' && $handler != 'comment' && $handler != 'discussion_reply') {
                 return $value;
         }
         $entity = $params['entity'];
@@ -736,14 +763,23 @@ function gc_thewire_setup_entity_menu_items($hook, $type, $value, $params) {
         	        }
         	}
         }
-	if ($entity->canEdit() && $handler == 'comment') {
-        	foreach ($value as $index => $item) {
-        	        $name = $item->getName();
-        	        if ($name == 'edit') {
-				//$item->setText('<div id="wire-edit-bla"></div>');
-				$item->setText('');
-				$item->setLinkClass('comment-edit');
-        	        }
+	if ($entity->canEdit()) {
+		if ($handler == 'comment') {
+        		foreach ($value as $index => $item) {
+        		        $name = $item->getName();
+        		        if ($name == 'edit') {
+					$item->setText('');
+					$item->setLinkClass('comment-edit');
+        		        }
+        		}
+        	} elseif ($handler == 'discussion_reply') {
+        		foreach ($value as $index => $item) {
+        		        $name = $item->getName();
+        		        if ($name == 'edit') {
+					$item->setText('');
+					$item->setLinkClass('discussion-reply-edit');
+        		        }
+        		}
         	}
         }
         if (elgg_is_logged_in()) {

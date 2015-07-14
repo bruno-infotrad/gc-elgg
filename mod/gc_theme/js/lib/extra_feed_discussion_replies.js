@@ -2,9 +2,15 @@
  *  JQuery more group discussion replies
  *   */
 
-elgg.provide('elgg.extra_feed_replies');
-
-elgg.extra_feed_replies = function(guid){
+elgg.provide('elgg.extra_feed_discussion_replies');
+elgg.extra_feed_discussion_replies.init = function(){
+	$('[id^=extra-feed-discussion_replies-]').live('click', function (e){
+		e.preventDefault();
+		var guid = parseInt(this.id.match(/\d+$/));
+		elgg.fetch_extra_feed_discussion_replies(guid);
+	});
+};
+elgg.fetch_extra_feed_discussion_replies = function(guid){
         var data;
         if (elgg.is_logged_in()) {
         	$(document).ready(function() {
@@ -25,3 +31,4 @@ elgg.extra_feed_replies = function(guid){
 		});
 	};
 };
+elgg.register_hook_handler('init', 'system', elgg.extra_feed_discussion_replies.init);

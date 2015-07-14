@@ -141,6 +141,8 @@ a.elgg-button-join,a.elgg-button-leave {
 #thewire-submit-button:disabled {
 	opacity: .5;
 }
+#gft-cancel-button,
+#gft-submit-button,
 #thewire-cancel-button,
 #thewire-submit-button {
   font-weight: normal;
@@ -171,6 +173,8 @@ a#select-contribute-to {margin-left: 36%;}
   text-shadow: 0 1px 1px #222;
 }
 
+#gft-cancel-button,
+#gft-submit-button,
 #select-pns,
 a#select-contribute-to,
 #message-friendsof,

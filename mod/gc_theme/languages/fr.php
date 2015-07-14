@@ -363,7 +363,7 @@ return array(
 	'river:comment:object:comment' => '%s a commenté sur %s',
 	'river:comments:all' => "Voir tous les commentaires de %d",
 	'river:friend:user:default' => "%s est maintenant collègue avec %s",
-	'river:replies:all' => "Voir tous les commentaires de %d",
+	'river:discussion_replies:all' => "Voir les %d réponses",
 	'river:to' => "%s &#x25B6 %s",
 	'river:all' => 'Toutes les nouvelles',
 	'river:mine' => 'Mes nouvelles',

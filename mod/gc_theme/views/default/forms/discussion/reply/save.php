@@ -8,7 +8,6 @@
  */
 
 $topic = elgg_extract('topic', $vars);
-$canwrite = elgg_extract('canwrite', $vars, false);
 
 $topic_guid_input = '';
 if (isset($vars['topic'])) {
@@ -55,30 +54,6 @@ if ($inline) {
 		'name' => 'description',
 		'value' => $value
 	));
-	if ($canwrite) {
-		$description_input = elgg_view('input/plaintext', array(
-               	        'name' => 'group_topic_post',
-               	        'id' => $id.'-textarea',
-               	        'style' => 'height:22px;',
-               	        'onblur' => "changeHeight(\"$id\",'22px',\"$canwrite\")",
-               	        'onfocus' => "changeHeight(\"$id\",'60px',\"$canwrite\")",
-			'placeholder' => elgg_echo('annotation:group_topic_post:value:placeholder'),
-               	));
-               	$submit_input = elgg_view('input/submit', array(
-               	        'value' => elgg_echo('reply'),
-               	        'style' => 'visibility: hidden;',
-               	        'id' => $id.'-submit',
-               	));
-	} else {
-               	$submit_input = '';
-		$description_input = elgg_view('input/plaintext', array(
-               	        'name' => 'group_topic_post',
-               	        'id' => $id.'-textarea',
-               	        'style' => 'height:22px;',
-               	        'disabled' => 'disabled',
-			'value' => elgg_echo('groups:register_to_reply'),
-               	));
-	}
 
 echo <<<FORM
 	$description_input

@@ -93,7 +93,7 @@ return array(
 	'river:comment:object:comment' => '%s commented on %s',
 	'river:comments:all' => 'View all %d comments',
 	'river:friend:user:default' => "%s is now colleagues with %s",
-	'river:replies:all' => 'View all %d comments',
+	'river:discussion_replies:all' => 'View all %d replies',
 	'river:to' => '%s &#x25B6 %s',
 	'river:all' => 'News Feed',
 	'river:mine' => 'My News Feed',

@@ -12,6 +12,9 @@ if (!$group || !elgg_instanceof($group, 'group')) {
 elgg_load_library('elgg:groups');
 elgg_load_js('elgg.gc_comments');
 elgg_load_js('elgg.gc_wire');
+elgg_load_js('elgg.gc_gft');
+elgg_load_js('elgg.discussion');
+elgg_load_js('elgg.gc_discussion');
 groups_register_profile_buttons($group);
 
 $title = $group->name;

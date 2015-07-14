@@ -8,7 +8,9 @@
 
 ?>
 /*[class^=wire-edit-] {*/
+.discussion-reply-edit,
 .comment-edit,
+[id^=groupforumtopic-edit-],
 [id^=wire-edit-] {
 	background: url(<?php echo elgg_get_site_url(); ?>mod/gc_theme/graphics/icons/edit16x16.png) no-repeat 100% 0;
 	display: inline-block;

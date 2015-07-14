@@ -42,6 +42,12 @@ function gc_theme_init() {
 	$gc_comments_to_js = elgg_get_simplecache_url('js', 'gc_comments');
         elgg_register_simplecache_view('js/gc_comments');
         elgg_register_js('elgg.gc_comments', $gc_comments_to_js, 'footer');
+	$gc_gft_to_js = elgg_get_simplecache_url('js', 'gc_gft');
+        elgg_register_simplecache_view('js/gc_gft');
+        elgg_register_js('elgg.gc_gft', $gc_gft_to_js, 'footer');
+	$gc_discussion_to_js = elgg_get_simplecache_url('js', 'gc_discussion');
+        elgg_register_simplecache_view('js/gc_discussion');
+        elgg_register_js('elgg.gc_discussion', $gc_discussion_to_js, 'footer');
 	elgg_unregister_js('elgg.thewire');
 	$gc_wire_to_js = elgg_get_simplecache_url('js', 'gc_wire');
         elgg_register_simplecache_view('js/gc_wire');
@@ -127,6 +133,9 @@ function gc_theme_init() {
 	elgg_register_ajax_view('gc_theme/ajax/add_gc_comment');
 	elgg_register_ajax_view('gc_theme/ajax/view/comment');
 	elgg_register_ajax_view('gc_theme/ajax/edit_gc_wire');
+	elgg_register_ajax_view('gc_theme/ajax/edit_gc_gft');
+	elgg_register_ajax_view('gc_theme/ajax/add_discussion_reply');
+	elgg_register_ajax_view('gc_theme/ajax/view/discussion_reply');
 	elgg_register_ajax_view('compound/composer');
 	elgg_register_ajax_view('file/composer');
 	elgg_register_ajax_view('poll/composer');
@@ -195,7 +204,7 @@ function gc_theme_init() {
   
 	elgg_register_js('elgg.all_my_groups', '/mod/gc_theme/js/lib/all_my_groups.js');
 	elgg_register_js('elgg.extra_feed_comments', '/mod/gc_theme/js/lib/extra_feed_comments.js');
-	elgg_register_js('elgg.extra_feed_replies', '/mod/gc_theme/js/lib/extra_feed_replies.js');
+	elgg_register_js('elgg.extra_feed_discussion_replies', '/mod/gc_theme/js/lib/extra_feed_discussion_replies.js');
 	elgg_register_js('elgg.activity_stream', '/mod/gc_theme/js/lib/ui.activity_stream.js');
 	elgg_register_js('elgg.new_feeds', '/mod/gc_theme/js/lib/new_feeds.js');
 	elgg_register_js('elgg.new_messages', '/mod/gc_theme/js/lib/new_messages.js');
@@ -237,6 +246,8 @@ function gc_theme_init() {
 	elgg_register_action('blog/save',"$action_path/blog/save.php");
 	elgg_unregister_action("comment/save");
 	elgg_register_action("comment/save", "$action_path/comment/save.php");
+	elgg_unregister_action('discussion/reply/save');
+	elgg_register_action('discussion/reply/save', "$action_path/discussion/reply/save.php");
 	elgg_unregister_action("group_tools/mail");
 	elgg_register_action("group_tools/mail", $action_path."/group_tools/mail.php");
 	elgg_unregister_action("group_tools/admin_transfer");
@@ -280,9 +291,10 @@ function gc_theme_init() {
 	elgg_unregister_plugin_hook_handler('register', 'menu:river', 'elgg_river_menu_setup');
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'groups_activity_owner_block_menu');
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'discussion_owner_block_menu');
+	elgg_register_plugin_hook_handler('register', 'menu:river', 'discussion_add_to_river_menu');
 	elgg_register_plugin_hook_handler('register', 'menu:river', 'gc_theme_river_menu_handler');
 	elgg_unregister_plugin_hook_handler('register','menu:entity','thewire_setup_entity_menu_items');
-	elgg_register_plugin_hook_handler('register','menu:entity','gc_thewire_setup_entity_menu_items');
+	elgg_register_plugin_hook_handler('register','menu:entity','gc_thewire_discussion_reply_setup_entity_menu_items');
 	// Unregister file and blog menu so as not to have two entries
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'file_owner_block_menu');
 	elgg_unregister_plugin_hook_handler('register', 'menu:owner_block', 'blog_owner_block_menu');
@@ -325,15 +337,15 @@ function gc_theme_init() {
 	elgg_extend_view("js/elgg", "file_tools/js/site");
 	//Scroll
 	elgg_extend_view("js/elgg", "js/scroll");
-	elgg_extend_view('js/elgg', '/mod/gc_theme/js/lib/extra_feed_comments.js');
-	elgg_extend_view('js/elgg', '/mod/gc_theme/js/lib/extra_feed_replies.js');
+	//elgg_extend_view('js/elgg', '/mod/gc_theme/js/lib/extra_feed_comments.js');
+	//elgg_extend_view('js/elgg', '/mod/gc_theme/js/lib/extra_feed_replies.js');
 	
 	//Likes summary bar -- "You, John, and 3 others like this"
 	//if (elgg_is_active_plugin('likes')) {
 		//elgg_extend_view('river/elements/responses', 'likes/river_footer', 1);
 	//}
 	
-	elgg_extend_view('river/elements/responses', 'discussion/discussion_replies');
+	//elgg_extend_view('river/elements/responses', 'discussion/discussion_replies');
 	
 	//Elgg only includes the search bar in the header by default,
 	//but we usually don't show the header when the user is logged in

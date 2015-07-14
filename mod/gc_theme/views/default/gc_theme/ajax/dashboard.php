@@ -36,7 +36,7 @@ switch ($page_type) {
 					"LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid",
 					"LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"
 					);
-		$options['wheres']=array("(rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid.")", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
+		$options['wheres']=array("(rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$group_guid.")", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
                 break;
         case 'groups':
 		$title = elgg_echo('groups');
@@ -46,7 +46,8 @@ switch ($page_type) {
 					"LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid",
 					"LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"
 					);
-		$options['wheres']=array("(rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote')", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
+		$options['wheres']=array("(rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote')", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
+		//$options['wheres']=array("(rv.access_id in('1','2') AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote')", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)");
                 break;
         case 'dfatd-maecd':
                 $title = elgg_echo('gc_theme:dfatd');

@@ -3,13 +3,14 @@
  * Displays discussion replies for a discussion river item
  */
 
-$item=$vars['item'];
-$topic = $item->getObjectEntity();
+$topic = elgg_extract('topic', $vars);
+//$item=$vars['item'];
+//$topic = $item->getObjectEntity();
 if ($topic->getSubtype() !="groupforumtopic") {
 	return true;
 }
 $object=$topic;
-$target = $item->getTargetEntity();
+//$target = $item->getTargetEntity();
 
 $options = array(
 	'type' => 'object',
@@ -30,9 +31,9 @@ if (!$group->isMember($user)) {
 }
 
 // annotations and comments do not have responses
-if ($item->annotation_id != 0 || !$object || elgg_instanceof($target, 'object', 'discussion_reply')) {
-	return true;
-}
+//if ($item->annotation_id != 0 || !$object || elgg_instanceof($target, 'object', 'discussion_reply')) {
+	//return true;
+//}
 
 if ($discussion_reply_count) {
 	$object_guid = $topic->getGUID();
@@ -46,31 +47,14 @@ if ($discussion_reply_count) {
 		elgg_load_js('elgg.extra_feed_discussion_replies');
 		$link = elgg_view('output/url', array(
 			'href' => $object->getURL(),
-			'onclick' => "elgg.extra_feed_discussion_replies(\"$object_guid\");return false;",
+			//'onclick' => "elgg.extra_feed_discussion_replies(\"$object_guid\");return false;",
+			'id' => 'extra-feed-discussion_replies-'.$object_guid,
 			'text' => elgg_echo('river:discussion_replies:all', array($discussion_reply_count)),
 		));
 		
 		echo elgg_view_image_block(elgg_view_icon('speech-bubble-alt'), $link, array('class' => 'elgg-river-participation-'.$object_guid));
 	}
 	
-	echo elgg_view_entity_list($discussion_replies, array('list_class' => 'elgg-river-comments-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
+	echo elgg_view_entity_list($discussion_replies, array('list_class' => 'elgg-river-replies-'.$object_guid, 'item_class' => 'elgg-river-participation', 'body_class' => $vars['body_class']));
 
-}
-
-if ($object->canAnnotate(0, 'group_topic_post')) {
-	// inline comment form
-?>
-<?php
-	//if ($canwrite) {
-		$id = "groups-reply-{$object_guid}";
-		echo elgg_view_form('discussion/reply/save', array(
-			'id' => $id,
-			'class' => 'elgg-river-participation elgg-form-small elgg-form-variable',
-		), array('entity' => $topic, 'inline' => true, 'id' => $id, 'canwrite' => $canwrite));
-	//} else {
-		//echo elgg_view_form('comments/add', array(
-			//'id' => $id,
-			//'class' => 'elgg-river-participation elgg-form-small',
-		//), array('entity' => $object, 'inline' => true, 'id' => $id, 'canwrite' => $canwrite));
-	//}
 }

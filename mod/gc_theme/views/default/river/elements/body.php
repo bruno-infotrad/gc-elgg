@@ -38,9 +38,14 @@ $river_guid = $item->id;
 $message = elgg_extract('message', $vars, false);
 if ($message !== false) {
 	if ($object->owner_guid == elgg_get_logged_in_user_guid()) {
-		$edit_area = 'edit_area';
-		$edit_icon = "<div id=\"wire-edit-$river_guid\"></div>";
-		//$edit_icon = "<div class=\"wire-edit\" onclick=\"$('#$object_guid-$container_guid').trigger('click');\"></div>";
+		if ($object->getSubtype() == 'thewire') {
+			$edit_area = 'thewire_edit_area';
+			$edit_icon = "<div id=\"wire-edit-$river_guid\"></div>";
+			//$edit_icon = "<div class=\"wire-edit\" onclick=\"$('#$object_guid-$container_guid').trigger('click');\"></div>";
+		} elseif ($object->getSubtype() == 'groupforumtopic') {
+			$edit_area = 'groupforumtopic_edit_area';
+			$edit_icon = "<div id=\"groupforumtopic-edit-$river_guid\"></div>";
+		}
 	} else {
 		$edit_area = '';
 		$edit_icon = '';
