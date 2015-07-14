@@ -50,11 +50,11 @@ if ($message !== false) {
 		$edit_area = '';
 		$edit_icon = '';
 	}
-        if (strlen($message) > 500) {
-		$message = "$edit_icon<div class=\"text collapsed\"><div class=\"$edit_area elgg-river-message\">$message</div></div>";
-	} else {
+        //if (strlen($message) > 500) {
+	//	$message = "$edit_icon<div class=\"text collapsed\"><div class=\"$edit_area elgg-river-message\">$message</div></div>";
+	//} else {
 		$message = "$edit_icon<div class=\"$edit_area elgg-river-message\">$message</div>";
-	}
+	//}
 }
 
 $attachments = elgg_extract('attachments', $vars, false);
