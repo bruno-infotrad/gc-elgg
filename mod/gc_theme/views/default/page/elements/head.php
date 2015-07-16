@@ -56,7 +56,7 @@ $css = elgg_get_loaded_css();
         <noscript>
         <link rel="stylesheet" href="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/theme-gcwu-intranet/css/theme-ns-min.css"/>
         </noscript>
-        <![endif]-->
+        <!--[endif]-->
 
 
 

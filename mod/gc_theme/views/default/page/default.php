@@ -75,3 +75,5 @@ if (elgg_is_logged_in()) {
 ?>
 <link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
 <script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script>
+<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/theme-gcwu-intranet/js/theme-min.js"></script>
+<script src="<?php echo $site_url;?>mod/gc_theme/views/default/gc_theme/dist/js/pe-ap-min.js"></script>
