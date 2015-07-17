@@ -44,12 +44,10 @@ define('DB_USERTABLE_LASTACTIVITY',	'last_action'							);
 
 		if($row = mysql_fetch_array($result))
 		{
-			$data = explode('attributes";',$row[0]);
-
-			if(!empty($data))
-			{
-				$session = unserialize($data[1]);
-				$userid = $session['guid'];
+			//Change in session so need to change code
+			if (preg_match('/guid\|i:\d+/',$row[0],$matches)) {
+				$guid_string = explode(':',$matches[0]);
+				$userid = $guid_string[1];
 			}
 		}
 	}
@@ -101,7 +99,11 @@ function getLink($link) {
 
 function getAvatar($image) {
 
-	$str = BASE_URL."../mod/profile/icondirect.php?guid=".$image."&size=medium";
+	$sql = ("SELECT `time_created` FROM `".TABLE_PREFIX."entities` WHERE `guid` = '".$image."'");
+	$result = mysql_query($sql);
+	$row = mysql_fetch_array($result);
+	$join_date = $row[0];
+	$str = BASE_URL."../mod/profile/icondirect.php?joindate=".$join_date."&guid=".$image."&size=medium";
 
 	return $str;
 }
