@@ -254,8 +254,7 @@ function gc_theme_init() {
 	elgg_register_action('discussion/reply/save', "$action_path/discussion/reply/save.php");
 	elgg_unregister_action("group_tools/mail");
 	elgg_register_action("group_tools/mail", $action_path."/group_tools/mail.php");
-	elgg_unregister_action("group_tools/admin_transfer");
-	elgg_register_action("group_tools/admin_transfer", $action_path."/group_tools/admin_transfer.php");
+	elgg_register_action("groups/edit", $action_path."/groups/edit.php");
 	elgg_register_action("gc_theme/pns", $action_path."/gc_theme/pns.php");
 	elgg_register_action("notificationsettings/single_groupsave", $action_path."/notificationsettings/single_groupsave.php");
 	// Remove admin for toggling notification for group
