@@ -473,7 +473,7 @@ return array(
 	'gc_theme:sidebar_link:faqs' => 'FAQ',
 	'gc_theme:sidebar_link:training' => 'Formation',
 	'gc_theme:comment:notify_ref:subject' => 'Commentaire Agora',
-	'gc_theme:comment:notify_ref:body' => "%s vous a cité dans le commentaire %s",
+	'gc_theme:comment:notify_ref:body' => "%s vous a cité dans un commentaire au %s",
 	'gc_theme:done' => 'Retour à l\'événement',
 	'gc_theme:registrationform_preamble' => "Personnalisez votre formulaire d'inscription en ajoutant des questions en cliquand sur \"Ajoutez des questions\"",
 	'gc_theme:toggle_classified_ads' => 'Montrer/cacher les annonces classées',

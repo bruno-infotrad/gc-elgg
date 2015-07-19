@@ -9,13 +9,19 @@
 $entity_guid = (int) get_input('entity_guid', 0, false);
 $comment_guid = (int) get_input('comment_guid', 0, false);
 $comment_text = get_input('generic_comment');
+$raw_comment_text = strip_tags($comment_text);
 $is_edit_page = (bool) get_input('is_edit_page', false, false);
 
 if (empty($comment_text)) {
 	register_error(elgg_echo("generic_comment:blank"));
 	forward(REFERER);
 }
-
+//Add profile URL
+$comment_text = preg_replace('/(^|[^\w])@([\w]+)/', '$1<a href="' . elgg_get_site_url() . 'profile/$2">@$2</a>', $comment_text);
+// email addresses
+$comment_text = preg_replace('/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i', '$1<a href="mailto:$2@$3">$2@$3</a>', $comment_text);
+// hashtags
+$comment_text = preg_replace('/(^|[^\w])#(\w*[^\s\d!-\/:-@]+\w*)/', '$1<a href="' . $CONFIG->wwwroot . 'thewire/tag/$2">#$2</a>', $comment_text);
 if ($comment_guid) {
 	// Edit an existing comment
 	$comment = get_entity($comment_guid);
@@ -77,6 +83,32 @@ if ($comment_guid) {
 				'action' => 'create',
 			)
 		);
+	}
+	//Notify any user referred by handle in comment text
+	if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
+	        foreach ($atoms as $atom) {
+	                $username=preg_replace('/^@/','',$atom,-1,$count);
+	                if ($count) {
+	                        if($to_user=get_user_by_username($username)) {
+	                        	//$comment_text = preg_replace('/@'.$username.'/', '<a href="profile/'.$username.'">@'.$username.'</a>', $comment_text);
+					if ($to_user->guid != $entity->owner_guid && $to_user->guid != $user->guid) {
+						$to = $to_user->guid;
+						notify_user($to,
+							$user->guid,
+							elgg_echo('gc_theme:comment:notify_ref:subject', array(), $to_user->language),
+							elgg_echo('gc_theme:comment:notify_ref:body', array(
+								$user->name,
+								$entity->getURL(),
+							), $to_user->language),
+							array(
+								'object' => $comment,
+								'action' => 'create',
+							)
+						);
+					}
+				}
+	                }
+	        }
 	}
 
 	// Add to river

@@ -201,7 +201,7 @@ return array(
 	'gc_theme:sidebar_link:faqs' => 'FAQs',
 	'gc_theme:sidebar_link:training' => 'Training',
 	'gc_theme:comment:notify_ref:subject' => 'Agora comment',
-	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment %s",
+	'gc_theme:comment:notify_ref:body' => "%s referred to you in the comment on %s",
 	'gc_theme:done' => 'Back to event',
 	'gc_theme:registrationform_preamble' => "Customize your registration questions to get information from attendees. Click on \"Add Questions\" to add registration questions.",
 	'gc_theme:toggle_classified_ads' => 'Show/hide classified ads',
