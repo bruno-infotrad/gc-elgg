@@ -476,6 +476,7 @@ return array(
 	'gc_theme:comment:notify_ref:body' => "%s vous a cité dans le commentaire %s",
 	'gc_theme:done' => 'Retour à l\'événement',
 	'gc_theme:registrationform_preamble' => "Personnalisez votre formulaire d'inscription en ajoutant des questions en cliquand sur \"Ajoutez des questions\"",
+	'gc_theme:toggle_classified_ads' => 'Montrer/cacher les annonces classées',
 	'event_manager:editregistration:addfield' => 'Ajoutez des questions',
 	'event_manager:editregistration:addfield:title' => 'Ajoutez une question',
 	'event_manager:editregistration:fieldtype' => 'Type de champs',

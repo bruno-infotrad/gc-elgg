@@ -81,6 +81,14 @@
 .elgg-agora-icon-eventmanager {
 	background-position: -18px -594px;
 }
+.control-toggle-cla-on {
+	background-position: 0 -576px;
+	margin-left: 0px;
+}
+.control-toggle-cla-off {
+	background-position: -18px -612px;
+	margin-left: 0px;
+}
 
 /* ***************************************
 	ICONS

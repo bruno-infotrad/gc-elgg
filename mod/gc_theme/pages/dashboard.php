@@ -48,9 +48,8 @@ elgg_set_page_owner_guid($user->guid);
 
 $title = elgg_echo('newsfeed');
 
-//$composer = elgg_view('page/elements/composer', array('entity' => $user, 'class' => 'elgg-composer-dashboard'));
 $composer = elgg_view('compound/multi', array("id" => "invite_to_group",));
-//$composer = elgg_view_form('compound/add', array('enctype' => 'multipart/form-data'));
+elgg_load_js('elgg.toggle_cla');
 elgg_load_js('elgg.gc_comments');
 elgg_load_js('elgg.gc_wire');
 elgg_load_js('elgg.gc_gft');

@@ -152,7 +152,7 @@ if (elgg_get_context() != 'admin') {
 					//$html .= "DEUXIEME CONDITION TYPE=".$new_item->getType()." SUBTYPE=".$new_item ->getSubType();
 					$container_guid = get_entity($new_item->object_guid)->container_guid;
 					if (get_entity($container_guid) instanceof ElggGroup) {
-						if ($container_guid == 34082) {
+						if ($container_guid == 21878) {
 							$item_classes .= ' hide-cla';
 						}
 						$group = $container_guid;
