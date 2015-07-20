@@ -1,5 +1,5 @@
 <?php
-$search_string = elgg_echo('members:searchname');
+$search_string = elgg_echo('members:search');
 
 $params = array(
         'name' => 'name',

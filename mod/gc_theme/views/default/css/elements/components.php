@@ -250,12 +250,12 @@ li[id*='elgg-group-'] .elgg-body {
 	River
 *************************************** */
 /*
-ul.elgg-river {
+ul.elgg-list-river {
 	padding: 0 15px 0 15px;
 }
 */
 
-.elgg-river > li {
+.elgg-list-river > li {
 	border-bottom: 1px solid #E9E9E9;
 	padding: 5px 0 0 15px;
 }

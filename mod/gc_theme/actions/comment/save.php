@@ -43,6 +43,20 @@ if ($comment_guid) {
 	}
 } else {
 	// Create a new comment on the target entity
+	// First check river exists, if it does not create it (e.g. for zip files)
+	$options = array('object_guids' => $entity_guid,'action_types' => 'create');
+	$river_item = elgg_get_river($options);
+	if (count($river_item) == 0) {
+		$entity = get_entity($entity_guid);
+		elgg_create_river_item(array(
+			'view' => 'river/object/'.$entity->getSubtype().'/create',
+			'action_type' => 'create',
+			'subject_guid' => $entity->owner_guid,
+			'object_guid' => $entity_guid,
+			'target_guid' => 0
+		));
+	}
+
 	$entity = get_entity($entity_guid);
 	if (!$entity) {
 		register_error(elgg_echo("generic_comment:notfound"));
