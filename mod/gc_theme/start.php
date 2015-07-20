@@ -166,6 +166,7 @@ function gc_theme_init() {
 	elgg_register_ajax_view('gc_theme/ajax/members');
 	elgg_register_ajax_view('gc_theme/ajax/members/search/name');
 	elgg_register_ajax_view('gc_theme/ajax/messages_inbox');
+	elgg_register_ajax_view('gc_theme/ajax/site_notifications');
 	elgg_register_ajax_view('gc_theme/ajax/pages_friends');
 	elgg_register_ajax_view('gc_theme/ajax/pages_owner');
 	elgg_register_ajax_view('gc_theme/ajax/pages_world');
