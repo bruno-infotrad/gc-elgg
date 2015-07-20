@@ -62,6 +62,7 @@ try {
 // can be changed. Refs #4171
 if ($user->language) {
 	$message = elgg_echo('loginok', array(), $user->language);
+	$_SESSION['language'] = $user->language;
 } else {
 	$message = elgg_echo('loginok');
 }

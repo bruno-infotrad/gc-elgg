@@ -137,6 +137,9 @@ class Translator {
 		if (!$language) {
 			$language = 'en';
 		}
+		//if (! $_COOKIE['Elgg_lang']) {
+			setcookie("Elgg_lang", $language, 0, '/');
+		//}
 	
 		return $language;
 	}
@@ -154,7 +157,7 @@ class Translator {
 		//	$language = $user->language;
 		//}
 
-        	if ((!$language) && (isset($_SESSION['language'])) && ($_SESSION['language'])) {
+        	if ((isset($_SESSION['language'])) && ($_SESSION['language'])) {
                 	$language = $_SESSION['language'];
         	}
 	

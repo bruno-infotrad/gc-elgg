@@ -13,13 +13,16 @@
     elgg_register_event_handler('init','system','toggle_lang_init');
 	
 	// Create a session variable if is not already set
+/*
 	if (!isset($_SESSION['language'])) { 
-		if ($CONFIG->language) {
-			$_SESSION['language'] = $CONFIG->language;
+		$language = elgg_get_config('language');
+		if ($language) {
+			$_SESSION['language'] = $language;
 		} else {
 			$_SESSION['language'] = "en";
 		}
 	}
+*/
 	
 	// Register actions
 	elgg_register_action("toggle_language/toggle", $CONFIG->pluginspath."toggle_language/actions/toggle.php", 'public');
