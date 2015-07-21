@@ -14,6 +14,7 @@ $container_guid = (int) get_input('container_guid', 0);
 $guid = (int) get_input('file_guid');
 $tags = get_input("tags");
 $embed= get_input("embed",false);
+$add_to_river= get_input("add_to_river",false);
 
 if ($container_guid == 0) {
 	$container_guid = elgg_get_logged_in_user_guid();
@@ -190,7 +191,7 @@ if ($new_file) {
 	if ($guid) {
 		$message = elgg_echo("file:saved");
 		system_message($message);
-		if (! $embed) {
+		if (! $embed && $add_to_river == 'true') {
 			elgg_create_river_item(array( 'view' => 'river/object/file/create', 'action_type' => 'create', 'subject_guid' => elgg_get_logged_in_user_guid(), 'object_guid' => $file->guid,));
 		}
 	} else {

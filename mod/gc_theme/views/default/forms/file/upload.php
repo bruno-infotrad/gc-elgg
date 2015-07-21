@@ -26,6 +26,8 @@ if ($guid) {
 	$file_label = elgg_echo("file:file");
 	$submit_label = elgg_echo('upload');
 	$file_selected = elgg_echo('gc_theme:no_file_selected');
+	$add_to_river = elgg_view('input/checkbox',array('name'=>'add_to_river','value'=>'true'));
+	$add_to_river = '<div class="gc-addtoriver-row"><div class="gc-input-file-2em"><label>'.elgg_echo('Show in feed').'</label></div><div class="gc-addtoriver-cb">'.$add_to_river.'</div></div>';
 }
 ?>
 <script type="text/javascript">
@@ -83,6 +85,12 @@ if ($embed) {
 	<div class="gc-input-file-desc"><?php echo elgg_view('input/plaintext', array('name' => 'description', 'value' => $desc)); ?></div>
 </div>
 
+<?php
+	//allow user to add to river but not on by default
+	if (! $guid) {
+		echo $add_to_river;
+	}
+?>
 <div class="gc-input-file-row">
 <?php 
 //CAREFUL! file_tools plugin has to be on for his to work. Since it has been in use, no point

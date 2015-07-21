@@ -80,7 +80,9 @@ label[for=blog_description] {
   min-width: 15em;
   padding: 5px;
 }
-.gc-input-file-ib {display:inline-block;}
+.gc-addtoriver-row {display:block;position:relative;top:-10px;}
+.gc-addtoriver-cb {padding-left:10px;}
+.gc-addtoriver-cb,.gc-input-file-ib {display:inline-block;}
 .gc-input-file-queue {display:inline-block;margin-left:5em;vertical-align:top;}
 .gc-input-file-row {display:inline-block;margin-top:5px;}
 .gc-input-file-browse {display:inline-block;vertical-align:top;}
