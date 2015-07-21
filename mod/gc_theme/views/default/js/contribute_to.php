@@ -36,6 +36,7 @@ elgg.contribute_to.init = function() {
 	$('#thewire-contribute-to').attr('disabled','disabled');
 	$('#thewire-contribute-to').css('pointer-events','none');
 	$("[id$=thewire-textarea]").live('keyup', function(){
+		var pt = $.trim($("[id$=thewire-textarea]").val());
 		if ($.trim($("[id$=thewire-textarea]").val())) {
 			if (!$('input#thewire-exec-content').is(':checked')) {
 				$('#thewire-contribute-to').css('opacity','1.0');
@@ -76,15 +77,17 @@ elgg.contribute_to.init = function() {
 	$( window ).load(function() {
 /*
  * Comment out for now
+*/
 		CKEDITOR.on('instanceReady', function(event) {
 			for ( var i in CKEDITOR.instances ){
 				var oEditor   = CKEDITOR.instances[i];
 				var id   = $(oEditor).attr('id');
-				console.log("i="+i+" id="+id);
+				//console.log("i="+i+" id="+id);
 				//elgg.user_handle('#thewire-textarea');
-				elgg.user_handle(i);
+				//elgg.user_handle(i);
 			}
 		});
+/*
 */
 		CKEDITOR.on('instanceReady', function(event) {
 			var e = CKEDITOR.instances['thewire-textarea']
@@ -100,12 +103,15 @@ elgg.contribute_to.init = function() {
 				}
 			});
 
-			editable.on( 'keyup', function( event ) {
-				var texte = e.getData();
-				if (texte) {
-					$('#thewire-textarea').html(texte);
-					elgg.user_handle('thewire-textarea');
-					console.log("DATA"+texte);
+			e.on( 'change', function( event ) {
+			//editable.on( 'change', function( event ) {
+				var edata = e.getData();
+				//var texte = editable.getText();
+				//var donnees = editable.getData();
+				//console.log("EDONNEES "+edata+" LONGUEUR DES EDONNEES "+edata.length+" DONNEES "+donnees+" LONGUEUR DES DONNEES "+donnees.length+" TEXTE "+texte+" LONGUEUR DU TEXTE "+texte.length);
+				if (edata.length != 0) {
+					//$('#thewire-textarea').html(texte);
+					//elgg.user_handle('thewire-textarea');
 					if (!$('input#thewire-exec-content').is(':checked')) {
 						$('#thewire-contribute-to').css('opacity','1.0');
 						$('#thewire-contribute-to').css('pointer-events','all');
