@@ -17,15 +17,15 @@ if (preg_match('/,/',$container_guid)) {
 }
 $parent_guid = (int) get_input('parent_guid');
 $guid = (int) get_input('guid',0);
-elgg_log("compound/add=".$container_guid,'NOTICE');
+$GLOBALS['GC_THEME']->debug("compound/add=".$container_guid);
 if ($container_guid) {
 	if ($mv_container_guid) {
 		foreach($container_guids as $container) {
 			$gguid=get_entity($container);
-			elgg_log("multiple compound/add=".$gguid->membership,'NOTICE');
+			$GLOBALS['GC_THEME']->debug("multiple compound/add=".$gguid->membership);
 			if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
 				$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container'");
-				elgg_log("multiple compound/add group_access_collections ".$gac->id,'NOTICE');
+				$GLOBALS['GC_THEME']->debug("multiple compound/add group_access_collections ".$gac->id);
 				$access_ids[$container]=$gac->id;
 			} else {
 				$access_ids[$container] = ACCESS_LOGGED_IN;
@@ -33,10 +33,10 @@ if ($container_guid) {
 		}
 	} else {
 		$gguid=get_entity($container_guid);
-		elgg_log("compound/add=".$gguid->membership,'NOTICE');
+		$GLOBALS['GC_THEME']->debug("compound/add=".$gguid->membership);
 		if ($gguid instanceof ElggGroup && $gguid->membership == ACCESS_PRIVATE) {
 			$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$container_guid'");
-			elgg_log("compound/add group_access_collections ".$gac->id,'NOTICE');
+			$GLOBALS['GC_THEME']->debug("compound/add group_access_collections ".$gac->id);
 			$access_id=$gac->id;
 		} else {
 			$access_id = ACCESS_LOGGED_IN;
@@ -68,7 +68,7 @@ if ($container_guid == 0) {
 }
 if ($mv_container_guid && $guid == 0) {
 	foreach($container_guids as $container) {
-		elgg_log("multiple post ".$access_ids[$container],'NOTICE');
+		$GLOBALS['GC_THEME']->debug("multiple post ".$access_ids[$container]);
 		$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
 		if (!$guid) {
 			register_error(elgg_echo("thewire:error"));
@@ -203,16 +203,6 @@ function thebetterwire_save_post($guid = 0,$text, $userid, $container_guid, $acc
 		$time_updated = time();
 		$post->time_updated = $time_updated;
         	$guid = $post->save();
-		/*
-		elgg_log("BRUNO JEDITABLE TEST ".$river_guid,'NOTICE');
-		if ($guid) {
-			$river_items = elgg_get_river(array('id' => $river_guid));
-			elgg_log("BRUNO JEDITABLE RIVER ".var_export($river_items,true),'NOTICE');
-			$sql_query = "UPDATE {$db_prefix}river SET  posted  = '{$time_updated}' WHERE id = {$river_guid};";
-                	$result = update_data($sql_query);
-			elgg_log("BRUNO JEDITABLE AFTER ".$river_items[0]->id." ".$river_items[0]->posted,'NOTICE');
-		}
-		*/
 	}
         return $guid;
 }

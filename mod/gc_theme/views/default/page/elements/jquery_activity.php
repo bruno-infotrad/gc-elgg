@@ -37,9 +37,9 @@ if (is_array($items) && $count > 0) {
 		//$html .= "<p id=\"$id\" class=\"$item_class\">";
 		$summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary_with_tiny_pic', array('item' => $item)));
 		//$summary = elgg_view_list_item($item);
-		//elgg_log("BRUNO activity:summary before elgg_view".$summary, 'NOTICE');
+		//$GLOBALS['GC_THEME']->debug("BRUNO activity:summary before elgg_view".$summary);
 		if ($summary === false) {
-			elgg_log("BRUNO activity:summary FALSE".$summary, 'NOTICE');
+			$GLOBALS['GC_THEME']->debug("BRUNO activity:summary FALSE".$summary);
 		        $subject = $item->getSubjectEntity();
 		        $summary = elgg_view('output/url', array(
 		                'href' => $subject->getURL(),
@@ -48,7 +48,7 @@ if (is_array($items) && $count > 0) {
 		                'is_trusted' => true,
 		        ));
 		}
-		elgg_log("BRUNO activity:summary ".$summary, 'NOTICE');
+		$GLOBALS['GC_THEME']->debug("BRUNO activity:summary ".$summary);
 		                                $html .= $summary;
 	}
 }

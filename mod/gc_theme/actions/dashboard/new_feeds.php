@@ -17,8 +17,6 @@ if ($user->feed_viewed) {
 if ($feed_last_viewed) {
 	$query = "SELECT COUNT(*) as total from {$db_prefix}river rv where rv.posted > $feed_last_viewed  AND rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote'";
 	$new_feeds = get_data_row($query);
-	//elgg_log("BRUNO new feeds ".var_export($new_feeds,true),'NOTICE');
-	elgg_log("BRUNO new feeds $new_feeds->total",'NOTICE');
 	$json = array('success' => TRUE, 'count' => $new_feeds->total, 'js_polling_control' => $js_polling_control);
 } else {
 	$json = array('success' => TRUE, 'count' => 0, 'js_polling_control' => $js_polling_control);

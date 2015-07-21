@@ -5,7 +5,7 @@
 $sql_query_count = "SELECT count(*) as count FROM `elgg_users_entity` where last_login = 0 and username regexp '[a-zA-Z]{3}[[:digit:]]{3}' and username regexp '^......$' order by username";
 $db_count=get_data($sql_query_count);
 $count = $db_count[0]->count;
-$GLOBALS['DUA_LOG']->fatal('Processing '.$count.' unused xCIDA accounts');
+$GLOBALS['GC_THEME']->fatal('Processing '.$count.' unused xCIDA accounts');
 $sql_query = "SELECT username FROM `elgg_users_entity` where last_login = 0 and username regexp '[a-zA-Z]{3}[[:digit:]]{3}' and username regexp '^......$' order by username";
 $list_of_users = get_data($sql_query);
 foreach ($list_of_users as $sql_user) {
@@ -26,11 +26,11 @@ foreach ($list_of_users as $sql_user) {
 	if ($user->last_login == 0 || $nomoobu == 0) {
 */
 	if ($user->last_login == 0) {
-		$GLOBALS['DUA_LOG']->DEBUG('Deleting user '.$username);
+		$GLOBALS['GC_THEME']->DEBUG('Deleting user '.$username);
 		if($user->delete()) {
-			$GLOBALS['DUA_LOG']->fatal('User '.$username.' deleted');
+			$GLOBALS['GC_THEME']->fatal('User '.$username.' deleted');
 		} else {
-			$GLOBALS['DUA_LOG']->fatal('User '.$username.' COULD NOT BE DELETED');
+			$GLOBALS['GC_THEME']->fatal('User '.$username.' COULD NOT BE DELETED');
 		}
 	}
 }

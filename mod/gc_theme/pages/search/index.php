@@ -26,7 +26,7 @@ $search_type = get_input('search_type', 'all');
 // @todo is there an example query to demonstrate ^
 // XSS protection is more important that searching for HTML.
 $query = stripslashes(get_input('q', get_input('tag', '')));
-//elgg_log("BRUNO query=$query",'NOTICE');
+//$GLOBALS['GC_THEME']->debug("BRUNO query=$query");
 // @todo - create function for sanitization of strings for display in 1.8
 // encode <,>,&, quotes and characters above 127
 $display_query = mb_convert_encoding($query, 'HTML-ENTITIES', 'UTF-8');
@@ -142,7 +142,9 @@ foreach ($types as $type => $subtypes) {
 			$url = elgg_get_site_url()."search?$data";
 			$menu_item = new ElggMenuItem($label, elgg_echo($label), $url);
 			elgg_register_menu_item('page', $menu_item);
-			elgg_log("BRUNO search menu item ".var_export($menu_item,true),'NOTICE');
+			$GLOBALS['GC_THEME']->debug("gc_register:params ".var_export($params,true));
+
+			$GLOBALS['GC_THEME']->debug("BRUNO search menu item ".var_export($menu_item,true));
 		}
 	} else {
 		$label = "item:$type";
@@ -160,7 +162,7 @@ foreach ($types as $type => $subtypes) {
 
 		$menu_item = new ElggMenuItem($label, elgg_echo($label), $url);
 		elgg_register_menu_item('page', $menu_item);
-		elgg_log("BRUNO search menu item ".var_export($menu_item,true),'NOTICE');
+		$GLOBALS['GC_THEME']->debug("BRUNO search menu item ".var_export($menu_item,true));
 	}
 }
 
@@ -182,7 +184,7 @@ foreach ($custom_types as $type) {
 
 	$menu_item = new ElggMenuItem($label, elgg_echo($label), $url);
 	elgg_register_menu_item('page', $menu_item);
-	elgg_log("BRUNO search menu item ".var_export($menu_item,true),'NOTICE');
+	$GLOBALS['GC_THEME']->debug("BRUNO search menu item ".var_export($menu_item,true));
 }
 
 // start the actual search

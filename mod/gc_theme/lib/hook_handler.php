@@ -11,11 +11,11 @@ function gc_search_objects_hook($hook, $type, $value, $params) {
 		$user_guid = get_user_by_username($params['contributed_by'])->guid;
 		$where_contributed_by = "e.owner_guid=\"$user_guid\"";
 	}
-	elgg_log("BRUNO APPROXIMATE_DATE=".$params['approximate_date'],'NOTICE');
+	$GLOBALS['GC_THEME']->debug("APPROXIMATE_DATE=".$params['approximate_date']);
 	if ($params['approximate_date']) {
 		$approx_after = $params['approximate_date'] + 3*24*3600;
 		$approx_before = $params['approximate_date'] - 3*24*3600;
-		elgg_log("BRUNO APPROXIMATE_=$approx_before $approx_after",'NOTICE');
+		$GLOBALS['GC_THEME']->debug("APPROXIMATE_=$approx_before $approx_after");
 		$where_approximate_date = "e.time_created < $approx_after AND e.time_created > $approx_before";
 	}
 	$params['joins'] = array($join);
@@ -145,8 +145,10 @@ function gc_search_comments_hook($hook, $type, $value, $params) {
 	}
 
 
-	$e_access = get_access_sql_suffix('e');
-	$a_access = get_access_sql_suffix('a');
+	//$e_access = get_access_sql_suffix('e');
+	$e_access = _elgg_get_access_where_sql(array('table_alias' => 'e'));
+	//$a_access = get_access_sql_suffix('a');
+	$e_access = _elgg_get_access_where_sql(array('table_alias' => 'a'));
 	// @todo this can probably be done through the api..
 	$q = "SELECT count(DISTINCT a.id) as total FROM {$db_prefix}annotations a
 		JOIN {$db_prefix}metastrings msn ON a.name_id = msn.id
@@ -259,7 +261,7 @@ function gc_search_users_hook($hook, $type, $value, $params) {
 		unset($params['container_guid']);
 		$count = elgg_get_entities_from_relationship($params);
 		$params['container_guid'] = $tmp_container_guid;
-		elgg_log('BRUNO RIGHT AFTER SEARCH HOOK '.$count,'NOTICE');
+		$GLOBALS['GC_THEME']->debug("RIGHT AFTER SEARCH HOOK ".$count);
 	} else {
         	$count = elgg_get_entities($params);
 	}
@@ -270,13 +272,13 @@ function gc_search_users_hook($hook, $type, $value, $params) {
         }
         $params['count'] = FALSE;
 	if (get_entity($params['container_guid']) instanceof ElggGroup) {
-		elgg_log('BRUNO SEARCH HOOK '.$params['container_guid'],'NOTICE');
+		$GLOBALS['GC_THEME']->debug("SEARCH HOOK ".$params['container_guid']);
         	$params['relationship'] = 'member';
         	$params['relationship_guid'] = $params['container_guid'];
         	$params['inverse_relationship'] = true;
 		unset($params['container_guid']);
 		$user_entities = elgg_get_entities_from_relationship($params);
-		elgg_log('BRUNO RIGHT AFTER SEARCH HOOK '.var_export($user_entities,true),'NOTICE');
+		$GLOBALS['GC_THEME']->debug("RIGHT AFTER SEARCH HOOK ".$var_export($user_entities,true));
 	} else {
         	$user_entities = elgg_get_entities($params);
 	}
@@ -303,7 +305,8 @@ function gc_search_users_hook($hook, $type, $value, $params) {
 	$params['joins'][] = "JOIN {$db_prefix}metastrings msn on md.name_id = msn.id";
 	$params['joins'][] = "JOIN {$db_prefix}metastrings msv on md.value_id = msv.id";
 
-	$access = get_access_sql_suffix('md');
+	//$access = get_access_sql_suffix('md');
+	$access = _elgg_get_access_where_sql(array('table_alias' => 'md'));
 	$and_used = preg_split("/ and /i", $query);
 	$or_used = preg_split("/ or /i", $query);
 	$new_query = '';
@@ -365,7 +368,7 @@ function gc_search_users_hook($hook, $type, $value, $params) {
 		if (! $title_tmp) {
                         $title_tmp = $params['query'];
                 }
-                elgg_log('BRUNO gc_search__users_hook title_tmp='.$title_tmp,'NOTICE');
+		$GLOBALS['GC_THEME']->debug("gc_search__users_hook title_tmp=".$title_tmp);
 
 		if (elgg_strlen($title_tmp) > 297) {
 			$title_str = elgg_substr($title_tmp, 0, 297) . '...';
@@ -513,7 +516,7 @@ function gc_search_tags_hook($hook, $type, $value, $params) {
 		if (! $title_tmp) {
 			$title_tmp = $params['query'];
 		}
-		elgg_log('BRUNO gc_search_tags_hook title_tmp='.$title_tmp,'NOTICE');
+		$GLOBALS['GC_THEME']->debug("gc_search_tags_hook title_tmp=".$title_tmp);
 		if (elgg_strlen($title_tmp) > 297) {
 			$title_str = elgg_substr($title_tmp, 0, 297) . '...';
 		} else {
@@ -543,8 +546,8 @@ function gc_search_tags_hook($hook, $type, $value, $params) {
 
 function gc_register($hook, $type, $value,$params) {
 	$db_prefix = elgg_get_config('dbprefix');
-	elgg_log("BRUNO gc_register:params ".var_export($params,true),'NOTICE');
-	elgg_log("BRUNO gc_register:params guid ".$params['user']->guid,'NOTICE');
+	$GLOBALS['GC_THEME']->debug("gc_register:params ".var_export($params,true));
+	$GLOBALS['GC_THEME']->debug("gc_register:params guid ".$params['user']->guid);
 	// Use raw method to update user to GCuser because user entity not validated so not yet available
 	$user=$params['user'];
 	$metaname = 'collections_notifications_preferences_email';
@@ -649,7 +652,7 @@ function gc_user_entities($hook, $type, $return, $params) {
 }
 
 function gc_theme_river_menu_handler($hook, $type, $items, $params) {
-	elgg_log("BRUNO gc_theme_river_menu_handler ".var_export($params,true),'NOTICE');
+	$GLOBALS['GC_THEME']->debug("gc_theme_river_menu_handler ".var_export($params,true));
 	$item = $params['item'];
 	$object = $item->getObjectEntity();
 
@@ -797,7 +800,7 @@ function gc_thewire_discussion_reply_setup_entity_menu_items($hook, $type, $valu
 function gc_dashboard_delete_item($hook, $type, $fields, $params) {
 	$entity = $params['entity'];
 	$handler = elgg_extract('handler', $params, false);
-	elgg_log("BRUNO handler $handler",'NOTICE');
+	$GLOBALS['GC_THEME']->debug("HANDLER $handler");
 
 	$options = array(
 		'name' => 'delete',
@@ -1033,7 +1036,7 @@ function gc_theme_annotation_permissions_handler($hook, $type, $result, $params)
 	$entity = $params['entity'];
 	$user = $params['user'];
 	$annotation_name = $params['annotation_name'];
-	elgg_log("BRUNO gc_theme_annotation_permissions_handler ".var_export($params,true),'NOTICE');
+	$GLOBALS['GC_THEME']->debug("gc_theme_annotation_permissions_handler ".var_export($params,true));
 	
 	//Users should not be able to post on their own message board
 	if ($annotation_name == 'messageboard' && $user->guid == $entity->guid) {
@@ -1304,16 +1307,16 @@ function gc_theme_views_add_rss_link() {
 }
 function gc_object_notifications_intercept($hook, $entity_type, $returnvalue, $params) {
 	if (isset($params)) {
-		elgg_log('BRUNO GC INTERCEPT params '.var_export($params,true),'NOTICE');
+		$GLOBALS['GC_THEME']->debug("GC INTERCEPT params ".var_export($params,true));
 		if ($params['event'] == 'create' && $params['object'] instanceof ElggObject) {
-			elgg_log('BRUNO GC INTERCEPT params '.var_export($params,true),'NOTICE');
+			$GLOBALS['GC_THEME']->debug("GC INTERCEPT params ".var_export($params,true));
 			$object = $params['object'];
-			elgg_log('BRUNO BLOG INTERCEPT object->subtype '.$object->getSubtype(),'NOTICE');
+			$GLOBALS['GC_THEME']->debug('BLOG/EVENT INTERCEPT object->subtype '.$object->getSubtype());
 			if ($object->getSubtype() == 'blog' || $object->getSubtype() == 'event') {
-				elgg_log('BRUNO GC INTERCEPT IT IS A BLOG OR AN EVENT','NOTICE');
-				elgg_log('BRUNO GC INTERCEPT object->status '.$object->status,'NOTICE');
+				$GLOBALS['GC_THEME']->debug('GC INTERCEPT IT IS A BLOG OR AN EVENT');
+				$GLOBALS['GC_THEME']->debug('GC INTERCEPT object->status '.$object->status);
 				if ($object->status != 'published') {
-					elgg_log('BRUNO GC INTERCEPT AND IT IS NOT PUBLISHED','NOTICE');
+					$GLOBALS['GC_THEME']->debug('BRUNO GC INTERCEPT AND IT IS NOT PUBLISHED');
 					return true;
 				}
 			}
@@ -1426,9 +1429,9 @@ function im_admin_can_edit_hook($hook, $type, $return_value, $params){
 }
 
 function ad2elgg_user_update_forward_hook($hook_name, $entity_type, $return_value, $parameters){
-	$GLOBALS['DUA_LOG']->debug("FORWARD HOOK: ".var_export($parameters,true));
+	$GLOBALS['GC_THEME']->debug("FORWARD HOOK: ".var_export($parameters,true));
 	$username = get_input("username");
-	$GLOBALS['DUA_LOG']->debug("Username: $username");
+	$GLOBALS['GC_THEME']->debug("Username: $username");
 	if(!empty($username)){
 		return elgg_get_site_url() . "/dfait_adsync/sync/" . $username;
 	}

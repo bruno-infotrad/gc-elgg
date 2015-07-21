@@ -30,8 +30,8 @@ if ($children) {
 		$item->addLinkClass('elgg-menu-parent');
 	} else {
 		foreach ($children as $child) {
-			elgg_log('BRUNO menuitem:children '. $child->getName(),NOTICE);
-			elgg_log('BRUNO menuitem:children '. $child->getSelected(),NOTICE);
+			$GLOBALS['GC_THEME']->debug('BRUNO menuitem:children '. $child->getName());
+			$GLOBALS['GC_THEME']->debug('BRUNO menuitem:children '. $child->getSelected());
 			if ($child->getSelected()) {
 				$child_selected = true;
 				$link_class = 'elgg-menu-opened';

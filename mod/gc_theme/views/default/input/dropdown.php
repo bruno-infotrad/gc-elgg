@@ -44,14 +44,14 @@ unset($vars['value']);
 $guid = $vars['guid'];
 unset($vars['guid']);
 
-elgg_log("input/dropdown value=".var_export($value,true),'NOTICE');
-elgg_log("input/dropdown options_values=".var_export($options_values,true),'NOTICE');
-elgg_log("input/dropdown elgg_get_page_owner_guid=".elgg_get_page_owner_guid(),'NOTICE');
-elgg_log("input/dropdown guid=".$guid,'NOTICE');
-elgg_log("input/dropdown elgg_view_access_collections=".elgg_view_access_collections(elgg_get_page_owner_guid()),'NOTICE');
+$GLOBALS['GC_THEME']->debug("input/dropdown value=".var_export($value,true));
+$GLOBALS['GC_THEME']->debug("input/dropdown options_values=".var_export($options_values,true));
+$GLOBALS['GC_THEME']->debug("input/dropdown elgg_get_page_owner_guid=".elgg_get_page_owner_guid());
+$GLOBALS['GC_THEME']->debug("input/dropdown guid=".$guid);
+$GLOBALS['GC_THEME']->debug("input/dropdown elgg_view_access_collections=".elgg_view_access_collections(elgg_get_page_owner_guid()));
 $filter_guid=elgg_get_page_owner_guid();
 $gguid=get_entity($filter_guid);
-elgg_log("input/dropdown gguid->membership=".$gguid->membership,'NOTICE');
+$GLOBALS['GC_THEME']->debug("input/dropdown gguid->membership=".$gguid->membership);
 
 ?>
 <select <?php echo elgg_format_attributes($vars); ?>>
@@ -61,14 +61,14 @@ if ($options_values) {
 // Check it is a group otherwise default
 	if ($gguid instanceof ElggGroup) {
 		$uri_atoms = preg_split("/\//",$_SERVER['REQUEST_URI']);
-		elgg_log("input/dropdown uri_atoms=".$uri_atoms[sizeof($uri_atoms)-2],'NOTICE');
+		$GLOBALS['GC_THEME']->debug("input/dropdown uri_atoms=".$uri_atoms[sizeof($uri_atoms)-2]);
 $and_used = preg_split("/ and /i", $query);
 // Check if group is closed and we are displaying the access drowpdown. If so, change the default value to be for the group
 		//if ($options_values[0] == ACCESS_PRIVATE ) {
 		if ($options_values[0] == ACCESS_PRIVATE && $gguid->membership == ACCESS_PRIVATE && $uri_atoms[sizeof($uri_atoms)-2] != 'edit') {
 			$dbprefix = elgg_get_config('dbprefix');
 			$gac=get_data_row("SELECT id FROM {$dbprefix}access_collections WHERE owner_guid='$filter_guid'");
-			elgg_log("input/dropdown group_access_collections ".$gac->id,'NOTICE');
+			$GLOBALS['GC_THEME']->debug("input/dropdown group_access_collections ".$gac->id);
 			$value=$gac->id;
 		//} else {
 			//$value = ACCESS_LOGGED_IN;
@@ -76,19 +76,19 @@ $and_used = preg_split("/ and /i", $query);
 	}
 	foreach ($options_values as $opt_value => $option) {
 
-		elgg_log("input/dropdown opt_value=$opt_value",'NOTICE');
+		$GLOBALS['GC_THEME']->debug("input/dropdown opt_value=$opt_value");
 		$option_attrs = elgg_format_attributes(array(
 			'value' => $opt_value,
 			'selected' => (string)$opt_value == (string)$value,
 		));
 
-		elgg_log("input/dropdown option_attrs=$option_attrs",'NOTICE');
+		$GLOBALS['GC_THEME']->debug("input/dropdown option_attrs=$option_attrs");
 		echo "<option $option_attrs>$option</option>";
 	}
 } else {
 	if (is_array($options)) {
 		foreach ($options as $option) {
-			elgg_log("input/dropdown option=$option",'NOTICE');
+			$GLOBALS['GC_THEME']->debug("input/dropdown option=$option");
 			$option_attrs = elgg_format_attributes(array(
 				'selected' => (string)$option == (string)$value
 			));

@@ -11,7 +11,7 @@ if (elgg_is_admin_logged_in()) {
 		//echo "User $user->username<br>";
 		if(! $user->isBanned()) {
 			if (preg_match('/[a-zA-Z]{3}[0-9]{3}/',$user->username)) {
-					$GLOBALS['DUA_LOG']->FATAL("User $user->username");
+					$GLOBALS['GC_THEME']->FATAL("User $user->username");
 					$user_metadata = profile_manager_get_user_profile_data($user);
 					$count=count($user_metadata);
 					if (($count > 1)&&($user->icontime)) {

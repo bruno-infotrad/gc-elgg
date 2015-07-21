@@ -13,7 +13,7 @@ if (elgg_is_active_plugin('polls')) {
 	$polls = elgg_get_entities_from_metadata($options);
 	if ($polls) {
 		$vars['entity'] = get_entity($polls[0]->guid);
-		elgg_log('BRUNO POLLS '.$vars['entity']->question,'NOTICE');
+		$GLOBALS['GC_THEME']->debug('BRUNO POLLS '.$vars['entity']->question);
 		$sidebar_alt = '<h3>'.$vars['entity']->question.'</h3>';
 		$sidebar_alt .= '<div class="clearfloat"></div><div id="poll-container-'.$vars['entity']->guid.'"class="poll_post">';
         	$sidebar_alt .=elgg_view('polls/poll_widget_content',$vars);

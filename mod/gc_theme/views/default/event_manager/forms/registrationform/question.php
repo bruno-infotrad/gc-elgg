@@ -3,7 +3,6 @@
 	$event_guid = $vars["event_guid"];
 	$question_guid = $vars["question_guid"];
 
-	elgg_log("EVENT_MANAGER event_guid=$event_guid question_guid=$question_guid");	
 	if($event_guid && ($entity = get_entity($event_guid))){
 		// assume new question mode
 		if(!($entity instanceof Event)){

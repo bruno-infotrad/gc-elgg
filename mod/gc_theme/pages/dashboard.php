@@ -41,7 +41,7 @@ if (((!isset($offset) || $offset == 0)) && ($user->pns_viewed ) && (($now - $use
 	$user->activity_viewed = $user->feed_viewed;
 	//call this to delete unused time stamps right away
 	//delete_orphaned_metastrings();
-	elgg_log("BRUNO dashboard:feed_viewed $user->feed_viewed $user->feed_viewed_previous",'NOTICE');
+	//$GLOBALS['GC_THEME']->debug("BRUNO dashboard:feed_viewed $user->feed_viewed $user->feed_viewed_previous");
 }
 
 elgg_set_page_owner_guid($user->guid);

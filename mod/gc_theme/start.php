@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['DUA_LOG'] = new FlexLog(FlexLogLevel::DEBUG);
+$GLOBALS['GC_THEME'] = new FlexLog(FlexLogLevel::DEBUG);
 
 function gc_theme_init() {
 	$plugins_path =  elgg_get_plugins_path();
@@ -72,7 +72,7 @@ function gc_theme_init() {
 	elgg_register_plugin_hook_handler('search', 'user', 'gc_search_users_hook');
 	elgg_unregister_plugin_hook_handler('search', 'tags', 'search_tags_hook');
 	elgg_register_plugin_hook_handler('search', 'tags', 'gc_search_tags_hook');
-	elgg_register_plugin_hook_handler('register', 'user', 'gc_register');
+	//elgg_register_plugin_hook_handler('register', 'user', 'gc_register');
 	elgg_unregister_plugin_hook_handler('access:collections:write', 'all', 'groups_write_acl_plugin_hook');
 	elgg_register_plugin_hook_handler('access:collections:write', 'all', 'gc_groups_write_acl_plugin_hook');
 	elgg_register_plugin_hook_handler("route", "groups", "gc_group_tools_route_groups_handler",400);

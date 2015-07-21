@@ -7,7 +7,7 @@
  * @subpackage Core
  *
  */
-elgg_log("BRUNO CONTEXT ".elgg_get_context(),'NOTICE');
+$GLOBALS['GC_THEME']->debug("BRUNO CONTEXT ".elgg_get_context());
 elgg_push_context('owner_block');
 
 // groups and other users get owner block

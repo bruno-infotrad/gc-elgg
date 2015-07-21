@@ -16,7 +16,6 @@ $db_prefix = elgg_get_config('dbprefix');
 //No friends and no join group
 $stream = elgg_list_river(array( 'wheres' => array("rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join'"),));
 //$stream = elgg_list_river(array( 'wheres' => array("rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.type != 'group' AND rv.action_type != 'create'  AND rv.action_type != 'update'"),));
-elgg_log("BRUNO dashboard:activity ".var_export($activity,true),'NOTICE');
 
 
 elgg_set_page_owner_guid(1);

@@ -13,8 +13,8 @@
  */
 
 //$test_url = $_SERVER['HTTP_REFERER'];
-//elgg_log("BRUNO referrer ".$_SERVER['HTTP_REFERER'],'NOTICE');
-//elgg_log("BRUNO context ".$context,'NOTICE');
+//$GLOBALS['GC_THEME']->debug("BRUNO referrer ".$_SERVER['HTTP_REFERER']);
+//$GLOBALS['GC_THEME']->debug("BRUNO context ".$context);
 if (!empty($vars['subtype'])) {
 	$subtype = "&entity_subtype=" . urlencode($vars['subtype']);
 } else {

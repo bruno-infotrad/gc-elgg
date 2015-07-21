@@ -406,7 +406,7 @@ function thewire_gc_page_handler($page) {
 	if (! elgg_is_logged_in()) {
 		forward('/dashboard');
 	} else {
-	elgg_log("BRUNO page ".var_export($page,true),'ERROR');
+	$GLOBALS['GC_THEME']->debug("page ".var_export($page,true));
         if (isset($page[0]) && (
 	    $page[0] == 'all' || 
 	    $page[0] == 'edit' || 
@@ -476,7 +476,7 @@ function gc_members_page_handler($page) {
 function gc_friends_page_handler($page_elements, $handler) {
         elgg_set_context('friends');
        	$base = elgg_get_plugins_path() . 'gc_theme/pages/friends';
-	elgg_log('BRUNO gc_friends_page_handler:page_elements '.var_export($page_elements,true),'NOTICE');
+	$GLOBALS['GC_THEME']->debug("gc_friends_page_handler:page_elements ".var_export($page_elements,true));
         if (isset($page_elements[0]) && $user = get_user_by_username($page_elements[0])) {
                 elgg_set_page_owner_guid($user->getGUID());
         }
@@ -558,7 +558,7 @@ function multi_invite_autocomplete() {
 }
 
 function gc_theme_dashboard_handler() {
-        elgg_log("BRUNO in start:gc_theme_dahboard_handler", 'NOTICE');
+	$GLOBALS['GC_THEME']->debug("in start:gc_theme_dahboard_handler");
         require_once elgg_get_plugins_path() . 'gc_theme/pages/dashboard.php';
         return true;
 }
@@ -569,7 +569,7 @@ function gc_theme_activity_handler() {
 }
 
 function gc_theme_custom_river_handler() {
-        elgg_log("BRUNO in start:gc_theme_custom_river_handler", 'NOTICE');
+	$GLOBALS['GC_THEME']->debug("in start:gc_theme_custom_river_handler");
         require_once elgg_get_plugins_path() . 'gc_theme/pages/custom_river.php';
         return true;
 }

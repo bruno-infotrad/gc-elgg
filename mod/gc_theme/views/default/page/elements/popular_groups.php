@@ -29,16 +29,16 @@ function find_most_active_groups($past) {
 	$then = $now-3600*24*$past;
 	$db_prefix = elgg_get_config('dbprefix');
 	$query_group_list = "SELECT distinct container_guid FROM {$db_prefix}river rv join {$db_prefix}entities e on rv.object_guid=e.guid join {$db_prefix}groups_entity eg on e.container_guid=eg.guid where rv.action_type not in ('create','join') and rv.posted>$then";
-	//elgg_log("BRUNO ACTIVE GROUPS $query_group_list",'NOTICE');
+	//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUPS $query_group_list");
 	$group_list = get_data($query_group_list);
-	//elgg_log("BRUNO ACTIVE GROUPS ".var_export($group_list,true),'NOTICE');
+	//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUPS ".var_export($group_list,true));
 	foreach ($group_list as $group) {
-		//elgg_log("BRUNO ACTIVE GROUP ".$group->container_guid,'NOTICE');
+		//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUP ".$group->container_guid);
 		$query_activity_count = "SELECT count(id) as count FROM {$db_prefix}river rv join {$db_prefix}entities e on rv.object_guid=e.guid where rv.posted>$then and e.container_guid=$group->container_guid";
 		$result = get_data_row($query_activity_count);
-		//elgg_log("BRUNO ACTIVE GROUP COUNT".var_export($result,true),'NOTICE');
+		//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUP COUNT".var_export($result,true));
 		$counts[$group->container_guid] = $result->count;
-		//elgg_log("BRUNO ACTIVE GROUP COUNT".$counts[$group->container_guid],'NOTICE');
+		//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUP COUNT".$counts[$group->container_guid]);
 	}
 	arsort($counts,SORT_NUMERIC);
 	return $counts;
