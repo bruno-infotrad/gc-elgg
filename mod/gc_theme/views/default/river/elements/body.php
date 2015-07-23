@@ -40,7 +40,7 @@ if ($message !== false) {
 	if ($object->owner_guid == elgg_get_logged_in_user_guid()) {
 		if ($object->getSubtype() == 'thewire') {
 			$edit_area = 'thewire_edit_area';
-			$edit_icon = "<div id=\"wire-edit-$river_guid\"></div>";
+			$edit_icon = "<span title=\"".elgg_echo('gc_theme:wire_edit')."\"><div id=\"wire-edit-$river_guid\"></div></span>";
 			//$edit_icon = "<div class=\"wire-edit\" onclick=\"$('#$object_guid-$container_guid').trigger('click');\"></div>";
 		} elseif ($object->getSubtype() == 'groupforumtopic') {
 			$edit_area = 'groupforumtopic_edit_area';

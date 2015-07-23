@@ -212,6 +212,7 @@ return array(
 	'event_manager:editregistration:addfield:field_type:dropdown' => 'Dropdown',
 	'event_manager:editregistration:addfield:field_type:radiobutton' => 'Radiobutton',
 	'gc_theme:thewire:tags' => "Tagged objects",
+	'gc_theme:wire_edit' => 'Click to edit',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

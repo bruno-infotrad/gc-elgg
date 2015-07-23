@@ -487,6 +487,7 @@ return array(
 	'event_manager:editregistration:addfield:field_type:dropdown' => 'Liste',
 	'event_manager:editregistration:addfield:field_type:radiobutton' => "Bouton d'options",
 	'gc_theme:thewire:tags' => "Objects étiquetés",
+	'gc_theme:wire_edit' => 'Cliquez pour modifier',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",
