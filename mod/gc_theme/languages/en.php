@@ -213,6 +213,8 @@ return array(
 	'event_manager:editregistration:addfield:field_type:radiobutton' => 'Radiobutton',
 	'gc_theme:thewire:tags' => "Tagged objects",
 	'gc_theme:wire_edit' => 'Click to edit',
+	'gc_theme:show_in_feed' => 'Show on feed',
+	'gc_theme:show_in_feed:help' => 'If checkbox is selected, uploaded file will be displayed on feed page',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

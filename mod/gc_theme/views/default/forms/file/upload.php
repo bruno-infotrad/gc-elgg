@@ -27,7 +27,7 @@ if ($guid) {
 	$submit_label = elgg_echo('upload');
 	$file_selected = elgg_echo('gc_theme:no_file_selected');
 	$add_to_river = elgg_view('input/checkbox',array('name'=>'add_to_river','value'=>'true'));
-	$add_to_river = '<div class="gc-addtoriver-row"><div class="gc-input-file-2em"><label>'.elgg_echo('Show in feed').'</label></div><div class="gc-addtoriver-cb">'.$add_to_river.'</div></div>';
+	$add_to_river = '<div class="gc-addtoriver-row"><div class="gc-input-file-2em"><label>'.elgg_echo('gc_theme:show_in_feed').'</label></div><div class="gc-addtoriver-cb">'.$add_to_river.'</div><span class="elgg-icon elgg-icon-info elgg-icon-info-top" title="'.elgg_echo('gc_theme:show_in_feed:help').'"></span></div>';
 }
 ?>
 <script type="text/javascript">

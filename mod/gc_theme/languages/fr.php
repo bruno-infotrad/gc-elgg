@@ -488,6 +488,8 @@ return array(
 	'event_manager:editregistration:addfield:field_type:radiobutton' => "Bouton d'options",
 	'gc_theme:thewire:tags' => "Objects étiquetés",
 	'gc_theme:wire_edit' => 'Cliquez pour modifier',
+	'gc_theme:show_in_feed' => 'Visible sur le fil de nouvelle',
+	'gc_theme:show_in_feed:help' => 'Si la case à cocher est selectionnée, le fichier sera visible sur le fil de nouvelles',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",
