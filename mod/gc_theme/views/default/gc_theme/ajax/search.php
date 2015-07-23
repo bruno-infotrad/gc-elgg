@@ -62,6 +62,8 @@ $offset = ($search_type == 'all') ? 0 : get_input('offset', 0);
 $container_guid = get_input('container_guid', ELGG_ENTITIES_ANY_VALUE);
 $friends = get_input('friends', ELGG_ENTITIES_ANY_VALUE);
 $sort = get_input('sort');
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 switch ($sort) {
 	case 'relevance':
 	case 'created':

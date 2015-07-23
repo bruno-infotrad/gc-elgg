@@ -1,8 +1,9 @@
 <?php
 $user = elgg_get_logged_in_user_entity();
 $offset = get_input("offset");
-
+$base_url = get_input('base_url');
 $content = elgg_list_entities_from_relationship(array(
+	'base_url' => $base_url,
 	'type' => 'object',
 	'subtype' => 'page_top',
 	'full_view' => false,

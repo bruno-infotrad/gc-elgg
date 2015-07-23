@@ -3,7 +3,7 @@
 ?>
 elgg.provide('elgg.scroll');
 
-elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
+elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,already_viewed){
         var data;
         if (elgg.is_logged_in()) {
         	$(document).ready(function() {
@@ -48,7 +48,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 				$(more_marker).hide();
 				$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
 			}
-			//console.log('AFTER REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
+			console.log('AFTER REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms)+' already viewed='+already_viewed);
 			// Fix for colorbox issue (embed)
 			switch(context){
 				case 'search':
@@ -58,7 +58,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('more_url='+more_url);
-					params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/'+path_atoms;
 					break;
 				case 'dashboard':
@@ -68,7 +68,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('more_url='+more_url);
-					params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset, 'already_viewed': already_viewed};
 					ajax_path ='ajax/view/gc_theme/ajax/dashboard';
 					break;
 				case 'friends':
@@ -77,7 +77,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 20;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-					params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/friends';
 					break;
 				case 'friendsof':
@@ -86,7 +86,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 20;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-					params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/friendsof';
 					break;
 				case 'members':
@@ -101,7 +101,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					}
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-					params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 					if (page_type == 'search') {
 						ajax_path = 'ajax/view/gc_theme/ajax/members/search/'+path_atoms[2];
 					} else {
@@ -116,7 +116,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/bookmarks_owner';
 					}
 					break;
@@ -128,7 +128,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 12;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/file_world';
 					} else if (page_type == 'friends') {
 						iteration++;
@@ -136,7 +136,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 20;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						//Offset only obtained from get_input, not from options - blah
 						ajax_path = 'ajax/view/gc_theme/ajax/file_friends?offset='+new_offset;
 					} else if (page_type == 'owner') {
@@ -145,7 +145,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 20;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/file_owner';
 					}
 					break;
@@ -156,7 +156,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/pages_world';
 					} else if (page_type == 'friends') {
 						iteration++;
@@ -164,7 +164,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						//Offset only obtained from get_input, not from options - blah
 						ajax_path = 'ajax/view/gc_theme/ajax/pages_friends?offset='+new_offset;
 					} else if (page_type == 'owner') {
@@ -173,7 +173,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
-						params = {'page_type': page_type,'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/pages_owner';
 					} else if (page_type == 'group') {
 						var group_guid = path_atoms[2];
@@ -182,7 +182,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-						params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/pages_owner';
 					}
 					break;
@@ -195,7 +195,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
 						//console.log('more_url='+more_url);
-						params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/group_wall';
 					} else if (page_type == 'members') {
 						var group_guid = path_atoms[2];
@@ -204,7 +204,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						new_offset = parseInt(offset) + 20;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-						params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/group_members';
 					} else if (groups_page_type == 'all') {
 						iteration++;
@@ -214,7 +214,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 						more_url = elgg.more_url(base_url,'',page_type,owner,new_offset,count,iteration);
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
 						//console.log('more_url='+more_url);
-						params = {'group_guid': group_guid, 'page_type': page_type, 'filter': filter_value, 'owner': owner, 'offset': new_offset};
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'filter': filter_value, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/allgroups';
 					}
 					break;
@@ -225,7 +225,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 15;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/polls';
 					break;
 				case 'blog':
@@ -238,7 +238,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 10;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/blogs';
 					break;
 				case 'thewire':
@@ -255,7 +255,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 15;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/thewire';
 					break;
 				case 'messages':
@@ -267,7 +267,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 10;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/messages_inbox';
 					break;
 				case 'site_notifications':
@@ -277,7 +277,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					new_offset = parseInt(offset) + 10;
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/site_notifications';
 					break;
 				case 'embed':
@@ -288,7 +288,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					//console.log('EMBED base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('EMBED more_url='+more_url);
-					params = {'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/embed';
 					break;
 				case 'ajax':
@@ -302,7 +302,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 							new_offset = parseInt(offset) + 10;
 							//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
 							more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
-							params = {'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+							params = {'base_url': base_url,'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 							ajax_path = 'ajax/view/gc_theme/ajax/user_groups';
 						} else if (args[0] == 'user_activity') {
 							var container = args[1].split("=");
@@ -312,7 +312,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 							new_offset = parseInt(offset) + 20;
 							more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 							//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-							params = {'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+							params = {'base_url': base_url,'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 							ajax_path = 'ajax/view/gc_theme/ajax/user_activity';
 						} else if (args[0] == 'user_colleagues') {
 							var container = args[1].split("=");
@@ -322,7 +322,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 							new_offset = parseInt(offset) + 20;
 							more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 							//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-							params = {'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+							params = {'base_url': base_url,'container_guid': container_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 							ajax_path = 'ajax/view/gc_theme/ajax/user_colleagues';
 						}
 					}
@@ -333,8 +333,9 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 				dataType: 'html', 
 				success: function(data) {
 					//console.log("CONTEXT="+context);
-					data=data.replace(/<ul class="elgg-pagination">.+<\/ul>/,'');
+					//data=data.replace(/<ul class="elgg-pagination">.+<\/ul>/,'');
 					//console.log(data);
+					$(more_marker).remove();
 					var tmp_more_marker = '#gc-pagination';
 					//var tmp_more_marker = '.elgg-ajax-loader';
 					if (context == 'embed') {
@@ -347,8 +348,8 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration){
 					}
 					if (delete_marker) {
 						$(more_marker).remove();
-					} else {
-						$(more_marker).replaceWith(more_url);
+					//} else {
+						//$(more_marker).replaceWith(more_url);
 					}
 					$(more_marker).show();
 				}

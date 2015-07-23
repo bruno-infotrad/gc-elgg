@@ -1,9 +1,11 @@
 <?php
 $db_prefix = elgg_get_config("dbprefix");
 $container_guid = get_input('container_guid');
+$base_url = get_input('base_url');
 elgg_set_page_owner_guid($vars['container_guid']);
 $offset = get_input('offset');
 $content = elgg_list_entities_from_relationship(array(
+	'base_url' => $base_url,
 	'type' => 'group',
 	'relationship' => 'member',
 	'relationship_guid' => elgg_get_page_owner_guid(),

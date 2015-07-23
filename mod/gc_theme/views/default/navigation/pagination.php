@@ -22,8 +22,10 @@ $offset = abs((int) elgg_extract('offset', $vars, 0));
 if (!$limit = (int) elgg_extract('limit', $vars, 10)) {
 	$limit = 10;
 }
+$iteration = (int) $offset/$limit;
 $page_type = elgg_extract('page_type', $vars, '');
 $context = elgg_extract('context', $vars, '');
+$already_viewed = elgg_extract('already_viewed', $vars, '');
 $owner = elgg_get_page_owner_entity();
 
 $count = (int) elgg_extract('count', $vars, 0);
@@ -104,7 +106,7 @@ if ($current_page < $total_pages) {
 echo '<ul class="elgg-pagination">';
 if (1) {
 	elgg_load_js('elgg.scroll');
-	echo elgg_view('output/url', array('class'=>'gc-scroll', 'href'=>$base_url,'text'=>elgg_echo('gc_theme:more'),'rel' => 'nofollow','onclick'=>"elgg.scroll(\"$base_url\",\"$context\",\"$page_type\",\"$owner->username\",\"$offset\",\"$count\",0);return false;"));
+	echo elgg_view('output/url', array('class'=>'gc-scroll', 'href'=>$base_url,'text'=>elgg_echo('gc_theme:more'),'rel' => 'nofollow','onclick'=>"elgg.scroll(\"$base_url\",\"$context\",\"$page_type\",\"$owner->username\",\"$offset\",\"$count\",\"$iteration\",\"$already_viewed\");return false;"));
 }else{
 	if ($pages->prev['href']) {
 		$link = elgg_view('output/url', $pages->prev);

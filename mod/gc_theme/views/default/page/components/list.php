@@ -26,6 +26,15 @@ $pagination = elgg_extract('pagination', $vars, true);
 $offset_key = elgg_extract('offset_key', $vars, 'offset');
 $position = elgg_extract('position', $vars, 'after');
 $no_results = elgg_extract('no_results', $vars, '');
+$already_viewed_string = elgg_extract('already_viewed', $vars, '');
+$GLOBALS['GC_THEME']->debug("IN LIST ALREADY_VIEWED=$already_viewed_string");
+if ($already_viewed_string) {
+	$already_viewed = explode(',',$already_viewed_string);
+	foreach ($already_viewed as $viewed_guid) {
+		$GLOBALS['GC_THEME']->debug("IN LIST ALREADY_VIEWED GUID=$viewed_guid");
+		$test[$viewed_guid] = 1;
+	}
+}
 
 $user = elgg_get_logged_in_user_entity();
 $user_last_action = $user->feed_viewed_previous;
@@ -62,26 +71,19 @@ $ingroup_label=elgg_echo('river:ingroup:label');
 $ingroups_label=elgg_echo('river:ingroups:label');
 $ingroup_pattern=$ingroups_label.'|'.$ingroup_label.' ';
 
-if ($pagination && $count) {
-	$nav .= elgg_view('navigation/pagination', array(
-		'base_url' => $base_url,
-		'offset' => $offset,
-		'count' => $count,
-		'limit' => $limit,
-		'offset_key' => $offset_key,
-	));
-}
-
 $html .= "<ul class=\"$list_class\">";
 if (elgg_get_context() != 'admin') {
 	$previous_item_time_created = 0;
 	$premier=true;
 	foreach ($items as $item) {
-		if ($test[$item->object_guid]){
-			continue;
-		}
-		$guid=0;
-		$test[$guid]=0;
+		$GLOBALS['GC_THEME']->debug("IN LIST ITEM=".var_export($item,true));
+		$GLOBALS['GC_THEME']->debug("IN LIST TEST=".var_export($test,true));
+		$GLOBALS['GC_THEME']->debug("IN LIST VERIF OGUID=".$item->object_guid." TGUID=".$item->target_guid." TEST_OGUID=".$test[$item->object_guid]." TEST_TGUID=".$test[$item->target_guid]);
+		//if ($test[$item->object_guid]){
+			//continue;
+		//}
+		//$guid=0;
+		//$test[$guid]=0;
 		$item_markup = 0;
 		$dbprefix = elgg_get_config('dbprefix');
 		$new_item = $item;
@@ -102,13 +104,19 @@ if (elgg_get_context() != 'admin') {
 					$res = get_data($query, "_elgg_row_to_elgg_river_item");
 					$new_item = $res[0];
 					$test[$item->target_guid] = 1;
-					$test[$item->object_guid] = 1;
+					//$test[$item->object_guid] = 1;
 					//unset($item_class);
 					if (elgg_is_logged_in() && $user->guid != $item->owner_guid && $user_last_action < $item->time_created) {
 						//$item_class=$item_class." marked-as-updated";
 						$item_class="updated-annotation";
 					}
 				} else {
+					$GLOBALS['GC_THEME']->debug("IN LIST ITEM SKIPPED COMMENT");
+					continue;
+				}
+			} else {
+				if ($test[$item->object_guid]){
+					$GLOBALS['GC_THEME']->debug("IN LIST ITEM SKIPPED ITEM");
 					continue;
 				}
 			}
@@ -123,6 +131,7 @@ if (elgg_get_context() != 'admin') {
 			}
 		}
 		$li = elgg_view_list_item($new_item, $vars);
+		$GLOBALS['GC_THEME']->debug("IN LIST NEW_ITEM=".var_export($new_item,true));
 		if ($li) {
 			$item_classes = array($item_class);
 			
@@ -217,13 +226,10 @@ if (elgg_get_context() != 'admin') {
 				}
 			//}
 			$premier = $false;
-
-
-
-			
 			//$html .= "<li id=\"$id\" class=\"$item_classes\">$li</li>";
 		}
 	}
+	$html .= $cached_html;
 } else {
 	foreach ($items as $item) {
 		$li = elgg_view_list_item($item, $vars);
@@ -249,6 +255,18 @@ if (elgg_get_context() != 'admin') {
 	}
 }
 $html .= '</ul>';
+
+$already_viewed_string = implode(',',array_keys($test));
+if ($pagination && $count) {
+	$nav .= elgg_view('navigation/pagination', array(
+		'already_viewed' => $already_viewed_string,
+		'base_url' => $base_url,
+		'offset' => $offset,
+		'count' => $count,
+		'limit' => $limit,
+		'offset_key' => $offset_key,
+	));
+}
 
 if ($position == 'before' || $position == 'both') {
 	$html = $nav . $html;

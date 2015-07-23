@@ -7,6 +7,8 @@ $options['type'] = 'object';
 $options['subtype'] = 'file';
 $options['offset'] = $offset;
 $options['limit'] = 6;
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 $container_guid = get_input('group_guid');
 if ($container_guid) {
 	$options['container_guids'] = array(elgg_get_logged_in_user_guid(),$container_guid);

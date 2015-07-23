@@ -1,9 +1,12 @@
 <?php
 $page_type = get_input('page_type');
 $offset = get_input('offset');
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 $user = elgg_get_logged_in_user_entity();
 if ($page_type == 'all') {
 	$content = elgg_list_entities(array(
+		'base_url' => $base_url,
 		'type' => 'object',
 		'subtype' => 'thewire',
 		'limit' => get_input('limit', 15),
@@ -11,6 +14,7 @@ if ($page_type == 'all') {
         echo $content;
 } elseif ($page_type == 'friends') {
 	$content .= elgg_list_entities_from_relationship(array(
+		'base_url' => $base_url,
 	        'type' => 'object',
 	        'subtype' => 'thewire',
 	        'full_view' => false,
@@ -22,6 +26,7 @@ if ($page_type == 'all') {
         echo $content;
 } elseif ($page_type == 'owner') {
 	$content = elgg_list_entities(array(
+		'base_url' => $base_url,
 		'type' => 'object',
 		'subtype' => 'thewire',
 		'container_guid' => $user->guid,
@@ -32,6 +37,7 @@ if ($page_type == 'all') {
 	$group_guid = get_input('group_guid');
 	if ($group_guid) {
 		$content = elgg_list_entities(array(
+			'base_url' => $base_url,
 			'type' => 'object',
 			'subtype' => 'thewire',
 			'container_guid' => $group_guid,

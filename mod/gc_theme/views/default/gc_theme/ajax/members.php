@@ -6,6 +6,8 @@
 $page_type = get_input('page_type');
 $offset = get_input('offset');
 $name = get_input('name');
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 $options['offset'] = $offset;
 require_once elgg_get_plugins_path() . 'gc_theme/lib/gc_find_active_users.php';
 //Override function to get users to filter out banned users

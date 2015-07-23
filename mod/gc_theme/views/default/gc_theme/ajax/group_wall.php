@@ -3,6 +3,8 @@ $group = get_entity(get_input('group_guid'));
 $user = elgg_get_logged_in_user_entity();
 $offset = get_input('offset');
 $options['offset'] = $offset;
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 
 if (!$group || !elgg_instanceof($group, 'group')) {
 	register_error(elgg_echo('groups:notfound'));

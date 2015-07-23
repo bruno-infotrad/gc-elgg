@@ -1,28 +1,30 @@
 <?php
 $page_type = get_input('page_type');
 $offset = get_input('offset');
+$base_url = get_input('base_url');
 if ($page_type == 'all') {
-	$return = blog_get_page_content_list($offset,NULL);
+	$return = blog_get_page_content_list($offset,$base_url,NULL);
 	echo $return['content'];
 } elseif ($page_type == 'friends') {
 	$user = elgg_get_logged_in_user_entity();
-	$return = blog_get_page_content_friends($offset,$user->guid);
+	$return = blog_get_page_content_friends($offset,$base_url,$user->guid);
 	echo $return['content'];
 } elseif ($page_type == 'owner') {
 	$container_guid = get_input('group_guid');
 	if (! $container_guid) {
 		$container_guid = $user->getGUID();
 	}
-	$return = blog_get_page_content_list($offset,$container_guid);
+	$return = blog_get_page_content_list($offset,$base_url,$container_guid);
 	echo $return['content'];
 }
-function blog_get_page_content_list($offset,$container_guid = NULL) {
+function blog_get_page_content_list($offset,$base_url,$container_guid = NULL) {
 
 	$return = array();
 
 	$return['filter_context'] = $container_guid ? 'mine' : 'all';
 
 	$options = array(
+		'base_url' => $base_url,
 		'type' => 'object',
 		'subtype' => 'blog',
 		'full_view' => false,
@@ -92,7 +94,7 @@ function blog_get_page_content_list($offset,$container_guid = NULL) {
  * @param int $user_guid
  * @return array
  */
-function blog_get_page_content_friends($offset,$user_guid) {
+function blog_get_page_content_friends($offset,$base_url,$user_guid) {
 
 	$user = get_user($user_guid);
 	if (!$user) {
@@ -111,6 +113,7 @@ function blog_get_page_content_friends($offset,$user_guid) {
 	elgg_register_title_button();
 
 	$options = array(
+		'base_url' => $base_url,
 		'type' => 'object',
 		'subtype' => 'blog',
 		'full_view' => false,

@@ -6,7 +6,9 @@
  */
 $limit = get_input("limit", 12);
 $offset = get_input("offset");
+$base_url = get_input('base_url');
 $content = elgg_list_entities(array(
+	'base_url' => $base_url,
 	'types' => 'object',
 	'subtypes' => 'file',
 	'limit' => $limit,

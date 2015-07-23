@@ -7,6 +7,8 @@
  */
 
 $guid = get_input('guid');
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 
 $entity = get_entity($guid);
 elgg_set_page_owner_guid($entity->getContainerGUID());

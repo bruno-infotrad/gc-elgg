@@ -8,6 +8,11 @@ $options = array();
 $offset = get_input('offset');
 $options['offset'] = $offset;
 $page_type = get_input('page_type');
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
+$already_viewed = get_input('already_viewed');
+$GLOBALS['GC_THEME']->debug("IN AJAX ALREADY_VIEWED=$already_viewed");
+$options['already_viewed'] = $already_viewed;
 if (! $page_type) {
 	$preferred_tab = $user->preferred_tab;
 	$page_type = ($preferred_tab)?$preferred_tab:'all';

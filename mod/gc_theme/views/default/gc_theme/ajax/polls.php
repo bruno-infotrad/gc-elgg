@@ -13,6 +13,8 @@ $options = array(
 	'full_view' => FALSE, 
 	'limit'=>15,
 );
+$base_url = get_input('base_url');
+$options['base_url'] = $base_url;
 
 if ($page_type == 'group') {
 	$group = get_entity($container_guid);
