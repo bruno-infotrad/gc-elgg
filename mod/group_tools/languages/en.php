@@ -67,9 +67,9 @@ $english = array(
 	'group_tools:settings:special_states:featured' => "Featured",
 	'group_tools:settings:special_states:featured:description' => "The site administrators have chosen to feature the following groups.",
 	'group_tools:settings:special_states:auto_join' => "Auto join",
-	'group_tools:settings:special_states:auto_join:description' => "New users will automaticly join the following groups.",
+	'group_tools:settings:special_states:auto_join:description' => "New users will automatically join the following groups.",
 	'group_tools:settings:special_states:suggested' => "Suggested",
-	'group_tools:settings:special_states:suggested:description' => "The following groups are suggested to (new) users. It is possible to auto suggest groups, if no groups are automaticly detected or too few, the list will be appended by these groups.",
+	'group_tools:settings:special_states:suggested:description' => "The following groups are suggested to (new) users. It is possible to auto suggest groups, if no groups are automatically detected or too few, the list will be appended by these groups.",
 
 	'group_tools:settings:fix:title' => "Fix group access problems",
 	'group_tools:settings:fix:missing' => "There are %d users who are a member of a group but don't have access to the content shared with the group.",
@@ -153,7 +153,7 @@ To visit the group please click on the following link:
 	'group_tools:special_states:title' => "Group special states",
 	'group_tools:special_states:description' => "A group can have several special states, here is an overview of the special states and their current value.",
 	'group_tools:special_states:featured' => "Is this group featured",
-	'group_tools:special_states:auto_join' => "Will users automaticly join this group",
+	'group_tools:special_states:auto_join' => "Will users automatically join this group",
 	'group_tools:special_states:auto_join:fix' => "To make all site members a member of this group, please %sclick here%s.",
 	'group_tools:special_states:suggested' => "Is this group suggested to (new) users",
 	
@@ -442,7 +442,7 @@ To visit the group please click on the following link:
 	'group_tools:join:domain_based:tooltip' => "Because of a matching e-mail domain, you can join this group.",
 	
 	'group_tools:domain_based:title' => "Configure e-mail domains",
-	'group_tools:domain_based:description' => "When you configure one (or more) e-mail domains, users with that e-mail domain will automaticly join your group upon registration. Also if you have a closed group user with a matching e-mail domain can join without requesting membership. You can configure multipe domains by using a comma. Don't include the @ sign",
+	'group_tools:domain_based:description' => "When you configure one (or more) e-mail domains, users with that e-mail domain will automatically join your group upon registration. Also if you have a closed group user with a matching e-mail domain can join without requesting membership. You can configure multipe domains by using a comma. Don't include the @ sign",
 	
 	'group_tools:action:domain_based:success' => "The new e-mail domains were saved",
 	
