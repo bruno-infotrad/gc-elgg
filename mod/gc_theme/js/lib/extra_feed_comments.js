@@ -7,7 +7,11 @@ elgg.extra_feed_comments.init = function(){
 	$('[id^=extra-feed-comments-]').live('click', function (e){
 		e.preventDefault();
 		var guid = parseInt(this.id.match(/\d+$/));
+		var icon='<div class="comment-icon-center">'+$(this).closest('.elgg-body.new-feed').find('li.elgg-menu-item-comment').html()+'</div>';
+		var newicon = icon.replace('id="','id="dup-');
+		var pos=$(this).closest('[class^=elgg-river-responses-]');
 		elgg.fetch_extra_feed_comments(guid);
+		$(pos).after(newicon);
 	});
 };
 elgg.fetch_extra_feed_comments = function(guid){
@@ -21,6 +25,7 @@ elgg.fetch_extra_feed_comments = function(guid){
 				dataType: 'html', 
 				data: params, 
 				success: function(data) {
+					data = data.replace('elgg-river-comments','elgg-river-comments-'+guid);
 					var more_comment_marker = '.elgg-ajax-loader';
 					var comment_marker = '.elgg-river-comments-'+guid;
 					$(more_comment_marker).replaceWith('');

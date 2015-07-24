@@ -79,15 +79,15 @@ elgg.gc_comments.Comment.prototype = {
 					//that.$item.find('[data-role="comment-text"]').html(value);
 					elgg.ajax('ajax/view/gc_theme/ajax/view/comment?guid=' + json.output, {
 						success: function(html) {
-							//console.log("COMMENT GRABBED "+that.guid);
+							console.log("COMMENT GRABBED "+that.guid);
 							if ($('.elgg-river-responses-'+that.guid).length) {
-								//console.log("COMMENT WITH RESPONSE");
+								console.log("COMMENT WITH RESPONSE "+that.guid);
 								$('ul.elgg-list .elgg-river-comments-'+that.guid).append(html);
 								that.gc_hideForm(function () {
 									that.gc_getForm().remove();
 								});
 							} else {
-								//console.log("COMMENT WITHOUT RESPONSE");
+								console.log("COMMENT WITHOUT RESPONSE");
 								html = "<div class=\"elgg-river-responses-"+that.guid+"\"><ul class=\"elgg-list elgg-river-comments-"+that.guid+"\">"+html+"</ul></div>";
 								//console.log("COMMENT WITHOUT RESPONSE "+html);
 								that.gc_getForm().replaceWith(html);
@@ -130,6 +130,7 @@ elgg.gc_comments.init = function() {
 	$(document).on('click', 'a.elgg-comment-add', function () {
 			//console.log('FIRED '+$(this).attr('id'));
 			var guid = $(this).attr('id');
+			guid = guid.replace('dup-','');
 			// store object as data in the edit link
 			dc = new elgg.gc_comments.Comment(guid);
 			$(this).data('Comment', dc);

@@ -7,6 +7,7 @@
  */
 
 ?>
+.comment-icon-center {padding-left: 45%;}
 .elgg-icon-info-top {vertical-align:text-top!important;}
 /*[class^=wire-edit-] {*/
 .discussion-reply-edit,
