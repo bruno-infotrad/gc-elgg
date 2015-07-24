@@ -16,8 +16,13 @@ if (preg_match('/,/',$container_guid)) {
 	$container_guids = preg_split('/,/',$container_guid);
 }
 $parent_guid = (int) get_input('parent_guid');
-$guid = (int) get_input('guid',0);
-$GLOBALS['GC_THEME']->debug("compound/add=".$container_guid);
+$guid = get_input('guid',0);
+$GLOBALS['GC_THEME']->debug("compound/add container_guid=".$container_guid);
+$GLOBALS['GC_THEME']->debug("compound/add guid=".$guid);
+if (preg_match('/,/',$guid)) {
+	$mv_guid = true;
+	$guids = preg_split('/,/',$guid);
+}
 if ($container_guid) {
 	if ($mv_container_guid) {
 		foreach($container_guids as $container) {
@@ -45,18 +50,7 @@ if ($container_guid) {
 }
 
 $body = get_input('gc_wire', '', false);
-$jeditable = false;
 $river_guid = get_input('river_guid',0);
-if (empty($body)) {
-	$body = get_input('value', '', false);
-	$guid = get_input('guid');
-	$container_guid = get_input('container_guid');
-	if (! $guid || ! $container_guid || ! $river_guid) {
-		register_error(elgg_echo("thewire:missing_guids"));
-		forward(REFERER);
-	}
-	$jeditable = true;
-}
 $method = 'site';
 // make sure the post isn't blank
 if (empty($body)) {
@@ -66,29 +60,44 @@ if (empty($body)) {
 if ($container_guid == 0) {
 	$container_guid = $user_id;
 }
-if ($mv_container_guid && $guid == 0) {
+if ($mv_container_guid) {
+	$i = 0;
 	foreach($container_guids as $container) {
-		$GLOBALS['GC_THEME']->debug("multiple post ".$access_ids[$container]);
-		$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
-		if (!$guid) {
-			register_error(elgg_echo("thewire:error"));
-			forward(REFERER);
+		$GLOBALS['GC_THEME']->debug("BRUNO compound/add multiple post container_guid=$container guid=$guids[$i]");
+		if ($guid == 0) {
+			$GLOBALS['GC_THEME']->debug("BRUNO compound/add multiple post new post in container_guid=$container");
+			$guid = thebetterwire_save_post($guid, $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,false,0);
+			if (!$guid) {
+				register_error(elgg_echo("thewire:error"));
+				$GLOBALS['GC_THEME']->debug("BRUNO compound/add ERROR multiple post new post in container_guid=$container");
+				forward(REFERER);
+			}
+			// Reset guid because of jeditable
+			$guid = 0;
+		} else {
+			$GLOBALS['GC_THEME']->debug("BRUNO compound/add multiple post jeditable edited post in container_guid=$container guid=$guids[$i]");
+			$guid = thebetterwire_save_post($guids[$i], $body, $user_id, $container, $access_ids[$container], $parent_guid, $method,$exec_content,$jeditable,$river_guid);
+			if (!$guid) {
+				$GLOBALS['GC_THEME']->debug("BRUNO compound/add ERROR multiple post jeditable edited post in container_guid=$container guid=$guids[$i]");
+				register_error(elgg_echo("thewire:error"));
+				forward(REFERER);
+			}
+			$i++;
 		}
-		// Reset guid because of jeditable
-		$guid = 0;
 	}
 } else {
+	$GLOBALS['GC_THEME']->debug("BRUNO compound/add single post jeditable edited post in container_guid=$container guid=$guid");
 	$guid = thebetterwire_save_post($guid, $body, $user_id, $container_guid, $access_id, $parent_guid, $method,$exec_content,$jeditable,$river_guid);
 	//$thewire_entity = get_entity($guid);
 	//$thewire_entity->save();
 	if (!$guid) {
+		$GLOBALS['GC_THEME']->debug("BRUNO compound/add ERROR single post jeditable edited post in container_guid=$container guid=$guid");
 		register_error(elgg_echo("thewire:error"));
 		forward(REFERER);
 	}
 }
 // Send response to original poster if not already registered to receive notification
 if ($parent_guid) {
-	thewire_send_response_notification($guid, $parent_guid, $user);
 	$parent = get_entity($parent_guid);
 	forward("thewire/thread/$parent->wire_thread");
 }

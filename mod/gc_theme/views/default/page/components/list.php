@@ -183,9 +183,14 @@ if (elgg_get_context() != 'admin') {
 					//} elseif ($previous_group && $group && $previous_group <> $group && $new_item->subject_guid == $previous_subject_guid && abs($previous_posted - $new_item->posted) <=2) {
 						//$html .= "<br>previous_group_string=$previous_group_string group=$group"; 
 						$cached_html = preg_replace("/$ingroup_pattern/",$ingroups_label.' '.$group_link.', ',$cached_html,1);
+						//$GLOBALS['GC_THEME']->debug("BEFORE PREG_REPLACE ");
+						elgg_log("BEFORE PREG_REPLACE $cached_html");
+						$cached_html = preg_replace('/(id="wire-edit-\d+)/','$1'."_$new_item->id",$cached_html,1);
+						//$GLOBALS['GC_THEME']->debug("AFTER PREG_REPLACE ");
+						elgg_log("AFTER PREG_REPLACE $cached_html");
 						//$cached_html = preg_replace('/<div class="wire-edit" onclick=.+?\><\/div\>/U','',$cached_html,1);
-						$cached_html = preg_replace("/edits\['container_guid'\] = '".$previous_group_string."/","edits['container_guid'] = '".$previous_group_string.",".$group,$cached_html,1);
-						$cached_html = preg_replace("/edits\['guid'\] = '".$previous_item_string."/","edits['guid'] = '".$previous_item_string.",".$entity_guid,$cached_html,1);
+						//$cached_html = preg_replace("/edits\['container_guid'\] = '".$previous_group_string."/","edits['container_guid'] = '".$previous_group_string.",".$group,$cached_html,1);
+						//$cached_html = preg_replace("/edits\['guid'\] = '".$previous_item_string."/","edits['guid'] = '".$previous_item_string.",".$entity_guid,$cached_html,1);
 						$cached_html = preg_replace('/'.$river_label.'.+?\>'.$wire_label.'<\/a>/U',$river_label.$wire_label,$cached_html,1);
 						$cached_html = preg_replace('/<li class="elgg-menu-item-comment"/','<li class="elgg-menu-item-comment" style="display:none;"',$cached_html);
 						//$cached_html = preg_replace('/<form .+/','',$cached_html,1);

@@ -6,9 +6,11 @@ elgg.provide('elgg.gc_wire');
  * @param {Number} guid
  * @constructor
  */
-elgg.gc_wire.theWire = function (guid) {
+elgg.gc_wire.theWire = function (guid,guid_string) {
 	this.guid = guid;
-	this.$item = $('#item-river-' + guid);
+	this.guid_string = guid_string;
+	this.$item = $('[id^=item-river-'+guid+']');
+	//this.$item = $('#item-river-' + guid);
 };
 
 elgg.gc_wire.theWire.prototype = {
@@ -18,7 +20,8 @@ elgg.gc_wire.theWire.prototype = {
 	 * @returns {jQuery} note: may be empty
 	 */
 	getForm: function () {
-		return $('#elgg-form-gc_wire-save-' + this.guid);
+		//return $('#elgg-form-gc_wire-save-' + this.guid);
+		return $('[id^=elgg-form-gc_wire-save-'+this.guid+']');
 
 	},
 
@@ -40,7 +43,7 @@ elgg.gc_wire.theWire.prototype = {
 		var that = this;
 
 		// Get the form using ajax
-		elgg.ajax('ajax/view/gc_theme/ajax/edit_gc_wire?guid=' + this.guid, {
+		elgg.ajax('ajax/view/gc_theme/ajax/edit_gc_wire?guid='+this.guid+'&guid_string='+this.guid_string, {
 			success: function(html) {
 				// Add the form to DOM
 				//console.log("IN LOADFORM SUCCESS"+JSON.stringify(that));
@@ -108,8 +111,11 @@ elgg.gc_wire.theWire.prototype = {
 elgg.gc_wire.init = function() {
 	$(document).on('click', "[id^='wire-edit-']", function () {
 		// store object as data in the edit link
-		guid = this.id.split('-').pop();
-		dc = new elgg.gc_wire.theWire(guid);
+		guid_string = this.id.split('-').pop();
+		//console.log('GUID_STRING='+guid_string);
+		guids = guid_string.split('_');
+		//console.log('GUIDS='+JSON.stringify(guids));
+		dc = new elgg.gc_wire.theWire(guids[0],guid_string);
 		$(this).data('theWire', dc);
 		dc.toggleEdit();
 		return false;
