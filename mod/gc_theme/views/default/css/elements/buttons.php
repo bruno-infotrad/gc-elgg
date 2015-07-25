@@ -134,14 +134,50 @@ a.elgg-button-join,a.elgg-button-leave {
   -webkit-border-radius: 4px;
 }
 
+#gc_theme-cancel-button,
+a#thewire-contribute-to {
+  font-weight: normal;
+  text-align: center;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+#gc_theme-cancel-button,
+#thewire-contribute-to {
+	border-radius: 4px;
+	color: #000!important;
+	float: right;
+	margin-right: 10px;
+	margin-top: -2px;
+	border-color: #ccc;
+	background-color: rgb(238, 238, 238);
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fefefe), color-stop(100%, #dcdcdc));
+	background-image: -webkit-linear-gradient(#fefefe, #dcdcdc);
+	background-image: -moz-linear-gradient(#fefefe, #dcdcdc);
+	background-image: -o-linear-gradient(#fefefe, #dcdcdc);
+	background-image: linear-gradient(#fefefe, #dcdcdc);
+	text-shadow: none;
+}
 #thewire-contribute-to {
 	pointer-events: none;
 }
+
+.gc_theme-submit-button,
+#thewire-cancel-button {
+	float: left;
+	margin-top: -2px;
+}
+#thewire-submit-button {
+	float: right;
+	margin-top: -2px;
+}
+
 #select-contribute-to,
 #thewire-contribute-to,
 #thewire-submit-button:disabled {
 	opacity: .5;
 }
+#gc_theme-cancel-button,
+.gc_theme-submit-button,
 #gft-cancel-button,
 #gft-submit-button,
 #thewire-cancel-button,
@@ -174,6 +210,7 @@ a#select-contribute-to {margin-left: 36%;}
   text-shadow: 0 1px 1px #222;
 }
 
+.gc_theme-submit-button,
 #gft-cancel-button,
 #gft-submit-button,
 #select-pns,

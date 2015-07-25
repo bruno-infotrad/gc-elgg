@@ -42,26 +42,6 @@ td.event_manager_event_edit_label.gc-required {background-color: #e7eef6;}
 #compound_poll,#compound_file {
 	display: none;
 }
-a#thewire-contribute-to {
-  font-weight: normal;
-  text-align: center;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 13px;
-}
-#thewire-contribute-to {
-	border-radius: 4px;
-	color: #000!important;
-	float: right;
-	margin-right: 10px;
-	margin-top: -2px;
-	border-color: #ccc;
-	background-color: rgb(238, 238, 238);
-	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fefefe), color-stop(100%, #dcdcdc));
-	background-image: -webkit-linear-gradient(#fefefe, #dcdcdc);
-	background-image: -moz-linear-gradient(#fefefe, #dcdcdc);
-	background-image: -o-linear-gradient(#fefefe, #dcdcdc);
-	background-image: linear-gradient(#fefefe, #dcdcdc);
-}
 label[for=blog_description] {
 	display: inline-block;
 }
@@ -164,15 +144,6 @@ textarea {
 	font-weight: normal!important;
 	min-width: 17%;
 	text-align: left!important;
-}
-
-#thewire-cancel-button {
-	float: left;
-	margin-top: -2px;
-}
-#thewire-submit-button {
-	float: right;
-	margin-top: -2px;
 }
 
 #browser.elgg-foot.mts {

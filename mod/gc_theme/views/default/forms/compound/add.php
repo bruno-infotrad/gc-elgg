@@ -45,12 +45,13 @@ if ($guid) {
 	echo elgg_view('input/hidden', array( 'name' => 'river_guid', 'value' => $river_guid,));
 	echo elgg_view('input/submit', array(
 		'value' => elgg_echo('save'),
-		'id' => 'thewire-submit-button',
+		//'id' => 'thewire-submit-button',
+		'class' => 'gc_theme-submit-button',
 	));
 	echo elgg_view('input/button', array(
 		'value' => elgg_echo('cancel'),
 		'class' => 'elgg-button-cancel mlm',
-		'id' => 'thewire-cancel-button',
+		'id' => 'gc_theme-cancel-button',
 		'href' => $entity ? $entity->getURL() : '#',
 	));
 
