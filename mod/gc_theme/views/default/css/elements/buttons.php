@@ -9,6 +9,7 @@
 /* **************************
 	BUTTONS
 ************************** */
+#uploadify-button-wrapper {opacity:0;}
 .event_manager_event_actions {
 	background: url(http://192.168.239.130/newelgg-1.8.16/mod/event_manager/_graphics/arrows_down.png) right center no-repeat, linear-gradient(#fefefe, #dcdcdc);
 	border: 1px solid;
