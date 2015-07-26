@@ -57,6 +57,8 @@ function gc_theme_init() {
         elgg_register_simplecache_view('js/gc_wire');
         elgg_register_js('elgg.gc_wire', $gc_wire_js, 'footer');
 
+	// Add wire
+	add_group_tool_option('thewire',elgg_echo('gc_theme:enable_group_wire'),TRUE);
 	//Register role config hook for im admins
 	elgg_register_plugin_hook_handler('roles:config', 'role', 'roles_im_admins_config', 600);
 	//Register permissions check hook

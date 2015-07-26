@@ -1,18 +1,23 @@
 <?php
 //elgg_load_js('elgg.contribute_to');
-$tabs["thewire"] = array(
-	'text' => elgg_view_agora_icon('wire') . elgg_echo("composer:object:thewire"),
-	"href" => "#",
-	"rel" => "users",
-	"priority" => 300,
-	"onclick" => "compound_switch_tab(\"thewire\");",
-	"selected" => true
-);
-//$vars['class'] = 'dropzone';
-$form_data = "<div id='compound_thewire'>";
-$form_data .= elgg_view_form('compound/add',$vars);
-$form_data .= "</div>";
-
+$owner = elgg_get_page_owner_entity();
+if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thewire_enable != 'no')) {
+	$file_selected = false;
+	$tabs["thewire"] = array(
+		'text' => elgg_view_agora_icon('wire') . elgg_echo("composer:object:thewire"),
+		"href" => "#",
+		"rel" => "users",
+		"priority" => 300,
+		"onclick" => "compound_switch_tab(\"thewire\");",
+		"selected" => true
+	);
+	//$vars['class'] = 'dropzone';
+	$form_data = "<div id='compound_thewire'>";
+	$form_data .= elgg_view_form('compound/add',$vars);
+	$form_data .= "</div>";
+} else {
+	$file_selected = true;
+}
 $tabs["polls"] = array(
 	'text' => elgg_view_agora_icon('addpoll') . elgg_echo("composer:object:poll"),
 	"href" => "#",
@@ -29,6 +34,7 @@ $tabs["files"] = array(
 	"href" => "#",
 	"rel" => "users",
 	"priority" => 500,
+	"selected" => $file_selected,
 	"onclick" => "compound_switch_tab(\"files\");"
 );
 elgg_load_library('elgg:file');

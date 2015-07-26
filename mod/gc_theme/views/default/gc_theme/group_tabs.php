@@ -214,12 +214,14 @@
 			"selected" => ($selected_tab == "events") ? true: false
 		);
 	}
-	$tabs[] = array(
-		"text" => elgg_echo("thewire"),
-		"href" => "thewire_group/group/" . $page_owner_guid . "/all",
-		"link_id" => "thewire-single-form-link",
-		"selected" => ($selected_tab == "thewire") ? true: false
-	);
+	if ($group->thewire_enable != "no") {
+		$tabs[] = array(
+			"text" => elgg_echo("thewire"),
+			"href" => "thewire_group/group/" . $page_owner_guid . "/all",
+			"link_id" => "thewire-single-form-link",
+			"selected" => ($selected_tab == "thewire") ? true: false
+		);
+	}
 	if ($group->forum_enable == "yes") {
 		$tabs[] = array(
 			"text" => elgg_echo("profile:discussion"),
