@@ -1510,3 +1510,33 @@ function event_entity_menu_setup($hook, $type, $return, $params) {
 
         return $return;
 }
+
+function gc_wire_prepare_notification($hook, $type, $notification, $params) {
+
+        $entity = $params['event']->getObject();
+        $owner = $params['event']->getActor();
+        $recipient = $params['recipient'];
+        $language = $params['language'];
+        $method = $params['method'];
+        $descr = elgg_get_excerpt($entity->description);
+
+        $subject = elgg_echo('thewire:notify:subject', array($owner->name), $language);
+        if ($entity->reply) {
+                $parent = thewire_get_parent($entity->guid);
+                if ($parent) {
+                        $parent_owner = $parent->getOwnerEntity();
+                        $body = elgg_echo('thewire:notify:reply', array($owner->name, $parent_owner->name), $language);
+                }
+        } else {
+                $body = elgg_echo('thewire:notify:post', array($owner->name), $language);
+        }
+        $body .= "\n\n" . $descr . "\n\n";
+        $body .= elgg_echo('thewire:notify:footer', array($entity->getURL()), $language);
+
+        $notification->subject = $subject;
+        $notification->body = $body;
+        $notification->summary = elgg_echo('thewire:notify:summary', array($descr), $language);
+
+        return $notification;
+}
+

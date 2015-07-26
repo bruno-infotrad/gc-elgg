@@ -95,6 +95,8 @@ function gc_theme_init() {
 	elgg_register_page_handler('settings', 'gc_usersettings_page_handler');
 	elgg_unregister_page_handler('notifications', 'notifications_page_handler');
 	elgg_register_page_handler('notifications', 'gc_notifications_page_handler');
+	elgg_unregister_plugin_hook_handler('prepare', 'notification:create:object:thewire', 'thewire_prepare_notification');
+	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:thewire', 'gc_wire_prepare_notification');
 	elgg_unregister_page_handler('members', 'members_page_handler');
 	elgg_register_page_handler('members', 'gc_members_page_handler');
 	elgg_unregister_page_handler("file_tools", "file_tools_page_handler");
