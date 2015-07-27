@@ -34,6 +34,8 @@ elgg.gc_comments.Comment.prototype = {
 	gc_showForm: function () {
 		//console.log("IN SHOWFORM");
 		this.gc_getForm().slideDown('medium').data('hidden', 0);
+		$('html, body').animate({scrollTop: this.gc_getForm().offset().top - 150},1000);
+		//window.scrollTo(0,this.gc_getForm().position().top-150);
 	},
 
 	gc_loadForm: function () {
