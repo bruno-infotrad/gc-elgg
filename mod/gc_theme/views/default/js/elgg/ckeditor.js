@@ -85,56 +85,56 @@ define(function(require) {
 
 
 			var e = CKEDITOR.instances['thewire-textarea']
-			var editable = e.editable();
+			// Test for wire textarea as the button do not exist outside of it
+			if (e) {
+				var editable = e.editable();
 
-			var exec_content_warning = "<?php echo elgg_echo('gc_theme:exec_content:warning');?>";
-			$('input#thewire-exec-content').live('click',function(event){
-				if ($('input#thewire-exec-content').is(':checked')) {
-					if (confirm(exec_content_warning) == false) {
-						event.preventDefault();
-						return;
+				var exec_content_warning = "<?php echo elgg_echo('gc_theme:exec_content:warning');?>";
+				$('input#thewire-exec-content').live('click',function(event){
+					if ($('input#thewire-exec-content').is(':checked')) {
+						if (confirm(exec_content_warning) == false) {
+							event.preventDefault();
+							return;
+						}
 					}
-				}
-			});
+				});
 
-			e.on( 'change', function( event ) {
-			//editable.on( 'change', function( event ) {
-				var edata = e.getData();
-				//var texte = editable.getText();
-				//var donnees = editable.getData();
-				//console.log("EDONNEES "+edata+" LONGUEUR DES EDONNEES "+edata.length+" DONNEES "+donnees+" LONGUEUR DES DONNEES "+donnees.length+" TEXTE "+texte+" LONGUEUR DU TEXTE "+texte.length);
-				if (edata.length != 0) {
-					//$('#thewire-textarea').html(texte);
-					//elgg.user_handle('thewire-textarea');
-					if (!$('input#thewire-exec-content').is(':checked')) {
-						$('#thewire-contribute-to').css('opacity','1.0');
-						$('#thewire-contribute-to').css('pointer-events','all');
-						$('#thewire-contribute-to').removeAttr('disabled');
+				e.on( 'change', function( event ) {
+				//editable.on( 'change', function( event ) {
+					var edata = e.getData();
+					//var texte = editable.getText();
+					//var donnees = editable.getData();
+					//console.log("EDONNEES "+edata+" LONGUEUR DES EDONNEES "+edata.length+" DONNEES "+donnees+" LONGUEUR DES DONNEES "+donnees.length+" TEXTE "+texte+" LONGUEUR DU TEXTE "+texte.length);
+					if (edata.length != 0) {
+						//$('#thewire-textarea').html(texte);
+						//elgg.user_handle('thewire-textarea');
+						if (!$('input#thewire-exec-content').is(':checked')) {
+							$('#thewire-contribute-to').css('opacity','1.0');
+							$('#thewire-contribute-to').css('pointer-events','all');
+							$('#thewire-contribute-to').removeAttr('disabled');
+						};
+						$('#thewire-submit-button').removeAttr('disabled');
+						//$('input#thewire-submit-button:disabled').val(false);
+						$('#thewire-submit-button').css('opacity','1.0');
+					} else {
+						$('#thewire-contribute-to').css('opacity','0.5');
+						$('#thewire-contribute-to').css('pointer-events','none');
+						$('#thewire-contribute-to').attr('disabled','disabled');
+						//$('input#thewire-submit-button.elgg-button.elgg-button-submit:disabled').val(true);
+						$('#thewire-submit-button').attr('disabled','disabled');
+						$('#thewire-submit-button').css('opacity','0.5');
 					};
-					$('#thewire-submit-button').removeAttr('disabled');
-					//$('input#thewire-submit-button:disabled').val(false);
-					$('#thewire-submit-button').css('opacity','1.0');
-				} else {
-					$('#thewire-contribute-to').css('opacity','0.5');
-					$('#thewire-contribute-to').css('pointer-events','none');
-					$('#thewire-contribute-to').attr('disabled','disabled');
-					//$('input#thewire-submit-button.elgg-button.elgg-button-submit:disabled').val(true);
-					$('#thewire-submit-button').attr('disabled','disabled');
-					$('#thewire-submit-button').css('opacity','0.5');
-				};
-			});
+				});
 
-			$('.elgg-form-compound-add').on('submit', function (e){
-				var $form = $(this);
-				if ($form.data('submitted') === true) {
-					e.preventDefault();
-				} else {
-					$form.data('submitted',true);
-				}
-			});
-
-
-
+				$('.elgg-form-compound-add').on('submit', function (e){
+					var $form = $(this);
+					if ($form.data('submitted') === true) {
+						e.preventDefault();
+					} else {
+						$form.data('submitted',true);
+					}
+				});
+			}
     }); 
 	// Live handlers don't need to wait for domReady and only need to be registered once.
 	$('.ckeditor-toggle-editor').live('click', elggCKEditor.toggleEditor);
