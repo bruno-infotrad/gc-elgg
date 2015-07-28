@@ -657,20 +657,41 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 	$object = $item->getObjectEntity();
 
 	if (!elgg_in_context('widgets') && !$item->annotation_id && $object instanceof ElggEntity && $item->action_type != 'join') {
-		if ($object->canAnnotate(0, 'generic_comment')) {
-			//if ($object->getSubtype() == 'thewire') {
-				$items[] = ElggMenuItem::factory(array(
-					'name' => 'comment',
-					//'href' => "#comments-add-$object->guid",
-					//'text' => elgg_echo('comment'),
-					'text' => elgg_view_icon('speech-bubble'),
-					'title' => elgg_echo('comment:this'),
-					'rel' => "toggle",
-					'priority' => 50,
-					'link_class'=>'elgg-comment-add',
-					'id'=> $object->getGUID(),
-				));
-			//}
+		$group = $object->getContainerEntity();
+		if ($group instanceof ElggGroup ) {
+			if  ($group->canWriteToContainer() || elgg_is_admin_logged_in()) {
+				if ($object->canAnnotate(0, 'generic_comment')) {
+					//if ($object->getSubtype() == 'thewire') {
+						$items[] = ElggMenuItem::factory(array(
+							'name' => 'comment',
+							//'href' => "#comments-add-$object->guid",
+							//'text' => elgg_echo('comment'),
+							'text' => 'OUI'.elgg_view_icon('speech-bubble'),
+							'title' => elgg_echo('comment:this'),
+							'rel' => "toggle",
+							'priority' => 50,
+							'link_class'=>'elgg-comment-add',
+							'id'=> $object->getGUID(),
+						));
+					//}
+				}
+			}
+		} else {
+			if ($object->canAnnotate(0, 'generic_comment')) {
+				//if ($object->getSubtype() == 'thewire') {
+					$items[] = ElggMenuItem::factory(array(
+						'name' => 'comment',
+						//'href' => "#comments-add-$object->guid",
+						//'text' => elgg_echo('comment'),
+						'text' => 'NON'.elgg_view_icon('speech-bubble'),
+						'title' => elgg_echo('comment:this'),
+						'rel' => "toggle",
+						'priority' => 50,
+						'link_class'=>'elgg-comment-add',
+						'id'=> $object->getGUID(),
+					));
+				//}
+			}
 		}
 		if (elgg_instanceof($object, 'object', 'groupforumtopic')) {
 			$group = $object->getContainerEntity();
