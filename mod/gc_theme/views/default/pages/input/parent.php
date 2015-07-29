@@ -26,7 +26,7 @@ foreach ($pages as $page) {
 	for ($i = 0; $i < $page['depth']; $i++) {
 		$spacing .= "--";
 	}
-	$options[$page['guid']] = "$spacing " . $page['title'];
+	$options[$page['guid']] = "$spacing " . elgg_get_excerpt($page['title'],80);
 }
 
 $defaults = array(
