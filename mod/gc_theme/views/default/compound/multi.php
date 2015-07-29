@@ -2,7 +2,7 @@
 //elgg_load_js('elgg.contribute_to');
 $owner = elgg_get_page_owner_entity();
 if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thewire_enable != 'no')) {
-	$file_selected = false;
+	$thewire_enabled = true;
 	$tabs["thewire"] = array(
 		'text' => elgg_view_agora_icon('wire') . elgg_echo("composer:object:thewire"),
 		"href" => "#",
@@ -16,7 +16,26 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 	$form_data .= elgg_view_form('compound/add',$vars);
 	$form_data .= "</div>";
 } else {
-	$file_selected = true;
+	elgg_load_library('elgg:pages');
+	if (elgg_instanceof($owner, 'object')) {
+        	$parent_guid = $owner->getGUID();
+	}
+	elgg_set_page_owner_guid($owner->getGUID());
+	$vars = pages_prepare_form_vars(null, $parent_guid);
+	$vars['disable_top_pages'] = true;
+	$thewire_enabled = false;
+	$tabs["page"] = array(
+		'text' => elgg_view_agora_icon('pages') . elgg_echo("composer:object:page"),
+		"href" => "#",
+		"rel" => "users",
+		"priority" => 300,
+		"onclick" => "compound_switch_tab(\"page\");",
+		"selected" => true
+	);
+	//$vars['class'] = 'dropzone';
+	$form_data = "<div id='compound_page'>";
+	$form_data .= elgg_view_form('pages/edit',array(),$vars);
+	$form_data .= "</div>";
 }
 $tabs["polls"] = array(
 	'text' => elgg_view_agora_icon('addpoll') . elgg_echo("composer:object:poll"),
@@ -34,7 +53,6 @@ $tabs["files"] = array(
 	"href" => "#",
 	"rel" => "users",
 	"priority" => 500,
-	"selected" => $file_selected,
 	"onclick" => "compound_switch_tab(\"files\");"
 );
 elgg_load_library('elgg:file');
@@ -65,27 +83,51 @@ echo '</div>';
 		$('.elgg-menu-compound li').removeClass('elgg-state-selected');
 
                 $('.elgg-menu-compound li.elgg-menu-item-' + tab).addClass('elgg-state-selected');
-
-		switch(tab){
-			case "thewire":
-			default:
-				$('#compound_file').hide();
-				$('#compound_poll').hide();
-				
-				$('#compound_thewire').show();
-				break;
-			case "polls":
-				$('#compound_thewire').hide();
-				$('#compound_file').hide();
-				
-				$('#compound_poll').show();
-				break;
-			case "files":
-				$('#compound_thewire').hide();
-				$('#compound_poll').hide();
-				
-				$('#compound_file').show();
-				break;
+		var thewire_enabled = <?php echo $thewire_enabled; ?>;
+		if (thewire_enabled) {
+			switch(tab) {
+				case "thewire":
+				default:
+					$('#compound_file').hide();
+					$('#compound_poll').hide();
+					
+					$('#compound_thewire').show();
+					break;
+				case "polls":
+					$('#compound_thewire').hide();
+					$('#compound_file').hide();
+					
+					$('#compound_poll').show();
+					break;
+				case "files":
+					$('#compound_thewire').hide();
+					$('#compound_poll').hide();
+					
+					$('#compound_file').show();
+					break;
+			}
+		} else {
+			switch(tab) {
+				case "page":
+				default:
+					$('#compound_file').hide();
+					$('#compound_poll').hide();
+					
+					$('#compound_page').show();
+					break;
+				case "polls":
+					$('#compound_page').hide();
+					$('#compound_file').hide();
+					
+					$('#compound_poll').show();
+					break;
+				case "files":
+					$('#compound_page').hide();
+					$('#compound_poll').hide();
+					
+					$('#compound_file').show();
+					break;
+			}
 		}
 	}
 </script>

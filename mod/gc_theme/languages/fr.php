@@ -141,6 +141,7 @@ return array(
 	'composer:annotation:messageboard' => "Afficher",
 	'post' => "Afficher",
 	'composer:object:file' => "Téléchargez un fichier",
+	'composer:object:page' => "Ajoutez une page",
 	
 	'file:river:create' => "Télécharger un fichier",
 	'file:friends' => "Fichiers des collègues",

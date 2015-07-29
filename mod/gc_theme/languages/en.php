@@ -9,6 +9,7 @@ return array(
 	'composer:object:blog' => "Blog",
 	'composer:annotation:messageboard' => "Post",
 	'composer:object:file' => 'Add a file',
+	'composer:object:page' => 'Add a page',
 	'event_manager:list:navigation:list' => 'All',
 	'event_manager:list:navigation:mine' => 'Mine',
 	'event_manager:event:relationship:event_interested' => 'Tentative',
