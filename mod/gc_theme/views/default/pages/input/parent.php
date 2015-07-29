@@ -19,7 +19,7 @@ if (empty($vars['entity'])) {
 $pages = pages_get_navigation_tree($container);
 $options = array();
 if (elgg_is_admin_logged_in() || roles_has_role(elgg_get_logged_in_user_entity(),'im_admin')) {
-	$options['0'] = 'TOP PAGE';
+	$options['0'] = elgg_echo('gc_theme:top_level_page');
 }
 foreach ($pages as $page) {
 	$spacing = "";

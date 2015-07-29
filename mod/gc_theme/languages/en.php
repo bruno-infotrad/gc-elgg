@@ -217,6 +217,7 @@ return array(
 	'gc_theme:show_in_feed' => 'Show on feed',
 	'gc_theme:show_in_feed:help' => 'If checkbox is selected, uploaded file will be displayed on feed page',
 	'gc_theme:enable_group_wire' => 'Enable group wire',
+	'gc_theme:top_level_page' => 'Top level page',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

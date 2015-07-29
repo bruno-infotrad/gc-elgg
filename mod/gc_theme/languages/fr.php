@@ -492,6 +492,7 @@ return array(
 	'gc_theme:show_in_feed' => 'Visible sur le fil de nouvelle',
 	'gc_theme:show_in_feed:help' => 'Si la case à cocher est selectionnée, le fichier sera visible sur le fil de nouvelles',
 	'gc_theme:enable_group_wire' => 'Activer le file de nouvelles dans le groupe',
+	'gc_theme:top_level_page' => 'Page de plus haut niveau',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",
