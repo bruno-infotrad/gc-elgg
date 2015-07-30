@@ -22,7 +22,6 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 	}
 	elgg_set_page_owner_guid($owner->getGUID());
 	$vars = pages_prepare_form_vars(null, $parent_guid);
-	$vars['disable_top_pages'] = true;
 	$thewire_enabled = 0;
 	$tabs["page"] = array(
 		'text' => elgg_view_agora_icon('pages') . elgg_echo("composer:object:page"),

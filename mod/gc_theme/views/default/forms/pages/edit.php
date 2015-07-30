@@ -8,14 +8,19 @@
 $variables = elgg_get_config('pages');
 $user = elgg_get_logged_in_user_entity();
 $entity = elgg_extract('entity', $vars);
-$disable_top_pages = elgg_extract('disable_top_pages', $vars,false);
 $access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
 $vars['access_id'] = $access_id;
+$container_guid = $vars['container_guid'];
+$container = get_entity($container_guid);
 $can_change_access = true;
 if ($user && $entity) {
 	$can_change_access = ($user->isAdmin() || $user->getGUID() == $entity->owner_guid);
 }
-
+if (!($container instanceof ElggGroup)||($container instanceof ElggGroup && $container->thewire_enable != 'no')) {
+	$disable_top_pages = false;
+} else {
+	$disable_top_pages = true;
+}
 foreach ($variables as $name => $type) {
 	//echo "name=$name type=$type<br>";
 	// don't show read / write access inputs for non-owners or admin when editing
@@ -24,6 +29,7 @@ foreach ($variables as $name => $type) {
 	}
 	
 	// don't show parent picker input for top or new pages.
+	// CHeck if wire if disabled in group. If it is, allow only admins and IM admins to add top pages
 	if (!$disable_top_pages) {
 		if ($name == 'parent_guid' && (!$vars['parent_guid'] || !$vars['guid'])) {
 			continue;
@@ -69,7 +75,7 @@ if ($vars['guid']) {
 }
 echo elgg_view('input/hidden', array(
 	'name' => 'container_guid',
-	'value' => $vars['container_guid'],
+	'value' => $container_guid,
 ));
 if (!$disable_top_pages && !$vars['guid']) {
 	echo elgg_view('input/hidden', array(
