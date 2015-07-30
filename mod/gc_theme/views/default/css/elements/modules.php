@@ -34,7 +34,7 @@
 }
 
 .elgg-module-aside > .elgg-body {
-	/*max-width: 250px;*/
+	max-width: 96%;
 	padding: 0 5px;
 }
 
