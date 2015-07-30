@@ -2,7 +2,7 @@
 //elgg_load_js('elgg.contribute_to');
 $owner = elgg_get_page_owner_entity();
 if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thewire_enable != 'no')) {
-	$thewire_enabled = true;
+	$thewire_enabled = 1;
 	$tabs["thewire"] = array(
 		'text' => elgg_view_agora_icon('wire') . elgg_echo("composer:object:thewire"),
 		"href" => "#",
@@ -23,7 +23,7 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 	elgg_set_page_owner_guid($owner->getGUID());
 	$vars = pages_prepare_form_vars(null, $parent_guid);
 	$vars['disable_top_pages'] = true;
-	$thewire_enabled = false;
+	$thewire_enabled = 0;
 	$tabs["page"] = array(
 		'text' => elgg_view_agora_icon('pages') . elgg_echo("composer:object:page"),
 		"href" => "#",
@@ -37,30 +37,37 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 	$form_data .= elgg_view_form('pages/edit',array(),$vars);
 	$form_data .= "</div>";
 }
-$tabs["polls"] = array(
-	'text' => elgg_view_agora_icon('addpoll') . elgg_echo("composer:object:poll"),
-	"href" => "#",
-	"rel" => "users",
-	"priority" => 400,
-	"onclick" => "compound_switch_tab(\"polls\");"
-);
-$form_data .= "<div id='compound_poll'>";
-$form_data .= elgg_view_form('polls/edit',$vars);
-$form_data .= "</div>";
-
-$tabs["files"] = array(
-	'text' => elgg_view_agora_icon('addfile') . elgg_echo("composer:object:file"),
-	"href" => "#",
-	"rel" => "users",
-	"priority" => 500,
-	"onclick" => "compound_switch_tab(\"files\");"
-);
-elgg_load_library('elgg:file');
-$form_vars = array('enctype' => 'multipart/form-data',);
-$body_vars = file_prepare_form_vars();
-$form_data .= "<div id='compound_file'>";
-$form_data .= elgg_view_form('file/upload', $form_vars, array_merge($body_vars, $vars));
-$form_data .= "</div>";
+$polls_enabled = 0;
+if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->polls_enable != 'no')) {
+	$polls_enabled = 1;
+	$tabs["polls"] = array(
+		'text' => elgg_view_agora_icon('addpoll') . elgg_echo("composer:object:poll"),
+		"href" => "#",
+		"rel" => "users",
+		"priority" => 400,
+		"onclick" => "compound_switch_tab(\"polls\");"
+	);
+	$form_data .= "<div id='compound_poll'>";
+	$form_data .= elgg_view_form('polls/edit',$vars);
+	$form_data .= "</div>";
+}
+$files_enabled = 0;
+if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->file_enable != 'no')) {
+	$files_enabled = 1;
+	$tabs["files"] = array(
+		'text' => elgg_view_agora_icon('addfile') . elgg_echo("composer:object:file"),
+		"href" => "#",
+		"rel" => "users",
+		"priority" => 500,
+		"onclick" => "compound_switch_tab(\"files\");"
+	);
+	elgg_load_library('elgg:file');
+	$form_vars = array('enctype' => 'multipart/form-data',);
+	$body_vars = file_prepare_form_vars();
+	$form_data .= "<div id='compound_file'>";
+	$form_data .= elgg_view_form('file/upload', $form_vars, array_merge($body_vars, $vars));
+	$form_data .= "</div>";
+}
 // build tabs
 if(!empty($tabs)){
 	foreach($tabs as $name => $tab){
