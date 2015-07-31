@@ -103,6 +103,8 @@ function gc_theme_init() {
 	elgg_register_page_handler("file_tools", "gc_file_tools_page_handler");
 	elgg_unregister_plugin_hook_handler("route", "file", "file_tools_file_route_hook");
 	elgg_register_plugin_hook_handler("route", "file", "gc_file_tools_file_route_hook");
+	elgg_unregister_plugin_hook_handler("register", "menu:file_tools_folder_sidebar_tree", "file_tools_folder_sidebar_tree_hook");
+	elgg_register_plugin_hook_handler("register", "menu:file_tools_folder_sidebar_tree", "gc_file_tools_folder_sidebar_tree_hook");
 	/**
 	 * Customize pages
 	 */

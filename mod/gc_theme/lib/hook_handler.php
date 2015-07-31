@@ -1561,3 +1561,31 @@ function gc_wire_prepare_notification($hook, $type, $notification, $params) {
         return $notification;
 }
 
+function gc_file_tools_folder_sidebar_tree_hook($hook, $type, $returnvalue, $params) {
+	
+	if (empty($params) || !is_array($params)) {
+		return $returnvalue;
+	}
+	
+	$container = elgg_extract("container", $params);
+	if (empty($container) || (!elgg_instanceof($container, "user") && !elgg_instanceof($container, "group"))) {
+		return $returnvalue;
+	}
+	
+	$main_menu_item = ElggMenuItem::factory(array(
+		"name" => "root",
+		"text" => elgg_echo("file_tools:list:folder:main"),
+		"href" => "#",
+		"id" => "0",
+		"rel" => "root",
+		"priority" => 0
+	));
+	
+	if ($folders = file_tools_get_folders($container->getGUID())) {
+		$main_menu_item->setChildren(gc_file_tools_make_menu_items($folders));
+	}
+	
+	$returnvalue[] = $main_menu_item;
+	
+	return $returnvalue;
+}

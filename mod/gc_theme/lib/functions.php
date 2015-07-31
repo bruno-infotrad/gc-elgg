@@ -83,3 +83,35 @@ function gc_pages_get_navigation_tree($container) {
 	}
 	return $tree;
 }
+
+function gc_file_tools_make_menu_items($folders, $niveau=0) {
+	$result = false;
+	if (!empty($folders) && is_array($folders)) {
+		$result = array();
+		
+		foreach ($folders as $index => $level) {
+			if ($folder = elgg_extract("folder", $level)) {
+				$folder_title = $folder->title;
+				if (empty($folder_title)) {
+					$folder_title = elgg_echo("untitled");
+				}
+				
+				$folder_menu = ElggMenuItem::factory(array(
+					"name" => "folder_" . $folder->getGUID(),
+					"text" => elgg_get_excerpt($folder_title,30-(int)3*$niveau/2),
+					"href" => "#" . $folder->getGUID(),
+					"priority" => $folder->order
+				));
+				
+				if ($children = elgg_extract("children", $level)) {
+					$niveau+=1;
+					$folder_menu->setChildren(gc_file_tools_make_menu_items($children,$niveau));
+				}
+				
+				$result[] = $folder_menu;
+			}
+		}
+	}
+	
+	return $result;
+}
