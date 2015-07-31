@@ -89,7 +89,7 @@ define(function(require) {
 			if (e) {
 				var editable = e.editable();
 
-				var exec_content_warning = "<?php echo elgg_echo('gc_theme:exec_content:warning');?>";
+				var exec_content_warning = elgg.echo('gc_theme:exec_content:warning');
 				$('input#thewire-exec-content').live('click',function(event){
 					if ($('input#thewire-exec-content').is(':checked')) {
 						if (confirm(exec_content_warning) == false) {
