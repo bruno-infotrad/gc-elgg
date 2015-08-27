@@ -669,7 +669,7 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 							'text' => elgg_view_icon('speech-bubble'),
 							'title' => elgg_echo('comment:this'),
 							'rel' => "toggle",
-							'priority' => 50,
+							'priority' => 101,
 							'link_class'=>'elgg-comment-add',
 							'id'=> $object->getGUID(),
 						));
@@ -686,7 +686,7 @@ function gc_theme_river_menu_handler($hook, $type, $items, $params) {
 						'text' => elgg_view_icon('speech-bubble'),
 						'title' => elgg_echo('comment:this'),
 						'rel' => "toggle",
-						'priority' => 50,
+						'priority' => 101,
 						'link_class'=>'elgg-comment-add',
 						'id'=> $object->getGUID(),
 					));
