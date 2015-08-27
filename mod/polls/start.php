@@ -34,7 +34,7 @@ function polls_init() {
 	
 	// notifications
 	elgg_register_notification_event('object', 'poll');
-	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:page', 'polls_prepare_notification');
+	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:poll', 'polls_prepare_notification');
 	// register the JavaScript
 	$js = elgg_get_simplecache_url('js', 'polls/js');
 	elgg_register_simplecache_view('js/polls/js');
