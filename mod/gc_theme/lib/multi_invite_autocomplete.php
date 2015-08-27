@@ -48,12 +48,12 @@
 				if($relationship == "notfriends"){
 					foreach($entities as $entity){
 						if(!check_entity_relationship($user->getGUID(), "friend", $entity->getGUID())){
-							$result[] = array("type" => "user", "value" => $entity->getGUID(),"content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
+							$result[] = array("type" => "user", "value" => $entity->getGUID(),"label" => $entity->name, "content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
 						}	
 					}
 				} else {
 					foreach($entities as $entity){
-						$result[] = array("type" => "user", "value" => $entity->getGUID(),"content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
+						$result[] = array("type" => "user", "value" => $entity->getGUID(),"label" => $entity->name, "content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
 					}
 				}
 			}
