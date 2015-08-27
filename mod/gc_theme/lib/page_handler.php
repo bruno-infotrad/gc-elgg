@@ -480,10 +480,12 @@ function gc_friends_page_handler($page_elements, $handler) {
         if (isset($page_elements[0]) && $user = get_user_by_username($page_elements[0])) {
                 elgg_set_page_owner_guid($user->getGUID());
         }
+	/*
         if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
 		$user = elgg_get_logged_in_user_entity();
-		elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
+		//elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
         }
+	*/
 
         switch ($handler) {
                 case 'friends':
@@ -493,6 +495,14 @@ function gc_friends_page_handler($page_elements, $handler) {
                 		$vars['search_type'] = $page_elements[1];
                         	require_once "$base/search.php";
 			} else {
+				elgg_register_menu_item('title', array(
+					'name' => 'multi_invite',
+					'href' => "/friends/multi_invite",
+					'text' => elgg_echo('friends:multi_invite'),
+					'link_class' => 'elgg-button elgg-button-action',
+					'contexts' => array('friends'),
+					'priority' => 40,
+				));
                         	require_once "$base/index.php";
 			}
                         break;
@@ -506,12 +516,13 @@ function gc_friends_page_handler($page_elements, $handler) {
 }
 function gc_collections_page_handler($page_elements) {
         elgg_set_context('friends');
+	elgg_unregister_menu_item('title', 'multi_invite');
        	$base = elgg_get_plugins_path() . 'gc_theme/pages/friends';
         if (isset($page_elements[0])) {
                 if ($page_elements[0] == "add") {
                         elgg_set_page_owner_guid(elgg_get_logged_in_user_guid());
 			$user = elgg_get_logged_in_user_entity();
-			elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
+			//elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
                         require_once "{$base}/collections/add.php";
                         return true;
                 } else {
@@ -520,7 +531,7 @@ function gc_collections_page_handler($page_elements) {
                                 elgg_set_page_owner_guid($user->getGUID());
                                 if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
 					$user = elgg_get_logged_in_user_entity();
-					elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
+					//elgg_register_menu_item('page', array( 'name' => 'friends:view:collections', 'text' => elgg_echo('friends:collections'), 'href' => "collections/$user->username",));
                                 }
                                 require_once "{$base}/collections/view.php";
                                 return true;

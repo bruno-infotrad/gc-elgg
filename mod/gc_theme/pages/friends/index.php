@@ -14,7 +14,7 @@ if (!$owner) {
 }
 
 $title = elgg_echo("friends:owned", array($owner->name));
-elgg_register_title_button('friends', 'multi_invite');
+//elgg_register_title_button('friends', 'multi_invite');
 $options = array(
 	'relationship' => 'friend',
 	'relationship_guid' => $owner->getGUID(),

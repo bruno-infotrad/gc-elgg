@@ -305,6 +305,7 @@ function gc_theme_pagesetup_handler() {
 				'contexts' => array('collections'),
 				'priority' => 50,
 			));
+/*
 			elgg_register_menu_item('title', array(
 				'name' => 'multi_invite',
 				'href' => "/friends/multi_invite",
@@ -313,6 +314,7 @@ function gc_theme_pagesetup_handler() {
 				'contexts' => array('friends'),
 				'priority' => 40,
 			));
+*/
 			elgg_unregister_menu_item('page','edit_avatar');
 			elgg_unregister_menu_item('page','edit_profile');
 			elgg_unregister_menu_item('extras','avatar:edit');
@@ -425,6 +427,7 @@ function gc_theme_pagesetup_handler() {
 				));
 			}
 			
+/*
 			if (elgg_is_active_plugin('tagcloud')) {
 				elgg_register_menu_item('page', array(
 					'name' => 'tags',
@@ -434,6 +437,7 @@ function gc_theme_pagesetup_handler() {
 					'is_trusted' => true,
 				));
 			}
+*/
 			
 /*
 			elgg_register_menu_item('page', array(
