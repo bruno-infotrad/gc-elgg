@@ -6,6 +6,9 @@
 
 	$sort_by 			= get_input("sort_by");
 	$direction 			= get_input("direction");
+	// Hard code limti to 10 for not
+	$limit = 10;
+	$offset				= (int) get_input("offset", 0);
 	
 	if(!empty($page_owner) && (elgg_instanceof($page_owner, "user") || elgg_instanceof($page_owner, "group"))) {
 		group_gatekeeper();
@@ -41,7 +44,8 @@
 		$files_options = array(
 			"type" => "object",
 			"subtype" => "file",
-			"limit" => false,
+			"limit" => $limit,
+			"offset" => $offset,
 			"container_guid" => $page_owner->getGUID()
 		);
 
@@ -68,9 +72,17 @@
 				$files = elgg_get_entities($files_options);
 			}
 		}
+		// get count
+		$files_options["count"] = true;
+		$files_count = elgg_get_entities_from_relationship($files_options);
+		// do we need a more button
+		$show_more = false;
+		if ($limit) {
+			$show_more = $files_count > ($offset + $limit);
+		}
 
 		if(!$draw_page) {
-			echo elgg_view("file_tools/list/files", array("folder" => $folder, "files" => $files, "sort_by" => $sort_by, "direction" => $direction));
+			echo elgg_view("file_tools/list/files", array("folder" => $folder, "files" => $files, "sort_by" => $sort_by, "direction" => $direction,"show_more" => $show_more, "limit" => $limit, "offset" => $offset));
 		} else {
 			// build breadcrumb
 			elgg_push_breadcrumb(elgg_echo("file"), "file/all");
