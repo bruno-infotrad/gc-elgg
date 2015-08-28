@@ -179,6 +179,37 @@
 	}
 
 	/**
+	 * Prepare a notification message about a created event
+	 *
+	 * @param string                          $hook         Hook name
+	 * @param string                          $type         Hook type
+	 * @param Elgg_Notifications_Notification $notification The notification to prepare
+	 * @param array                           $params       Hook parameters
+	 * 
+	 * @return Elgg_Notifications_Notification
+	 */
+	function event_manager_prepare_notification($hook, $type, $notification, $params) {
+		$entity = $params['event']->getObject();
+		$owner = $params['event']->getActor();
+		$language = $params['language'];
+		$method = $params['method'];
+		
+		$subject = elgg_echo('event_manager:notification:subject', array(), $language);
+		$summary = elgg_echo('event_manager:notification:summary', array(), $language);
+		$body = elgg_echo('event_manager:notification:body', array($owner->name, $entity->title), $language);
+		if ($description = $entity->shortdescription) {
+			$body .= PHP_EOL . PHP_EOL . $description;
+		} elseif ($description = $entity->description) {
+			$body .= PHP_EOL . PHP_EOL . elgg_get_excerpt($description);
+		}
+		$body .= PHP_EOL . PHP_EOL . $entity->getURL();
+		$notification->subject = $subject;
+		$notification->body = $body;
+		$notification->summary = $summary;
+		return $notification;
+	}
+	
+	/**
 	 * Notification body for events
 	 *
 	 * @param string $hook
