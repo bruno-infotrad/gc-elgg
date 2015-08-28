@@ -131,7 +131,8 @@
 							if (get_entity($user_guid) instanceof ElggUser) {
 								// add river events
 								if (($type != "event_waitinglist") && ($type != "event_pending")) {
-									add_to_river('river/event_relationship/create', 'event_relationship', $user_guid, $event_guid);
+									elgg_create_river_item(array( 'view' => 'river/event_relationship/create', 'action_type' => 'event_relationship', 'subject_guid' => $user_guid, 'object_guid' => $event_guid, ));
+									//add_to_river('river/event_relationship/create', 'event_relationship', $user_guid, $event_guid);
 								}
 							}
 						}
