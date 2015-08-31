@@ -11,10 +11,10 @@
 				$event = $entity;
 			}
 		}
-		if (!$event->canEdit()) {
-			return;
-		}
 		if($event){
+			if (!$event->canEdit()) {
+				return;
+			}
 			$user = elgg_extract("entity", $params);
 
 			if($user){
