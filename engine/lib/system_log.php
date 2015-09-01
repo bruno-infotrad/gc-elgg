@@ -189,6 +189,7 @@ function get_object_from_log_entry($entry) {
  * @return void
  */
 function system_log($object, $event) {
+	return;
 	global $CONFIG;
 	static $log_cache;
 	static $cache_size = 0;
