@@ -91,6 +91,10 @@
 	background-position: -18px -612px;
 	margin-left: 0px;
 }
+.elgg-agora-icon-eventregistration {
+	background-position: -18px -630px;
+	margin: 0px;
+}
 
 /* ***************************************
 	ICONS

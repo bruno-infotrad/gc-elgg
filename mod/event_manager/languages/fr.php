@@ -109,42 +109,49 @@ $language = array (
   'event_manager:registration:required_fields' => 'Veuillez remplir les champs obligatoires',
   'event_manager:event:registration:notification:owner:subject' => 'inscription évènement',
   'event_manager:event:registration:notification:user:subject' => 'inscription évènement',
+  'event_manager:event:registration:notification:owner:summary:event_attending' => '%s s\'est inscrit(e) comme \'participant(e)\' à l\'évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_attending' => 'Bonjour %s,
 
-%s c\'est inscrit(e) comme \'participant(e)\' à l\'évènement \'%s\' .',
+%s s\'est inscrit(e) comme \'participant(e)\' à l\'évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_attending' => 'Bonjour %s,
 
 Vous êtes maintenant inscrit(e) comme \'participant(e)\' l\'évènement \'%s\'.',
+  'event_manager:event:registration:notification:owner:summary:event_waitinglist' => '%s est sur la liste d\'attente pour votre évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_waitinglist' => 'Bonjour %s,
 
 %s est sur la liste d\'attente pour votre évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_waitinglist' => 'Bonjour %s,
 
 Vous êtes en liste d\'attente pour l\'évènement \'%s\'.',
+  'event_manager:event:registration:notification:owner:summary:event_exhibiting' => '%s s\'est inscrit(e) comme \'exposant(e)\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_exhibiting' => 'Bonjour %s,
 
 %s s\'est inscrit(e) comme \'exposant(e)\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_exhibiting' => 'Bonjour %s,
 
 Vous êtes maintenant inscrit(e) comme \'exposant(e)\' à l\'évènement \'%s\' .',
+  'event_manager:event:registration:notification:owner:summary:event_organizing' => '%s s\'est inscrit(e) comme \'organisateur/organisatrice\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_organizing' => 'Bonjour %s,
 
 %s s\'est inscrit(e) comme \'organisateur/organisatrice\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_organizing' => 'Bonjour %s,
 
 Vous êtes maintenant inscrit(e) comme \'organisateur/organisatrice\' à l\'évènement \'%s\' .',
+  'event_manager:event:registration:notification:owner:summary:event_presenting' => '%s s\'est inscrit(e) comme \'animateur/animatrice\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_presenting' => 'Bonjour %s,
 
 %s s\'est inscrit(e) comme \'animateur/animatrice\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_presenting' => 'Bonjour %s,
 
 Vous êtes maintenant inscrit(e) comme \'animateur/animatrice\' à l\'évènement \'%s\' .',
+  'event_manager:event:registration:notification:owner:summary:event_interested' => '%s s\'est inscrit(e) comme \'intéressé(e)\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_interested' => 'Bonjour %s,
 
 %s s\'est inscrit(e) comme \'intéressé(e)\' à votre évènement \'%s\' .',
   'event_manager:event:registration:notification:user:text:event_interested' => 'Bonjour %s,
 
 Vous êtes maintenant inscrit(e) comme \'intéressé(e)\' à l\'évènement \'%s\' .',
+  'event_manager:event:registration:notification:owner:summary:event_undo' => '%s s\'est désinscrit(e) de votre évènement \'%s\'.',
   'event_manager:event:registration:notification:owner:text:event_undo' => 'Bonjour %s,
 
 %s s\'est désinscrit(e) de votre évènement \'%s\'.',

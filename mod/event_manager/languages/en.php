@@ -138,6 +138,7 @@
 		'event_manager:event:registration:notification:owner:subject' => 'Event registration',
 		'event_manager:event:registration:notification:user:subject' => 'Event registration',
 
+		'event_manager:event:registration:notification:owner:summary:event_attending' => "%s signed up as 'attending' your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_attending' => "Hello %s,
 
 %s signed up as 'attending' your '%s' event.",
@@ -146,6 +147,7 @@
 
 You succesfully signed up as 'attending' the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_waitinglist' => "%s is on the waiting list for your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_waitinglist' => "Hello %s,
 
 %s is on the waiting list for your '%s' event.",
@@ -154,6 +156,7 @@ You succesfully signed up as 'attending' the '%s' event.",
 
 You are now on the waiting list for the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_exhibiting' => "%s has signed up as 'exhibiting' at your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_exhibiting' => "Hello %s,
 
 %s has signed up as 'exhibiting' at your '%s' event.",
@@ -162,6 +165,7 @@ You are now on the waiting list for the '%s' event.",
 
 You succesfully signed up as 'exhibiting' at the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_organizing' => "%s has signed up as 'organizing' of your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_organizing' => "Hello %s,
 
 %s has signed up as 'organizing' of your '%s' event.",
@@ -170,6 +174,7 @@ You succesfully signed up as 'exhibiting' at the '%s' event.",
 
 You succesfully signed up as 'organizing' of the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_presenting' => "%s has signed up as 'presenter' at your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_presenting' => "Hello %s,
 
 %s has signed up as 'presenter' at your '%s' event.",
@@ -178,6 +183,7 @@ You succesfully signed up as 'organizing' of the '%s' event.",
 
 You succesfully signed up as 'presenter' at the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_interested' => "%s has signed up as 'interested' in your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_interested' => "Hello %s,
 
 %s has signed up as 'interested' in your '%s' event.",
@@ -186,6 +192,7 @@ You succesfully signed up as 'presenter' at the '%s' event.",
 
 You succesfully signed up as 'interested' in the '%s' event.",
 
+		'event_manager:event:registration:notification:owner:summary:event_undo' => "%s has signed off from your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_undo' => "Hello %s,
 
 %s has signed off from your '%s' event.",
