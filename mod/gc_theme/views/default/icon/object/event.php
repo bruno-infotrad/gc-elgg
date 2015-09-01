@@ -13,5 +13,6 @@
 		
 		echo $icon;
 	} elseif($size == "tiny") {
-		echo '<div class="elgg-agora-icon elgg-agora-icon-eventregistration"></div>';
+		//echo '<div class="elgg-agora-icon elgg-agora-icon-eventregistration"></div>';
+		echo '<div></div>';
 	}

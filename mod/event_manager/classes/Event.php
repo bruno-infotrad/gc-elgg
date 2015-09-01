@@ -410,7 +410,8 @@
 				// notify the onwer of the event
 				$owner_subject = elgg_echo('event_manager:event:registration:notification:owner:subject',array(),$this->getOwnerEntity()->language);
 				
-				$summary = elgg_echo('event_manager:event:registration:notification:owner:summary:' . $type, array(
+				$summary = '<div class="elgg-image">'.elgg_view_entity_icon($to_entity, 'tiny').'</div>';
+				$summary .= elgg_echo('event_manager:event:registration:notification:owner:summary:' . $type, array(
 					$to_entity->name,
 					$event_title_link),$this->getOwnerEntity()->language);
 				$owner_message = elgg_echo('event_manager:event:registration:notification:owner:text:' . $type, array(
@@ -419,11 +420,6 @@
 					$event_title_link),$this->getOwnerEntity()->language);
 				
 				$owner_message .= $registrationLink;
-				elgg_log('NOTIFICATION $this->getOwnerEntity()->name='.$this->getOwnerEntity()->name,'NOTICE');
-				elgg_log('NOTIFICATION $to_entity->name='.$to_entity->name,'NOTICE');
-				elgg_log('NOTIFICATION $event_title_link='.$event_title_link,'NOTICE');
-				elgg_log('NOTIFICATION $registrationLink='.$registrationLink,'NOTICE');
-				elgg_log('NOTIFICATION $owner_message='.$owner_message,'NOTICE');
 				
 				notify_user($this->getOwnerGUID(), $this->getGUID(), $owner_subject, $owner_message,array('summary'=> $summary));
 

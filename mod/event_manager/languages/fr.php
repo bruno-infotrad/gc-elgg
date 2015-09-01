@@ -107,8 +107,8 @@ $language = array (
   'event_manager:registration:programparticipation' => 'Participation au programme',
   'event_manager:registration:editprogramparticipation' => 'Modifier votre participation au programme',
   'event_manager:registration:required_fields' => 'Veuillez remplir les champs obligatoires',
-  'event_manager:event:registration:notification:owner:subject' => 'inscription évènement',
-  'event_manager:event:registration:notification:user:subject' => 'inscription évènement',
+  'event_manager:event:registration:notification:owner:subject' => 'Inscription évènement',
+  'event_manager:event:registration:notification:user:subject' => 'Inscription évènement',
   'event_manager:event:registration:notification:owner:summary:event_attending' => '%s s\'est inscrit(e) comme \'participant(e)\' à l\'évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_attending' => 'Bonjour %s,
 
