@@ -48,13 +48,14 @@ if ($comment && $comment->canEdit()) {
 
 //$cancel_button = '';
 //if ($comment) {
+if (elgg_get_context() == 'ajax') {
 	$cancel_button = elgg_view('input/button', array(
 		'value' => elgg_echo('cancel'),
 		'id' => 'gc_theme-cancel-button',
 		'class' => 'elgg-button-cancel mlm',
 		'href' => $entity ? $entity->getURL() : '#',
 	));
-//}
+}
 
 if ($inline) {
 	$comment_input = elgg_view('input/text', array(
