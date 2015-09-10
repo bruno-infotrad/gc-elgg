@@ -86,7 +86,7 @@ if ($inline) {
 	$is_edit_page_input
 	$comment_guid_input
 	$entity_guid_input
-	$submit_input $cancel_button
+	$cancel_button $submit_input
 </div>
 FORM;
 }

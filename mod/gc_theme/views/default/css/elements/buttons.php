@@ -141,11 +141,12 @@ a#thewire-contribute-to {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 13px;
 }
+#gc_theme-cancel-button { float: left; margin-left: 0}
+#thewire-contribute-to { float: right;}
 #gc_theme-cancel-button,
 #thewire-contribute-to {
 	border-radius: 4px;
 	color: #000!important;
-	float: right;
 	margin-right: 10px;
 	margin-top: -2px;
 	border-color: #ccc;
@@ -161,9 +162,10 @@ a#thewire-contribute-to {
 	pointer-events: none;
 }
 
+.gc_theme-submit-button {float: right;}
+#thewire-cancel-button { float: left;}
 .gc_theme-submit-button,
 #thewire-cancel-button {
-	float: left;
 	margin-top: -2px;
 }
 #thewire-submit-button {
