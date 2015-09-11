@@ -112,11 +112,6 @@ function gc_messages_page_handler($page) {
         		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/messages';
                 	set_input('guid', $page[1]);
 			include "$base_dir/read.php";
-        	} elseif (isset($page[0]) && $page[0] == 'add' && isset($page[1])) {
-			//need to load js and css for right navigation to work
-        		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/messages';
-                	set_input('guid', $page[1]);
-			include "$base_dir/send.php";
         	} else {
                 	return messages_page_handler($page);
         	}

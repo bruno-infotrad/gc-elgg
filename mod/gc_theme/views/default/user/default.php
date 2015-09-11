@@ -46,9 +46,15 @@ if (elgg_in_context('owner_block') || elgg_in_context('widgets')) {
 	$metadata = '';
 }
 
-if (elgg_get_context() == 'gallery') {
+$context =  elgg_get_context();
+if ($context == 'gallery') {
 	echo $icon;
 	echo '<div class="data-cont">'.$entity->name.'</div>';
+} elseif ($context == 'livesearch') {
+	echo '<div class="elgg-image-block">';
+	echo '<div class="elgg-image">'.$icon.'</div>';
+	echo '<div class="elgg-body"><h3>'.$entity->name.'</h3></div>';
+	echo '</div>';
 } else {
 	if ($entity->isBanned()) {
 		$banned = elgg_echo('banned');
