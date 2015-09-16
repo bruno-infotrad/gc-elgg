@@ -6,6 +6,7 @@
  * @subpackage UI
  */
 ?>
+.gc-small-date {font-size: 75%;}
 #gc_theme-brief-description {
 	font-weight: normal;
 }

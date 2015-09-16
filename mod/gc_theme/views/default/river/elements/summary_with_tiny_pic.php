@@ -71,4 +71,5 @@ if ($subtype == 'thewire' ) {
         	$content = elgg_echo($key, array($subject_link, $object_link));
 	}
 }
+$content .= '<div class="gc-small-date">'.elgg_view_friendly_time($item->posted).'</div>';
 echo elgg_view_image_block($icon, $content,array('body_class' => 'sidebar-activity-item'));
