@@ -1,16 +1,6 @@
 <?php 
 $of="<div class=\"elgg-module elgg-module-aside\" id=\"top-border\">\n";
 $of.="<h2>".elgg_echo('gc_theme:popular_groups')."</h2>\n";
-/*
-$options = array(
-	'type' => 'group',
-	'relationship' => 'member',
-	'inverse_relationship' => false,
-	'full_view' => false,
-);
-
-$results = elgg_get_entities_from_relationship_count($options);
-*/
 $results = find_most_active_groups(30);
 $group_num=0;
 foreach ($results as $group_guid=>$count) {
@@ -28,7 +18,7 @@ function find_most_active_groups($past) {
 	$now = time();
 	$then = $now-3600*24*$past;
 	$db_prefix = elgg_get_config('dbprefix');
-	$query_group_list = "SELECT distinct container_guid FROM {$db_prefix}river rv join {$db_prefix}entities e on rv.object_guid=e.guid join {$db_prefix}groups_entity eg on e.container_guid=eg.guid where rv.action_type not in ('create','join') and rv.posted>$then";
+	$query_group_list = "SELECT distinct container_guid FROM {$db_prefix}river rv join {$db_prefix}entities e on rv.object_guid=e.guid join {$db_prefix}groups_entity eg on e.container_guid=eg.guid where rv.action_type != 'join' and rv.type != 'group' and rv.posted>$then";
 	//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUPS $query_group_list");
 	$group_list = get_data($query_group_list);
 	//$GLOBALS['GC_THEME']->debug("BRUNO ACTIVE GROUPS ".var_export($group_list,true));
