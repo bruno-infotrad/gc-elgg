@@ -3,19 +3,20 @@ $of="<div class=\"elgg-module elgg-module-aside\" id=\"top-border\">\n";
 $of.="<h2>".elgg_echo('gc_theme:popular_discussions')."</h2>\n";
 $end=time();
 $start=$end-3600*24*30;
+$db_prefix = elgg_get_config('dbprefix');
 $options = array(
-        'types' => 'object',
-        'limit' => '5',
-	'calculation' => 'count',
-	'metadata_name' => 'generic_comment',
-        'annotation_created_time_lower' => $start,
-        'annotation_created_time_upper' => $end,
-        'order_by' => 'annotation_calculation desc, e.time_updated desc',
-        'full_view' => false,
-        'pagination' => false,
-);
+    'type' => 'object',
+    'limit' => '5',
+    'selects' => array("count( * ) AS views"),
+    'joins' => array( "JOIN {$db_prefix}entities ce ON ce.container_guid = e.guid", "JOIN {$db_prefix}entity_subtypes cs ON ce.subtype = cs.id AND cs.subtype = 'comment'"),
+    'wheres' => array("ce.time_created > ".$start." AND ce.time_created < ".$end),
+    'group_by' => 'e.guid',
+    'order_by' => "views DESC",
+    'full_view' => false,
+    'pagination' => false,
+); 
 
-$results = elgg_get_entities_from_annotation_calculation($options);
+$results = elgg_get_entities($options);
 foreach ($results as $discussion) {
 	$of.=elgg_view('page/elements/popular_discussion', array('discussion' => $discussion));
 }
