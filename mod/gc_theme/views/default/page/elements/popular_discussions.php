@@ -7,7 +7,7 @@ $db_prefix = elgg_get_config('dbprefix');
 $options = array(
     'type' => 'object',
     'limit' => '5',
-    'selects' => array(("count( * ) AS views"),("ce.time_created AS comment_time")),
+    'selects' => array(("count( * ) AS views"),("MAX(ce.time_created) AS comment_time")),
     'joins' => array( "JOIN {$db_prefix}entities ce ON ce.container_guid = e.guid", "JOIN {$db_prefix}entity_subtypes cs ON ce.subtype = cs.id AND cs.subtype = 'comment'"),
     'wheres' => array("ce.time_created > ".$start." AND ce.time_created < ".$end),
     'group_by' => 'e.guid',
