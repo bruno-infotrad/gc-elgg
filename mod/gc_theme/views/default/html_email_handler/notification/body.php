@@ -1,7 +1,11 @@
 <?php 
-	$title = $vars["title"];
-	$message = nl2br($vars["message"]);
-	
+$subject = elgg_extract("subject", $vars);
+$message = nl2br(elgg_extract("body", $vars));
+$language = elgg_extract("language", $vars, get_current_language());
+//$recipient = elgg_extract("recipient", $vars);
+
+//$site = elgg_get_site_entity();
+//$site_url = elgg_get_site_url();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -10,8 +14,8 @@
 		<base target="_blank" />
 		
 		<?php 
-			if(!empty($title)){ 
-				echo "<title>" . $title . "</title>\n";
+			if(!empty($subject)){ 
+				echo "<title>" . $subject . "</title>\n";
 			}
 		?>
 	</head>
