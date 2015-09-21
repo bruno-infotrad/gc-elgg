@@ -34,7 +34,7 @@ $content .= '</div>';
 
 elgg_register_menu_item('title', array(
 	'name' => 'download',
-	'text' => elgg_echo('file:download'),
+	'text' => elgg_echo('download'),
 	'href' => "file/download/$file->guid",
 	'link_class' => 'elgg-button elgg-button-action',
 ));
