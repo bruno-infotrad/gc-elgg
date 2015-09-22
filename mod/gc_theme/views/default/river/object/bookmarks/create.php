@@ -5,10 +5,15 @@
  * @package Bookmarks
  */
 
-$object = $vars['item']->getObjectEntity();
+$item = $vars['item'];
+/* @var ElggRiverItem $item */
 
+$object = $item->getObjectEntity();
+$excerpt = elgg_get_excerpt($object->description);
 
-echo elgg_view('river/item', array(
-	'item' => $vars['item'],
-	'attachments' => elgg_view('object/bookmarks/river', array('entity' => $object)),
+echo elgg_view('river/elements/layout', array(
+	'item' => $item,
+	'message' => $excerpt,
+	'attachments' => elgg_view('output/url', array('href' => $object->address)),
+	'body_class' => $vars['body_class'],
 ));

@@ -48,7 +48,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 				$(more_marker).hide();
 				$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
 			}
-			console.log('AFTER REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms)+' already viewed='+already_viewed);
+			//console.log('AFTER REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms)+' already viewed='+already_viewed);
 			// Fix for colorbox issue (embed)
 			switch(context){
 				case 'search':

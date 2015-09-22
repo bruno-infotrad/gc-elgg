@@ -7,7 +7,6 @@ $page_type = get_input('page_type');
 $offset = get_input('offset');
 $name = get_input('name');
 $base_url = get_input('base_url');
-$options['base_url'] = $base_url;
 $options['offset'] = $offset;
 require_once elgg_get_plugins_path() . 'gc_theme/lib/gc_find_active_users.php';
 //Override function to get users to filter out banned users
@@ -25,6 +24,7 @@ switch ($page_type) {
 	$content = elgg_list_entities($params);
 	break;
 	case 'popular':
+		$options['base_url'] = $base_url;
 		$options['relationship'] = 'friend';
 		$options['inverse_relationship'] = false;
 		$options['joins'] = array("JOIN " . $dbprefix . "users_entity u ON e.guid=u.guid");
@@ -42,11 +42,13 @@ switch ($page_type) {
 			$content = elgg_view_entity_list($objects, array(
 			'count' => $count,
 			'offset' => $offset,
+			'base_url' => $base_url,
 			'limit' => 10
 			));
 		}
 		break;
 	case 'newest':
+		$options['base_url'] = $base_url;
 		$options['joins'] = array("JOIN " . $dbprefix . "users_entity u ON e.guid=u.guid");
 		if (! elgg_is_admin_logged_in()) {
 			$options['wheres'] = array("(u.banned = 'no')");
@@ -60,6 +62,7 @@ switch ($page_type) {
 			"full_view" => false,
 			"limit" => 15,
 			"joins" => array("JOIN " . $dbprefix . "users_entity u ON e.guid=u.guid"),
+			'base_url' => $base_url,
 			"order_by" => "u.name asc",
 		);
 		if (! elgg_is_admin_logged_in()) {

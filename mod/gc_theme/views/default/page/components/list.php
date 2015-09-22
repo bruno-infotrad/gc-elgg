@@ -22,6 +22,7 @@ $offset = elgg_extract('offset', $vars);
 $limit = elgg_extract('limit', $vars);
 $count = elgg_extract('count', $vars);
 $base_url = elgg_extract('base_url', $vars, '');
+$GLOBALS['GC_THEME']->debug("IN LIST BASE_URL=$base_url");
 $pagination = elgg_extract('pagination', $vars, true);
 $offset_key = elgg_extract('offset_key', $vars, 'offset');
 $position = elgg_extract('position', $vars, 'after');
@@ -260,8 +261,9 @@ if (elgg_get_context() != 'admin') {
 	}
 }
 $html .= '</ul>';
-
-$already_viewed_string = implode(',',array_keys($test));
+if ($test) {
+	$already_viewed_string = implode(',',array_keys($test));
+}
 if ($pagination && $count) {
 	$nav .= elgg_view('navigation/pagination', array(
 		'already_viewed' => $already_viewed_string,
