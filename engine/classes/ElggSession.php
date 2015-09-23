@@ -192,6 +192,10 @@ class ElggSession implements \ArrayAccess {
 	public function setLoggedInUser(\ElggUser $user) {
 		$this->set('guid', $user->guid);
 		$this->loggedInUser = $user;
+		if (!  $this->get('language')) {
+			$this->set('language', $user->language);
+		}
+
 	}
 
 	/**
