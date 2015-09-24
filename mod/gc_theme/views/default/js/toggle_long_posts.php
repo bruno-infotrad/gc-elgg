@@ -9,7 +9,8 @@ elgg.toggle_long_posts.init = function() {
 	$(document).ready(elgg.toggle_long_posts.activate);
 }
 elgg.toggle_long_posts.activate = function() {
-	var showMoreText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:more",elgg.get_logged_in_user_entity().language), showLessText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:less",elgg.get_logged_in_user_entity().language),
+	var showMoreText = '&nbsp;', showLessText = '&nbsp;',
+	//var showMoreText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:more",elgg.get_logged_in_user_entity().language), showLessText = '&nbsp;&nbsp;&nbsp; '+elgg.echo("gc_theme:less",elgg.get_logged_in_user_entity().language),
 	// var showMoreText = '&nbsp;&nbsp;&nbsp; <?php echo elgg_echo("gc_theme:more"); ?>',
 	//showLessText = '&nbsp;&nbsp;&nbsp; <?php echo elgg_echo("gc_theme:less"); ?>',
         collapsedHeight = $('<div>', {'class': 'text collapsed'}).css('height'),
