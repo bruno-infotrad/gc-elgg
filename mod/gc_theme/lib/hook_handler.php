@@ -278,7 +278,7 @@ function gc_search_users_hook($hook, $type, $value, $params) {
         	$params['inverse_relationship'] = true;
 		unset($params['container_guid']);
 		$user_entities = elgg_get_entities_from_relationship($params);
-		$GLOBALS['GC_THEME']->debug("RIGHT AFTER SEARCH HOOK ".$var_export($user_entities,true));
+		$GLOBALS['GC_THEME']->debug("RIGHT AFTER SEARCH HOOK ".var_export($user_entities,true));
 	} else {
         	$user_entities = elgg_get_entities($params);
 	}
