@@ -161,6 +161,7 @@ function gc_theme_init() {
 	elgg_register_ajax_view('gc_theme/ajax/blogs');
 	elgg_register_ajax_view('gc_theme/ajax/bookmarks_owner');
 	elgg_register_ajax_view('gc_theme/ajax/dashboard');
+	elgg_register_ajax_view('gc_theme/ajax/comments');
 	elgg_register_ajax_view('gc_theme/ajax/embed');
 	elgg_register_ajax_view('gc_theme/ajax/friends');
 	elgg_register_ajax_view('gc_theme/ajax/friendsof');
@@ -172,6 +173,7 @@ function gc_theme_init() {
 	elgg_register_ajax_view('gc_theme/ajax/members');
 	elgg_register_ajax_view('gc_theme/ajax/members/search/name');
 	elgg_register_ajax_view('gc_theme/ajax/messages_inbox');
+	elgg_register_ajax_view('gc_theme/ajax/replies');
 	elgg_register_ajax_view('gc_theme/ajax/site_notifications');
 	elgg_register_ajax_view('gc_theme/ajax/pages_friends');
 	elgg_register_ajax_view('gc_theme/ajax/pages_owner');
