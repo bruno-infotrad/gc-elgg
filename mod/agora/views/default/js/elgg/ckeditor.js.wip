@@ -1,0 +1,215 @@
+define(function(require) {
+	var elgg = require('elgg');
+	var $ = require('jquery'); require('jquery.ckeditor');
+	var CKEDITOR = require('ckeditor');
+	
+	CKEDITOR.plugins.addExternal('mediaembed', elgg.get_site_url() + 'mod/ckeditor_extended/vendors/plugins/mediaembed/', 'plugin.js');
+	
+	var elggCKEditor = {
+
+		/**
+		 * Toggles the CKEditor
+		 *
+		 * @param {Object} event
+		 * @return void
+		 */
+		toggleEditor: function(event) {
+			event.preventDefault();
+	
+			var target = $(this).attr('href');
+	
+			if (!$(target).data('ckeditorInstance')) {
+				$(target).ckeditor(elggCKEditor.init, elggCKEditor.config);
+				$(this).html(elgg.echo('ckeditor:html'));
+			} else {
+				$(target).ckeditorGet().destroy();
+				$(this).html(elgg.echo('ckeditor:visual'));
+			}
+		},
+
+		/**
+		 * Initializes the ckeditor module
+		 *
+		 * @return void
+		 */
+		init: function() {
+		},
+
+		/**
+		 * CKEditor has decided using width and height as attributes on images isn't
+		 * kosher and puts that in the style. This adds those back as attributes.
+		 * This is from this patch: http://dev.ckeditor.com/attachment/ticket/5024/5024_5.patch
+		 * 
+		 * @param {Object} event
+		 * @return void
+		 */
+		fixImageAttributes: function(event) {
+			event.editor.dataProcessor.htmlFilter.addRules({
+				elements: {
+					img: function(element) {
+						var style = element.attributes.style;
+						if (style) {
+							var match = /(?:^|\s)width\s*:\s*(\d+)px/i.exec(style);
+							var width = match && match[1];
+							if (width) {
+								element.attributes.width = width;
+							}
+							match = /(?:^|\s)height\s*:\s*(\d+)px/i.exec(style);
+							var height = match && match[1];
+							if (height) {
+								element.attributes.height = height;
+							}
+						}
+					}
+				}
+			});
+		},
+
+		/**
+		 * CKEditor configuration
+		 *
+		 * You can find configuration information here:
+		 * http://docs.ckeditor.com/#!/api/CKEDITOR.config
+		 */
+		config: require('elgg/ckeditor/config')
+
+	};
+
+var getCaretYPosition = function(e){
+    //var editor = CKEDITOR.instances.editor1, //get your CKEDITOR instance here
+    var editor = e;
+        sel = editor.getSelection(), // text selection
+        obj = sel.getStartElement().$, // the element the selected text resides in
+        range = editor.getSelection().getRanges(), // range of selection
+        container = range[0].startContainer.$, // get the DOM node of the selected text, probably a textnode
+        textlen = typeof obj.textContent === "undefined" ? obj.innerText.length : obj.textContent.length, // get the length of the text in the container
+        offset = range[0].startOffset; // get the offset from the beginning of the text in the container to the caret
+    if (container.nodeType === 3) { // if the container is a text node
+        while (container.previousSibling) { // add the length of all the preceding text nodes and elements in the same parent element
+            container = container.previousSibling;
+            if (container.length) {
+                offset += container.length; // this is for text nodes
+            } else {
+                offset += container.textContent ? container.textContent.length : container.innerText.length; // this is for HTML elements
+            }
+        }
+    }
+    var pct = textlen > 0 ? offset / textlen : 0, // the percentage of the caret position
+        cursor = Math.floor(obj.offsetHeight * pct); // multiply elem height by percentage of carets position for caret's offset in pixels
+
+    while (obj.offsetParent) { // add all the offsets of all of its parents to get the complete offset of the caret from document origin
+       cursor += obj.offsetTop;
+       obj = obj.offsetParent;
+    }
+    cursor += obj.offsetTop;
+
+    return cursor;
+}
+
+
+
+
+
+
+	CKEDITOR.on('instanceReady', elggCKEditor.fixImageAttributes);
+	CKEDITOR.on('instanceReady', function(event) {
+		if ($.browser.msie) {
+	        	$('iframe.cke_wysiwyg_frame', event.editor.container.$).contents().on('click', function() {
+	        		event.editor.focus();
+	        	});
+		}
+
+		for ( var i in CKEDITOR.instances ) {
+			var e = CKEDITOR.instances[i];
+			var id = $(e).attr('id');
+			console.log("i="+i+" id="+id);
+			//var e = CKEDITOR.instances['thewire-textarea']
+			// Test for wire textarea as the button do not exist outside of it
+			var editable = e.editable();
+			if (i == "thewire-textarea") {
+				var exec_content_warning = elgg.echo('agora:exec_content:warning');
+				$('input#thewire-exec-content').live('click',function(event){
+					if ($('input#thewire-exec-content').is(':checked')) {
+						if (confirm(exec_content_warning) == false) {
+							event.preventDefault();
+							return;
+						}
+					}
+				});
+				e.on( 'change', function( event ) {
+					edata = e.getData();
+					texte = editable.getText();
+				//editable.on( 'change', function( event ) {
+					//var donnees = editable.getData();
+					//console.log("EDONNEES "+edata+" LONGUEUR DES EDONNEES "+edata.length+" DONNEES "+donnees+" LONGUEUR DES DONNEES "+donnees.length+" TEXTE "+texte+" LONGUEUR DU TEXTE "+texte.length);
+					// Enable/disable submit nd exce content buttons depending on whether anything is typed in the box or not
+					if (edata.length != 0) {
+						//$('#thewire-textarea').html(texte);
+						//elgg.user_handle('thewire-textarea');
+						if (!$('input#thewire-exec-content').is(':checked')) {
+							$('#thewire-contribute-to').css('opacity','1.0');
+							$('#thewire-contribute-to').css('pointer-events','all');
+							$('#thewire-contribute-to').removeAttr('disabled');
+						};
+						$('#thewire-submit-button').removeAttr('disabled');
+						//$('input#thewire-submit-button:disabled').val(false);
+						$('#thewire-submit-button').css('opacity','1.0');
+					} else {
+						$('#thewire-contribute-to').css('opacity','0.5');
+						$('#thewire-contribute-to').css('pointer-events','none');
+						$('#thewire-contribute-to').attr('disabled','disabled');
+						//$('input#thewire-submit-button.elgg-button.elgg-button-submit:disabled').val(true);
+						$('#thewire-submit-button').attr('disabled','disabled');
+						$('#thewire-submit-button').css('opacity','0.5');
+					};
+
+					//if (texte.length != 0) {
+					//	console.log("TEXTE="+texte);
+					//	//Split to get last item
+					//	var words = texte.split(/ +/);
+					//	var last_word = words[words.length -1];
+					//	console.log("LAST WORD="+last_word);
+					//	if (last_word.match(/^@\w{3,}/)) {
+					//		console.log("SEARCH FOR "+last_word);
+					//	};
+					//};
+				});
+
+				$('.elgg-form-compound-add').on('submit', function (e){
+					var $form = $(this);
+					if ($form.data('submitted') === true) {
+						e.preventDefault();
+					} else {
+						$form.data('submitted',true);
+					}
+				});
+			}
+			// User handle helper
+			//e.on( 'change', function( event ) {
+			//	edata = e.getData();
+			//	texte = editable.getText();
+			//	if (texte.length != 0) {
+			//		console.log("TEXTE="+texte+" EDATA="+edata);
+			//		//Split to get last item
+			//		var words = texte.split(/ +/);
+			//		var html_words = edata.split(/ +|\r\n|\n/);
+			//		var last_word = words[words.length -1];
+			//		var last_html_word = html_words[html_words.length -2];
+			//		console.log("LAST WORD="+last_word+" HTML WORDS="+html_words+" LAST HTML WORD="+last_html_word);
+			//		if (last_word.match(/^@\w{3,}/)&& (last_html_word == last_word+'</p>' || last_html_word == '<p>'+last_word+'</p>')) {
+			//			var search_word = last_word.replace('@','');
+			//			//if (! search_word.match(/\W/) && last_html_word != '<p>&nbsp;</p>') {
+			//			if (! search_word.match(/\W/)) {
+			//				console.log("SEARCH FOR "+search_word+" CURSOR POS="+getCaretYPosition(e));
+			//				e.insertHtml('OUBA');
+			//			};
+			//		};
+			//	};
+			//});
+		}
+    }); 
+	// Live handlers don't need to wait for domReady and only need to be registered once.
+	$('.ckeditor-toggle-editor').live('click', elggCKEditor.toggleEditor);
+
+	return elggCKEditor;
+});
