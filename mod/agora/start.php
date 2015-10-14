@@ -160,6 +160,7 @@ function agora_init() {
 	elgg_register_ajax_view('agora/ajax/allgroups');
 	elgg_register_ajax_view('agora/ajax/blogs');
 	elgg_register_ajax_view('agora/ajax/bookmarks_owner');
+	elgg_register_ajax_view('agora/ajax/comments');
 	elgg_register_ajax_view('agora/ajax/dashboard');
 	elgg_register_ajax_view('agora/ajax/embed');
 	elgg_register_ajax_view('agora/ajax/friends');
@@ -172,6 +173,7 @@ function agora_init() {
 	elgg_register_ajax_view('agora/ajax/members');
 	elgg_register_ajax_view('agora/ajax/members/search/name');
 	elgg_register_ajax_view('agora/ajax/messages_inbox');
+	elgg_register_ajax_view('agora/ajax/replies');
 	elgg_register_ajax_view('agora/ajax/site_notifications');
 	elgg_register_ajax_view('agora/ajax/pages_friends');
 	elgg_register_ajax_view('agora/ajax/pages_owner');

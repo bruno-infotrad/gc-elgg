@@ -118,6 +118,15 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
 						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/agora/ajax/bookmarks_owner';
+					} else if (page_type == 'view') {
+						owner = path_atoms[2];
+						iteration++;
+						delete_marker = elgg.delete_marker(count,iteration,5);
+						new_offset = parseInt(offset) + 5;
+						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
+						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						ajax_path = 'ajax/view/agora/ajax/comments';
 					}
 					break;
 
