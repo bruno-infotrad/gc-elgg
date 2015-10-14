@@ -4,6 +4,10 @@
  */
 
 ?>
+.agora-body {
+	background-image: url(<?php echo elgg_get_site_url(); ?>/mod/agora/views/default/images/fond.jpg);
+	background-size: cover;
+}
 /*.elgg-form-groups-search .elgg-input-checkbox {margin-left:5%}*/
 #remember-me {display:inline-block;}
 li.elgg-menu-item-groups-all {padding-left: 0!important;}

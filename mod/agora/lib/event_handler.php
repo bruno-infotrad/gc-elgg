@@ -599,6 +599,9 @@ function gc_relationship_notification_hook($event, $type, $object) {
 }
 
 function ad2elgg_user_update($event, $type, $user) {
+	if (! elgg_is_active_plugin('dfait_adsync')) {
+		return;
+	}
 	if(!empty($user) && ($user instanceof ElggUser)){
 		$elgg_guid = $user->getGUID();
 		$sql_dfaitedsid = sanitise_string($user->username);

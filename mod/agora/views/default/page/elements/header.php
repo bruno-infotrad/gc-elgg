@@ -1,6 +1,13 @@
-<?php
-if ($_SESSION['language'] == 'fr') {
-	include(elgg_get_plugins_path()."agora/views/default/agora/header_fr.php");
-} else {
-	include(elgg_get_plugins_path()."agora/views/default/agora/header_en.php");
-}
+<?php $site_url=elgg_get_site_url();?>
+<div id="wb-head">
+    <div id="wb-head-in">
+        <header>
+            <!-- HeaderStart -->
+            <nav role="navigation">
+                    <div id="gcwu-gcnb-in">
+                        <img src="<?php echo $site_url;?>/mod/agora/views/default/images/infotrad.jpg"/>
+                    </div>
+            </nav>
+        </header>
+    </div>
+</div>

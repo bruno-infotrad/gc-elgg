@@ -39,7 +39,7 @@ header("Content-type: text/html; charset=UTF-8");
 <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
 
-<body style="background:#d3d3d3;">
+<body class="agora-body">
 <div id="wb-body">
 	<div class="elgg-page elgg-page-default">
 		<div class="elgg-page-messages">
@@ -67,13 +67,15 @@ echo elgg_view('page/elements/foot');
 <?php
 // Moved up because of JE framework 
 //For language preferences to kick in
+/*
 if (elgg_is_logged_in()) {
 	$site_url = elgg_get_site_url();
 	$commetchat_css_url = $site_url . 'cometchat/cometchatcss.php';
 	$commetchat_js_url  = $site_url . 'cometchat/cometchatjs.php';
 }
+*/
 ?>
-<link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
-<script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script>
+<!-- <link type="text/css" href="<?php echo $commetchat_css_url; ?>" rel="stylesheet" charset="utf-8">
+<script type="text/javascript" src="<?php echo $commetchat_js_url; ?>" charset="utf-8"></script> -->
 <script src="<?php echo $site_url;?>mod/agora/views/default/agora/dist/theme-gcwu-intranet/js/theme-min.js"></script>
 <script src="<?php echo $site_url;?>mod/agora/views/default/agora/dist/js/pe-ap-min.js"></script>
