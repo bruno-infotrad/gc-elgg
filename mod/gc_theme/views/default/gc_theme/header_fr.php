@@ -22,6 +22,7 @@
 						<li id="gcwu-gcnb3"><a href="http://intra/intranet/site_plan_site.aspx?lang=fra">Plan du site</a></li>
 						<li id="gcwu-gcnb4"><a href="http://publiservice.gc.ca/menu_f.html">Publiservice</a></li>
 						<li id="gcwu-gcnb5"><a href="http://www.international.gc.ca/international/index.aspx?lang=fra">Site Internet</a></li>
+						<li id="gcwu-gcnb6"><a href="http://signetapps/TeamInfo/SearchForm.aspx?Lang=fra">monÉquipe</a></li>
 						<script language="javascript" type="text/javascript">
 							function form_submit(){
 								document.getElementById('formtoggle').submit();

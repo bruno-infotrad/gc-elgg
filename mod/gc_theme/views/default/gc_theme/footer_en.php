@@ -12,15 +12,17 @@ href="http://intra/intranet/services_contacts.aspx?lang=eng">Assistance</A></H4>
   <LI><A href="http://intra/security-securite/security_key_contacts-securite_personnes_ressources.aspx?lang=eng">Security and Emergency</A></LI>
   <LI><A href="http://intra/property-immeubles/report_problem_facility-signaler_probleme_installation.aspx?lang=eng">Building Maintenance</A></LI>
   <LI><A href="http://intra/imit-giti/technical_support_technique.aspx?lang=eng">IM/IT Technical Support</A></LI>
+  <li><a href="http://signetapps/TeamInfo/SearchForm.aspx?Lang=eng">TeamInfo</a></li>
   <LI><A href="http://intra/intranet/useful-nos-utiles.aspx?lang=eng">Useful Telephone Numbers</A></LI>
 </UL></DIV></SECTION>
 <SECTION>
 <DIV class=span-2>
 <H4 class=gcwu-col-head>
-<A href="http://intra/intranet/legacy_intranets-anciens_intranets.aspx?lang=eng">Legacy Intranet Sites</A></H4>
+<A href="http://intra/intranet/other_intranet_autres.aspx?lang=eng">Other Intranet Sites</A></H4>
 <UL>
-  <LI><A href="http://web.acdi-cida.gc.ca/IntranetCIDA">Ex-CIDA (Entre Nous)</A></LI>
-  <LI><A href="http://intranet.dfait-maeci.gc.ca/intranet/index.aspx?lang=eng">Ex-DFAIT</A></LI>
+  <LI><A href="http://intranet.dfait-maeci.gc.ca/intranet/index.aspx?lang=eng">Ex-DFAIT &ndash; Legacy Intranet Site</A></LI>
+  <LI><A href="http://intra/missions/mission_intranet.aspx?lang=eng">Mission Intranet Site</A></LI>
+  <LI><A href="http://intranet.canada.ca/index-eng.asp">GC Intranet Site</A></LI>
 </UL></DIV></SECTION>
 <SECTION>
 <DIV class=span-2>

@@ -10,14 +10,16 @@
   <LI><A href="http://intra/security-securite/security_key_contacts-securite_personnes_ressources.aspx?lang=fra">Sécurité et urgences</A></LI>
   <LI><A href="http://intra/property-immeubles/report_problem_facility-signaler_probleme_installation.aspx?lang=fra">Entretien des bâtiments</A></LI>
   <LI><A href="http://intra/imit-giti/technical_support_technique.aspx?lang=fra">Soutien technique en GI/TI</A></LI>
+  <li><a href="http://signetapps/TeamInfo/SearchForm.aspx?Lang=fra">monÉquipe</a></li>
   <LI><A href="http://intra/intranet/useful-nos-utiles.aspx?lang=fra">Numéros de téléphone utiles</A></LI>
 </UL></DIV></SECTION>
 <SECTION>
 <DIV class=span-2>
-<H4 class=gcwu-col-head><A href="http://intra/intranet/legacy_intranets-anciens_intranets.aspx?lang=fra">Anciens sites intranet</A></H4>
+<H4 class=gcwu-col-head><A href="http://intra/intranet/other_intranet_autres.aspx?lang=fra">Autres sites intranet</A></H4>
 <UL>
-  <LI><A href="http://web.acdi-cida.gc.ca/IntranetACDI">Ex-ACDI (Entre Nous)</A></LI>
-  <LI><A href="http://intranet.dfait-maeci.gc.ca/intranet/index.aspx?lang=fra">Ex-MAECI</A></LI>
+  <LI><A href="http://intranet.dfait-maeci.gc.ca/intranet/index.aspx?lang=fra">Ex-MAECI &ndash; ancien site intranet</A></LI>
+  <LI><A href="http://intra/missions/mission_intranet.aspx?lang=fra">Site intranet des missions</A></LI>
+  <LI><A href="http://intranet.canada.ca/index-fra.asp">Site intranet du GC</A></LI>
 </UL></DIV></SECTION>
 <SECTION>
 <DIV class=span-2>
