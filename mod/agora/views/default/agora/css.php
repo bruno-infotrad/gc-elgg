@@ -4,6 +4,10 @@
  */
 
 ?>
+#logo-au-centre {
+	display: block;
+	margin: 0 auto;
+}
 .agora-body {
 	background-image: url(<?php echo elgg_get_site_url(); ?>/mod/agora/views/default/images/fond.jpg);
 	background-size: cover;

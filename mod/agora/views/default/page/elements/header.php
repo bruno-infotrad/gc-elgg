@@ -5,7 +5,7 @@
             <!-- HeaderStart -->
             <nav role="navigation">
                     <div id="gcwu-gcnb-in">
-                        <img src="<?php echo $site_url;?>/mod/agora/views/default/images/infotrad.jpg"/>
+                        <img id="logo-au-centre" src="<?php echo $site_url;?>/mod/agora/views/default/images/infotrad.jpg"/>
                     </div>
             </nav>
         </header>

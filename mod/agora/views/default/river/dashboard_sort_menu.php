@@ -5,11 +5,13 @@
  */
 $page_type = get_input('page_type');
 $tabs = array(
+/*
 	'intro' => array(
 		'text' => elgg_echo('agora:intro:title'),
 		'href' => 'dashboard?page_type=intro',
 		'priority' => 50,
 	), 
+*/
 	'friends' => array(
 		'text' => elgg_echo('access:friends:label'),
 		'href' => 'dashboard?page_type=friends',

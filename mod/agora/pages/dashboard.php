@@ -9,18 +9,20 @@ $jour = 24*3600;
 $exec_posts = get_exec_content();
 // 2014-05-01 00:00:00 1400630400
 $update_date = 1400630400;
+/*
 if (!isset($user->intro_viewed) || $user->intro_viewed < $update_date) {
 	$page_type = 'intro';
 	if (($user->pns_viewed+$jour) > $update_date) {
 		$user->intro_viewed = $now;
 	}
 } else {
+*/
 	$page_type = get_input('page_type');
 	if (! $page_type) {
 		$preferred_tab = $user->preferred_tab;
 		$page_type = ($preferred_tab)?$preferred_tab:'all';
 	}
-}
+//}
 //Code for marking non viewed stuff
 $offset = get_input('offset');
 if (((!isset($offset) || $offset == 0)) && ($user->pns_viewed ) && (($now - $user->pns_viewed) < $jour) && $page_type == 'all') {
