@@ -268,7 +268,7 @@ Someone signed off from the '%s' event. You are moved from the waiting list to a
 		'event_manager:event:relationship:event_organizing' => 'Organizing',
 		'event_manager:event:relationship:event_organizing:label' => 'Organizers',
 		'event_manager:event:relationship:undo' => 'Undo',
-		'event_manager:event:relationship:kick' => 'Kick from event',
+		'event_manager:event:relationship:kick' => 'Revoke registration',
 
 		'event_manager:event:rsvp:registration_ended' => 'Registration to this event has been ended.',
 		'event_manager:event:rsvp:event_full' => 'This event reached maximum attendees.',

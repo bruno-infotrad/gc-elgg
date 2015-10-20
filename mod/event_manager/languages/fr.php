@@ -199,7 +199,7 @@ une personne s\'est désinscrite de l\'évènement \'%s\' . Vous n\'êtes plus s
   'event_manager:event:relationship:event_exhibiting' => 'Exposition',
   'event_manager:event:relationship:event_organizing' => 'Organisation',
   'event_manager:event:relationship:undo' => 'annuler',
-  'event_manager:event:relationship:kick' => 'Exclure de l\'évènement',
+  'event_manager:event:relationship:kick' => 'Annuler l\'inscription',
   'event_manager:event:rsvp:registration_ended' => 'Les inscriptions à cet évènement sont closes.',
   'event_manager:event:rsvp:event_full' => 'Cet évènement a atteint le nombre maximum de participants.',
   'event_manager:event:rsvp:waiting_list' => 'Liste d\'attente',
