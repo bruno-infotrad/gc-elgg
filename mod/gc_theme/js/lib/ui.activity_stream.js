@@ -37,6 +37,7 @@ elgg.activity_stream.init = function(){
                 		                                debut: true,
 								page_owner_guid: elgg.get_page_owner_guid()
                 		                        },
+                			                //error: function(json){ },
                 		                        success: function(json){
                 		                                elgg.activity_stream.update(json);
                 		                        }
@@ -50,6 +51,7 @@ elgg.activity_stream.init = function(){
                 			                                debut: false,
 									page_owner_guid: elgg.get_page_owner_guid()
                 			                        },
+                			                	//error: function(json){ },
                 			                        success: function(json){
                 			                                elgg.activity_stream.update(json);
                 			                        }

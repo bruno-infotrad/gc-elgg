@@ -771,11 +771,12 @@ function gc_thewire_discussion_reply_setup_entity_menu_items($hook, $type, $valu
         	}
         }
         if (elgg_is_logged_in()) {
-		if ($handler == 'thewire') {
+		if ($entity->canEdit() && ($handler == 'thewire')) {
                 	$options = array(
                 	        'name' => 'comment',
-                	        'text' => elgg_echo('thewire:comment'),
+				'text' => elgg_view_icon('speech-bubble'),
                 	        'href' => "thewire/thread/$entity->guid",
+				'link_class'=>'elgg-comment-add',
                 	        'priority' => 150,
                 	);
                 $value[] = ElggMenuItem::factory($options);
