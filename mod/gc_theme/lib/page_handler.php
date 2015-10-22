@@ -588,7 +588,22 @@ function gc_theme_search_page_handler($segments, $handle) {
         return true;
 }
 function gc_groups_register_profile_buttons($group) {
-
+			if ($group->isMember(elgg_get_logged_in_user_entity())) {
+				if ($group->getOwnerGUID() != elgg_get_logged_in_user_guid()) {
+					// leave
+					$url = elgg_get_site_url() . "action/groups/leave?group_guid={$group->getGUID()}";
+					$url = elgg_add_action_tokens_to_url($url);
+					$text = 'groups:leave';
+					elgg_unregister_menu_item('title', $text);
+					elgg_register_menu_item('title', array(
+						'name' => $text,
+						'href' => $url,
+						'text' => elgg_echo($text),
+						'link_class' => 'elgg-button elgg-button-action',
+						'confirm' => TRUE
+					));
+				}
+			}
 //if (elgg_in_context('group_profile')) {
                 if (elgg_is_logged_in() && $group->canEdit()) {
 			if (!$group->isPublicMembership()) {

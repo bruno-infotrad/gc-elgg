@@ -16,6 +16,7 @@ elgg_load_js('elgg.gc_gft');
 elgg_load_js('elgg.discussion');
 elgg_load_js('elgg.gc_discussion');
 groups_register_profile_buttons($group);
+gc_groups_register_profile_buttons($group);
 
 $title = $group->name;
 $context = elgg_get_context();

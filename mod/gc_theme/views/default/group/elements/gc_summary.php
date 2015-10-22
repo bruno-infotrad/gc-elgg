@@ -57,7 +57,8 @@ if ($entity->isMember($user)) {
 	$url=$site_url.'/action/groups/leave?group_guid='.$entity->getGUID();
 	$url = elgg_add_action_tokens_to_url($url);
 	$actions_url = elgg_echo('groups:leave');
-	$join_leave_button = "<a href=\"$url\" class='elgg-button elgg-button-action elgg-button-leave'>$actions_url</a>";
+	$data_confirm = elgg_echo('question:areyousure');
+	$join_leave_button = "<a href=\"$url\" class='elgg-button elgg-button-action elgg-button-leave' data-confirm=\"$data_confirm\">$actions_url</a>";
 } else {
 	$url=$site_url.'/action/groups/join?group_guid='.$entity->getGUID();
 	$url = elgg_add_action_tokens_to_url($url);
