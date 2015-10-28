@@ -27,7 +27,7 @@ if (group_gatekeeper(false)) {
 	$activity = elgg_list_river($options);
 	
 	if (!$activity) {
-		$activity = elgg_view('output/longtext', array('value' => elgg_echo('group:activity:none')));
+		$activity = elgg_view('output/longtext', array('value' => elgg_echo('groups:activity:none')));
 	}
 	echo $activity;
 }
