@@ -159,6 +159,9 @@ function gc_theme_init() {
 	//Ajax pages for scroll
 	elgg_register_ajax_view('gc_theme/ajax/allgroups');
 	elgg_register_ajax_view('gc_theme/ajax/blogs');
+	elgg_register_ajax_view('gc_theme/ajax/bookmarks_all');
+	elgg_register_ajax_view('gc_theme/ajax/bookmarks_friends');
+	elgg_register_ajax_view('gc_theme/ajax/bookmarks_group');
 	elgg_register_ajax_view('gc_theme/ajax/bookmarks_owner');
 	elgg_register_ajax_view('gc_theme/ajax/dashboard');
 	elgg_register_ajax_view('gc_theme/ajax/comments');

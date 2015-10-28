@@ -95,6 +95,9 @@
 	background-position: -18px -630px;
 	margin: 0px;
 }
+.elgg-agora-icon-bookmarks {
+	background-position: -18px -648px;
+}
 
 /* ***************************************
 	ICONS

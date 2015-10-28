@@ -426,6 +426,17 @@ function gc_theme_pagesetup_handler() {
 					'priority' => 77,
 				));
 			}
+			if (elgg_is_active_plugin('bookmarks')) {
+				//elgg_unregister_menu_item('page', 'file:all');
+				//elgg_unregister_menu_item('page', 'file:document');
+				elgg_register_menu_item('page', array(
+					'name' => 'bookmarks',
+					'text' => elgg_view_agora_icon('bookmarks').elgg_echo('bookmarks'),
+					'href' => "/bookmarks/owner/$user->username",
+					'section' => '2contributions',
+					'priority' => 78,
+				));
+			}	
 			
 /*
 			if (elgg_is_active_plugin('tagcloud')) {
@@ -457,19 +468,6 @@ function gc_theme_pagesetup_handler() {
 	//				'contexts' => array('dashboard'),
 	//				'priority' => 10,
 	//			));
-	
-	
-			$address = urlencode(current_page_url());
-			
-//			if (elgg_is_active_plugin('bookmarks')) {
-//				elgg_register_menu_item('extras', array(
-//					'name' => 'bookmark',
-//					'text' => elgg_view_icon('push-pin-alt') . elgg_echo('bookmarks:this'),
-//					'href' => "bookmarks/add/$user->guid?address=$address",
-//					'title' => elgg_echo('bookmarks:this'),
-//					'rel' => 'nofollow',
-//				));
-//			}
 			
 			if (elgg_is_active_plugin('reportedcontent')) {
 				elgg_unregister_menu_item('footer', 'report_this');
