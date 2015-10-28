@@ -11,7 +11,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 			var delete_marker = false, more_marker;
 			var path = base_url.replace(elgg.get_site_url(),'');
 			var path_atoms = path.split("/");
-			console.log('BEFORE REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
+			//console.log('BEFORE REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
 			if (! context ) {
 				context_atoms = path_atoms[0].split("?");
 				if(context_atoms.length > 1) {
@@ -48,7 +48,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 				$(more_marker).hide();
 				$(more_marker).before('<div class="elgg-ajax-loader" id="gc-pagination"></div>');
 			}
-			console.log('AFTER REWRITE context='+context+' page_type='+page_type+' owner='+owner+' path='+path+' path_atoms='+JSON.stringify(path_atoms)+' already viewed='+already_viewed);
+			//console.log('AFTER REWRITE context='+context+' page_type='+page_type+' owner='+owner+' path='+path+' path_atoms='+JSON.stringify(path_atoms)+' already viewed='+already_viewed);
 			// Fix for colorbox issue (embed)
 			switch(context){
 				case 'search':
@@ -114,7 +114,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 						delete_marker = elgg.delete_marker(count,iteration,12);
 						new_offset = parseInt(offset) + 10;
 						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
-						console.log('BOOKMARKS base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
+						//console.log('BOOKMARKS base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
 						params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 						ajax_path = 'ajax/view/gc_theme/ajax/bookmarks_all';
 					} else if (page_type == 'friends') {
