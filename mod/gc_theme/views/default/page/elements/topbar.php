@@ -67,7 +67,7 @@ echo <<<_HTML
 						</select>
 						<label for="search-contrib-by">$contributed_by_label</label>
 						<input id="search-contrib-by" name="contributed_by" type="text" onfocus="elgg.contributed_by('search-contrib-by')"/>
-						<div id="search-contrib-by-autocomplete_results"></div>
+						<div id="search-contrib-by_autocomplete_results"></div>
 						<label for="search-date">$approximate_date_label</label>
 						<input id="search-date" name="approximate_date" type="text" value=$approximate_date />
 						<button class="button button-small button-accent" id= 'advanced-search-submit-button'>$search_label</button>

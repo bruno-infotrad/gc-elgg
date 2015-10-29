@@ -23,7 +23,7 @@
 			
 			if($entities = elgg_get_entities($query_options)){
 				foreach($entities as $entity){
-					$result[] = array("type" => "user", "value" => $entity->username,"content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
+					$result[] = array("type" => "user", "value" => $entity->username, "label" => $entity->name, "content" => "<img src='" . $entity->getIconURL("tiny") . "' /> " . $entity->name, "name" => $entity->name);
 				}
 			}
 		}
