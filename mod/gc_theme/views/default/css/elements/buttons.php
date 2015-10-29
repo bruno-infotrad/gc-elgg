@@ -9,6 +9,9 @@
 /* **************************
 	BUTTONS
 ************************** */
+#file-tools-show-more-wrapper, #file-tools-show-all-wrapper { display: inline-block; }
+#file-tools-show-more-wrapper { padding-left: 1px; }
+#file-tools-show-all-wrapper { padding-left: 10px; }
 #uploadify-button-wrapper {opacity:0;}
 .event_manager_event_actions {
 	background: url(http://192.168.239.130/newelgg-1.8.16/mod/event_manager/_graphics/arrows_down.png) right center no-repeat, linear-gradient(#fefefe, #dcdcdc);

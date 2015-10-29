@@ -6,8 +6,7 @@
 
 	$sort_by 			= get_input("sort_by");
 	$direction 			= get_input("direction");
-	// Hard code limti to 10 for not
-	$limit = 10;
+	$limit				= (int) get_input("limit", 10);
 	$offset				= (int) get_input("offset", 0);
 	
 	if(!empty($page_owner) && (elgg_instanceof($page_owner, "user") || elgg_instanceof($page_owner, "group"))) {

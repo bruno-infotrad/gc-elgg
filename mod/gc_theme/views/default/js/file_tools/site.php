@@ -327,6 +327,7 @@ elgg.file_tools.show_more_files = function() {
 	$('#file_tools_list_files div.elgg-ajax-loader').show();
 
 	var offset = $(this).siblings('input[name="offset"]').val();
+	var limit = $(this).siblings('input[name="limit"]').val();
 	var folder = $(this).siblings('input[name="folder_guid"]').val();
 	var query_parts = elgg.parse_url(window.location.href, "query", true);
 	var search_type = 'list';
@@ -340,7 +341,8 @@ elgg.file_tools.show_more_files = function() {
 		data: {
 			folder_guid: folder,
 			search_viewtype: search_type,
-			offset: offset
+			offset: offset,
+			limit : limit
 		},
 		success: function(data) {
 			// append the files to the list
@@ -350,7 +352,9 @@ elgg.file_tools.show_more_files = function() {
 
 			// replace the show more button with new data
 			var show_more = $(data).find("#file-tools-show-more-wrapper");
+			var show_all = $(data).find("#file-tools-show-all-wrapper");
 			$("#file-tools-show-more-wrapper").replaceWith(show_more);
+			$("#file-tools-show-all-wrapper").replaceWith(show_all);
 
 			// hide ajax loader
 			$('#file_tools_list_files div.elgg-ajax-loader').hide();
@@ -406,6 +410,7 @@ elgg.file_tools.init = function() {
 	$('#file_tools_action_bulk_delete').live("click", elgg.file_tools.bulk_delete);
 	$('#file_tools_action_bulk_download').live("click", elgg.file_tools.bulk_download);
 	$('#file-tools-show-more-files').live("click", elgg.file_tools.show_more_files);
+	$('#file-tools-show-all-files').live("click", elgg.file_tools.show_more_files);
 
 	$('#file_tools_list_new_folder_toggle').live('click', elgg.file_tools.new_folder);
 }

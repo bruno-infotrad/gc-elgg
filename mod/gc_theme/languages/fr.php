@@ -155,6 +155,7 @@ return array(
 	'file_tools:list:sort:time_created' => 'Date et heure de création',
 	'file_tools:list:sort:asc' => 'Ascendant',
 	'file_tools:list:sort:desc' => 'Descendant',
+	'file_tools:show_all' => 'Tous les fichiers',
 	'file_tools:show_more' => 'Plus de fichiers',
 	'file_tools:upload:tabs:single' => "Fichier",
 	'file_tools:upload:tabs:multi' => "Fichiers multiples",
