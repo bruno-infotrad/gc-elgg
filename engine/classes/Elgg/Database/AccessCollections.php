@@ -520,6 +520,35 @@ class AccessCollections {
 	}
 	
 	/**
+	 * Rename access collection
+	 *
+	 * @param int   $collection_id The ID of the collection.
+	 * @param text  $name       new name of the collection
+	 *
+	 * @return bool
+	 */
+	function rename($collection_id, $name) {
+		$acl = $this->get($collection_id);
+	
+		if (!$acl) {
+			return false;
+		}
+	
+		$db = _elgg_services()->db;
+		$prefix = $db->getTablePrefix();
+
+		$name = $db->sanitizeString($name);
+	
+		$q = "UPDATE {$prefix}access_collections SET name = '{$name}' WHERE id = {$collection_id}";
+		$result = _elgg_services()->db->updateData($q);
+		if ($result) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	 * Updates the membership in an access collection.
 	 *
 	 * @warning Expects a full list of all members that should

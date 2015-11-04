@@ -309,6 +309,18 @@ function create_access_collection($name, $owner_guid = 0, $site_guid = 0) {
 }
 
 /**
+ * Renames an access collection.
+ *
+ * @param int   $collection_id The ID of the collection.
+ * @param array $name       Collection name
+ *
+ * @return bool
+ */
+function rename_access_collection($collection_id, $name) {
+	return _elgg_services()->accessCollections->rename($collection_id, $name);
+}
+
+/**
  * Updates the membership in an access collection.
  *
  * @warning Expects a full list of all members that should
