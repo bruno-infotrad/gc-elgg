@@ -22,7 +22,7 @@ $tabs = array(
 	),
 	'collections' => array(
 		'title' => elgg_echo('friends:collections'),
-		'url' => "collections/".$user->username,
+		'url' => "collections/owner/".$user->username,
 		'selected' => $vars['selected'] == 'collections',
 	),
 	'all' => array(
