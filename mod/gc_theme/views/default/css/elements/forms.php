@@ -1,5 +1,10 @@
 <?php
 ?>
+[id*="gc-collection-rename-"] { display: inline-block;}
+[id*="gc-collection-save-"] { display: inline-block;}
+[id*="gc-collection-cancel-"] { display: inline-block;}
+[id*="gc-collection-name-"] { display: inline-block;}
+[id*="gc-collection-edit-rename-"] { display: none;}
 td.event_manager_event_edit_label.gc-required {background-color: #e7eef6;}
 #poll-submit-button,#polls_edit_cancel {display: inline-block;}
 .poll-tag,.poll-title {margin-left:0.5em;width: 80%;}

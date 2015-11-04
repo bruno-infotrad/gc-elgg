@@ -273,6 +273,8 @@ function gc_theme_init() {
 	// Remove admin for toggling notification for group
 	elgg_unregister_action("group_tools/notifications");
 	elgg_register_action("group_tools/notifications", $action_path . "/group_tools/notifications.php");
+	// Register rename of collections
+	elgg_register_action("friends/collections/rename", $action_path . "/friends/collections/rename.php");
 	// Poll with title
 	elgg_unregister_action("polls/edit");
 	elgg_register_action("polls/edit","$action_path/polls/edit.php");

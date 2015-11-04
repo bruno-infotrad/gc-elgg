@@ -167,10 +167,13 @@ a#thewire-contribute-to {
 
 .gc_theme-submit-button {float: right;}
 #thewire-cancel-button { float: left;}
+
+[id*="gc-collection-save-"],
 .gc_theme-submit-button,
 #thewire-cancel-button {
 	margin-top: -2px;
 }
+
 #thewire-submit-button {
 	float: right;
 	margin-top: -2px;
@@ -181,7 +184,11 @@ a#thewire-contribute-to {
 #thewire-submit-button:disabled {
 	opacity: .5;
 }
+
+[id*="gc-collection-save-"],
+[id*="gc-collection-cancel-"],
 #gc_theme-cancel-button,
+.gc_theme-cancel-button,
 .gc_theme-submit-button,
 #gft-cancel-button,
 #gft-submit-button,
@@ -215,6 +222,10 @@ a#select-contribute-to {margin-left: 36%;}
   text-shadow: 0 1px 1px #222;
 }
 
+[id*="gc-collection-save-"] {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==')!important;
+}
+[id*="gc-collection-save-"],
 .gc_theme-submit-button,
 #gft-cancel-button,
 #gft-submit-button,
