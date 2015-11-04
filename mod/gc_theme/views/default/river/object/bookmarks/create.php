@@ -14,6 +14,6 @@ $excerpt = elgg_get_excerpt($object->description);
 echo elgg_view('river/elements/layout', array(
 	'item' => $item,
 	'message' => $excerpt,
-	'attachments' => elgg_view('output/url', array('href' => $object->address)),
+	'attachments' => elgg_view('output/url', array('text' => $object->title,'href' => $object->address)),
 	'body_class' => $vars['body_class'],
 ));
