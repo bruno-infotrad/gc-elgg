@@ -12,7 +12,7 @@
 	
 	$site_url = elgg_get_site_url();
 ?>
-	<input type="text" id="<?php echo $id; ?>_autocomplete" class="elgg-input elgg-input-autocomplete" />
+	<input type="text" name="name" id="<?php echo $id; ?>_autocomplete" class="elgg-input elgg-input-autocomplete" />
 	
 	<div id="<?php echo $destination; ?>"></div>
 		
@@ -66,22 +66,7 @@
 						return false;
 					},
 					select: function( event, ui ) {
-						this.value = "";
-						var result = "";
-						
-						result += "<div class='<?php echo $destination; ?>_result'>";
-			
-						if(ui.item.type == "group"){
-							result += "<input type='hidden' value='" + ui.item.value + "' name='<?php echo $name; ?>[]' />";
-						} else if(ui.item.type == "email"){
-							result += "<input type='hidden' value='" + ui.item.value + "' name='<?php echo $name; ?>_email[]' />";
-						}
-						result += ui.item.content;
-			
-						result += "<span class='elgg-icon elgg-icon-delete-alt'></span>";
-						result += "</div>";
-						
-						$('#<?php echo $destination; ?>').append(result);
+						// prevent value inserted on click
 						return false;
 					},
 					autoFocus: true
