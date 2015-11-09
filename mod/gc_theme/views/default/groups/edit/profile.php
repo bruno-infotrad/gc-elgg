@@ -11,7 +11,9 @@
 */
 
 $group = elgg_extract("entity", $vars);
-
+if (empty($group)) {
+	$new_group=true;
+}
 $name_limit = elgg_get_plugin_setting("group_limit_name", "profile_manager");
 $description_limit = elgg_get_plugin_setting("group_limit_description", "profile_manager");
 	
@@ -40,12 +42,19 @@ if (!$show_input && !empty($group) && (!empty($name_limit) || ($name_limit == "0
 }
 
 if ($show_input) {
-	echo elgg_view("input/groups_autocomplete", array(
-			'name' => 'name',
-			'value' => elgg_extract('name', $vars),
-	));
-	if (!empty($name_edit_num_left)) {
-		echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $name_edit_num_left . "</strong>")) . "</div>";
+	if($new_group) {
+		echo elgg_view("input/groups_autocomplete", array(
+				'name' => 'name',
+				'value' => elgg_extract('name', $vars),
+		));
+	} else {
+		echo elgg_view("input/text", array(
+				'name' => 'name',
+				'value' => elgg_extract('name', $vars),
+		));
+		if (!empty($name_edit_num_left)) {
+			echo "<div class='elgg-subtext'>" . elgg_echo("profile_manager:group:edit:limit", array("<strong>" . $name_edit_num_left . "</strong>")) . "</div>";
+		}
 	}
 } else {
 	// show value
