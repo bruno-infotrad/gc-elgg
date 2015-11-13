@@ -10,7 +10,10 @@
 		$params['wheres'] = array("msv.string like '%$q%'");
 		$group_tags = elgg_get_tags($params);
 		foreach($group_tags as $group_tag){
-			$result[] = array("content" => $group_tag->tag);
+			$tag = $group_tag->tag;
+			if (!preg_match('/"|;/',$tag)) {
+				$result[] = array("content" => $group_tag->tag);
+			}
 		}
 	}
 	header("Content-Type: application/json");

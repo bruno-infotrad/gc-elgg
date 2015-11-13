@@ -130,6 +130,7 @@ return array(
 	'tagcloud:widget:title' => "Nuage de Mots-clé",
 	'profile:field:tags' => "Mots-clé",
 	'tags' => "Mots-clé",
+	'tags:add_tip' => '&nbsp;(Séparez les mots-clé par des virgules)',
 	'tag_names:tags' => "Mots-clé",
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",

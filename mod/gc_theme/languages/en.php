@@ -77,7 +77,7 @@ return array(
         'river:messageboard:group:default' => "%s posted on %s's message board",
 	'river:update:user:default' => '%s has a new avatar',
 
-
+	'tags:add_tip' => '&nbsp;(Use commas to separate tags)',
 
 	
 	'likes:likethis' => 'Like',

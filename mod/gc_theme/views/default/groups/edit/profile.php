@@ -90,7 +90,7 @@ if (count($group_fields["fields"]) > 0) {
 		// get title
 		$title = $field->getTitle();
 		if($metadata_name == 'interests') {
-			$title .= 'Use commas to separate tags';
+			$title .= elgg_echo('tags:add_tip');
 		}
 		// get value
 		$value = elgg_extract($metadata_name, $vars);
