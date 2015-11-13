@@ -812,6 +812,7 @@
 				'relationship' => EVENT_MANAGER_RELATION_ATTENDING_WAITINGLIST,
 				'relationship_guid' => $this->getGUID(),
 				'inverse_relationship' => FALSE,
+				'selects' => array("r.time_created as registration_time"),
 				'limit' => false,
 				'site_guids' => false
 			));

@@ -124,6 +124,7 @@ return array(
 	'event_manager:edit:form:options' => 'Options avancées',
 	'event_manager:editregistration:addfield' => 'Ajouter une question',
 	'event_manager:editregistration:addfield:title' => 'Ajouter une question',
+	'event_manager:registration:time' => 'Date d\'inscription',
 	'search_types:tags' => "Mots-clé",
 	'pages:tags' => "Mots-clé",
 	'file:tags' => "Mots-clé",

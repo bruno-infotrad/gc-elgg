@@ -213,6 +213,7 @@ return array(
 	'event_manager:editregistration:addfield:field_type:textarea' => 'Textarea',
 	'event_manager:editregistration:addfield:field_type:dropdown' => 'Dropdown',
 	'event_manager:editregistration:addfield:field_type:radiobutton' => 'Radiobutton',
+	'event_manager:registration:time' => 'Registration Date',
 	'gc_theme:thewire:tags' => "Tagged objects",
 	'gc_theme:wire_edit' => 'Click to edit',
 	'gc_theme:show_in_feed' => 'Show on feed',

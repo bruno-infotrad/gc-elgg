@@ -381,7 +381,7 @@
 			$EOL = PHP_EOL;
 		}
 		
-		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username').'"';
+		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username').'";"'.elgg_echo('event_manager:registration:time').'"';
 		
 		if($event->registration_needed) {
 			if($registration_form = $event->getRegistrationFormQuestions()) {
@@ -417,7 +417,7 @@
 			foreach($waiters as $waiter) {
 				$answerString = '';
 				
-				$dataString .= '"'.$waiter->guid.'";"'.$waiter->name.'";"'.$waiter->email.'";"'.$waiter->username.'"';
+				$dataString .= '"'.$waiter->guid.'";"'.$waiter->name.'";"'.$waiter->email.'";"'.$waiter->username.'";"'.date('c', $waiter->getVolatileData('select:registration_time')).'"';
 			
 				if($event->registration_needed) {
 					if($registration_form = $event->getRegistrationFormQuestions()) {
