@@ -123,6 +123,7 @@ function gc_theme_init() {
 	elgg_register_page_handler('site_notifications', 'gc_site_notifications_page_handler');
 	elgg_register_page_handler('multi_invite_autocomplete', 'multi_invite_autocomplete');
 	elgg_register_page_handler('groups_autocomplete', 'groups_autocomplete');
+	elgg_register_page_handler('group_tags_autocomplete', 'group_tags_autocomplete');
 	elgg_register_page_handler('user_autocomplete', 'user_autocomplete');
 	elgg_register_page_handler('contribute_to', 'contribute_to_page_handler');
 	elgg_register_page_handler('notify_groups', 'notify_groups_page_handler');

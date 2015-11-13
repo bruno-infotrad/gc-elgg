@@ -558,6 +558,10 @@ function groups_autocomplete() {
         require_once elgg_get_plugins_path() . 'gc_theme/lib/groups_autocomplete.php';
         return true;
 }
+function group_tags_autocomplete() {
+        require_once elgg_get_plugins_path() . 'gc_theme/lib/group_tags_autocomplete.php';
+        return true;
+}
 function multi_invite_autocomplete() {
         require_once elgg_get_plugins_path() . 'gc_theme/lib/multi_invite_autocomplete.php';
         return true;

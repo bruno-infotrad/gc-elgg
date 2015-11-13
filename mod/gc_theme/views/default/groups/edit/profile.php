@@ -89,7 +89,9 @@ if (count($group_fields["fields"]) > 0) {
 		
 		// get title
 		$title = $field->getTitle();
-		
+		if($metadata_name == 'interests') {
+			$title .= 'Use commas to separate tags';
+		}
 		// get value
 		$value = elgg_extract($metadata_name, $vars);
 		
@@ -162,6 +164,8 @@ if (count($group_fields["fields"]) > 0) {
 						'value' => $value
 				));
 			}
+		} elseif($metadata_name == 'interests') {
+			echo elgg_view("input/group_tags_autocomplete", array('value' => elgg_extract('interests', $vars)));
 		} else {
 			if ($valtype == "dropdown") {
 				// add div around dropdown to let it act as a block level element
