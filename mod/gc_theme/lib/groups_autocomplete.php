@@ -20,14 +20,13 @@
 		//$params['count'] = TRUE;
 		$groups = elgg_get_entities($params);
 		foreach($groups as $group){
-			//if ($entity instanceof ElggGroup !$group->isMember($user)) {
-			if (! $group->isMember($user)) {
+			//if (! $group->isMember($user)) {
 				if (! $group->isPublicMembership()) {
 					$result[] = array("type" => "group", "value" => $group->getGUID(),"label" => $group->name,"content" => "<div class='is-locked-autocomplete'><a href='".$group->getURL()."'><img src='" . $group->getIconURL("tiny") . "' /> " . $group->name . "</a></div>", "name" => $group->name);
 				} else {
 					$result[] = array("type" => "group", "value" => $group->getGUID(),"label" => $group->name,"content" => "<a href='".$group->getURL()."'><img src='" . $group->getIconURL("tiny") . "' /> " . $group->name."</a>", "name" => $group->name);
 				}
-			}
+			//}
 		}
 	}
 	header("Content-Type: application/json");
