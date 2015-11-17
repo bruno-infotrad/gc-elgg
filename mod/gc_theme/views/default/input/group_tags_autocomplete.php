@@ -1,7 +1,7 @@
 <?php 
 elgg_require_js('gc_theme/tags_autocomplete');
 $value = elgg_extract("value", $vars);
-if ($value) {
+if (is_array($value)) {
 	$value = implode(',',$value);
 }
 ?>
