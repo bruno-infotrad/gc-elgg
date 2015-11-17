@@ -9,7 +9,6 @@
 * @copyright Coldtrick IT Solutions 2009
 * @link http://www.coldtrick.com/
 */
-
 $group = elgg_extract("entity", $vars);
 if (empty($group)) {
 	$new_group=true;

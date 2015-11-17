@@ -6,4 +6,4 @@ if (is_array($value)) {
 }
 ?>
 <input type="text" name="interests" value="<?php echo $value;?>" id="elgg-input-group-tags-autocomplete" class="elgg-input-tags elgg-input-autocomplete" />
-<div id="elgg-input-group-tags-autocomplete-results"/>
+<div id="elgg-input-group-tags-autocomplete-results"></div>
