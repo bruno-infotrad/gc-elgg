@@ -19,7 +19,7 @@
 
 			if($user){
 				// kick from event
-				$href = elgg_get_site_url() . 'action/event_manager/event/rsvp?guid=' . $event->getGUID() . '&user=' . $user->getGUID() . '&type=' . EVENT_MANAGER_RELATION_UNDO;
+				$href = elgg_get_site_url() . 'action/event_manager/event/rsvp?guid=' . $event->getGUID() . '&user=' . $user->getGUID() . '&type=' . EVENT_MANAGER_RELATION_REVOKE;
 				$href = elgg_add_action_tokens_to_url($href);
 
 				$item = new ElggMenuItem("event_manager_kick", elgg_echo("event_manager:event:relationship:kick"), $href);

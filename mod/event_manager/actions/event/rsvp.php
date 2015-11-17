@@ -2,6 +2,7 @@
 
 	$guid = (int) get_input("guid");
 	$user_guid = get_input("user", elgg_get_logged_in_user_guid());
+	$user = get_entity($user_guid);
 	
 	$forward_url = get_input("forward_url", REFERER);
 	$notice = true;
@@ -9,7 +10,7 @@
 	if(!empty($guid) && ($event = get_entity($guid))) {
 		if($event->getSubtype() == Event::SUBTYPE) {
 			
-			if(($user = get_entity($user_guid)) && ($rel = get_input("type"))) {
+			if($user  && ($rel = get_input("type"))) {
 				//echo '- loggedin and relation type is set<br />';
 				if($rel == EVENT_MANAGER_RELATION_ATTENDING) {
 					//echo '- relation type is \'attending\'<br />';
@@ -54,7 +55,7 @@
 					}
 				} else {
 					//echo '- relation ship type is not EVENT_MANAGER_RELATION_ATTENDING, rsvp otherwise<br />';
-					if($event->$rel || ($rel == EVENT_MANAGER_RELATION_UNDO) || ($rel == EVENT_MANAGER_RELATION_ATTENDING)) {
+					if($event->$rel || ($rel == EVENT_MANAGER_RELATION_UNDO) || ($rel == EVENT_MANAGER_RELATION_REVOKE)) {
 						$rsvp = $event->rsvp($rel, $user_guid);
 					} else {
 						register_error(elgg_echo('event_manager:event:relationship:message:unavailable_relation'));
@@ -63,7 +64,7 @@
 				
 				if($notice){
 					if($rsvp) {
-						system_message(elgg_echo('event_manager:event:relationship:message:' . $rel));
+						system_message(elgg_echo('event_manager:event:relationship:message:' . $rel,array($user->name)));
 					} else {
 						register_error(elgg_echo('event_manager:event:relationship:message:error'));
 					}

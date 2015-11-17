@@ -13,6 +13,7 @@
 	define("EVENT_MANAGER_RELATION_PRESENTING", "event_presenting");
 	define("EVENT_MANAGER_RELATION_INTERESTED", "event_interested");
 	define("EVENT_MANAGER_RELATION_UNDO", "event_undo");
+	define("EVENT_MANAGER_RELATION_REVOKE", "event_revoke");
 
 	define("EVENT_MANAGER_RELATION_REGISTRATION_QUESTION", "event_registration_questions");
 	define("EVENT_MANAGER_RELATION_USER_REGISTERED", "event_user_registered");

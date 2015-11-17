@@ -109,6 +109,7 @@ $language = array (
   'event_manager:registration:required_fields' => 'Veuillez remplir les champs obligatoires',
   'event_manager:event:registration:notification:owner:subject' => 'Inscription évènement',
   'event_manager:event:registration:notification:user:subject' => 'Inscription évènement',
+  'event_manager:event:registration:notification:user:subject:undo' => 'Annulation de l\'inscription à l\'évènement',
   'event_manager:event:registration:notification:owner:summary:event_attending' => '%s s\'est inscrit(e) comme \'participant(e)\' à l\'évènement \'%s\' .',
   'event_manager:event:registration:notification:owner:text:event_attending' => 'Bonjour %s,
 
@@ -158,6 +159,13 @@ Vous êtes maintenant inscrit(e) comme \'intéressé(e)\' à l\'évènement \'%s
   'event_manager:event:registration:notification:user:text:event_undo' => 'Bonjour %s,
 
 Vous êtes maintenant désinscrit(e) de l\'évènement \'%s\' .',
+  'event_manager:event:registration:notification:owner:summary:event_revoke' => 'vous avez annulé l\'inscription de %s à votre évènement \'%s\'.',
+  'event_manager:event:registration:notification:owner:text:event_revoke' => 'Bonjour %s,
+
+Vous avez annulé l\'inscription de %s pour votre évènement \'%s\'.',
+  'event_manager:event:registration:notification:user:text:event_revoke' => 'Bonjour %s,
+
+Le proprietaire de l\'évènement \'%s\' a annulé votre inscription à l\'évènement.',
   'event_manager:event:registration:notification:user:text:event_spotfree' => 'Bonjour %s,
 
 une personne s\'est désinscrite de l\'évènement \'%s\' . Vous n\'êtes plus sur la liste d\'attente.',
@@ -212,6 +220,7 @@ une personne s\'est désinscrite de l\'évènement \'%s\' . Vous n\'êtes plus s
   'event_manager:event:relationship:message:event_exhibiting' => 'Vous êtes exposant à cet évènement',
   'event_manager:event:relationship:message:event_organizing' => 'Vous êtes organisateur/organisatrice pour cet évènement',
   'event_manager:event:relationship:message:event_undo' => 'Vous quittez cet évènement',
+  'event_manager:event:relationship:message:event_revoke' => '%s  ne participe plus à cet évènement',
   'event_manager:event:relationship:message:error' => 'Erreur pour rejoindre/quitter l\'évènement',
   'event_manager:event:relationship:message:unavailable_relation' => 'La RSVP type you selected is not available',
   'event_manager:widgets:events:title' => 'évènements manager',

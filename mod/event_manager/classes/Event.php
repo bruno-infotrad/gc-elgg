@@ -83,7 +83,7 @@
 				$event_guid = $this->getGUID();
 				
 				// remove registrations
-				if ($type == EVENT_MANAGER_RELATION_UNDO){
+				if (($type == EVENT_MANAGER_RELATION_UNDO)||($type == EVENT_MANAGER_RELATION_REVOKE)){
 					if (!(($user = get_entity($user_guid)) instanceof ElggUser)) {
 						// make sure we can remove the registration object
 						$EVENT_MANAGER_UNDO_REGISTRATION = true;
@@ -125,12 +125,12 @@
 				}
 				
 				// add the new relationship
-				if ($type && ($type != EVENT_MANAGER_RELATION_UNDO) && (in_array($type, event_manager_event_get_relationship_options()))) {
+				if ($type && ($type != EVENT_MANAGER_RELATION_UNDO)&&($type != EVENT_MANAGER_RELATION_REVOKE) && (in_array($type, event_manager_event_get_relationship_options()))) {
 					if ($result = $this->addRelationship($user_guid, $type)) {
 						if ($add_to_river){
 							if (get_entity($user_guid) instanceof ElggUser) {
 								// add river events
-								if (($type != "event_waitinglist") && ($type != "event_pending")) {
+								if (($type != "event_waitinglist") && ($type != "event_pending") && ($type != "event_revoke")) {
 									elgg_create_river_item(array( 'view' => 'river/event_relationship/create', 'action_type' => 'event_relationship', 'subject_guid' => $user_guid, 'object_guid' => $event_guid, ));
 									//add_to_river('river/event_relationship/create', 'event_relationship', $user_guid, $event_guid);
 								}
@@ -424,11 +424,14 @@
 				notify_user($this->getOwnerGUID(), $this->getGUID(), $owner_subject, $owner_message,array('summary'=> $summary));
 
 				// notify the attending user
-				$user_subject = elgg_echo('event_manager:event:registration:notification:user:subject');
-				
+				if ($type == EVENT_MANAGER_RELATION_UNDO || $type == EVENT_MANAGER_RELATION_REVOKE){
+					$user_subject = elgg_echo('event_manager:event:registration:notification:user:subject:undo',array(),$to_entity->language);
+				} else {
+					$user_subject = elgg_echo('event_manager:event:registration:notification:user:subject',array(),$to_entity->language);
+				}
 				$user_message = elgg_echo('event_manager:event:registration:notification:user:text:' . $type, array(
 					$to_entity->name,
-					$event_title_link));
+					$event_title_link),$to_entity->language);
 				
 				$user_message .= $registrationLink;
 								

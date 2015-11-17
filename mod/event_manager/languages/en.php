@@ -137,6 +137,7 @@
 
 		'event_manager:event:registration:notification:owner:subject' => 'Event registration',
 		'event_manager:event:registration:notification:user:subject' => 'Event registration',
+		'event_manager:event:registration:notification:user:subject:undo' => 'Unregistered from event',
 
 		'event_manager:event:registration:notification:owner:summary:event_attending' => "%s signed up as 'attending' your '%s' event.",
 		'event_manager:event:registration:notification:owner:text:event_attending' => "Hello %s,
@@ -200,6 +201,14 @@ You succesfully signed up as 'interested' in the '%s' event.",
 		'event_manager:event:registration:notification:user:text:event_undo' => "Hello %s,
 
 You signed off succesfully from the '%s' event.",
+		'event_manager:event:registration:notification:owner:summary:event_revoke' => "You unregistered %s from your '%s' event.",
+		'event_manager:event:registration:notification:owner:text:event_revoke' => "Hello %s,
+
+You unregistered %s from your '%s' event.",
+
+		'event_manager:event:registration:notification:user:text:event_revoke' => "Hello %s,
+
+The event owner has unregistered you from the '%s' event.",
 
 		'event_manager:event:registration:notification:user:text:event_spotfree' => "Hello %s,
 
@@ -283,6 +292,7 @@ Someone signed off from the '%s' event. You are moved from the waiting list to a
 		'event_manager:event:relationship:message:event_exhibiting' => 'You are now exhibiting this event',
 		'event_manager:event:relationship:message:event_organizing' => 'You are now organizing this event',
 		'event_manager:event:relationship:message:event_undo' => 'You left this event',
+		'event_manager:event:relationship:message:event_revoke' => 'You unregistered %s from this event',
 		'event_manager:event:relationship:message:error' => 'Error joining/leaving event',
 		'event_manager:event:relationship:message:unavailable_relation' => 'The RSVP type you selected is not available',
 
