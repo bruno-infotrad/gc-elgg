@@ -16,12 +16,18 @@ elgg.new_messages.init = function(){
 	var data;
 	if (elgg.is_logged_in()) {
 		if (elgg.session.js_polling === "on") {
-			elgg.action("action/dashboard/new_messages",elgg.new_messages.update);
+			elgg.action("action/dashboard/new_messages",{
+				error: function(json){ },
+				success: function(json){ elgg.new_messages.update(json)}
+			});
 		}
 		setInterval(function(){
 			var data;
 			if (elgg.session.js_polling === "on") {
-				elgg.action("action/dashboard/new_messages",elgg.new_messages.update);
+				elgg.action("action/dashboard/new_messages",{
+					error: function(json){ },
+					success: function(json){ elgg.new_messages.update(json)}
+				});
 			};
 		},60000);
 	};
