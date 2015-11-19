@@ -357,6 +357,8 @@ return array(
 	
 	'likes:likethis' => "Aime",
 	'likes:remove' => "N'aime pas",
+	'likes:this' => 'a aimé',
+
 	
 	
 	'pages:river:create' => "a crée une page",
