@@ -22,7 +22,7 @@ echo elgg_view("input/file", array('name' => 'icon'));
 echo "</div>";
 
 echo "<div>";
-echo "<label>" . elgg_echo("groups:name") . "</label><br />";
+echo "<label>" . elgg_echo("groups:name") . '&nbsp;<span class="elgg-icon elgg-icon-info elgg-icon-info-top" title="'.elgg_echo('gc_theme:group_name:help').'"></span></label>';
 
 $show_input = false;
 if (empty($group) || ($name_limit === NULL) || ($name_limit === "") || elgg_is_admin_logged_in()) {

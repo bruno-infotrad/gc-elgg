@@ -413,6 +413,7 @@ return array(
         'gc_theme:online' => 'En ligne',
 	'gc_theme:activity' => "Historique",
 	'gc_theme:river:recent_activity' => "Activité récente",
+	'gc_theme:group_name:help' => 'Les noms de groupes existants apparaitront au fur et à mesure que vous taperez',
 	'gc_theme:group:recent_activity' => "Activité récente du groupe",
 	'gc_theme:upload_file' => 'Télécharger un fichier',
 	'gc_theme:previously_loaded' => 'Déjà visionné',

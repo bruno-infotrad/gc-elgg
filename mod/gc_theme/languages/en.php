@@ -132,6 +132,7 @@ return array(
 	'gc_theme:online_friends' => 'Online now',
 	'gc_theme:activity' => 'Activity Stream',
 	'gc_theme:river:recent_activity' => 'Recent Activity',
+	'gc_theme:group_name:help' => 'If typed string matches an existing group name, the group name will be displayed below the text box; you can click on the group to go to it and inspect its content before creating a new one.',
 	'gc_theme:group:recent_activity' => 'Recent Group Activity',
 	'gc_theme:upload_file' => 'Upload file',
 	'gc_theme:previously_loaded' => 'Previously loaded',
