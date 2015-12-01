@@ -9,7 +9,11 @@
 		$db_prefix = elgg_get_config('dbprefix');
 		$params['type'] = 'group';
 		$params['limit'] = $limit;
-		$params['query'] = '*'.$q.'*';
+		if (strlen($q) <=3) {
+			$params['query'] = $q;
+		} else {
+			$params['query'] = '*'.$q.'*';
+		}
 		$join = "JOIN {$db_prefix}groups_entity ge ON e.guid = ge.guid";
 		$params['joins'] = array($join);
 		$fields = array('name', 'description');
