@@ -12,3 +12,8 @@ httpd_*
 install.hidden-Bazinga
 install.hidden-Bazinga/**
 offline_*
+mod/html_email_handler/.gitignore
+mod/html_email_handler/.travis.yml
+mod/html_email_handler/composer.json
+mod/html_email_handler/composer.lock
+
