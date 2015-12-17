@@ -433,7 +433,7 @@ return array(
 	'gc_theme:contribute' => 'Contribuez',
 	'gc_theme:contribute_to' => 'Contribuez à...',
 	'gc_theme:groups_selected' => 'Groupes sélectionnés',
-	'gc_theme:dfatd' => 'MAECD',
+	'gc_theme:dfatd' => 'AMC',
 	'gc_theme:people' => 'Personnes',
 	'gc_theme:tabnav:friends' => 'Personnes',
 	'gc_theme:tabnav:friendsof' => 'Personnes',
@@ -459,14 +459,14 @@ return array(
 	'gc_theme:search:groups' => 'Trouvez un groupe',
 	'gc_theme:mygroups:none' => 'Joignez des groupes et suivez les activités associées',
 	'gc_theme:colleagues:none' => 'Ajoutez des collègues et suivez leurs activités',
-	'gc_theme:exec_content_title' => 'Messages du MAECD',
-	'gc_theme:exec_content_tab' => 'Tous les messages du MAECD',
-	'gc_theme:exec_content' => 'Message du MAECD',
-	'gc_theme:exec_content:warning' => 'Êtes-vous certain(e) de vouloir afficher ce message pour tout le MAECD?',
-	'gc_theme:remove_exec_content' => 'Supprimer comme message MAECD',
+	'gc_theme:exec_content_title' => 'Messages d\'AMC',
+	'gc_theme:exec_content_tab' => 'Tous les messages d\'AMC',
+	'gc_theme:exec_content' => 'Message d\'AMC',
+	'gc_theme:exec_content:warning' => 'Êtes-vous certain(e) de vouloir afficher ce message pour tout AMC?',
+	'gc_theme:remove_exec_content' => 'Supprimer comme message AMC',
 	'gc_theme:removed_exec_content' => 'Supprimé',
 	'gc_theme:help' => 'Aide',
-	'gc_theme:socmed' => 'Les médias sociaux au MAECD',
+	'gc_theme:socmed' => 'Les médias sociaux à AMC',
 	'gc_theme:contact' => 'Contactez-nous',
 	'gc_theme:feedback' => 'Rétroaction',
 	'gc_theme:news' => 'Nouvelles',
@@ -780,8 +780,8 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
         'gc_theme:intro:training_videos' => '<li><b>Vidéos de formation</b></li>Nous avons mis à votre disposition des vidéos de formation utiles pour vous familiariser avec Agora :',
         'gc_theme:intro:training_videos2' => '<ol><li><a href="http://intra/collaboration/agora/agora-video-access-acces.aspx?lang=fra">Accès à Agora</a></li><li><a href="http://intra/collaboration/agora/agora-video-user-interface-interface-utilisateur.aspx?lang=fra">Interface utilisateur</a></li><li><a href="http://intra/collaboration/agora/agora-video-profile-profil.aspx?lang=fra">Profil</a></li><li><a href="http://intra/collaboration/agora/agora-video-people-personnes.aspx?lang=fra">Personnes</a></li><li>Groupes<ol><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-i.aspx?lang=fra">Comment se joindre à un groupe</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-ii.aspx?lang=fra">Comment créér un groupe</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-iii.aspx?lang=fra">Contenu et activité du groupe</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-iv.aspx?lang=fra">Édition et gestion</a></li></ol><li><a href="http://intra/collaboration/agora/agora-video-editor-editeur.aspx?lang=fra">L\'éditeur</a></li></ol>',
 	'gc_theme:pns_header' => "Énoncé d'avis de confidentialité",
-	'gc_theme:pns' => "<p>Le ministère des Affaires étrangères, du Commerce et du Développement (MAECD) s’engage à protéger les renseignements personnels qu’il détient et à respecter le droit à la vie privée.</p>
-<p>La Loi sur la protection des renseignements personnels définit les « renseignements personnels » comme des renseignements qui, quels que soient leur forme et leur support, concernent un individu identifiable. Les renseignements personnels recueillis par le MAECD ne peuvent être divulgués à des personnes/organisations non autorisées en vertu des dispositions de la Loi sur la protection des renseignements personnels. Toute personne a droit à la protection des renseignements personnels qui la concernent et à l’accès à ces renseignements. Toute personne a également le droit de demander qu’on apporte des corrections à ces renseignements si, selon elle, ils sont erronés ou incomplets. Pour apporter des modifications, veuillez communiquer avec la Direction de l’accès à l’information et de la protection des renseignements personnels du Ministère.</p>
+	'gc_theme:pns' => "<p>Le ministère des Affaires mondiales (AMC) s’engage à protéger les renseignements personnels qu’il détient et à respecter le droit à la vie privée.</p>
+<p>La Loi sur la protection des renseignements personnels définit les « renseignements personnels » comme des renseignements qui, quels que soient leur forme et leur support, concernent un individu identifiable. Les renseignements personnels recueillis par l'AMC ne peuvent être divulgués à des personnes/organisations non autorisées en vertu des dispositions de la Loi sur la protection des renseignements personnels. Toute personne a droit à la protection des renseignements personnels qui la concernent et à l’accès à ces renseignements. Toute personne a également le droit de demander qu’on apporte des corrections à ces renseignements si, selon elle, ils sont erronés ou incomplets. Pour apporter des modifications, veuillez communiquer avec la Direction de l’accès à l’information et de la protection des renseignements personnels du Ministère.</p>
 <p>Le pouvoir de recueillir des renseignements personnels est conféré par la Loi sur la gestion des finances publiques et il est conforme à la Politique de communication du gouvernement du Canada. L’information relative à la collecte, à l’utilisation et à la divulgation des renseignements personnels est décrite dans les fichiers de renseignements personnels du Secrétariat du Conseil du Trésor – Services de communications internes (PSU 915). Vous pouvez voir cette information à l’adresse suivante : www.infosource.gc.ca/emp/emp03-fra.asp#psu915.</p>
 <p>Agora, dont l’accès est limité aux seuls utilisateurs ayant accès au SIGNET, est un outil ministériel de collaboration électronique qui permet d’échanger de l’information NON CLASSIFIÉE à l’intérieur de groupes ouverts ou privés.</p>
 <p>Certains renseignements relatifs au profil dans Agora peuvent être entrés automatiquement par Active Directory – là où les renseignements liés au travail (nom, division, numéro de téléphone, p. ex.) sont conservés. Les changements apportés à monÉquipe pourraient se retrouver dans Agora. Tout ajout de renseignements personnel dans Agora est volontaire. Si un utilisateur décide de divulguer des renseignements personnels, il le fait de son plein gré et en sachant que ceux-ci pourraient être vus par d’autres utilisateurs d’Agora. En ajoutant des renseignements personnels sur Agora, l’utilisateur consent, de façon implicite à la collecte, à l’utilisation et à la divulgation de ses renseignements personnels.</p>

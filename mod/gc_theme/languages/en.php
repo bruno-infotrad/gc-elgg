@@ -153,7 +153,7 @@ return array(
 	'gc_theme:contribute' => 'Contribute',
 	'gc_theme:contribute_to' => 'Contribute To...',
 	'gc_theme:groups_selected' => 'Groups selected',
-	'gc_theme:dfatd' => 'DFATD',
+	'gc_theme:dfatd' => 'GAC',
 	'gc_theme:people' => 'People',
 	'gc_theme:tabnav:friends' => 'People',
 	'gc_theme:tabnav:friendsof' => 'People',
@@ -179,14 +179,14 @@ return array(
 	'gc_theme:search:groups' => 'Find a group',
 	'gc_theme:mygroups:none' => 'Join groups to follow the groups activities',
 	'gc_theme:colleagues:none' => 'Add colleagues and follow their activities',
-	'gc_theme:exec_content_title' => 'DFATD Messages',
-	'gc_theme:exec_content_tab' => 'All DFATD Messages',
-	'gc_theme:exec_content' => 'DFATD Message',
-	'gc_theme:exec_content:warning' => 'This will broadcast to all DFATD. Are you sure?',
-	'gc_theme:remove_exec_content' => 'Remove DFATD flag',
+	'gc_theme:exec_content_title' => 'GAC Messages',
+	'gc_theme:exec_content_tab' => 'All GAC Messages',
+	'gc_theme:exec_content' => 'GAC Message',
+	'gc_theme:exec_content:warning' => 'This will broadcast to all GAC. Are you sure?',
+	'gc_theme:remove_exec_content' => 'Remove GAC flag',
 	'gc_theme:removed_exec_content' => 'Removed',
  	'gc_theme:help' => 'Help',
-	'gc_theme:socmed' => 'Social Media at DFATD',
+	'gc_theme:socmed' => 'Social Media at GAC',
 	'gc_theme:contact' => 'Contact',
 	'gc_theme:feedback' => 'Feedback',
 	'gc_theme:news' => 'News',
@@ -395,8 +395,8 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'gc_theme:intro:training_videos' => '<li><b>Training Videos</b></li>Direct access to individual training videos:',
 	'gc_theme:intro:training_videos2' => '<ol><li><a href="http://intra/collaboration/agora/agora-video-access-acces.aspx?lang=eng">Accessing Agora</a></li><li><a href="http://intra/collaboration/agora/agora-video-access-acces.aspx?lang=eng">The User Interface</a></li><li><a href="http://intra/collaboration/agora/agora-video-profile-profil.aspx?lang=eng">Profile</a></li><li><a href="http://intra/collaboration/agora/agora-video-people-personnes.aspx?lang=eng">People</a></li><li>Groups<ol><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-i.aspx?lang=eng">How to join Groups</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-ii.aspx?lang=eng">How to Create Groups</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-iii.aspx?lang=eng">Group Content and Activities</a></li><li><a href="http://intra/collaboration/agora/agora-video-groups-groupes-iv.aspx?lang=eng">Editing and Management</a></li></ol><li><a href="http://intra/collaboration/agora/agora-video-editor-editeur.aspx?lang=eng">The Editor</a></li></ol>',
 	'gc_theme:pns_header' => 'Privacy Notice Statement',
-	'gc_theme:pns' => "<p>Foreign Affairs, Trade and Development Canada (DFATD) is committed to safeguarding the personal information under its control and respecting the privacy rights of individuals.</p>
-<p>Section 3 of the Privacy Act defines ‘personal information’ as any information about an identifiable individual recorded in any form. Personal information collected by DFATD is protected from disclosure to unauthorized persons and/or agencies subject to the provisions of the Privacy Act. Individuals have the right to the protection of and access to their personal information, and to request correction to their personal information where the individual believes there is an error or omission. For corrections, contact the Department’s Access to Information and Privacy Protection Division.</p>
+	'gc_theme:pns' => "<p>Global Affairs Canada (GAC) is committed to safeguarding the personal information under its control and respecting the privacy rights of individuals.</p>
+<p>Section 3 of the Privacy Act defines ‘personal information’ as any information about an identifiable individual recorded in any form. Personal information collected by GAC is protected from disclosure to unauthorized persons and/or agencies subject to the provisions of the Privacy Act. Individuals have the right to the protection of and access to their personal information, and to request correction to their personal information where the individual believes there is an error or omission. For corrections, contact the Department’s Access to Information and Privacy Protection Division.</p>
 <p>The authority to collect personal information stems from the Financial Administration Act and in accordance with the Communications Policy of the Government of Canada.  Information related to the collection, use and disclosure of personal information is described in the Treasury Board Secretariat’s personal information bank Internal Communications (PSU 915) which can be viewed at: http://www.infosource.gc.ca/emp/emp03-eng.asp#psu915.</p>
 <p>Limited only to users with Signet connectivity, Agora is a corporate e-collaboration tool that provides for the sharing of UNCLASSIFIED information within open or private groups.</p>
 <p>Certain Profile Information in Agora may be auto-populated by the Active Directory where work-related details (i.e. name, division, phone number) are maintained. Changes made in TeamInfo may be reflected in Agora. The decision to add personal information to Agora is voluntary. Should a user choose to disclose their personal information they do so at their own discretion and with the knowledge that information may be viewed by other users of Agora. By adding personal information to Agora, the user is providing implicit consent for the collection, use and disclosure of their personal information.</p>
