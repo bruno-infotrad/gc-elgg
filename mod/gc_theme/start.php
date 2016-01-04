@@ -85,9 +85,6 @@ function gc_theme_init() {
 	elgg_unregister_plugin_hook_handler('register', 'menu:page', 'bookmarks_page_menu');
 	// Trigger update of ad2elgg_user table when username is changed
 	elgg_register_event_handler("update", "user", "ad2elgg_user_update");
-	// Unregister add colleague event notification (bug 57)
-	elgg_unregister_event_handler('create', 'friend', 'relationship_notification_hook');
-	elgg_register_event_handler('create', 'friend', 'gc_relationship_notification_hook');
 	// For two column layout
 	elgg_unregister_event_handler('pagesetup', 'system', 'notifications_plugin_pagesetup');
 	elgg_unregister_event_handler('pagesetup', 'system', 'usersettings_pagesetup');
