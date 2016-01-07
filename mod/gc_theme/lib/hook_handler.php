@@ -750,6 +750,13 @@ function gc_thewire_discussion_reply_setup_entity_menu_items($hook, $type, $valu
         	                unset($value[$index]);
         	        }
         	}
+        	$options = array(
+        	        'name' => 'thread',
+        	        'text' => elgg_echo('thewire:thread'),
+        	        'href' => "thewire/thread/$entity->wire_thread",
+        	        'priority' => 170,
+        	);
+        	$value[] = ElggMenuItem::factory($options);
         }
 	if ($entity->canEdit()) {
 		if ($handler == 'comment') {
@@ -821,15 +828,7 @@ function gc_thewire_discussion_reply_setup_entity_menu_items($hook, $type, $valu
                 );
                 $value[] = ElggMenuItem::factory($options);
         }
-/*
-        $options = array(
-                'name' => 'thread',
-                'text' => elgg_echo('thewire:thread'),
-                'href' => "thewire/thread/$entity->wire_thread",
-                'priority' => 170,
-        );
-        $value[] = ElggMenuItem::factory($options);
-*/
+
         return $value;
 }
 

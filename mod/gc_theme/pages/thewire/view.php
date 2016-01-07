@@ -20,21 +20,15 @@ if (!$container) {
 }
 
 $title = $thewire->title;
-
 if (elgg_instanceof($container, 'group')) {
-	elgg_push_breadcrumb($container->name, "thewire_group/group/$container->guid/all");
 	if ($container->isMember(elgg_get_logged_in_user_entity())) {
 		$comments = elgg_view_comments($thewire);
 	} else {
 		$comments = elgg_view_comments($thewire,FALSE);
 	}
 } else {
-	elgg_push_breadcrumb($container->name, "thewire/owner/$container->username");
 	$comments = elgg_view_comments($thewire);
 }
-//pages_prepare_parent_breadcrumbs($thewire);
-elgg_push_breadcrumb($title);
-
 $content = elgg_view_entity($thewire, array('full_view' => true));
 //Test if group member, if not do not allow to comment
 
