@@ -5,7 +5,7 @@
 
 /**
  * Sends out a full HTML mail
- * 
+ *
  * @param array $options In the format:
  *     to => STR|ARR of recipients in RFC-2822 format (http://www.faqs.org/rfcs/rfc2822.html)
  *     from => STR of senden in RFC-2822 format (http://www.faqs.org/rfcs/rfc2822.html)
@@ -17,7 +17,7 @@
  *     bcc => NULL|STR|ARR of BCC recipients in RFC-2822 format (http://www.faqs.org/rfcs/rfc2822.html)
  *     date => NULL|UNIX timestamp with the date the message was created
  *     attachments => NULL|ARR of array(array('mimetype', 'filename', 'content'))
- * 
+ *
  * @return bool
  */
 function html_email_handler_send_email(array $options = null) {
@@ -26,23 +26,9 @@ function html_email_handler_send_email(array $options = null) {
 	$site = elgg_get_site_entity();
 	
 	// make site email
-	if (!empty($site->email)) {
-		$site_from = html_email_handler_make_rfc822_address($site);
-	} else {
-		// no site email, so make one up
-		$site_from = "noreply@" . $site->getDomain();
-		
-		if (!empty($site->name)) {
-			$site_name = $site->name;
-			if (strstr($site_name, ",")) {
-				$site_name = '"' . $site_name . '"'; // Protect the name with quotations if it contains a comma
-			}
-			
-			$site_name = "=?UTF-8?B?" . base64_encode($site_name) . "?="; // Encode the name. If may content nos ASCII chars.
-			$site_from = $site_name . " <" . $site_from . ">";
-		}
-	}
+	$site_from = html_email_handler_make_rfc822_address($site);
 	
+	// get sendmail options
 	$sendmail_options = html_email_handler_get_sendmail_options();
 	
 	if (!isset($limit_subject)) {
@@ -67,6 +53,24 @@ function html_email_handler_send_email(array $options = null) {
 	
 	// merge options
 	$options = array_merge($default_options, $options);
+	
+	// redo to/from for notifications
+	$notification = elgg_extract('notification', $options);
+	if (!empty($notification) && ($notification instanceof \Elgg\Notifications\Notification)) {
+		$recipient = $notification->getRecipient();
+		$sender = $notification->getSender();
+		
+		$options['to'] = html_email_handler_make_rfc822_address($recipient);
+		if (!isset($options['recipient'])) {
+			$options['recipient'] = $recipient;
+		}
+		
+		if (!($sender instanceof \ElggUser) && $sender->email) {
+			$options['from'] = html_email_handler_make_rfc822_address($sender);
+		} else {
+			$options['from'] = $site_from;
+		}
+	}
 	
 	// check options
 	if (!empty($options["to"]) && !is_array($options["to"])) {
@@ -131,11 +135,13 @@ function html_email_handler_send_email(array $options = null) {
 			
 			// Alternatively fetch content based on an absolute path to a file on server:
 			if (empty($attachment["content"]) && !empty($attachment["filepath"])) {
-				$attachment["content"] = chunk_split(base64_encode(file_get_contents($attachment["filepath"])));
+				if (is_file($attachment["filepath"])) {
+					$attachment["content"] = chunk_split(base64_encode(file_get_contents($attachment["filepath"])));
+				}
 			}
 			
 			// Cannot attach an empty file in any case..
-			if (empty($attachment["content"])) {
+			if (!elgg_extract('content', $attachment)) {
 				continue;
 			}
 			
@@ -262,6 +268,7 @@ function html_email_handler_send_email(array $options = null) {
 	
 	// encode subject to handle special chars
 	$subject = $options["subject"];
+	$subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8'); // Decode any html entities
 	if ($limit_subject) {
 		$subject = elgg_get_excerpt($subject, 175);
 	}
@@ -302,8 +309,6 @@ function html_email_handler_css_inliner($html_text) {
 		// clear error log
 		libxml_clear_errors();
 		
-		elgg_load_library("emogrifier");
-		
 		$emo = new Pelago\Emogrifier($html_text, $css);
 		$result = $emo->emogrify();
 	}
@@ -323,7 +328,7 @@ function html_email_handler_make_html_body($options = "", $body = "") {
 	global $CONFIG;
 	
 	if (!is_array($options)) {
-		elgg_deprecated_notice("html_email_handler_make_html_body now takes an array as param, please update you're code", "1.9");
+		elgg_deprecated_notice("html_email_handler_make_html_body now takes an array as param, please update your code", "1.9");
 		
 		$options = array(
 			"subject" => $options,
@@ -417,7 +422,7 @@ function html_email_handler_make_rfc822_address(ElggEntity $entity, $use_fallbac
 			$name = '"' . $name . '"'; // Protect the name with quotations if it contains a comma
 		}
 		
-		$name = "=?UTF-8?B?" . base64_encode($name) . "?="; // Encode the name. If may content nos ASCII chars.
+		$name = "=?UTF-8?B?" . base64_encode($name) . "?="; // Encode the name. If may content non ASCII chars.
 		$email = $name . " <" . $email . ">";
 	}
 	
