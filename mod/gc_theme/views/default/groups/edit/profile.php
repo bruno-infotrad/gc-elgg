@@ -164,7 +164,7 @@ if (count($group_fields["fields"]) > 0) {
 				));
 			}
 		} elseif($metadata_name == 'interests') {
-			echo elgg_view("input/group_tags_autocomplete", array('value' => elgg_extract('interests', $vars)));
+			echo elgg_view("input/tags", array('name' => 'interests', 'value' => elgg_extract('interests', $vars)));
 		} else {
 			if ($valtype == "dropdown") {
 				// add div around dropdown to let it act as a block level element

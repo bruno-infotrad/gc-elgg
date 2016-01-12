@@ -1,8 +1,8 @@
 <?php
 ?>
 #cke_33 > .cke_toolgroup {margin: 0 2px 0;}
-#elgg-input-group-tags-autocomplete-results {list-style-type: none;}
-#elgg-input-group-tags-autocomplete-results li:hover {background-color: #e7eef6;}
+#elgg-input-tags-autocomplete-results {list-style-type: none;}
+#elgg-input-tags-autocomplete-results li:hover {background-color: #e7eef6;}
 [id*="gc-collection-rename-"] { display: inline-block;}
 [id*="gc-collection-save-"] { display: inline-block;}
 [id*="gc-collection-cancel-"] { display: inline-block;}

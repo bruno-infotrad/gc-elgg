@@ -15,33 +15,34 @@ define(function(require) {
 		$(json).each(function(index, tag) {
 			existing_tags += '<li id="'+tag.content+'">' + tag.content + "</li>";
 		});
-		$('#elgg-input-group-tags-autocomplete-results').html(existing_tags);
-		$('#elgg-input-group-tags-autocomplete-results li').bind('click', function (e) {
+		$('#elgg-input-tags-autocomplete-results').html(existing_tags);
+		$('#elgg-input-tags-autocomplete-results li').bind('click', function (e) {
 			replacement = $(this).attr('id');
-			$('#elgg-input-group-tags-autocomplete').val(function(index, value){return value.replace(search_string,replacement);});
+			$('#elgg-input-tags-autocomplete').val(function(index, value){return value.replace(search_string,replacement);});
 		});
 	};
 
-	var autocomplete = function (content,search_string) {
+	var autocomplete = function (content,search_string,name) {
 		var options = {success: handleResponse};
-		elgg.get(elgg.config.wwwroot + 'group_tags_autocomplete?q='+search_string, options);
+		elgg.get(elgg.config.wwwroot + 'tags_autocomplete?q='+search_string+'&name='+name, options);
 	};
 
 	var init = function() {
 		$(document).click(function(e) {   
-			if(e.target.id != 'elgg-input-group-tags-autocomplete-results') {
-				$("#elgg-input-group-tags-autocomplete-results").hide();   
+			if(e.target.id != 'elgg-input-tags-autocomplete-results') {
+				$("#elgg-input-tags-autocomplete-results").hide();   
 			} 
 		});
-		$('#elgg-input-group-tags-autocomplete').bind('keyup', function(e) {
-			$("#elgg-input-group-tags-autocomplete-results").html('');   
-			$("#elgg-input-group-tags-autocomplete-results").show();   
+		$('#elgg-input-tags-autocomplete').bind('keyup', function(e) {
+			$("#elgg-input-tags-autocomplete-results").html('');   
+			$("#elgg-input-tags-autocomplete-results").show();   
 
 			// Hide on backspace, enter and escape
 			if (e.which == 8 || e.which == 13|| e.which == 27) {
-				$("#elgg-input-group-tags-autocomplete-results").hide();   
+				$("#elgg-input-tags-autocomplete-results").hide();   
 			} else {
 				content = $(this).val();
+				name = $(this).attr('name');
 				parts = content.split(',');
 				//console.log('PARTS='+parts);
 				if (parts.length === 0) {
@@ -50,7 +51,7 @@ define(function(require) {
 					search_string = parts[parts.length - 1];
 				}
 				//console.log('CONTENT='+search_string);
-				autocomplete(content,search_string);
+				autocomplete(content,search_string,name);
 			}
 		});
 
