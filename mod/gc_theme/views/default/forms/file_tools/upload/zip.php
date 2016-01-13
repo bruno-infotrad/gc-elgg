@@ -9,6 +9,7 @@ $form_body .= elgg_view("input/file", array("name" => "zip_file","id" => "zip_fi
 $form_body .= "</div>";
 $file_selected = elgg_echo('gc_theme:no_file_selected');
 $form_body .= '<div class="gc-input-file-1em gc-file-selected">'.$file_selected.'</div>';
+$form_body .= "</div>";
 $form_body .= "<div class=\"gc-input-file-row\">";
 if(file_tools_use_folder_structure()){
 	$form_body .= "<div class=\"gc-input-file-1em\">";
@@ -31,7 +32,7 @@ $form_body .= "</div>";
 echo $form_body;
 ?>
 <script type="text/javascript">
-$('#zip').filter(":input").live('change',function() {check_zip();});
+$("input[name='zip_file']").live('change',function() {check_zip();});
 function check_zip(){
         var ext,filename;
         	filename = $('#zip_file').val().split('\\').pop().toLowerCase();
