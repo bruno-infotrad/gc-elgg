@@ -40,6 +40,9 @@ function gc_theme_init() {
         elgg_register_simplecache_view('js/toggle_long_posts');
         elgg_register_js('elgg.toggle_long_posts', $toggle_long_posts_js, 'footer');
 	elgg_load_js('elgg.toggle_long_posts');
+	$toggle_compound = elgg_get_simplecache_url('js', 'toggle_compound');
+        elgg_register_simplecache_view('js/toggle_compound');
+        elgg_register_js('elgg.toggle_compound', $toggle_compound, 'footer');
 	$contribute_to_js = elgg_get_simplecache_url('js', 'contribute_to');
         elgg_register_simplecache_view('js/contribute_to');
         elgg_register_js('elgg.contribute_to', $contribute_to_js, 'footer');

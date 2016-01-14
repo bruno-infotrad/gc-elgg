@@ -1,5 +1,5 @@
 <?php
-//elgg_load_js('elgg.contribute_to');
+elgg_load_js('elgg.toggle_compound');
 $owner = elgg_get_page_owner_entity();
 if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thewire_enable != 'no')) {
 	$thewire_enabled = 1;
