@@ -91,7 +91,7 @@ if ($embed) {
 		echo $add_to_river;
 	}
 ?>
-<div class="gc-input-file-row">
+<div id="gc-access-input" class="gc-input-file-row">
 <?php 
 //CAREFUL! file_tools plugin has to be on for his to work. Since it has been in use, no point
 // in adding a test

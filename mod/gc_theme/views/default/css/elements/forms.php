@@ -1,7 +1,7 @@
 <?php
 ?>
 #width_tmp_folder_guid {display: none;}
-[name='folder_guid'],[name='parent_guid'] {width: 22em;}
+[name='folder_guid'],[name='parent_guid'] {width: 19em;}
 #cke_33 > .cke_toolgroup {margin: 0 2px 0;}
 #elgg-input-tags-autocomplete-results {list-style-type: none;}
 #elgg-input-tags-autocomplete-results li:hover {background-color: #e7eef6;}
@@ -59,8 +59,9 @@ label[for=blog_description] {
   height: 28px;
 }
 #multi-upload-div {
-  vertical-align: middle;
+  vertical-align: top;
   height: 32px;
+  margin-top: 5px;
 }
 #file-tools-uploadify-cancel {height: 28px;}
 #uploadify-button-wrapper.uploadify {top: -30px;}
@@ -73,6 +74,13 @@ label[for=blog_description] {
 .gc-addtoriver-row {display:block;position:relative;top:-10px;}
 .gc-addtoriver-cb {padding-left:10px;}
 .gc-addtoriver-cb,.gc-input-file-ib {display:inline-block;}
+
+.gc-input-file-ib .elgg-text-help {max-width: 16em; font-size: 10px;}
+#gc-access-input #gc_theme-parent-folder-label,
+#gc-access-input .gc-input-file-ib,
+#gc-access-input .gc-input-file-1em {vertical-align: top;}
+#gc-access-input .elgg-input-access {margin: 0;}
+
 .gc-input-file-queue {display:inline-block;margin-left:5em;vertical-align:top;}
 .gc-input-file-row {display:inline-block;margin-top:5px;}
 .gc-input-file-browse {display:inline-block;vertical-align:top;}
