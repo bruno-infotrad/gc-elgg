@@ -1,5 +1,7 @@
 <?php
 ?>
+#width_tmp_folder_guid {display: none;}
+[name='folder_guid'],[name='parent_guid'] {width: 22em;}
 #cke_33 > .cke_toolgroup {margin: 0 2px 0;}
 #elgg-input-tags-autocomplete-results {list-style-type: none;}
 #elgg-input-tags-autocomplete-results li:hover {background-color: #e7eef6;}
