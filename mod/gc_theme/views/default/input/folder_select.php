@@ -39,8 +39,9 @@ echo elgg_view("input/dropdown", $vars);
 </select>
 <script>
 $(document).ready(function() {
-  $("select[name='folder_guid']").change(function(){
-    $("#width_tmp_option").html($("select[name='folder_guid']").$(":selected").text()); 
+  $("select[name='folder_guid'],select[name='parent_guid']").change(function(){
+    $("#width_tmp_option").html($(this).$(":selected").text()); 
+    //$("#width_tmp_option").html($("select[name='folder_guid']").$(":selected").text()); 
     $(this).width($("#width_tmp_folder_guid").width());  
   });
 });
