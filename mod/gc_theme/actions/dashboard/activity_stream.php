@@ -14,9 +14,11 @@ if (elgg_is_logged_in()) {
 	$user = elgg_get_logged_in_user_entity();
 	if ($page_owner instanceof ElggGroup) {
 		$activity_label = elgg_echo('gc_theme:group:recent_activity');
+		$group_guid = 'e1.container_guid='.$page_owner_guid;
+		$group_guid .= ' OR e2.container_guid='.$page_owner_guid;
 		$group_options = array(
-			'joins' => array("JOIN {$dbprefix}entities e ON e.guid = rv.object_guid"),
-			'wheres' => array("(e.container_guid = $page_owner_guid OR rv.object_guid = $page_owner_guid) AND rv.action_type != 'vote'"),
+			'joins' => array("JOIN elgg_entities e1 ON e1.guid = rv.object_guid", "LEFT JOIN elgg_entities e2 ON e2.guid = rv.target_guid", "LEFT JOIN elgg_groups_entity ge1 ON ge1.guid = e1.container_guid", "LEFT JOIN elgg_groups_entity ge2 ON ge2.guid = e2.container_guid"),
+			'wheres' => array("(rv.type != 'user' AND rv.action_type != 'friend' AND rv.action_type != 'join' AND rv.action_type != 'vote' AND ".$page_owner_guid.")", "(ge1.guid IS NOT NULL OR ge2.guid IS NOT NULL)")
 		);
 	} else {
 		$activity_label = elgg_echo('gc_theme:river:recent_activity');
