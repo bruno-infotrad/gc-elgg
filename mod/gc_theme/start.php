@@ -379,4 +379,16 @@ function gc_theme_init() {
 		}
 	}
 }
+
+function tag_management_pagesetup() {
+	if (elgg_in_context("admin") && elgg_is_admin_logged_in()) {
+		elgg_load_js('lightbox');
+		elgg_load_css('lightbox');
+		elgg_register_admin_menu_item('configure', 'settings', 'gc_theme');
+		elgg_register_admin_menu_item('configure', 'manage_tags', 'gc_theme');
+	}
+}
+
+// Initialization functions
 elgg_register_event_handler('init', 'system', 'gc_theme_init');
+elgg_register_event_handler('pagesetup', 'system', 'tag_management_pagesetup');

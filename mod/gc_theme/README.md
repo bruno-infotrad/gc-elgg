@@ -1,4 +1,4 @@
-# DFATD Theme for Elgg #
+# GAC Theme for Elgg #
 This Elgg plugin is the upgraded version of the GC Theme plugin.  It makes use of jquery mobile and WET. This plugin exposes the following features:
 * New dashboard page with multi-tab upload and list features for maximum flexibility
 * Real time update for new river items and new messages

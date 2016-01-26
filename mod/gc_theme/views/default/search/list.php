@@ -18,6 +18,7 @@
 $entities = $vars['results']['entities'];
 $count = $vars['results']['count'] - count($entities);
 $thewire_tags = $vars['thewire_tags'];
+$exact = $vars['exact'];
 
 if (!is_array($entities) || !count($entities)) {
 	return FALSE;
@@ -72,7 +73,7 @@ if (!$type_str && array_key_exists('type', $vars['params'])) {
 	$type_str = elgg_echo("item:{$vars['params']['type']}");
 }
 
-if (!$type_str) {
+if (!$type_str && $exact != 'yes') {
 	$type_str = elgg_echo('search:unknown_entity');
 }
 
@@ -84,7 +85,7 @@ if (array_key_exists('search_type', $vars['params'])
 	$type_str = $search_type_str;
 }
 
-if ($show_more) {
+if ($show_more && $exact != 'yes') {
 	$more_str = elgg_echo('search:more', array($count, $type_str));
 	$more_url = elgg_http_remove_url_query_element($url, 'limit');
 	$more_link = "<li class='elgg-item'><a href=\"$more_url\">$more_str</a></li>";

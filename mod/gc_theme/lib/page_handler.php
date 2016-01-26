@@ -1,4 +1,13 @@
 <?php
+function manage_tags_page_handler() {
+        if (elgg_is_admin_logged_in()) {
+        	$base_dir = elgg_get_plugins_path() . 'gc_theme/views/default/admin/gc_theme';
+		require_once "$base_dir/manage_tags.php";
+		return true;
+        } else {
+                forward('/dashboard');
+        }
+}
 function fxuwpi_page_handler() {
         if (elgg_is_admin_logged_in()) {
         	$base_dir = elgg_get_plugins_path() . 'gc_theme/lib';
