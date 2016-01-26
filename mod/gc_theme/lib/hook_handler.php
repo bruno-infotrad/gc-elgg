@@ -465,7 +465,11 @@ function gc_search_tags_hook($hook, $type, $value, $params) {
 		$user_guid = get_user_by_username($params['contributed_by'])->guid;
 		$where_contributed_by = " AND md.owner_guid=\"$user_guid\"";
 	}
-	$params['wheres'][] = "(msn.string IN ($tags_in) AND msv.string like '%$query%' AND $access $where_contributed_by)";
+	if ($params['exact'] == 'yes') {
+		$params['wheres'][] = "(msn.string IN ($tags_in) AND msv.string = '$query' collate utf8_bin AND $access $where_contributed_by)";
+	} else {
+		$params['wheres'][] = "(msn.string IN ($tags_in) AND msv.string like '%$query%' AND $access $where_contributed_by)";
+	}
 
 
 	$params['count'] = TRUE;
