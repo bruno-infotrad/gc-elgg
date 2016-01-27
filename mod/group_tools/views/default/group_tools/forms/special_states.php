@@ -97,7 +97,7 @@ if (!empty($user) && $user->isAdmin()) {
 			);
 			
 			$user_count = elgg_get_entities_from_relationship($options);
-			$member_count = $group->getMembers(0, 0, true);
+			$member_count = $group->getMembers(array('limit'=>0, 'offset'=>0, 'count'=>true));
 			
 			if ($user_count != $member_count) {
 					
