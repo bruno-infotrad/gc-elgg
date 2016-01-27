@@ -25,7 +25,8 @@ if ($search_string) {
 			$guids = ($guids)? ($guids.','.$entity->getGUID()) : $entity->getGUID();
 		}
 		//echo $guids;
-		$body .= elgg_view("input/text", array('class' => 'new-tags', 'name' => 'tags', 'value' => $search_string));
+		$body .= elgg_view("input/hidden", array('class' => 'old-tags', 'name' => 'oldtag', 'value' => $search_string));
+		$body .= elgg_view("input/text", array('class' => 'new-tags', 'name' => 'newtags', 'value' => $search_string));
 		$body .= elgg_view("input/hidden", array('name' => 'guids', 'value' => $guids));
 		$body .= elgg_view("input/button", array('class' => 'modify-tags', "value" => elgg_echo("modify")));
 		//echo var_export($results,true);
@@ -40,13 +41,14 @@ echo $body;
 if (elgg.is_admin_logged_in()) {
 	var site_url = elgg.get_site_url();
 	var tags_modified = "<?php echo elgg_echo('gc_theme:tags_modified'); ?>";
+	var old_tag  = "<?php echo $search_string ;?>";
 	var new_tags  = "<?php echo $search_string ;?>";
 	$(".new-tags").on('change', function() {
 		new_tags = $(this).val();
 	});
 	var guids = "<?php echo $guids;?>";
 	$('.elgg-button.modify-tags').on('click', function() {
-		$.post(elgg.security.addToken(site_url+'admin/gc_theme/modify_tags?&tags=' + new_tags + '&guids=' + guids)).success(function(status) {
+		$.post(elgg.security.addToken(site_url+'admin/gc_theme/modify_tags?oldtag='+old_tag+'&newtags=' + new_tags + '&guids=' + guids)).success(function(status) {
 			if (status == "success") {
 				elgg.system_message(tags_modified);
 			} else {
