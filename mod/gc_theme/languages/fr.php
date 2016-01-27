@@ -730,6 +730,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'gc_theme:entities_to_be_modified' => '%s entités seront modifiées',
 	'gc_theme:modify_tags:howto' => 'Entrez  le nouveau mot-clé ou les mots-clé séparés par des virgules et cliquez sur le bouton Modifiez',
 	'gc_theme:tags_modified' => 'Mot-clé modifié',
+	'gc_theme:modify_tags:search' => 'Cherchez le mot-clé que vous voulez remplacer à l\'aide de la boite de texte ci-dessous et sélectionnez-le, puis cliquez sur Recherche pour trouver les entités associees à ce mot-clé',
 	'admin:gc_theme' => "Agora",
 	'admin:gc_theme:settings' => "Paramètres",
 	'admin:gc_theme:manage_tags' => "Gestion des mots-clé",

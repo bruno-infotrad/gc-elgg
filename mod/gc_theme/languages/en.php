@@ -228,6 +228,7 @@ return array(
 	'gc_theme:entities_to_be_modified' => 'There are %s entities to be modified',
 	'gc_theme:modify_tags:howto' => 'Enter the new tag or the new comma separated tags in the box below and click on the Modify button',
 	'gc_theme:tags_modified' => 'Tag value was modified',
+	'gc_theme:modify_tags:search' => 'Use the autocomplete tag search box below to perform a search on existings tag and select the tag you want to modify, then click on Search to find the entities associated with the chosen tag',
 	'admin:gc_theme' => "Agora",
 	'admin:gc_theme:settings' => "Settings",
 	'admin:gc_theme:manage_tags' => "Tag management",
