@@ -227,6 +227,7 @@ return array(
 	'gc_theme:entity_to_be_modified' => 'There is %s entity to be modified',
 	'gc_theme:entities_to_be_modified' => 'There are %s entities to be modified',
 	'gc_theme:modify_tags:howto' => 'Enter the new tag or the new comma separated tags in the box below and click on the Modify button',
+	'gc_theme:tags_modified' => 'Tag value was modified',
 	'admin:gc_theme' => "Agora",
 	'admin:gc_theme:settings' => "Settings",
 	'admin:gc_theme:manage_tags' => "Tag management",
