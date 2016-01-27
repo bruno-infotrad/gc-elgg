@@ -2,6 +2,7 @@
 $body = '<div class="gc-theme-manage-tags">';
 $body .= '<div class="gc-theme-search-tags">';
 $search_string = get_input('tags');
+$body .= '<h4>'.elgg_echo('gc_theme:modify_tags:search').'</h4><br>';
 $body .=  elgg_view_form('gc_theme/admin/manage_tags',array('action' => '/admin/gc_theme/manage_tags', 'method' => 'get','class' => 'gc-theme-search-tag'),array('name' => 'tags' , 'value' => $search_string));
 $body .= '</div>';
 if ($search_string) {
@@ -41,10 +42,10 @@ echo $body;
 if (elgg.is_admin_logged_in()) {
 	var site_url = elgg.get_site_url();
 	var tags_modified = "<?php echo elgg_echo('gc_theme:tags_modified'); ?>";
-	var old_tag  = "<?php echo $search_string ;?>";
-	var new_tags  = "<?php echo $search_string ;?>";
+	var old_tag  = encodeURIComponent("<?php echo $search_string ;?>");
+	var new_tags = '';
 	$(".new-tags").on('change', function() {
-		new_tags = $(this).val();
+		new_tags = encodeURIComponent($(this).val());
 	});
 	var guids = "<?php echo $guids;?>";
 	$('.elgg-button.modify-tags').on('click', function() {
