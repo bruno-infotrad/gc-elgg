@@ -14,7 +14,7 @@
 			if($group->canEdit()){
 				set_time_limit(0);
 				
-				$subject = elgg_echo("group_tools:mail:message:from") . ": " . $group->name . " - ".$subject; 
+				$subject = $subject . " - ".elgg_echo("group_tools:mail:message:from") . ": " . $group->name; 
 				$body = elgg_echo("group_tools:mail:message:from") . ": " . $group->name . " [" . $group->getURL() . "]".PHP_EOL . PHP_EOL.$body; 
 					
 				foreach($user_guids as $guid){
