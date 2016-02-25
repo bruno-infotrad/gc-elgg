@@ -27,6 +27,14 @@ function gc_theme_pagesetup_handler() {
 					'priority' => 15,
 				));
 			}
+			elgg_register_menu_item('page', array(
+				'name' => 'tags',
+				'parent_name' => 'news',
+				'text' => elgg_echo('tags'),
+				'href' => "/tags/all",
+				'section' => '0discussions',
+				'priority' => 17,
+			));
 
 			elgg_unregister_menu_item('extras', 'bookmark');
 			elgg_unregister_menu_item('page', '1_account');

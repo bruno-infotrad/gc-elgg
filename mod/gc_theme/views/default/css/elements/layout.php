@@ -8,6 +8,29 @@
  *
  */
 ?>
+.tag-total,
+.tag-name {
+	display: inline-block;
+}
+.tag-block {
+	display: inline-block;
+	min-width: 30%;
+	padding: 0 5px;
+}
+.tag-total {
+	width: 1.5em;
+}
+.tag-name {
+    color: #39739D;
+    font-size: 12px;
+    white-space: nowrap;
+    background: #E1ECF4 none repeat scroll 0% 0%;
+    border: 1px solid #E1ECF4;
+    display: inline-block;
+    margin: 2px 2px 2px 0px;
+    border-radius: 0px;
+    transition: color 0.15s ease 0s, background 0.15s ease 0s, border 0.15s ease 0s;
+}
 .gc-multi-group-posts {display: none;}
 .elgg-body.gc-notification {display: inline;}
 .gc-river-event {display:inline-block;vertical-align:top;}

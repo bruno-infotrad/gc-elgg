@@ -81,6 +81,7 @@ return array(
 	'river:update:user:default' => '%s has a new avatar',
 
 	'tags:add_tip' => '&nbsp;(Use commas to separate tags)',
+	'tags:list' => 'Tag list',
 
 	
 	'likes:likethis' => 'Like',
@@ -179,6 +180,7 @@ return array(
 	'gc_theme:tabnav:bookmarks' => 'Bookmarks',
 	'gc_theme:tabnav:widgets' => 'Page Revisions',
 	'gc_theme:tabnav:events' => 'Events',
+	'gc_theme:tabnav:tags' => 'Tags',
 	'gc_theme:search:groups' => 'Find a group',
 	'gc_theme:mygroups:none' => 'Join groups to follow the groups activities',
 	'gc_theme:colleagues:none' => 'Add colleagues and follow their activities',

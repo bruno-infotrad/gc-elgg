@@ -113,6 +113,7 @@ function gc_theme_init() {
 	elgg_register_page_handler('dashboard', 'gc_theme_dashboard_handler');
 	elgg_unregister_page_handler('search', 'search_page_handler');
 	elgg_register_page_handler('search', 'gc_theme_search_page_handler');
+	elgg_register_page_handler('tags', 'gc_theme_tags_page_handler');
 	elgg_register_page_handler('pages', 'gc_pages_page_handler');
 	elgg_register_page_handler('events', 'gc_event_manager_page_handler');
 	elgg_register_page_handler('messages', 'gc_messages_page_handler');
@@ -179,6 +180,7 @@ function gc_theme_init() {
 	elgg_register_ajax_view('gc_theme/ajax/pages_friends');
 	elgg_register_ajax_view('gc_theme/ajax/pages_owner');
 	elgg_register_ajax_view('gc_theme/ajax/pages_world');
+	elgg_register_ajax_view('gc_theme/ajax/tagslist');
 	elgg_register_ajax_view('gc_theme/ajax/polls');
 	elgg_register_ajax_view('gc_theme/ajax/search');
 	elgg_register_ajax_view('gc_theme/ajax/thewire');

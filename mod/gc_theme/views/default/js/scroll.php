@@ -11,6 +11,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 			var delete_marker = false, more_marker;
 			var path = base_url.replace(elgg.get_site_url(),'');
 			var path_atoms = path.split("/");
+			//console.log('DEBUT base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' count='+count+' iteration='+iteration);
 			//console.log('BEFORE REWRITE context='+context+' page_type='+page_type+' path='+path+' path_atoms='+JSON.stringify(path_atoms));
 			if (! context ) {
 				context_atoms = path_atoms[0].split("?");
@@ -60,6 +61,16 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 					//console.log('more_url='+more_url);
 					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset};
 					ajax_path = 'ajax/view/gc_theme/ajax/'+path_atoms;
+					break;
+				case 'tags':
+					iteration++;
+					delete_marker = elgg.delete_marker(count,iteration,60);
+					new_offset = parseInt(offset) + 60;
+					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
+					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
+					//console.log('more_url='+more_url);
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset, 'already_viewed': already_viewed};
+					ajax_path ='ajax/view/gc_theme/ajax/tagslist';
 					break;
 				case 'dashboard':
 					iteration++;
@@ -403,10 +414,13 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 	};
 };
 elgg.delete_marker = function(count,iteration,offset_step) {
+	//console.log('count='+count+' iteration='+iteration+' offset_step='+offset_step);
 	var delete_marker = false;
+	//console.log('delete_marker='+delete_marker);
 	if (count < (iteration+1)*offset_step) {
 		delete_marker = true;
 	}
+	//console.log('delete_marker='+delete_marker);
 	return delete_marker;
 }
 elgg.more_url = function(base_url,context,page_type,owner,offset,count,iteration){

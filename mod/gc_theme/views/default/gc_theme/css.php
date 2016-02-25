@@ -13,6 +13,7 @@ li[class*='elgg-menu-item-group-'] {
 	padding-left: 17px;
 }
 /*.elgg-menu-item-groups-user-invites,.elgg-menu-item-groups-add,.elgg-menu-item-groups-yours-more,.elgg-menu-item-groups-invitations,.elgg-menu-item-groups-join-request,*/
+.elgg-menu-item-tags,
 .elgg-menu-item-wire,
 li[class*='elgg-menu-item-friends-'],.elgg-menu-item-multi-invite, .elgg-menu-item-messages-sentmessages {
 	padding-left: 20px;

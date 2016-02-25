@@ -133,6 +133,7 @@ return array(
 	'tags' => "Mots-clé",
 	'tags:add_tip' => '&nbsp;(Séparez les mots-clé par des virgules)',
 	'tag_names:tags' => "Mots-clé",
+	'tags:list' => "Liste des mots-clé",
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',
@@ -459,6 +460,7 @@ return array(
 	'gc_theme:tabnav:bookmarks' => 'Signets',
 	'gc_theme:tabnav:widgets' => 'Révisions de la page',
 	'gc_theme:tabnav:events' => 'Événements',
+	'gc_theme:tabnav:tags' => 'Mots-clés',
 	'gc_theme:search:groups' => 'Trouvez un groupe',
 	'gc_theme:mygroups:none' => 'Joignez des groupes et suivez les activités associées',
 	'gc_theme:colleagues:none' => 'Ajoutez des collègues et suivez leurs activités',

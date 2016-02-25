@@ -273,6 +273,16 @@ function gc_usersettings_page_handler($segments, $handle) {
         }
 }
 
+function gc_theme_tags_page_handler($segments, $handle) {
+	$pages_dir = elgg_get_plugins_path() . 'gc_theme/pages';
+
+	switch ($segments[0]) {
+		case 'all':
+			require_once "$pages_dir/tags/tagslist.php";
+			return true;
+	}
+}
+
 function gc_theme_groups_page_handler($segments, $handle) {
 	$pages_dir = elgg_get_plugins_path() . 'gc_theme/pages';
 
