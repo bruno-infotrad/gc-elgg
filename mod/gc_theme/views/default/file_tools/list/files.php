@@ -5,6 +5,8 @@ $folder = elgg_extract("folder", $vars);
 $show_more = (bool) elgg_extract("show_more", $vars, false);
 $limit = (int) elgg_extract("limit", $vars, file_tools_get_list_length());
 $all_files = (int) file_tools_get_list_length();
+$sort_by = elgg_extract("sort_by", $vars);
+$direction = elgg_extract("direction", $vars);
 $offset = (int) elgg_extract("offset", $vars, 0);
 
 // only show the header if offset == 0
@@ -24,7 +26,7 @@ if (empty($offset)) {
 if (!empty($entities)) {
 	$params = array(
 		"full_view" => false,
-		"pagination" => false
+		"pagination" => false,
 	);
 	
 	elgg_push_context("file_tools_selector");
@@ -86,11 +88,18 @@ if (empty($files_content)) {
 		$files_content .= "</div>";
 	}
 }
-
+if (! $sort_by || $sort_by == 'oe.title') {
+	$selected = 'name';
+} elseif ($sort_by == 'e.time_created') {
+	$selected = 'time_created';
+} elseif ($sort_by == 'simpletype') {
+	$selected = 'type';
+}
 // show the listing
 echo "<div id='file_tools_list_files'>";
 echo "<div id='file_tools_list_files_overlay'></div>";
 echo $folder_content;
+echo elgg_view('file_tools/list/nav', array('selected' => $selected, 'direction' => $direction));
 echo $files_content;
 echo elgg_view("graphics/ajax_loader");
 echo "</div>";

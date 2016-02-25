@@ -1184,7 +1184,6 @@ function gc_file_tools_file_route_hook($hook, $type, $returnvalue, $params){
 	
 	if(!empty($returnvalue) && is_array($returnvalue)){
 		$page = elgg_extract("segments", $returnvalue);
-		
 		switch($page[0]){
 			case "view":
 				if(!elgg_is_logged_in() && isset($page[1])){

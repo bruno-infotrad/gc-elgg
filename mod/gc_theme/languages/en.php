@@ -36,6 +36,9 @@ return array(
 	'files' => 'Files',
 	'file_tools:forms:edit:parent' => 'Select a<br>parent folder',
 	'file_tools:show_all' => 'Show all files',
+	'file_tools:file_name' => 'Name',
+	'file_tools:file_type' => 'Type',
+	'file_tools:file_date_created' => 'Date created',
 	'friend:user:add' => "Add %s as Colleague",
 	
 	'groups:add' => 'Create Group',

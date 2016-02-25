@@ -43,6 +43,7 @@ elgg.file_tools.uploadify.init = function() {
 			height: "23",
 			width: "120",
 			auto: false,
+			debug: true,
 			onQueueComplete: function(queueData) {
 				var folder = $('#file_tools_file_parent_guid').val();
 				
@@ -207,13 +208,37 @@ elgg.file_tools.breadcrumb_click = function(event) {
 
 elgg.file_tools.load_folder = function(folder_guid) {
 	var query_parts = elgg.parse_url(window.location.href, "query", true);
+	//console.log('query_parts='+JSON.stringify(query_parts));
+	//console.log('referer='+JSON.stringify(document.referrer));
+	var referer=document.referrer;
+	var sort_by_prev = '';
+	if (referer != null) {
+		sort_by_prev = referer.match(/.+?sort_by=(.+?)&.+/);
+		//console.log('referer='+JSON.stringify(sort_by_prev));
+	}
 	var search_type = 'list';
+	var sort_by = '&sort_by=oe.title', direction = '&direction=asc';
 	
-	if (query_parts && query_parts.search_viewtype) {
-		search_type = query_parts.search_viewtype;
+	if (query_parts) { 
+		if (query_parts.search_viewtype) {
+			search_type = query_parts.search_viewtype;
+		}
+		if (query_parts.sort_by) {
+			sort_by = "&sort_by=" + query_parts.sort_by;
+		}
+		if (query_parts.direction) {
+			direction = "&direction=" + query_parts.direction;
+		}
+		if (sort_by_prev != null && sort_by_prev[1] == query_parts.sort_by) {
+			if (query_parts.direction == 'asc') {
+				direction = "&direction=desc";
+			} else {
+				direction = "&direction=asc";
+			}
+		}
 	}
 	
-	var url = elgg.get_site_url() + "file_tools/list/" + elgg.get_page_owner_guid() + "?folder_guid=" + folder_guid + "&search_viewtype=" + search_type;
+	var url = elgg.get_site_url() + "file_tools/list/" + elgg.get_page_owner_guid() + "?folder_guid=" + folder_guid + "&search_viewtype=" + search_type + sort_by + direction;
 
 	$("#file_tools_list_files_container .elgg-ajax-loader").show();
 	$("#file_tools_list_files_container").load(url, function() {
@@ -331,16 +356,40 @@ elgg.file_tools.show_more_files = function() {
 	var folder = $(this).siblings('input[name="folder_guid"]').val();
 	var query_parts = elgg.parse_url(window.location.href, "query", true);
 	var search_type = 'list';
-	
-	if (query_parts && query_parts.search_viewtype) {
-		search_type = query_parts.search_viewtype;
+	var referer=document.referrer;
+	var sort_by_prev = '';
+	if (referer != null) {
+		sort_by_prev = referer.match(/.+?sort_by=(.+?)&.+/);
+		//console.log('SHOW MORE referer='+JSON.stringify(sort_by_prev));
 	}
-
+	var search_type = 'list';
+	var sort_by = 'oe.title', direction = 'asc';
+	
+	if (query_parts) { 
+		if (query_parts.search_viewtype) {
+			search_type = query_parts.search_viewtype;
+		}
+		if (query_parts.sort_by) {
+			sort_by = query_parts.sort_by;
+		}
+		if (query_parts.direction) {
+			direction = query_parts.direction;
+		}
+		if (sort_by_prev != null && sort_by_prev[1] == query_parts.sort_by) {
+			if (query_parts.direction == 'asc') {
+				direction = "desc";
+			} else {
+				direction = "asc";
+			}
+		}
+	}
 	
 	elgg.post("file_tools/list/" + elgg.get_page_owner_guid(), {
 		data: {
 			folder_guid: folder,
 			search_viewtype: search_type,
+			sort_by: sort_by,
+			direction: direction,
 			offset: offset,
 			limit : limit
 		},

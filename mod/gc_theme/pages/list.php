@@ -3,12 +3,10 @@
 	$page_owner 		= elgg_get_page_owner_entity();
 	$folder_guid 		= (int) get_input("folder_guid", 0);
 	$draw_page 			= get_input("draw_page", true);
-
 	$sort_by 			= get_input("sort_by");
 	$direction 			= get_input("direction");
 	$limit				= (int) get_input("limit", 10);
 	$offset				= (int) get_input("offset", 0);
-	
 	if(!empty($page_owner) && (elgg_instanceof($page_owner, "user") || elgg_instanceof($page_owner, "group"))) {
 		group_gatekeeper();
 		
@@ -68,7 +66,7 @@
 				$folder = false; // just to be save
 				$files_options["wheres"] = $wheres;
 				
-				$files = elgg_get_entities($files_options);
+				$files = elgg_get_entities_from_metadata($files_options);
 			}
 		}
 		// get count
@@ -79,7 +77,6 @@
 		if ($limit) {
 			$show_more = $files_count > ($offset + $limit);
 		}
-
 		if(!$draw_page) {
 			echo elgg_view("file_tools/list/files", array("folder" => $folder, "files" => $files, "sort_by" => $sort_by, "direction" => $direction,"show_more" => $show_more, "limit" => $limit, "offset" => $offset));
 		} else {
@@ -97,7 +94,6 @@
 			$title_text = elgg_echo("file:user", array($page_owner->name));
 			
 			$body = "<div id='file_tools_list_files_container'>" . elgg_view("graphics/ajax_loader", array("hidden" => false)) . "</div>";
-			
 			// make sidebar
 			$sidebar = elgg_view("file_tools/list/tree", array("folder" => $folder, "folders" => $folders));
 			$sidebar .= elgg_view("file_tools/sidebar/sort_options");

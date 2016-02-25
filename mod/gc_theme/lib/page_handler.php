@@ -693,7 +693,6 @@ function gc_file_tools_page_handler($page) {
 				if(isset($page[2])) {
 					set_input("folder_guid", $page[2]);
 				}
-				
 				$include_file = dirname(dirname(__FILE__)) . "/pages/list.php";
 			}
 			break;

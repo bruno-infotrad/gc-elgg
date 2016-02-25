@@ -7,6 +7,23 @@
  */
 
 ?>
+.arrow-up {
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid black;
+	display: inline-block;
+	height: 0; 
+	width: 0; 
+}
+
+.arrow-down {
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid black;
+	display: inline-block;
+	height: 0; 
+	width: 0; 
+}
 .comment-icon-center {padding-left: 45%;}
 .elgg-icon-info-top {vertical-align:text-top!important;}
 /*[class^=wire-edit-] {*/

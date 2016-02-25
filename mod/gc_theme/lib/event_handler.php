@@ -381,7 +381,7 @@ function gc_theme_pagesetup_handler() {
 				elgg_register_menu_item('page', array(
 					'name' => 'files',
 					'text' => elgg_view_agora_icon('files').elgg_echo('files'),
-					'href' => "/file/owner/$user->username",
+					'href' => "/file/owner/$user->username?sort_by=oe.title&direction=asc",
 					'section' => '2contributions',
 					'priority' => 70,
 				));

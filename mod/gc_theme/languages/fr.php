@@ -168,6 +168,9 @@ return array(
 	'file_tools:menu:mine' => "Vos dossiers",
 	'file_tools:menu:user' => "Dossiers de %s",
 	'file_tools:menu:group' => "Dossiers du groupe",
+	'file_tools:file_name' => 'Nom',
+	'file_tools:file_type' => 'Type',
+	'file_tools:file_date_created' => 'Date de création',
 		
 	// group tool option
 	'file_tools:group_tool_option:structure_management' => "Permettre la gestion des dossiers par les membres",
