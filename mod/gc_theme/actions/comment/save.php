@@ -98,33 +98,6 @@ if ($comment_guid) {
 			)
 		);
 	}
-	//Notify any user referred by handle in comment text
-	if ($atoms=preg_split('/\s+|<br>|,/', $raw_comment_text)) {
-	        foreach ($atoms as $atom) {
-	                $username=preg_replace('/^@/','',$atom,-1,$count);
-	                if ($count) {
-	                        if($to_user=get_user_by_username($username)) {
-	                        	//$comment_text = preg_replace('/@'.$username.'/', '<a href="profile/'.$username.'">@'.$username.'</a>', $comment_text);
-					if ($to_user->guid != $entity->owner_guid && $to_user->guid != $user->guid) {
-						$to = $to_user->guid;
-						notify_user($to,
-							$user->guid,
-							elgg_echo('gc_theme:comment:notify_ref:subject', array(), $to_user->language),
-							elgg_echo('gc_theme:comment:notify_ref:body', array(
-								$user->name,
-								$entity->getURL(),
-							), $to_user->language),
-							array(
-								'object' => $comment,
-								'action' => 'create',
-							)
-						);
-					}
-				}
-	                }
-	        }
-	}
-
 	// Add to river
 	elgg_create_river_item(array(
 		'view' => 'river/object/comment/create',
