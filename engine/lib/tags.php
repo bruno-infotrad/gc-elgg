@@ -74,6 +74,8 @@ function elgg_get_tags(array $options = array()) {
 	$defaults = array(
 		'threshold' => 1,
 		'tag_names' => array(),
+		'count' => false,
+		'offset' => 0,
 		'limit' => elgg_get_config('default_limit'),
 
 		'types' => ELGG_ENTITIES_ANY_VALUE,
@@ -167,9 +169,15 @@ function elgg_get_tags(array $options = array()) {
 		}
 	}
 
+	 if (! $options['count']) {
+		$query  = "SELECT msv.string as tag, count(msv.id) as total ";
+		$query .= "FROM {$CONFIG->dbprefix}entities e ";
+	} else {
+		$query  = "SELECT COUNT(*) as total ";
+		$query .= "FROM {$CONFIG->dbprefix}entities e ";
+                }
 
-	$query  = "SELECT msv.string as tag, count(msv.id) as total ";
-	$query .= "FROM {$CONFIG->dbprefix}entities e ";
+
 
 	// add joins
 	foreach ($joins as $j) {
@@ -186,14 +194,22 @@ function elgg_get_tags(array $options = array()) {
 	// Add access controls
 	$query .= _elgg_get_access_where_sql();
 
-	$threshold = sanitise_int($options['threshold']);
-	$query .= " GROUP BY msv.string HAVING total >= {$threshold} ";
-	$query .= " ORDER BY total DESC ";
+	if (! $options['count'] && $options['limit'] != 0) {
+		$threshold = sanitise_int($options['threshold']);
+		$query .= " GROUP BY msv.string HAVING total >= {$threshold} ";
+		$query .= " ORDER BY total DESC ";
+		$limit = sanitise_int($options['limit']);
+		$offset = sanitise_int($options['offset']);
+		$query .= " LIMIT {$offset},{$limit} ";
+	}
+	if (! $options['count']) {
+		$results =  get_data($query);
+	} else {
+		$total =  get_data_row($query);
+		$results = (int)$total->total;
+	}
 
-	$limit = sanitise_int($options['limit']);
-	$query .= " LIMIT {$limit} ";
-
-	return get_data($query);
+	return $results;
 }
 
 /**
