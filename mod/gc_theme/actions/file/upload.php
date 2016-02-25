@@ -12,7 +12,7 @@ $desc = get_input("description");
 $access_id = (int) get_input("access_id");
 $container_guid = (int) get_input('container_guid', 0);
 $guid = (int) get_input('file_guid');
-$tags = get_input("tags");
+$tags = get_input("tags",'');
 $embed= get_input("embed",false);
 $add_to_river= get_input("add_to_river",false);
 
