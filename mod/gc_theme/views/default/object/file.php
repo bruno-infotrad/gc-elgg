@@ -165,7 +165,7 @@
 			"content" => $excerpt
 		);
 		$params = $params + $vars;
-		$list_body = elgg_view("object/elements/summary", $params);
+		$list_body = elgg_view("object/elements/file_summary", $params);
 		
 		echo elgg_view_image_block($file_icon, $list_body, array("class" => "file-tools-file", "image_alt" => $file_icon_alt));
 	}

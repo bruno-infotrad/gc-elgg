@@ -8,6 +8,20 @@
  *
  */
 ?>
+.gc-file-name,
+.gc-file-date-created {
+	display: inline-block;
+	font-size: 11px;
+}
+.gc-file-name {
+	font-weight: bold;
+	width: 35%;
+}
+.gc-file-date-created {
+	padding-left: 3px;
+	vertical-align: top;
+	width: 11%;
+}
 .tag-total,
 .tag-name {
 	display: inline-block;

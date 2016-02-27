@@ -208,14 +208,14 @@ elgg.file_tools.breadcrumb_click = function(event) {
 
 elgg.file_tools.load_folder = function(folder_guid) {
 	var query_parts = elgg.parse_url(window.location.href, "query", true);
-	console.log('query_parts='+JSON.stringify(query_parts));
-	console.log('referer='+JSON.stringify(document.referrer));
+	//console.log('query_parts='+JSON.stringify(query_parts));
+	//console.log('referer='+JSON.stringify(document.referrer));
 	var referer=document.referrer;
 	var sort_by_prev = '';
 	var switched = 0;
 	if (referer != null) {
 		sort_by_prev = referer.match(/.+?sort_by=(.+?)&.+/);
-		console.log('referer='+JSON.stringify(sort_by_prev));
+		//console.log('referer='+JSON.stringify(sort_by_prev));
 	}
 	var search_type = 'list';
 	var sort_by = '&sort_by=oe.title', direction = '&direction=asc';
