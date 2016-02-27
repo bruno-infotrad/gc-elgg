@@ -176,7 +176,7 @@
 	if ($group->file_enable == "yes") {
 		$tabs[] = array(
 			"text" => elgg_echo("files"),
-			"href" => "file/group/" . $page_owner_guid . "/all",
+			"href" => "file/group/" . $page_owner_guid . "/all?sort_by=oe.title&direction=asc",
 			"link_id" => "file-tools-single-form-link",
 			"is_trusted" => true,
 			"selected" => ($selected_tab == "files") ? true: false

@@ -193,7 +193,7 @@ return array(
 	'file_tools:list:select_all' => 'Tout sélectionner',
 	'file_tools:list:deselect_all' => 'Tout désélectionner',
 	'file_tools:list:download_selected' => 'Sélection du téléchargement',
-	'file_tools:list:delete_selected' => 'Sélection de la suppression',
+	'file_tools:list:delete_selected' => 'Suppression de la sélection',
 	'file_tools:list:alert:not_all_deleted' => 'Tous les fichiers n\'ont pu être supprimés',
 	'file_tools:list:alert:none_selected' => 'Aucune sélection',
 	

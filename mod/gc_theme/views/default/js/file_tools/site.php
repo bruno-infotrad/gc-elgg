@@ -208,13 +208,14 @@ elgg.file_tools.breadcrumb_click = function(event) {
 
 elgg.file_tools.load_folder = function(folder_guid) {
 	var query_parts = elgg.parse_url(window.location.href, "query", true);
-	//console.log('query_parts='+JSON.stringify(query_parts));
-	//console.log('referer='+JSON.stringify(document.referrer));
+	console.log('query_parts='+JSON.stringify(query_parts));
+	console.log('referer='+JSON.stringify(document.referrer));
 	var referer=document.referrer;
 	var sort_by_prev = '';
+	var switched = 0;
 	if (referer != null) {
 		sort_by_prev = referer.match(/.+?sort_by=(.+?)&.+/);
-		//console.log('referer='+JSON.stringify(sort_by_prev));
+		console.log('referer='+JSON.stringify(sort_by_prev));
 	}
 	var search_type = 'list';
 	var sort_by = '&sort_by=oe.title', direction = '&direction=asc';
@@ -230,6 +231,7 @@ elgg.file_tools.load_folder = function(folder_guid) {
 			direction = "&direction=" + query_parts.direction;
 		}
 		if (sort_by_prev != null && sort_by_prev[1] == query_parts.sort_by) {
+			switched = 1;
 			if (query_parts.direction == 'asc') {
 				direction = "&direction=desc";
 			} else {
@@ -238,7 +240,7 @@ elgg.file_tools.load_folder = function(folder_guid) {
 		}
 	}
 	
-	var url = elgg.get_site_url() + "file_tools/list/" + elgg.get_page_owner_guid() + "?folder_guid=" + folder_guid + "&search_viewtype=" + search_type + sort_by + direction;
+	var url = elgg.get_site_url() + "file_tools/list/" + elgg.get_page_owner_guid() + "?folder_guid=" + folder_guid + "&search_viewtype=" + search_type + sort_by + direction + "&switched=" + switched;
 
 	$("#file_tools_list_files_container .elgg-ajax-loader").show();
 	$("#file_tools_list_files_container").load(url, function() {
@@ -454,7 +456,7 @@ elgg.file_tools.init = function() {
 	// tree functions
 	elgg.file_tools.tree.init();
 	
-	$('#file_tools_breadcrumbs a').live("click", elgg.file_tools.breadcrumb_click);
+	//$('#file_tools_breadcrumbs a').live("click", elgg.file_tools.breadcrumb_click);
 	$('#file_tools_select_all').live("click", elgg.file_tools.select_all);
 	$('#file_tools_action_bulk_delete').live("click", elgg.file_tools.bulk_delete);
 	$('#file_tools_action_bulk_download').live("click", elgg.file_tools.bulk_download);

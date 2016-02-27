@@ -5,6 +5,7 @@
 	$draw_page 			= get_input("draw_page", true);
 	$sort_by 			= get_input("sort_by");
 	$direction 			= get_input("direction");
+	$switched 			= get_input("switched",0);
 	$limit				= (int) get_input("limit", 10);
 	$offset				= (int) get_input("offset", 0);
 	if(!empty($page_owner) && (elgg_instanceof($page_owner, "user") || elgg_instanceof($page_owner, "group"))) {
@@ -78,7 +79,7 @@
 			$show_more = $files_count > ($offset + $limit);
 		}
 		if(!$draw_page) {
-			echo elgg_view("file_tools/list/files", array("folder" => $folder, "files" => $files, "sort_by" => $sort_by, "direction" => $direction,"show_more" => $show_more, "limit" => $limit, "offset" => $offset));
+			echo elgg_view("file_tools/list/files", array("folder" => $folder, "files" => $files, "sort_by" => $sort_by, "direction" => $direction,"show_more" => $show_more, "limit" => $limit, "offset" => $offset, "switched" => $switched));
 		} else {
 			// build breadcrumb
 			elgg_push_breadcrumb(elgg_echo("file"), "file/all");

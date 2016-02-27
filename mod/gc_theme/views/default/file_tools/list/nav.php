@@ -9,39 +9,49 @@ if (elgg_instanceof($owner, 'user')) {
 } elseif (elgg_instanceof($owner, 'group')) {
 	$url = "file/group/".$owner->getGUID();
 }
-$direction = elgg_extract('direction',$vars);
+$olddirection = $direction = elgg_extract('direction',$vars);
+$switched = elgg_extract('switched',$vars);
+$folder_guid = elgg_extract('folder_guid',$vars);
 $selected = $vars['selected'];
 if ($direction == 'asc') {
-	if ($selected == 'name') {
-		$name_arrow = ' <div class="arrow-up"></div>';
-	} elseif ($selected == 'type') {
-		$type_arrow = ' <div class="arrow-up"></div>';
-	} elseif ($selected == 'time_created') {
-		$time_created_arrow = ' <div class="arrow-up"></div>';
-	}
+	$arrow = ' <div class="arrow-up"></div>';
 } else {
-	if ($selected == 'name') {
-		$name_arrow = ' <div class="arrow-down"></div>';
-	} elseif ($selected == 'type') {
-		$type_arrow = ' <div class="arrow-down"></div>';
-	} elseif ($selected == 'time_created') {
-		$time_created_arrow = ' <div class="arrow-down"></div>';
+	$arrow = ' <div class="arrow-down"></div>';
+}
+if ($selected == 'name') {
+	$name_arrow = $arrow;
+} elseif ($selected == 'type') {
+	$type_arrow = $arrow;
+} elseif ($selected == 'time_created') {
+	$time_created_arrow = $arrow;
+}
+$folder_anchor = "";
+if ($folder_guid) {
+	$folder_anchor = "#$folder_guid";
+//Only do this because it is a bad idea to use local anchors (#) as folder GUIDs
+	if (! $switched) {
+		if ($olddirection == 'asc') {
+			$direction = 'desc';
+		} elseif ($olddirection == 'desc') {
+			$direction = 'asc';
+		}
 	}
 }
+
 $tabs = array(
 	'name' => array(
 		'title' => elgg_echo('file_tools:file_name').$name_arrow,
-		'url' => $url."?sort_by=oe.title&direction=$direction",
+		'url' => $url."?folder_guid=$folder_guid&sort_by=oe.title&direction=$direction$folder_anchor",
 		'selected' => $selected == 'name',
 	),
 	'type' => array(
 		'title' => elgg_echo('file_tools:file_type').$type_arrow,
-		'url' => $url."?sort_by=simpletype&direction=$direction",
+		'url' => $url."?folder_guid=$folder_guid&sort_by=simpletype&direction=$direction$folder_anchor",
 		'selected' => $selected == 'type',
 	),
 	'time_created' => array(
 		'title' => elgg_echo('file_tools:file_date_created').$time_created_arrow,
-		'url' => $url."?sort_by=e.time_created&direction=$direction",
+		'url' => $url."?folder_guid=$folder_guid&sort_by=e.time_created&direction=$direction$folder_anchor",
 		'selected' => $selected == 'time_created',
 	),
 );

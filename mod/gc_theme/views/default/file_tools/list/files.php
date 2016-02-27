@@ -7,8 +7,13 @@ $limit = (int) elgg_extract("limit", $vars, file_tools_get_list_length());
 $all_files = (int) file_tools_get_list_length();
 $sort_by = elgg_extract("sort_by", $vars);
 $direction = elgg_extract("direction", $vars);
+$switched = elgg_extract("switched", $vars);
 $offset = (int) elgg_extract("offset", $vars, 0);
 
+$folder_guid = 0;
+if ($folder) {
+	$folder_guid = $folder->getGUID();
+}
 // only show the header if offset == 0
 $folder_content = "";
 if (empty($offset)) {
@@ -48,11 +53,7 @@ if (empty($files_content)) {
 		));
 		$files_content .= elgg_view("input/hidden", array("name" => "offset", "value" => ($limit + $offset)));
 		$files_content .= elgg_view("input/hidden", array("name" => "limit", "value" => 10));
-		if (!empty($folder)) {
-			$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => $folder->getGUID()));
-		} else {
-			$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => "0"));
-		}
+		$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => $folder_guid));
 		$files_content .= "</div>";
 		$files_content .= "<div class='center' id='file-tools-show-all-wrapper'>";
 		$files_content .= elgg_view("input/button", array(
@@ -62,11 +63,7 @@ if (empty($files_content)) {
 		));
 		$files_content .= elgg_view("input/hidden", array("name" => "offset", "value" => ($limit + $offset)));
 		$files_content .= elgg_view("input/hidden", array("name" => "limit", "value" => $all_files));
-		if (!empty($folder)) {
-			$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => $folder->getGUID()));
-		} else {
-			$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => "0"));
-		}
+		$files_content .= elgg_view("input/hidden", array("name" => "folder_guid", "value" => $folder_guid));
 		$files_content .= "</div>";
 	}
 	
@@ -99,7 +96,7 @@ if (! $sort_by || $sort_by == 'oe.title') {
 echo "<div id='file_tools_list_files'>";
 echo "<div id='file_tools_list_files_overlay'></div>";
 echo $folder_content;
-echo elgg_view('file_tools/list/nav', array('selected' => $selected, 'direction' => $direction));
+echo elgg_view('file_tools/list/nav', array('folder_guid' => $folder_guid, 'selected' => $selected, 'direction' => $direction, 'switched' => $switched));
 echo $files_content;
 echo elgg_view("graphics/ajax_loader");
 echo "</div>";

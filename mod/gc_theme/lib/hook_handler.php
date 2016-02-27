@@ -1606,3 +1606,24 @@ function gc_file_tools_folder_sidebar_tree_hook($hook, $type, $returnvalue, $par
 	
 	return $returnvalue;
 }
+function gc_file_tools_folder_url_handler($hook, $type, $returnvalue, $params) {
+	
+	if (empty($params) || !is_array($params)) {
+		return $returnvalue;
+	}
+	
+	$entity = elgg_extract("entity", $params);
+	if (empty($entity) || !elgg_instanceof($entity, "object", FILE_TOOLS_SUBTYPE)) {
+		return $returnvalue;
+	}
+	
+	$container = $entity->getContainerEntity();
+
+	if (elgg_instanceof($container, "group")) {
+		$returnvalue = "file/group/" . $container->getGUID() . "/all#" . $entity->getGUID()."?sort_by=oe.title&direction=asc";
+	} else {
+		$returnvalue = "file/owner/" . $container->username . "#" . $entity->getGUID()."?sort_by=oe.title&direction=asc";
+	}
+
+	return $returnvalue;
+}
