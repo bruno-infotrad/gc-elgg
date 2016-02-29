@@ -669,6 +669,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'groups:list' => "Groupes A-Z",
 	'groups:list:other' => "Autre",
 	'groups:newest' => "Récents",
+	'group:export_members' => 'Exporter la liste des membres',
 	'group_tools:group:edit:profile' => "Profil du groupe",
 	'group_tools:group:edit:other' => "Autres options",
 	'group_tools:multiple_admin:group_admins' => "Propriétaires du groupe",

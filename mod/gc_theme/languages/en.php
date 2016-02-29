@@ -49,6 +49,7 @@ return array(
 	'groups:list' => 'A-Z Groups',
 	'groups:list:other' => 'Other',
 	'groups:newest' => 'Newest',
+	'group:export_members' => 'Export members list',
 
 	'home' => 'Home',
 	

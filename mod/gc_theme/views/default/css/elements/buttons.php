@@ -9,6 +9,14 @@
 /* **************************
 	BUTTONS
 ************************** */
+#export-members {
+	float: right;
+	position: relative;
+	padding-right: 5px;
+	text-decoration: none;
+	top: -3.2em;
+	
+}
 #file-tools-show-more-wrapper, #file-tools-show-all-wrapper { display: inline-block; }
 #file-tools-show-more-wrapper { padding-left: 1px; }
 #file-tools-show-all-wrapper { padding-left: 10px; }

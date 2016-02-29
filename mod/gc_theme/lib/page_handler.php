@@ -313,6 +313,11 @@ function gc_theme_groups_page_handler($segments, $handle) {
 			require_once "$pages_dir/groups/members.php";
 			return true;
 
+		case 'export_members':
+			elgg_set_page_owner_guid($segments[1]);
+			require_once "$pages_dir/groups/export_members.php";
+			return true;
+
 		case 'info':
 			elgg_set_page_owner_guid($segments[1]);
 			require_once "$pages_dir/groups/info.php";
