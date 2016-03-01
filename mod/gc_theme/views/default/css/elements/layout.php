@@ -32,7 +32,7 @@
 	padding: 0 5px;
 }
 .tag-total {
-	width: 1.5em;
+	width: 2em;
 }
 .tag-name {
     color: #39739D;
