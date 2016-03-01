@@ -10,7 +10,7 @@
 	BUTTONS
 ************************** */
 #export-members {
-	float: right;
+	left: 75%;
 	position: relative;
 	padding-right: 5px;
 	text-decoration: none;
