@@ -297,6 +297,7 @@
 			$EOL = PHP_EOL;
 		}
 		
+		$headerString .= "sep=;".$EOL;
 		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username').'"';
 		
 		if($event->registration_needed) {
@@ -381,6 +382,7 @@
 			$EOL = PHP_EOL;
 		}
 		
+		$headerString .= "sep=;".$EOL;
 		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username').'";"'.elgg_echo('event_manager:registration:time').'"';
 		
 		if($event->registration_needed) {
