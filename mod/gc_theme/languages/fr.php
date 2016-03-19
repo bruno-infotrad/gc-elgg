@@ -134,6 +134,10 @@ return array(
 	'tags:add_tip' => '&nbsp;(Séparez les mots-clé par des virgules)',
 	'tag_names:tags' => "Mots-clé",
 	'tags:list' => "Liste des mots-clé",
+	'tags:since_beginning' => 'Tous',
+	'tags:one_year' => 'L\'année dernière',
+	'tags:six_months' => 'Les derniers six mois',
+	'tags:one_month' => 'Les derniers trois mois',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',
