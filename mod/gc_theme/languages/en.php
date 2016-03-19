@@ -83,10 +83,10 @@ return array(
 
 	'tags:add_tip' => '&nbsp;(Use commas to separate tags)',
 	'tags:list' => 'Tag list',
-	'tags:since_beginning' => 'All',
+	'tags:since_beginning' => 'All-Time',
 	'tags:one_year' => 'Last year',
 	'tags:six_months' => 'Last six months',
-	'tags:one_month' => 'Last three months',
+	'tags:one_month' => 'Last month',
 
 	
 	'likes:likethis' => 'Like',

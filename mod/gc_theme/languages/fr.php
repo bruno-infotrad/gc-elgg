@@ -136,8 +136,8 @@ return array(
 	'tags:list' => "Liste des mots-clé",
 	'tags:since_beginning' => 'Tous',
 	'tags:one_year' => 'L\'année dernière',
-	'tags:six_months' => 'Les derniers six mois',
-	'tags:one_month' => 'Les derniers trois mois',
+	'tags:six_months' => 'Les six derniers mois',
+	'tags:one_month' => 'Le mois dernier',
 	
 	'river:create:object:bookmarks' => "%s a mis en signet %s",
 	'river:create:object:poll' => '%s a créé le sondage %s',
