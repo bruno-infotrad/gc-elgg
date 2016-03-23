@@ -22,6 +22,7 @@ if ($year && $month && $day) {
 $additional_keywords = get_input('additional_keywords');
 // $search_type == all || entities || trigger plugin hook
 $search_type = get_input('search_type', 'all');
+$exact = get_input('exact', '');
 // @todo there is a bug in get_input that makes variables have slashes sometimes.
 // @todo is there an example query to demonstrate ^
 // XSS protection is more important that searching for HTML.
@@ -93,6 +94,7 @@ $params = array(
 //	'tag_type' => $tag_type,
 	'owner_guid' => $owner_guid,
 	'container_guid' => $container_guid,
+	'exact' => $exact,
 //	'friends' => $friends
 	'pagination' => ($search_type == 'all') ? FALSE : TRUE
 );
