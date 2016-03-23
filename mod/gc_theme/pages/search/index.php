@@ -199,14 +199,17 @@ if ($search_type == 'all' || $search_type == 'entities') {
 	// if a plugin returns FALSE for subtype ignore it.
 	// if a plugin returns NULL or '' for subtype, pass to generic type search function.
 	// if still NULL or '' or empty(array()) no results found. (== don't show??)
-	$type = 'group';
-	$current_params['type'] = $type;
-	$current_params['subtype'] = ELGG_ENTITIES_NO_VALUE;
 
-	$results = elgg_trigger_plugin_hook('search', $type, $current_params, array());
-	if ($results === FALSE) {
-		// someone is saying not to display these types in searches.
-		continue;
+	if ($search_type == 'all' || ($search_type == 'entities' && $entity_type == 'group')) {
+		$type = 'group';
+		$current_params['type'] = $type;
+		$current_params['subtype'] = ELGG_ENTITIES_NO_VALUE;
+
+		$results = elgg_trigger_plugin_hook('search', $type, $current_params, array());
+		if ($results === FALSE) {
+			// someone is saying not to display these types in searches.
+			continue;
+		}
 	}
 
 	if (is_array($results['entities']) && $results['count']) {
