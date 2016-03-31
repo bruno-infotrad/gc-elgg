@@ -18,6 +18,7 @@ switch ($page_type) {
 	$options = array( 'type' => 'user', 'full_view' => false, 'joins' => array("JOIN {$dbprefix}users_entity u ON e.guid=u.guid"),);
 	$options['base_url'] = $base_url;
 	$options['offset'] = $offset;
+	$options["order_by"] = "u.name asc";
 	if (! elgg_is_admin_logged_in()) {
 		$options['wheres'] = array("((u.name LIKE \"%{$name}%\" OR u.username LIKE \"%{$name}%\") AND u.banned = 'no')");
 	} else {

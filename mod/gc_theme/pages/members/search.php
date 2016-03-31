@@ -31,6 +31,7 @@ if ($vars['search_type'] == 'tag') {
 	$params = array(
 		'type' => 'user',
 		'full_view' => false,
+		"order_by" => "u.name asc",
 		'joins' => array("JOIN {$db_prefix}users_entity u ON e.guid=u.guid"),
 	);
 	if (! elgg_is_admin_logged_in()) {
