@@ -382,6 +382,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'groups:register_to_comment' => 'Register in the group to add comments',
 	'groups:register_to_reply' => 'Register in the group to add replies',
 	'river:comment:group:default' => "%s posted a comment on %s group creation",
+	'members:title:searchname' => "Search Members",
 	'members:searchboxvalue' => "Name",
 	'members:label:alphabetical' => "Alphabetical",
 	'gc_theme:duplicate_account' => "Please note you have two different accounts on Agora. Please contact Agora Support to arrange migration of your content",

@@ -7,21 +7,23 @@ $page_type = get_input('page_type');
 $offset = get_input('offset');
 $name = get_input('name');
 $base_url = get_input('base_url');
-$options['offset'] = $offset;
 require_once elgg_get_plugins_path() . 'gc_theme/lib/gc_find_active_users.php';
 //Override function to get users to filter out banned users
 $dbprefix = elgg_get_config("dbprefix");
 $options = array('type' => 'user', 'full_view' => false);
+$options['offset'] = $offset;
 switch ($page_type) {
 	case 'search':
 	$name = sanitize_string($name);
-	$params = array( 'type' => 'user', 'full_view' => false, 'joins' => array("JOIN {$dbprefix}users_entity u ON e.guid=u.guid"),);
+	$options = array( 'type' => 'user', 'full_view' => false, 'joins' => array("JOIN {$dbprefix}users_entity u ON e.guid=u.guid"),);
+	$options['base_url'] = $base_url;
+	$options['offset'] = $offset;
 	if (! elgg_is_admin_logged_in()) {
-		$params['wheres'] = array("((u.name LIKE \"%{$name}%\" OR u.username LIKE \"%{$name}%\") AND u.banned = 'no')");
+		$options['wheres'] = array("((u.name LIKE \"%{$name}%\" OR u.username LIKE \"%{$name}%\") AND u.banned = 'no')");
 	} else {
-		$params['wheres'] = array("((u.name LIKE \"%{$name}%\" OR u.username LIKE \"%{$name}%\"))");
+		$options['wheres'] = array("((u.name LIKE \"%{$name}%\" OR u.username LIKE \"%{$name}%\"))");
 	}
-	$content = elgg_list_entities($params);
+	$content = elgg_list_entities($options);
 	break;
 	case 'popular':
 		$options['base_url'] = $base_url;
