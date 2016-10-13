@@ -9,11 +9,16 @@ if ($page_type == 'all') {
 	$user = elgg_get_logged_in_user_entity();
 	$return = blog_get_page_content_friends($offset,$base_url,$user->guid);
 	echo $return['content'];
-} elseif ($page_type == 'owner') {
+} elseif ($page_type == 'group') {
 	$container_guid = get_input('group_guid');
 	if (! $container_guid) {
 		$container_guid = $user->getGUID();
 	}
+	$return = blog_get_page_content_list($offset,$base_url,$container_guid);
+	echo $return['content'];
+} elseif ($page_type == 'owner') {
+	$owner = get_user_by_username(get_input('owner'));
+	$container_guid = $owner->getGUID();
 	$return = blog_get_page_content_list($offset,$base_url,$container_guid);
 	echo $return['content'];
 }

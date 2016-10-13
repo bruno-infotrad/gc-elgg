@@ -339,12 +339,22 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 				case 'discussion':
 					owner = path_atoms[2];
 					iteration++;
-					delete_marker = elgg.delete_marker(count,iteration,10);
-					new_offset = parseInt(offset) + 10;
-					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
-					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
-					params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
-					ajax_path = 'ajax/view/gc_theme/ajax/replies';
+					if (page_type == 'view') {
+						delete_marker = elgg.delete_marker(count,iteration,10);
+						new_offset = parseInt(offset) + 10;
+						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
+						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						ajax_path = 'ajax/view/gc_theme/ajax/replies';
+					} else if (page_type == 'owner') {
+						var group_guid = owner;
+						delete_marker = elgg.delete_marker(count,iteration,20);
+						new_offset = parseInt(offset) + 20;
+						more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
+						//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset+' group_guid='+group_guid);
+						params = {'base_url': base_url,'group_guid': group_guid, 'page_type': page_type, 'owner': owner, 'offset': new_offset};
+						ajax_path = 'ajax/view/gc_theme/ajax/discussion';
+					}
 					break;
 				case 'ajax':
 					if  (path_atoms[2] == 'profile') {
