@@ -29,7 +29,8 @@ function polls_get_choices($poll) {
 		'relationship' => 'poll_choice',
 		'relationship_guid' => $poll->guid,
 		'inverse_relationship' => TRUE,
-		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC')
+		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC'),
+		'limit' => 0,
 	);
 	return elgg_get_entities_from_relationship($options);
 }
