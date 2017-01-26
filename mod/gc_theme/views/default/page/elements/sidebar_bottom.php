@@ -15,11 +15,11 @@ $help_label = elgg_echo("gc_theme:help");
 $contact_label = elgg_echo("gc_theme:contact");
 $contact_url = "${site_url}pages/view/19301/contact-us-contacteznous";
 $about_label = elgg_echo("gc_theme:about");
-$about_url = " http://modus/gi_ti-im_it/gi_ti-im_it/7633993-7369136.aspx?lang=$langue";
+$about_url = " http://modus/personnel-employees/peo-work/kno-colla/7633993-7369136.aspx?lang=$langue";
 $stats_label = elgg_echo("site_stats:stats");
 $stats_url = "${site_url}site_stats";
 $training_label = elgg_echo('gc_theme:sidebar_link:training');
-$training_url = "http://modus/gi_ti-im_it/gi_ti-im_it/7633993-7369136.aspx?lang=$langue#$training";
+$training_url = "http://modus/personnel-employees/peo-work/kno-colla/7633993-7369136.aspx?lang=$langue#$training";
 $content =<<<_HTML
 <nav id="secondary-nav">
             <h2>AGORA</h2>
