@@ -632,7 +632,7 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'friend:newfriend:body' => "Vous êtes maintenant collègue avec %s.",
 	'friend:newfriend:body' => 'Ce courriel vous a été envoyé automatiquement. Vous êtes maintenant collègue avec %1$s dans "Agora", l\'outil de collaboration d\' AMC.<p>Cliquez sur l\'hyperlien pour voir le profil de <a href="%2$s">%1$s</a>.',
 	'htm_email_handler:note' => '<b>Note:</b> Vous avez reçu ce courriel car votre compte est réglé pour envoyer automatiquement des courriels de notification. Pour changer ce réglage, allez à la page <a href="%1$s">Notifications personnelles</a>.: ',
-        'htm_email_handler:note2' => '<p>SVP Veuillez ne pas répondre à ce message, puisque le courrier électronique envoyé à cette adresse ne sera pas vérifié. Si vous avez des questions, veuillez les adresser au bureau de service en <a href="http://intranet.dfait-maeci.gc.ca/international_platform-plateforme_internationale/imit-giti/help-aide/index.aspx?view=d">GI/TI</a>.',
+        'htm_email_handler:note2' => '<p>SVP Veuillez ne pas répondre à ce message, puisque le courrier électronique envoyé à cette adresse ne sera pas vérifié. Si vous avez des questions, veuillez les adresser au <a href="https://hql-dmesmwb01/SDO/FRA">bureau de service en GI/TI</a>.',
 	'htm_email_handler:group_send' => '<b>Note: Ce message a été envoyé par la commande "Envoyer un message aux membres" et ne dépend pas de vos réglages pour les notifications.</b>',
 	'item:object:blog' => 'Blogues',
 	'blogs:mine' => 'Mes blogues',

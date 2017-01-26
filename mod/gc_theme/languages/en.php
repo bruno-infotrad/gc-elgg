@@ -323,7 +323,7 @@ You can view your pending colleague requests at (Make sure you are logged into t
 	'friend:newfriend:subject' => "%s has made you a colleague",
 	'friend:newfriend:body' => 'You have received this notification because %1$s has made you a colleague in "Agora", GAC\'s collaboration site.<p>Click here to see <a href="%2$s">%1$s</a>\' profile.',
 	'htm_email_handler:note' => '<b>Note:</b> You have received this email because your settings are configured to receive automated notifications. To change your notification preferences, please go to your <a href="%1$s">Personal notifications</a> page.',
-	'htm_email_handler:note2' => '<p>Please do not reply to this message, as email sent to this address cannot be answered. If you have questions, please contact the <a href="http://intranet.dfait-maeci.gc.ca/international_platform-plateforme_internationale/imit-giti/help-aide/index.aspx?view=d">IM/IT help desk</a>',
+	'htm_email_handler:note2' => '<p>Please do not reply to this message, as email sent to this address cannot be answered. If you have questions, please contact the <a href="https://hql-dmesmwb01/SDO/ENG">IM/IT help desk</a>',
 	'htm_email_handler:group_send' => '<b>Note: This message was sent via the "Send message to members" group feature and is not related to your notifications settings.</b>',
 
 	'thewire' => 'Wire',
