@@ -2,7 +2,7 @@
 $of="<div class=\"elgg-module elgg-module-aside\" id=\"top-border\">\n";
 $of.="<h2>".elgg_echo('gc_theme:popular_discussions')."</h2>\n";
 $end=time();
-$start=$end-3600*24*30;
+$start=$end-3600*24*5;
 $db_prefix = elgg_get_config('dbprefix');
 $options = array(
     'type' => 'object',
