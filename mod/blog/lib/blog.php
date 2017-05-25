@@ -183,6 +183,7 @@ function blog_get_page_content_archive($owner_guid, $lower = 0, $upper = 0) {
 		'no_results' => elgg_echo('blog:none'),
 		'preload_owners' => true,
 		'distinct' => false,
+		'limit' => 30,
 	);
 
 	if ($owner_guid) {
