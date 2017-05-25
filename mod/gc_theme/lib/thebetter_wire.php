@@ -10,7 +10,8 @@ function thebetterwire_filter($text) {
 
         // email addresses
         $text = preg_replace(
-                                '/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i',
+                                '/<a href=mailto:.?>(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})<\/a>/i',
+                                //'/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i',
                                 '$1<a href="mailto:$2@$3">$2@$3</a>',
                                 $text);
 
