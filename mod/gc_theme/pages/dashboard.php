@@ -7,6 +7,13 @@ $user = elgg_get_logged_in_user_entity();
 $now = time();
 $jour = 24*3600;
 //$user->pns_viewed = 0;
+if (isset($user->pns_viewed)) {
+	if (is_array($user->pns_viewed)) {
+		$tmp_pns_viewed = $user->pns_viewed[0];
+		$user->deleteMetadata('pns_viewed');
+		$user->pns_viewed = $tmp_pns_viewed;
+	}
+}
 if (!isset($user->pns_viewed) || (($now - $user->pns_viewed) > $jour)) {
 	elgg_load_js('lightbox');
 	elgg_load_css('lightbox');
