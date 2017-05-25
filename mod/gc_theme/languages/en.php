@@ -46,6 +46,8 @@ return array(
 	'groups:invitations:left_menu' => "invitations",
 	'groups:invitations:short' => "Invitations",
 	'groups:membershiprequests:short' => 'Join requests',
+	'groups:closedcontent' => 'The content for this group is only visible to group members.',
+        'groups:closedcontent:join' => "Click the \"Join group\" button to view the group's contents.",
 	'groups:list' => 'A-Z Groups',
 	'groups:list:other' => 'Other',
 	'groups:newest' => 'Newest',

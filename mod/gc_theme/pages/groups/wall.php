@@ -71,7 +71,12 @@ if (group_gatekeeper(false)) {
 	
 	echo elgg_view_page($title, $body);
 } else {
-        $activity = elgg_view('groups/profile/closed_membership');
+	//echo $group->membership;
+	if ($group->membership == ACCESS_PUBLIC) {
+		$activity = elgg_view('groups/profile/closed_contents');
+	} else {
+		$activity = elgg_view('groups/profile/closed_membership');
+	}
 	$body = elgg_view_layout('two_sidebar_group_wall', array(
 		'title' => $title,
 		'content' => $activity,

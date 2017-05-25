@@ -673,6 +673,8 @@ Vous pouvez voir les demandes de vos collègues à (assurez-vous d'être autenti
 	'groups:list' => "Groupes A-Z",
 	'groups:list:other' => "Autre",
 	'groups:newest' => "Récents",
+	'groups:closedcontent' => "Le contenu de ce groupe n'est disponible que pour les membres.",
+        'groups:closedcontent:join' => "Cliquez sur le bouton \"Rejoindre le groupe\" pour y avoir accès.",
 	'group:export_members' => 'Exporter la liste des membres',
 	'group_tools:group:edit:profile' => "Profil du groupe",
 	'group_tools:group:edit:other' => "Autres options",
