@@ -195,10 +195,18 @@
 		$owner = $params['event']->getActor();
 		$language = $params['language'];
 		$method = $params['method'];
+		$start_day = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $entity->start_day);
+		$end_day = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $entity->end_ts);
+		$start_time_hours = date('H', $entity->start_time);
+		$start_time_minutes = date('i', $entity->start_time);
+		$start_time = $start_time_hours.'h'.$start_time_minutes;
+		$end_time_hours = date('H', $entity->end_ts);
+		$end_time_minutes = date('i', $entity->end_ts);
+		$end_time = $end_time_hours.'h'.$end_time_minutes;
 		
 		$subject = elgg_echo('event_manager:notification:subject', array(), $language);
 		$summary = elgg_echo('event_manager:notification:summary', array(), $language);
-		$body = elgg_echo('event_manager:notification:body', array($owner->name, $entity->title), $language);
+		$body = elgg_echo('event_manager:notification:body', array($owner->name, $entity->title, $start_day, $end_day, $start_time, $end_time), $language);
 		if ($description = $entity->shortdescription) {
 			$body .= PHP_EOL . PHP_EOL . $description;
 		} elseif ($description = $entity->description) {
