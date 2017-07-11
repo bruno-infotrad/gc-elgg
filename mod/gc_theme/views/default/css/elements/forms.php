@@ -1,5 +1,10 @@
 <?php
 ?>
+#cbox-replace {
+	position: absolute;
+	top:15%;
+	left: 43%;
+}
 #width_tmp_folder_guid {display: none;}
 [name='folder_guid'],[name='parent_guid'] {width: 17em;}
 #cke_33 > .cke_toolgroup {margin: 0 2px 0;}
