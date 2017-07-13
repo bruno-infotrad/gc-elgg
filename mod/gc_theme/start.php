@@ -391,6 +391,27 @@ function tag_management_pagesetup() {
 	}
 }
 
+function gc_classifieds_cleanup() {
+	$max_lifetime = elgg_get_plugin_setting('classified_expiry', 'gc_theme');
+	if ($max_lifetime && $max_lifetime > 0) {
+		$expired = time()-$max_lifetime*24*3600;
+		$ads = elgg_get_entities(array( 'type' => 'object', 'subtype' => 'page', 'container_guid' => 34082, 'modified_time_upper'=>$expired, 'limit'=>0,));
+	}
+	foreach($ads as $ad) {
+		if ($ad->delete()) {
+			echo "Deleted Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'<br>';
+		} else {
+			echo "<font color='red'>Could not delete Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'<br></font>';
+		}
+	}
+}
+function batch_classifieds_cleanup() {
+        $period = 'daily';
+        elgg_register_plugin_hook_handler('cron', $period, 'gc_classifieds_cleanup');
+}
+// Register a startup event
+elgg_register_event_handler('init','system','batch_classifieds_cleanup');
+
 // Initialization functions
 elgg_register_event_handler('init', 'system', 'gc_theme_init');
 elgg_register_event_handler('pagesetup', 'system', 'tag_management_pagesetup');

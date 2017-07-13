@@ -153,6 +153,7 @@ return array(
 	'gc_theme:settings:label:motd_url' => 'Page Hyperlink',
 	'gc_theme:settings:label:motd_display_expiry' => 'Display until (YYYY-MM-DD)',
         'gc_theme:settings:label:motd_display_duration' => 'Display for (time in minutes)',
+	'gc_theme:settings:label:classified_expiry' => 'Classified ads expiry (days)',
         'gc_theme:settings:label:js_polling_control' => "Polling control (WARNING: TURNING IT OFF MEANS END USERS WILL HAVE TO HARD RELOAD THE PAGE TO RESTART EVEN IF THIS IS CHANGED BACK TO ON)",
 
 	'gc_theme:motd:detail' => 'For more details go to ',

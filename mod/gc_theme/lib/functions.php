@@ -56,28 +56,30 @@ function gc_pages_get_navigation_tree($container) {
 		);
 		$depths[$page->guid] = 0;
 
-		$stack = array();
-		array_push($stack, $page);
-		while (count($stack) > 0) {
-			$parent = array_pop($stack);
-			$children = new ElggBatch('elgg_get_entities_from_metadata', array(
-				'type' => 'object',
-				'subtype' => 'page',
-				'metadata_name' => 'parent_guid',
-				'metadata_value' => $parent->getGUID(),
-				'limit' => false,
-			));
+		if ($container->getGUID() != 34082) {
+			$stack = array();
+			array_push($stack, $page);
+			while (count($stack) > 0) {
+				$parent = array_pop($stack);
+				$children = new ElggBatch('elgg_get_entities_from_metadata', array(
+					'type' => 'object',
+					'subtype' => 'page',
+					'metadata_name' => 'parent_guid',
+					'metadata_value' => $parent->getGUID(),
+					'limit' => false,
+				));
 
-			foreach ($children as $child) {
-				$tree[] = array(
-					'guid' => $child->getGUID(),
-					'title' => $child->title,
-					'url' => $child->getURL(),
-					'parent_guid' => $parent->getGUID(),
-					'depth' => $depths[$parent->guid] + 1,
-				);
-				$depths[$child->guid] = $depths[$parent->guid] + 1;
-				array_push($stack, $child);
+				foreach ($children as $child) {
+					$tree[] = array(
+						'guid' => $child->getGUID(),
+						'title' => $child->title,
+						'url' => $child->getURL(),
+						'parent_guid' => $parent->getGUID(),
+						'depth' => $depths[$parent->guid] + 1,
+					);
+					$depths[$child->guid] = $depths[$parent->guid] + 1;
+					array_push($stack, $child);
+				}
 			}
 		}
 	}

@@ -431,6 +431,7 @@ return array(
 	'gc_theme:settings:label:motd_url' => 'Hyperlien vers la page',
 	'gc_theme:settings:label:motd_display_expiry' => 'Montrer jusqu\'au (YYYY-MM-DD)',
         'gc_theme:settings:label:motd_display_duration' => 'Montrer pendant (durée en minutes)',
+	'gc_theme:settings:label:classified_expiry' => 'Durée d\'expiration des petites annonces (en jours)',
         'gc_theme:settings:label:js_polling_control' => "Reglage mis a jour ajax (ATTENTION: SI LE REGLAGE EST MIS SUR ARRET, CHAQUE USAGER DEVRA RECHARGER LA PAGE POUR QUE LA MISE A JOUR SE REMETTE EN MARCHE MEME SI LE REGLAGE EST REMIS SUR MARCHE)",
 	'gc_theme:motd:detail' => 'Pour plus de détails allez à ',
 	'gc_theme:cometchat:ie_warning' => 'Nous essayons de résoudre le problème d\'interopérabilité entre Internet Explorer (IE) et la fonction de clavardage d\'Agora. En cas de problème avec le clavardage dans IE, vous pouvez utiliser Chrome.',
