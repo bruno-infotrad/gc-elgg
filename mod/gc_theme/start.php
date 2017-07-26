@@ -399,9 +399,9 @@ function gc_classifieds_cleanup() {
 	}
 	foreach($ads as $ad) {
 		if ($ad->delete()) {
-			echo "Deleted Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'<br>';
+			echo "Deleted Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'\n';
 		} else {
-			echo "<font color='red'>Could not delete Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'<br></font>';
+			echo "Could not delete Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated).'\n';
 		}
 	}
 }
