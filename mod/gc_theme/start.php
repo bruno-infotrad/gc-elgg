@@ -401,7 +401,7 @@ function gc_classifieds_cleanup() {
 		if ($ad->delete()) {
 			echo "Deleted Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated)."\r\n";
 		} else {
-			echo "Could not delete Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated)."\n";
+			echo "Could not delete Ad ".$ad->title.' '.elgg_view_friendly_time($ad->time_updated)."\r\n";
 		}
 	}
 }
