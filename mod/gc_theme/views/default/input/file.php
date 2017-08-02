@@ -29,5 +29,5 @@ $attrs = array_merge($defaults, $vars);
 
 ?>
 <div class="input-file"><p class="elgg-button elgg-file-button"><?php echo elgg_echo('file_tools:forms:browse');?></p>
-<input type="file" <?php echo elgg_format_attributes($attrs);?>/>
+<input type="file" <?php echo elgg_format_attributes($attrs);?> multiple/>
 </div>

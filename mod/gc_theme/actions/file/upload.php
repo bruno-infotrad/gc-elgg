@@ -22,6 +22,8 @@ if ($container_guid == 0) {
 
 elgg_make_sticky_form('file');
 
+	//echo var_export($_FILES,true);
+	//exit;
 // check if upload attempted and failed
 if (!empty($_FILES['upload']['name']) && $_FILES['upload']['error'] != 0) {
 	$error = elgg_get_friendly_upload_error($_FILES['upload']['error']);

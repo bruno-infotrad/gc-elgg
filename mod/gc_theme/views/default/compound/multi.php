@@ -61,7 +61,7 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->file
 		"onclick" => "compound_switch_tab(\"files\");"
 	);
 	elgg_load_library('elgg:file');
-	$form_vars = array('enctype' => 'multipart/form-data',);
+	$form_vars = array('enctype' => 'multipart/form-data', 'class' => 'dropzone');
 	$body_vars = file_prepare_form_vars();
 	$form_data .= "<div id='compound_file'>";
 	$form_data .= elgg_view_form('file/upload', $form_vars, array_merge($body_vars, $vars));
