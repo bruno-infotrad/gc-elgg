@@ -9,12 +9,13 @@ function thebetterwire_filter($text) {
         $text = ' ' . $text;
 
         // email addresses
-        $text = preg_replace(
-                                '/<a href=mailto:.?>(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})<\/a>/i',
-                                //'/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i',
+	if (!preg_match('/mailto:/',$text)) {
+        	$text = preg_replace(
+                                /*'/[<a href=mailto:.?>]{0,1}(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})<\/a>/i',*/
+                                '/(^|[^\w])([\w\-\.]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})/i',
                                 '$1<a href="mailto:$2@$3">$2@$3</a>',
                                 $text);
-
+	}
         // links
         $text = parse_urls($text);
 
