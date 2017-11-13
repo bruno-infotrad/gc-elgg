@@ -40,9 +40,11 @@ if (! "<?php echo $guid; ?>" ) {
 	});
 }
 $('input#multi-upload-button[type=submit]').live('click',function(e) {
-	e.preventDefault();
-	$('.dropzone').get(0).dropzone.processQueue();
-	window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+	if ($('.dropzone').get(0).dropzone.files.length > 0) {
+		e.preventDefault();
+		$('.dropzone').get(0).dropzone.processQueue();
+		window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+	}
 });
 $('input[type=file]').live('change',function() {check_file();});
 function check_file(){
