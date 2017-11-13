@@ -39,7 +39,7 @@ if (! "<?php echo $guid; ?>" ) {
 	        //$('#multi-upload-button').css('opacity',0.5);
 	});
 }
-$('input[type=submit]').live('click',function(e) {
+$('input#multi-upload-button[type=submit]').live('click',function(e) {
 	e.preventDefault();
 	$('.dropzone').get(0).dropzone.processQueue();
 	window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
@@ -84,6 +84,7 @@ if ($embed) {
 </div>
 	<div class="gc-input-file-1em gc-file-selected"><?php echo $file_selected; ?></div>
 </div>
+<div id="elgg-dropzone-preview"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone:message'); ?></span></div></div>
 <div class="gc-input-file-row">
 	<div class="gc-input-file-2em"><label><?php echo elgg_echo('tags'); ?></label></div>
 	<div class="gc-input-file-ib"><?php echo elgg_view('input/tags', array('name' => 'tags', 'value' => $tags)); ?></div>

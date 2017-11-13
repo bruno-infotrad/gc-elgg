@@ -25,7 +25,8 @@ $title_text = elgg_echo("file:upload");
 // body
 $form_vars = array(
 	"enctype" => "multipart/form-data",
-	"class" => "hidden"
+	"class" => "hidden",
+
 );
 $body_vars = array();
 
