@@ -120,6 +120,8 @@ return array(
 	
 	'composer:prompt' => 'Share',
 	'sidebar_alt:river:title' => 'Activity Stream',
+	'gc_theme:dropzone:message' => 'Or drop file here',
+	'gc_theme:dropzone_multi:message' => 'Drop file here',
 	'gc_theme:jeditable:click' => 'Click to edit',
 	'gc_theme:no_file_selected' => 'No file selected',
 	'gc_theme:notification:methodhelper:site' => 'Send to Agora messages',

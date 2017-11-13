@@ -60,6 +60,9 @@
 		}
 		
 		// build different forms
+		$single_vars["class"] .= " dropzone";
+		$multi_vars["class"] .= " dropzone-multi";
+		//$multi_vars["class"] .= " dropzone";
 		$body = "<div id='file-tools-upload-wrapper'>";
 		$body .= elgg_view_form("file/upload", $single_vars, $body_vars);
 		$body .= elgg_view_form("file_tools/upload/multi", $multi_vars);

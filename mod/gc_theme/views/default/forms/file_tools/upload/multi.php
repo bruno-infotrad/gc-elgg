@@ -16,28 +16,13 @@
 	}
 	
 	// load JS
-	elgg_load_js("jquery.uploadify");
-	elgg_load_css("jquery.uploadify");
+	elgg_load_js("elgg.dropzone");
 ?>
-<script type="text/javascript">
-	var file_tools_uploadify_return_url = "<?php echo $return_url; ?>";
-</script>
 
 <fieldset>
-	<div>
-
-		<label><?php echo elgg_echo("file:file"); ?></label>
-						
-		<div id="uploadify-queue-wrapper" class="mbm">
-			<span><?php echo elgg_echo("file_tools:upload:form:info"); ?></span>
-		</div>
-		
-		<div class="gc-input-file-row">
-			<div class="gc-input-file-ib"><?php echo elgg_view("input/file", array("id" => "uploadify-button-wrapper", "name" => "upload")); ?></div>
-			<div class="gc-input-file-queue"><?php echo elgg_view("input/button", array("value" => elgg_echo('file_tools:forms:empty_queue'), "class" => "elgg-button-action hidden", "id" => "file-tools-uploadify-cancel")); ?></div>
-		</div>
-	</div>
+<div id="elgg-dropzone-preview-multi"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone_multi:message'); ?></span></div></div>
 	
+	<?php echo elgg_view('input/hidden', array('class' => 'hidden', 'name' => 'upload')); ?>
 	<div id="gc-access-input" class="gc-input-file-row">
 	<?php if(file_tools_use_folder_structure()){ ?>
 		<div class="gc-input-file-1em"><label><?php echo elgg_echo("file_tools:forms:edit:parent"); ?></label></div>
@@ -52,8 +37,18 @@
 			echo elgg_view("input/hidden", array("name" => "container_guid", "value" => $container_guid));
 			echo elgg_view("input/hidden", array("name" => "PHPSESSID", "value" => session_id()));
 							
-			echo elgg_view("input/submit", array("value" => elgg_echo("save")));
+			echo elgg_view("input/submit", array("value" => elgg_echo("save"), "id" => "multi-upload-button2"));
 		?>
 		</div>
 	</div>
 </fieldset>
+<script type="text/javascript">
+//Dropzone.options.previewsContainer = "#elgg-dropzone-preview-multi";
+//new Dropzone(".dropzone-multi");
+new Dropzone(".dropzone-multi", {previewsContainer: "#elgg-dropzone-preview-multi"});
+$('input#multi-upload-button2[type=submit]').live('click',function(e) {
+	e.preventDefault();
+	$('.dropzone-multi').get(0).dropzone.processQueue();
+	window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+});
+</script>

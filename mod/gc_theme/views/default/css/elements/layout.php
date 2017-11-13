@@ -8,6 +8,32 @@
  *
  */
 ?>
+#elgg-dropzone-preview,.dz-file-preview,.dz-image,.dz-details,.dz-size,.dz-filename,.dz-progress,.dz-upload,.dz-error-message {
+	display: inline-block;
+}
+
+#elgg-dropzone-preview, #elgg-dropzone-preview-multi {
+    border-style: dashed;
+    border-width: thin;
+    margin-left: 5%;
+    min-height: 40px;
+    width: 90%;
+}
+#elgg-dropzone-preview-multi {
+    margin-top: 10px;
+}
+.dz-message {
+    font-weight: bold;
+    margin-left: 27%;
+    margin-top: 10px;
+}
+.dz-details,#dz-remove {
+	vertical-align: top;
+}
+.dz-preview {
+    display: flex;
+}
+
 .gc-file-name,
 .gc-file-date-created {
 	display: inline-block;

@@ -7,6 +7,7 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use 
 elgg_load_library('elgg:file_tools');
+elgg_load_js('elgg.dropzone');
 $title = elgg_extract('title', $vars, '');
 $desc = elgg_extract('description', $vars, '');
 $tags = elgg_extract('tags', $vars, '');
@@ -32,12 +33,17 @@ if ($guid) {
 ?>
 <script type="text/javascript">
 if (! "<?php echo $guid; ?>" ) {
-$(document).ready(function() {
-        $('#multi-upload-button').css('pointer-events','none');
-        $('#multi-upload-button').attr('disabled','disabled');
-        $('#multi-upload-button').css('opacity',0.5);
-});
+	$(document).ready(function() {
+	        //$('#multi-upload-button').css('pointer-events','none');
+	        //$('#multi-upload-button').attr('disabled','disabled');
+	        //$('#multi-upload-button').css('opacity',0.5);
+	});
 }
+$('input#multi-upload-button[type=submit]').live('click',function(e) {
+	e.preventDefault();
+	$('.dropzone').get(0).dropzone.processQueue();
+	window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+});
 $('input[type=file]').live('change',function() {check_file();});
 function check_file(){
 	var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
@@ -78,6 +84,7 @@ if ($embed) {
 </div>
 	<div class="gc-input-file-1em gc-file-selected"><?php echo $file_selected; ?></div>
 </div>
+<div id="elgg-dropzone-preview"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone:message'); ?></span></div></div>
 <div class="gc-input-file-row">
 	<div class="gc-input-file-2em"><label><?php echo elgg_echo('tags'); ?></label></div>
 	<div class="gc-input-file-ib"><?php echo elgg_view('input/tags', array('name' => 'tags', 'value' => $tags)); ?></div>
