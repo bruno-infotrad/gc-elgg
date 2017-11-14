@@ -56,6 +56,9 @@ function gc_theme_init() {
 	$gc_wire_js = elgg_get_simplecache_url('js', 'gc_wire');
         elgg_register_simplecache_view('js/gc_wire');
         elgg_register_js('elgg.gc_wire', $gc_wire_js, 'footer');
+	$dropzone = elgg_get_simplecache_url('js', 'dropzone');
+        elgg_register_simplecache_view('js/dropzone');
+        elgg_register_js('elgg.dropzone', $dropzone, 'footer');
 
 	// Add wire
 	add_group_tool_option('thewire',elgg_echo('gc_theme:enable_group_wire'),TRUE);
@@ -231,7 +234,6 @@ function gc_theme_init() {
 	elgg_register_js('elgg.user_handle', '/mod/gc_theme/js/lib/user_handle.js');
 	elgg_register_js('elgg.contributed_by', '/mod/gc_theme/js/lib/contributed_by.js');
 	elgg_register_js('elgg.toggle_cla', '/mod/gc_theme/js/lib/toggle_cla.js');
-	elgg_register_js('elgg.dropzone', '/mod/gc_theme/js/lib/dropzone.js');
 	//elgg_register_js('elgg.scroll', '/mod/gc_theme/js/lib/scroll.js');
 	//elgg_extend_view('page/components/list', 'js/toggle_long_posts');
 	// Tab preferences

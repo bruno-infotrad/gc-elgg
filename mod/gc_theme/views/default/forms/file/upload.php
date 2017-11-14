@@ -16,6 +16,13 @@ $container_guid = elgg_extract('container_guid', $vars);
 if (!$container_guid) {
 	$container_guid = elgg_get_logged_in_user_guid();
 }
+$container = get_entity($container_guid);
+if (elgg_instanceof($container, 'group')) {
+	$group_page = 1;
+} else {
+	$group_page = 0;
+}
+
 $embed = elgg_extract('embed', $vars,0);
 $guid = elgg_extract('guid', $vars, null);
 
@@ -43,7 +50,11 @@ $('input#multi-upload-button[type=submit]').live('click',function(e) {
 	if ($('.dropzone').get(0).dropzone.files.length > 0) {
 		e.preventDefault();
 		$('.dropzone').get(0).dropzone.processQueue();
-		window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+		if (<?php echo $group_page; ?>) {
+			window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all");
+		} else {
+			window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+		}
 	}
 });
 $('input[type=file]').live('change',function() {check_file();});

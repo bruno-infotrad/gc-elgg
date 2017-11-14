@@ -1,4 +1,6 @@
-
+<?php
+?>
+elgg.provide('elgg.dropzone');
 /*
  **
  ** More info at [www.dropzonejs.com](http://www.dropzonejs.com)
@@ -25,7 +27,7 @@
  **
  **/
 
-(function() {
+elgg.dropzone.init = function() {
   var Dropzone, Emitter, ExifRestore, camelize, contentLoaded, detectVerticalSquash, drawImageIOSFix, noop, without,
     slice = [].slice,
     extend1 = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -113,14 +115,18 @@
 
     Dropzone.prototype.events = ["drop", "dragstart", "dragend", "dragenter", "dragover", "dragleave", "addedfile", "addedfiles", "removedfile", "thumbnail", "error", "errormultiple", "processing", "processingmultiple", "uploadprogress", "totaluploadprogress", "sending", "sendingmultiple", "success", "successmultiple", "canceled", "canceledmultiple", "complete", "completemultiple", "reset", "maxfilesexceeded", "maxfilesreached", "queuecomplete"];
 
+    var allowed_extensions_settings = "<?php echo elgg_get_plugin_setting('allowed_extensions', 'file_tools');?>";
+    var allowed_extensions = allowed_extensions_settings.replace(/, /g,",.");
+    allowed_extensions = '.'+allowed_extensions;
+
     Dropzone.prototype.defaultOptions = {
       url: null,
       method: "post",
       withCredentials: false,
       timeout: 30000,
-      parallelUploads: 2,
+      parallelUploads: 10,
       uploadMultiple: false,
-      maxFilesize: 256,
+      maxFilesize: 30,
       paramName: "upload",
       //paramName: "file",
       createImageThumbnails: true,
@@ -139,7 +145,8 @@
       headers: null,
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: null,
+      //acceptedFiles: null,
+      acceptedFiles: allowed_extensions,
       acceptedMimeTypes: null,
       autoProcessQueue: false,
       //autoProcessQueue: true,
@@ -2053,5 +2060,7 @@
   };
 
   contentLoaded(window, Dropzone._autoDiscoverFunction);
+};
 
-}).call(this);
+
+elgg.register_hook_handler('init', 'system', elgg.dropzone.init);

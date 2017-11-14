@@ -398,7 +398,7 @@ return array(
 	'activity' => 'Historique',
         'sidebar_alt:river:title' => 'Historique',
 	'gc_theme:dropzone:message' => 'Ou glissez-deposez votre fichier ici',
-	'gc_theme:dropzone_multi:message' => 'Glissez-déposez votre fichier ici',
+	'gc_theme:dropzone_multi:message' => 'Glissez-déposez vos fichiers ici (max. 10 fichiers)',
 	'gc_theme:jeditable:click' => 'Cliquez pour modifier',
 	'gc_theme:no_file_selected' => 'Aucun fichier choisi',
 	'gc_theme:notification:methodhelper:site' => 'Envoyer un message Agora',

@@ -7,6 +7,12 @@
 
 	$page_owner = elgg_get_page_owner_entity();
 	$container_guid = $page_owner->getGUID();
+	$container = get_entity($container_guid);
+	if (elgg_instanceof($container, 'group')) {
+		$group_page = 1;
+	} else {
+		$group_page = 0;
+	}
 	$site_url = elgg_get_site_url();
 	
 	if(elgg_instanceof($page_owner, "group", null, "ElggGroup")){
@@ -49,6 +55,10 @@ new Dropzone(".dropzone-multi", {previewsContainer: "#elgg-dropzone-preview-mult
 $('input#multi-upload-button2[type=submit]').live('click',function(e) {
 	e.preventDefault();
 	$('.dropzone-multi').get(0).dropzone.processQueue();
-	window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+	if (<?php echo $group_page; ?>) {
+		window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all");
+	} else {
+		window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+	}
 });
 </script>
