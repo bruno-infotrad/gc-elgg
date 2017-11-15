@@ -1,4 +1,5 @@
 <?php
+	elgg_load_js("elgg.dropzone");
 	/**
 	 * Elgg file browser uploader
 	 * 
@@ -20,11 +21,7 @@
 	} else {
 		$return_url = $site_url . "file/owner/" . $page_owner->username;
 	}
-	
-	// load JS
-	elgg_load_js("elgg.dropzone");
 ?>
-
 <fieldset>
 <div id="elgg-dropzone-preview-multi"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone_multi:message'); ?></span></div></div>
 	
@@ -51,7 +48,8 @@
 <script type="text/javascript">
 //Dropzone.options.previewsContainer = "#elgg-dropzone-preview-multi";
 //new Dropzone(".dropzone-multi");
-new Dropzone(".dropzone-multi", {previewsContainer: "#elgg-dropzone-preview-multi"});
+//new Dropzone(".dropzone-multi", {previewsContainer: "#elgg-dropzone-preview-multi"});
+$(".dropzone-multi").dropzone({previewsContainer: "#elgg-dropzone-preview-multi"});
 $('input#multi-upload-button2[type=submit]').live('click',function(e) {
 	e.preventDefault();
 	$('.dropzone-multi').get(0).dropzone.processQueue();
