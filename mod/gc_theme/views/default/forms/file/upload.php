@@ -51,9 +51,9 @@ $('input#multi-upload-button[type=submit]').live('click',function(e) {
 		e.preventDefault();
 		$('.dropzone').get(0).dropzone.processQueue();
 		if (<?php echo $group_page; ?>) {
-			window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all");
+			window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all?sort_by=e.time_created&direction=desc");
 		} else {
-			window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+			window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>?sort_by=e.time_created&direction=desc");
 		}
 	}
 });
@@ -90,14 +90,18 @@ function check_file(){
 <?php
 if ($embed) {
 	echo elgg_view('input/file', array('class' => 'elgg-input-file-embed', 'name' => 'upload'));
+	$preview = "preview-embed";
+	$button = "button-embed";
 } else {
 	echo elgg_view('input/file', array('name' => 'upload'));
+	$preview = "preview";
+	$button = "button";
 }
 ?>
 </div>
 	<div class="gc-input-file-1em gc-file-selected"><?php echo $file_selected; ?></div>
 </div>
-<div id="elgg-dropzone-preview"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone:message'); ?></span></div></div>
+<div id="elgg-dropzone-<?php echo $preview;?>"><div class="dz-message" data-dz-message><span><?php echo elgg_echo('gc_theme:dropzone:message'); ?></span></div></div>
 <div class="gc-input-file-row">
 	<div class="gc-input-file-2em"><label><?php echo elgg_echo('tags'); ?></label></div>
 	<div class="gc-input-file-ib"><?php echo elgg_view('input/tags', array('name' => 'tags', 'value' => $tags)); ?></div>
@@ -149,7 +153,7 @@ if ($guid) {
 	echo elgg_view('input/hidden', array('name' => 'file_guid', 'value' => $guid));
 }
 
-echo elgg_view('input/submit', array('id' => 'multi-upload-button', 'value' => $submit_label));
+echo elgg_view('input/submit', array('id' => "multi-upload-$button", 'value' => $submit_label));
 
 ?>
 </div>

@@ -12,7 +12,7 @@
 	display: inline-block;
 }
 
-#elgg-dropzone-preview, #elgg-dropzone-preview-multi {
+#elgg-dropzone-preview, #elgg-dropzone-preview-multi, #elgg-dropzone-preview-embed {
     border-style: dashed;
     border-width: thin;
     margin-left: 5%;

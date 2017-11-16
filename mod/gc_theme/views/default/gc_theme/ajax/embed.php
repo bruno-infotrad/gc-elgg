@@ -8,8 +8,12 @@ $options['subtype'] = 'file';
 $options['offset'] = $offset;
 $options['limit'] = 6;
 $base_url = get_input('base_url');
+//echo "BASE_URL=$base_url<br>";
 $options['base_url'] = $base_url;
 $container_guid = get_input('group_guid');
+if ($container_guid) {
+	elgg_set_page_owner_guid($container_guid);
+}
 if ($container_guid) {
 	$options['container_guids'] = array(elgg_get_logged_in_user_guid(),$container_guid);
 } else {

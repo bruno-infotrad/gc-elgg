@@ -54,9 +54,9 @@ $('input#multi-upload-button2[type=submit]').live('click',function(e) {
 	e.preventDefault();
 	$('.dropzone-multi').get(0).dropzone.processQueue();
 	if (<?php echo $group_page; ?>) {
-		window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all");
-	} else {
-		window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>");
+	       window.location.replace(elgg.get_site_url()+"/file/group/<?php echo $container_guid;?>/all?sort_by=e.time_created&direction=desc");
+	 } else {
+	       window.location.replace(elgg.get_site_url()+"/file/owner/<?php echo elgg_get_logged_in_user_entity()->username;?>?sort_by=e.time_created&direction=desc");
 	}
 });
 </script>

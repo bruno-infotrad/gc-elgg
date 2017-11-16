@@ -326,7 +326,12 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 					ajax_path = 'ajax/view/gc_theme/ajax/site_notifications';
 					break;
 				case 'embed':
-					var group_guid = page_type
+					page_type="";
+					base_url = path_atoms[0];
+					var group_guid = path_atoms[0].replace("embed?container_guid=","");
+					owner = group_guid;
+					//console.log("GROUP_GUID="+group_guid);
+					//console.log("OWNER="+owner);
 					iteration++;
 					delete_marker = elgg.delete_marker(count,iteration,6);
 					new_offset = parseInt(offset) + 6;
