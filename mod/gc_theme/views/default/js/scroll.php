@@ -69,7 +69,7 @@ elgg.scroll = function(base_url,context,page_type,owner,offset,count,iteration,a
 					//console.log('base_url='+base_url+' context='+context+' page_type='+page_type+' owner='+owner+' offset='+offset);
 					more_url = elgg.more_url(base_url,context,page_type,owner,new_offset,count,iteration);
 					//console.log('more_url='+more_url);
-					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset, 'already_viewed': already_viewed};
+					params = {'base_url': base_url,'page_type': page_type,'owner': owner, 'offset': new_offset, 'already_viewed': already_viewed, 'count': count};
 					ajax_path ='ajax/view/gc_theme/ajax/tagslist';
 					break;
 				case 'dashboard':
