@@ -28,10 +28,17 @@
     margin-top: 10px;
 }
 .dz-details,#dz-remove {
+	font-size: 11px;
+	padding-left: 1em;
 	vertical-align: top;
 }
 .dz-preview {
     display: flex;
+}
+
+.dz-error-message {
+	color: red;
+	font-weight: bold;
 }
 
 .gc-file-name,
