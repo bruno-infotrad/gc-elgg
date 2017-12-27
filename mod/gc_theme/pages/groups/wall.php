@@ -27,7 +27,7 @@ if (group_gatekeeper(false)) {
 	}
 	$composer = '';
 //put test in if user not part of group don't show composer otherwise goes in lalaland
-	if (elgg_is_logged_in() && $group->isMember($user)) {
+	if (elgg_is_logged_in() && $group->isMember($user) && can_write_to_container($user->guid,$group->guid)) {
 		//$composer = elgg_view('page/elements/composer', array('entity' => $group));
 		$composer = elgg_view('compound/multi', array("id" => "invite_to_group",));
 		//$composer = elgg_view_form('compound/add', array('enctype' => 'multipart/form-data'));

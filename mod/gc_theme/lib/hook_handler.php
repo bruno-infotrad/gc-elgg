@@ -1121,10 +1121,11 @@ function gc_theme_container_permissions_handler($hook, $type, $result, $params) 
 	$subtype = $params['subtype'];
 	
 	if ($container instanceof ElggGroup) {
-		if ($subtype == 'thewire') {
+		if ($container->readonly && $container->readonly == 'yes' && !elgg_is_admin_logged_in()) {
 			return false;
 		}
 	}
+	return true;
 }
 
 function gc_theme_group_profile_fields($hook, $type, $fields, $params) {

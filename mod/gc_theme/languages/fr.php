@@ -515,6 +515,8 @@ return array(
 	'gc_theme:show_in_feed:help' => 'Si la case à cocher est selectionnée, le fichier sera visible sur le fil de nouvelles',
 	'gc_theme:enable_group_wire' => 'Activer le file de nouvelles dans le groupe',
 	'gc_theme:top_level_page' => 'Page de plus haut niveau',
+	'gc_theme:groups:readonly' => 'Groupe en mode de lecture seulement',
+	'gc_theme:groups:readonly:warning' => 'Attention! Si vous sélectionnez "Oui", le groupe sera en mode lecture seulement et seuls les administrateurs du site pourront changer ce réglage.',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",

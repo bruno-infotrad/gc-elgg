@@ -4,6 +4,8 @@
  */
 
 ?>
+.gc-theme-readonly {display:inline-block; background-color: #ff8800; min-height: 70px}
+.gc-theme-readonly-choice {float: right; padding-top: 20px;}
 /*.elgg-form-groups-search .elgg-input-checkbox {margin-left:5%}*/
 #remember-me {display:inline-block;}
 li.elgg-menu-item-groups-all {padding-left: 0!important;}

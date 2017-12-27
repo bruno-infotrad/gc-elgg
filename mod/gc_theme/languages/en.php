@@ -248,6 +248,8 @@ return array(
 	'admin:gc_theme:settings' => "Settings",
 	'admin:gc_theme:manage_tags' => "Tag management",
 	'gc_theme:search_tags' => "Search tags",
+	'gc_theme:groups:readonly' => 'Make the group read-only',
+	'gc_theme:groups:readonly:warning' => 'WARNING! Selecting "Yes" will make the group read only and only site administrators will be able to revert this setting.',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

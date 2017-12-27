@@ -55,6 +55,7 @@ if (elgg_instanceof($group, "group") &&  !$group->canEdit()) {
 	forward(REFERER);
 }
 
+error_log("readonly input=".get_input('readonly','no'));
 // Assume we can edit or this is a new group
 if (sizeof($input) > 0) {
 	foreach ($input as $shortname => $value) {
@@ -110,6 +111,9 @@ $group->setPrivateSetting("elgg_default_access", $default_access);
 if ($is_new_group) {
 	// if new group, we need to save so group acl gets set in event handler
 	$group->save();
+} else {
+	$readonly = get_input('readonly','no');
+	$group->readonly = $readonly;
 }
 
 // Invisible group support

@@ -340,7 +340,7 @@ function gc_theme_init() {
 	 * Customize permissions
 	 */
 	elgg_register_plugin_hook_handler('permissions_check:annotate', 'all', 'gc_theme_annotation_permissions_handler');
-	//elgg_register_plugin_hook_handler('container_permissions_check', 'all', 'gc_theme_container_permissions_handler');
+	elgg_register_plugin_hook_handler('container_permissions_check', 'all', 'gc_theme_container_permissions_handler');
 	
 	/**
 	 * Miscellaneous customizations

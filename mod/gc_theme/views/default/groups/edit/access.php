@@ -15,7 +15,26 @@ $visibility = elgg_extract("vis", $vars);
 $owner_guid = elgg_extract("owner_guid", $vars);
 $content_access_mode = elgg_extract("content_access_mode", $vars);
 $default_access = elgg_extract("group_default_access", $vars, ACCESS_DEFAULT);
-
+if ($entity) {
+	$readonly = $entity->readonly;
+	if ($readonly == 'no' || elgg_is_admin_logged_in()){
+		$readonlydiv = '<div class="gc-theme-readonly">';
+		$readonlydiv .= elgg_echo("gc_theme:groups:readonly:warning");
+		$readonlydiv .= elgg_view("input/radio", array( "name" => "readonly",
+        	                "value" => $readonly,
+        	                "options" => array(
+        	                        elgg_echo("option:yes") => "yes",
+        	                        elgg_echo("option:no") => "no",
+        	                ),
+				"class" => 'gc-theme-readonly-choice',
+        	        ));
+		$readonlydiv .= '<label for="groups-readonly">';
+		$readonlydiv .= elgg_echo("gc_theme:groups:readonly");
+		$readonlydiv .= '</label>';
+		$readonlydiv .= '</div>';
+		echo $readonlydiv;
+	}
+}
 ?>
 <div>
 	<label for="groups-membership"><?php echo elgg_echo("groups:membership"); ?></label><br />
