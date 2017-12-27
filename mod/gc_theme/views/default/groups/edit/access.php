@@ -17,6 +17,7 @@ $content_access_mode = elgg_extract("content_access_mode", $vars);
 $default_access = elgg_extract("group_default_access", $vars, ACCESS_DEFAULT);
 if ($entity) {
 	$readonly = $entity->readonly;
+	$readonly = $readonly?$readonly:'no';
 	if ($readonly == 'no' || elgg_is_admin_logged_in()){
 		$readonlydiv = '<div class="gc-theme-readonly">';
 		$readonlydiv .= elgg_echo("gc_theme:groups:readonly:warning");
