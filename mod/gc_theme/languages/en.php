@@ -250,6 +250,7 @@ return array(
 	'gc_theme:search_tags' => "Search tags",
 	'gc_theme:groups:readonly' => 'Make the group read-only',
 	'gc_theme:groups:readonly:warning' => 'WARNING! Selecting "Yes" will make the group read only and only site administrators will be able to revert this setting.',
+	'gc_theme:groups:readonly:message' => 'THIS GROUP IS NOW READ ONLY',
 	'polls:friends' => "Colleagues' polls",
 	'polls:title' => "Title",
 	'friends' => "Colleagues",

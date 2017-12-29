@@ -517,6 +517,7 @@ return array(
 	'gc_theme:top_level_page' => 'Page de plus haut niveau',
 	'gc_theme:groups:readonly' => 'Groupe en mode de lecture seulement',
 	'gc_theme:groups:readonly:warning' => 'Attention! Si vous sélectionnez "Oui", le groupe sera en mode lecture seulement et seuls les administrateurs du site pourront changer ce réglage.',
+	'gc_theme:groups:readonly:message' => 'CE GROUPE EST EN MODE LECTURE SEULEMENT',
 	'polls:friends' => "Sondages des collègues",
 	'polls:title' => "Titre",
 	'friends' => "Collègues",

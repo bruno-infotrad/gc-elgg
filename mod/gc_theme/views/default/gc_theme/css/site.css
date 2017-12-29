@@ -340,6 +340,9 @@ a.tag {
 }
 
 /* line 232, ../sass/site.scss */
+.readonly {
+  background: #ff0000!important;
+}
 .detail-info-cont {
   border-top: 1px solid #dedede;
   background: #efefef;

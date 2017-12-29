@@ -1,6 +1,10 @@
 <?php
 $group = elgg_get_page_owner_entity();
 if ($group instanceof ElggGroup) {
+	if ($group->readonly == 'yes') {
+		$readonly = ' readonly';
+		$vars['readonly'] =$readonly;
+	}
 	$dbprefix = elgg_get_config("dbprefix");
 	$context = elgg_get_context();
 	$owner = $group->getOwnerEntity();
@@ -20,7 +24,7 @@ if ($group instanceof ElggGroup) {
 	}
 	if ($context == 'profile') {
 	?>
-	<div id="group-info-cont" class="detail-info-cont">
+	<div id="group-info-cont" class="detail-info-cont<?php echo $readonly; ?>">
 			<?php echo elgg_view_entity_icon($group, 'medium'); ?>
 			<div class="data-cont">
 				<?php echo elgg_view('page/elements/group_title', $vars); ?>
