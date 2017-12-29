@@ -19,6 +19,11 @@ elgg_push_breadcrumb(elgg_echo('file'), 'file/all');
 $crumbs_title = $owner->name;
 if (elgg_instanceof($owner, 'group')) {
 	elgg_push_breadcrumb($crumbs_title, "file/group/$owner->guid/all");
+	if ($owner->readonly == 'yes') {
+		$show_add_form = FALSE;
+	} else {
+		$show_add_form = TRUE;
+	}
 } else {
 	elgg_push_breadcrumb($crumbs_title, "file/owner/$owner->username");
 }
@@ -29,7 +34,7 @@ elgg_push_breadcrumb($title);
 
 $content = "<div class='gc_theme-view-file'>";
 $content .= elgg_view_entity($file, array('full_view' => true));
-$content .= elgg_view_comments($file);
+$content .= elgg_view_comments($file,$show_add_form);
 $content .= '</div>';
 
 elgg_register_menu_item('title', array(

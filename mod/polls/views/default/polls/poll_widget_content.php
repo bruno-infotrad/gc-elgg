@@ -48,4 +48,9 @@ if (elgg_is_logged_in()) {
 <?php if ($poll->status == 'closed') {echo '<p>'.$closed_text.'</p>';}?>
 <?php echo elgg_view('polls/results_for_widget', array('entity' => $poll)); ?>
 </div>
-<?php echo elgg_view_form('polls/vote', array('id'=>'poll-vote-form-'.$poll->guid),array('entity' => $poll,'callback'=>1,'form_display'=>$poll_display)); ?>
+<?php
+$page_owner = $poll->getContainerEntity();
+if ($page_owner->readonly != 'yes') {
+	echo elgg_view_form('polls/vote', array('id'=>'poll-vote-form-'.$poll->guid),array('entity' => $poll,'callback'=>1,'form_display'=>$poll_display));
+}
+?>

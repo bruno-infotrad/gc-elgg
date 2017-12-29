@@ -167,6 +167,143 @@ function gc_pages_page_handler($page) {
         }
 }
 
+function gc_bookmarks_page_handler($page) {
+        if (! elgg_is_logged_in()) {
+                forward('/dashboard');
+        } else {
+        	if (isset($page[0]) && $page[0] == 'view' && isset($page[1])) {
+			//need to load js and css for right navigation to work
+			elgg_load_js('jquery-treeview');
+        		elgg_load_css('jquery-treeview');
+        		$base_dir = elgg_get_plugins_path() . 'gc_theme/pages/bookmarks';
+                	set_input('guid', $page[1]);
+			include "$base_dir/view.php";
+        	} else {
+                	return bookmarks_page_handler($page);
+        	}
+       		return true;
+        }
+}
+
+function gc_blogs_page_handler($page) {
+        if (! elgg_is_logged_in()) {
+                forward('/dashboard');
+        } else {
+        	if (isset($page[0]) && $page[0] == 'view' && isset($page[1])) {
+			//need to load js and css for right navigation to work
+			$params = gc_blog_get_page_content_read($page[1]);
+			if (isset($params['sidebar'])) {
+				$params['sidebar'] .= elgg_view('blog/sidebar', array('page' => $page_type));
+			} else {
+				$params['sidebar'] = elgg_view('blog/sidebar', array('page' => $page_type));
+			}
+
+			$body = elgg_view_layout('content', $params);
+
+			echo elgg_view_page($params['title'], $body);
+			return true;
+        	} else {
+                	return blog_page_handler($page);
+        	}
+       		return true;
+        }
+}
+
+function gc_blog_get_page_content_read($guid = NULL) {
+
+	$return = array();
+
+	elgg_entity_gatekeeper($guid, 'object', 'blog');
+
+	$blog = get_entity($guid);
+
+	// no header or tabs for viewing an individual blog
+	$return['filter'] = '';
+
+	elgg_set_page_owner_guid($blog->container_guid);
+
+	elgg_group_gatekeeper();
+
+	$return['title'] = $blog->title;
+
+	$container = $blog->getContainerEntity();
+	$crumbs_title = $container->name;
+	if (elgg_instanceof($container, 'group')) {
+		elgg_push_breadcrumb($crumbs_title, "blog/group/$container->guid/all");
+		if ($container->readonly == 'yes') {
+			$show_add_form = FALSE;
+		} else {
+			$show_add_form = TRUE;
+		}
+	} else {
+		elgg_push_breadcrumb($crumbs_title, "blog/owner/$container->username");
+	}
+
+	elgg_push_breadcrumb($blog->title);
+	$return['content'] = elgg_view_entity($blog, array('full_view' => true));
+	// check to see if we should allow comments
+	if ($blog->comments_on != 'Off' && $blog->status == 'published') {
+		$return['content'] .= elgg_view_comments($blog,$show_add_form);
+	}
+
+	return $return;
+}
+
+function gc_polls_page_handler($page) {
+        if (! elgg_is_logged_in()) {
+                forward('/dashboard');
+        } else {
+        	if (isset($page[0]) && $page[0] == 'view' && isset($page[1])) {
+			//need to load js and css for right navigation to work
+			echo gc_polls_get_page_view($page[1]);
+        	} else {
+                	return polls_page_handler($page);
+        	}
+       		return true;
+        }
+}
+
+function gc_polls_get_page_view($guid) {
+	elgg_load_js('elgg.polls');
+	$poll = get_entity($guid);
+	if (elgg_instanceof($poll,'object','poll')) {		
+		// Set the page owner
+		$page_owner = $poll->getContainerEntity();
+		if ($page_owner->readonly == 'yes') {
+			$show_add_form = FALSE;
+		} else {
+			$show_add_form = TRUE;
+		}
+
+		elgg_set_page_owner_guid($page_owner->guid);
+		$title =  $poll->title;
+		$content = elgg_view_entity($poll, array('full_view' => TRUE));
+		//check to see if comments are on
+		if ($poll->comments_on != 'Off') {
+			$content .= elgg_view_comments($poll,$show_add_form);
+		}
+		
+		elgg_push_breadcrumb(elgg_echo('item:object:poll'), "polls/all");
+		if (elgg_instanceof($page_owner,'user')) {
+			elgg_push_breadcrumb($page_owner->name, "polls/owner/{$page_owner->username}");
+		} else {
+			elgg_push_breadcrumb($page_owner->name, "polls/group/{$page_owner->guid}");
+		}
+		elgg_push_breadcrumb($poll->title);
+	} else {			
+		// Display the 'post not found' page instead
+		$title = elgg_echo("polls:notfound");	
+		$content = elgg_view("polls/notfound");	
+		elgg_push_breadcrumb(elgg_echo('item:object:poll'), "polls/all");
+		elgg_push_breadcrumb($title);
+	}
+	
+	$params = array('title' =>$title,'content' => $content,'filter'=>'');
+	$body = elgg_view_layout('content', $params);
+		
+	// Display page
+	return elgg_view_page($title,$body);
+}
 function gc_notifications_page_handler($segments, $handle) {
 	elgg_gatekeeper();
 	$current_user = elgg_get_logged_in_user_entity();

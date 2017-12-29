@@ -20,7 +20,7 @@ $container = elgg_get_page_owner_entity();
 if ($container instanceof ElggGroup) {
 	group_gatekeeper();
 	$user = elgg_get_logged_in_user_entity();
-        if (elgg_is_logged_in() && $container->isMember($user)) {
+        if (elgg_is_logged_in() && $container->isMember($user) && $container->readonly != 'yes') {
 		$show_add_form =  true;
 	} else {
 		$show_add_form =  false;

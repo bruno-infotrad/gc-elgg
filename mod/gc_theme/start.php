@@ -120,6 +120,9 @@ function gc_theme_init() {
 	elgg_register_page_handler('search', 'gc_theme_search_page_handler');
 	elgg_register_page_handler('tags', 'gc_theme_tags_page_handler');
 	elgg_register_page_handler('pages', 'gc_pages_page_handler');
+	elgg_register_page_handler('bookmarks', 'gc_bookmarks_page_handler');
+	elgg_register_page_handler('polls', 'gc_polls_page_handler');
+	elgg_register_page_handler('blog', 'gc_blogs_page_handler');
 	elgg_register_page_handler('events', 'gc_event_manager_page_handler');
 	elgg_register_page_handler('messages', 'gc_messages_page_handler');
 	elgg_unregister_page_handler('site_notifications', 'site_notifications_page_handler');

@@ -2,6 +2,13 @@
 elgg_load_js('elgg.contribute_to');
 	$event = $vars["entity"];
 	$owner = $event->getOwnerEntity();
+	$show_add_form=TRUE;
+	if (elgg_instanceof($event->getContainerEntity(), 'group')) {
+		$group = $event->getContainerEntity();
+		if ($group->readonly =='yes') {
+			$show_add_form=FALSE;
+		}
+	}
 	$event_details = "";
 	
 	$owner_link = elgg_view('output/url', array(
@@ -124,7 +131,7 @@ elgg_load_js('elgg.contribute_to');
 	}
 	
 	if($event->comments_on){
-		$body .= elgg_view_comments($event);
+		$body .= elgg_view_comments($event,$show_add_form);
 	}
 	
 	$entity_menu = elgg_view_menu("entity", array("entity" => $event, "sort_by" => "priority", "class" => "elgg-menu-hz", "handler" => "event"));

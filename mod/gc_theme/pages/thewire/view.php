@@ -21,7 +21,7 @@ if (!$container) {
 
 $title = $thewire->title;
 if (elgg_instanceof($container, 'group')) {
-	if ($container->isMember(elgg_get_logged_in_user_entity())) {
+	if ($container->isMember(elgg_get_logged_in_user_entity())&& $container->readonly != 'yes') {
 		$comments = elgg_view_comments($thewire);
 	} else {
 		$comments = elgg_view_comments($thewire,FALSE);
