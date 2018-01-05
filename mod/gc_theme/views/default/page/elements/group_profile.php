@@ -43,7 +43,7 @@ if ($group instanceof ElggGroup) {
 	<?php echo elgg_view_menu('title', array('sort_by' => 'priority'));?>
 	</div>
 	<?php } else {?>
-	<div class="detail-info-cont">
+	<div class="detail-info-cont<?php echo $readonly; ?>">
 			<?php echo elgg_view_entity_icon($group, 'small'); ?>
 			<div class="data-cont">
 				<?php $vars['title'] = $group->name.'-'.elgg_echo("gc_theme:tabnav:$context");

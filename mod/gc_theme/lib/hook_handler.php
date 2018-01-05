@@ -1137,6 +1137,7 @@ function gc_theme_group_profile_fields($hook, $type, $fields, $params) {
 }
 
 function gc_pages_entity_menu_setup($hook, $type, $return, $params) {
+	//$GLOBALS['GC_THEME']->debug("ENTITY=".var_export($params['entity'],true));
 	if (elgg_in_context('widgets')) {
 		return $return;
 	}
@@ -1144,6 +1145,16 @@ function gc_pages_entity_menu_setup($hook, $type, $return, $params) {
 	$entity = $params['entity'];
 	$container = get_entity($entity->container_guid);
 	$handler = elgg_extract('handler', $params, false);
+	//$GLOBALS['GC_THEME']->debug("HANDLER=".$handler);
+	// readonly section
+	if (!elgg_is_admin_logged_in() && elgg_instanceof($container, 'group')&& $container->readonly =='yes') {
+		foreach ($return as $index => $item) {
+			if ($item->getName() == 'delete' || $item->getName() == 'edit') {
+				unset($return[$index]);
+			}
+		}
+	}
+	// Legacy section
 	if ($handler != 'pages') {
 		return $return;
 	}

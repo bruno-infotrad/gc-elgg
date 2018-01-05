@@ -340,8 +340,14 @@ a.tag {
 }
 
 /* line 232, ../sass/site.scss */
+#readonly2 {
+  color: #760423;
+}
+#readonly {
+  background: #ffffff;
+}
 .readonly {
-  background: #ff0000!important;
+  background: #ff99ff!important;
 }
 .detail-info-cont {
   border-top: 1px solid #dedede;

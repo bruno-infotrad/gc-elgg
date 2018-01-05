@@ -12,13 +12,15 @@
 		$event_options["container_guid"] = $page_owner->getGUID();
 		
 		$who_create_group_events = elgg_get_plugin_setting('who_create_group_events', 'event_manager'); // group_admin, members
-		if((($who_create_group_events == "group_admin") && $page_owner->canEdit()) || (($who_create_group_events == "members") && $page_owner->isMember($user))){
-			elgg_register_menu_item('title', array(
-								'name' => "new",
-								'href' => "events/event/new/" . $page_owner->getGUID(),
-								'text' => elgg_echo("event_manager:menu:new_event"),
-								'link_class' => 'elgg-button elgg-button-action',
-								));
+		if ($page_owner->readonly != 'yes' || elgg_is_admin_logged_in()) {
+			if((($who_create_group_events == "group_admin") && $page_owner->canEdit()) || (($who_create_group_events == "members") && $page_owner->isMember($user))){
+				elgg_register_menu_item('title', array(
+									'name' => "new",
+									'href' => "events/event/new/" . $page_owner->getGUID(),
+									'text' => elgg_echo("event_manager:menu:new_event"),
+									'link_class' => 'elgg-button elgg-button-action',
+									));
+			}
 		}
 	} elseif(elgg_is_logged_in()) {
 		$who_create_site_events = elgg_get_plugin_setting('who_create_site_events', 'event_manager');

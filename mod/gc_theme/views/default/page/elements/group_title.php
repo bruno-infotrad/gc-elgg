@@ -5,9 +5,9 @@ if (isset($vars['header'])) {
 }
 
 if (isset($vars['readonly'])) {
-	echo "<h2{$class}>".elgg_echo('gc_theme:groups:readonly:message')."</h2>";
+	echo "<h2 id='readonly'>".elgg_echo('gc_theme:groups:readonly:message')."</h2>";
 }
-$class = '';
+$class = " id='readonly2'";
 if (isset($vars['class'])) {
 	$class = " class=\"{$vars['class']}\"";
 }
