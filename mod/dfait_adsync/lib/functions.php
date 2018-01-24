@@ -1125,7 +1125,8 @@ function adsync_get_avatar_from_teaminfo($elgg_user) {
 			$block = mcrypt_get_block_size('tripledes', 'ecb');
 			$pad = ord($teaminfo_password[($len = strlen($teaminfo_password)) - 1]);
 			$teaminfo_password = substr($teaminfo_password, 0, strlen($teaminfo_password) - $pad);
-			$link = mssql_connect($teaminfo_server,$teaminfo_username, $teaminfo_password);
+			//$link = mssql_connect($teaminfo_server,$teaminfo_username, $teaminfo_password);
+			$link = mssql_connect($teaminfo_server,$teaminfo_username, "cH7th3FR");
 			if (!$link) {
 				throw new Exception("erreur de connection");
 			}
