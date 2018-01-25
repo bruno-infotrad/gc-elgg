@@ -55,7 +55,6 @@ if (elgg_instanceof($group, "group") &&  !$group->canEdit()) {
 	forward(REFERER);
 }
 
-error_log("readonly input=".get_input('readonly','no'));
 // Assume we can edit or this is a new group
 if (sizeof($input) > 0) {
 	foreach ($input as $shortname => $value) {
