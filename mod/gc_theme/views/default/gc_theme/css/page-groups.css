@@ -37,6 +37,7 @@
   display: none;
   margin-bottom: 10px;
   padding-top: 40px;
+  max-width: 100%;
 }
 /* line 30, ../sass/page-groups.scss */
 #group-info-cont .counter-cont {
