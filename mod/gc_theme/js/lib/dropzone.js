@@ -139,7 +139,7 @@
       headers: null,
       clickable: true,
       ignoreHiddenFiles: true,
-      acceptedFiles: ".avi,.doc,.docx,.dot,.drf,.gif,.htm,.html,.ics,.jpeg,.jpg,.kml,.log,.mid,.mov,.mp3,.mp4,.msg,.odt,.oft,.pdf,.png,.ppsx,.ppt,.pptm,.pptx,.pub,.txt,.vsd,.xls,.xlsm,.xlsx,.xps,.zip",
+      acceptedFiles: ".avi,.doc,.docx,.dot,.drf,.gif,.htm,.html,.ics,.jpeg,.jpg,.kml,.log,.mid,.mov,.mp3,.mp4,.msg,.odt,.oft,.pdf,.png,.ppsx,.ppt,.pptm,.pptx,.pst,.pub,.txt,.vsd,.xls,.xlsm,.xlsx,.xps,.zip",
       //acceptedFiles: null,
       acceptedMimeTypes: null,
       autoProcessQueue: false,
