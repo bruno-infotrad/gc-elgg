@@ -262,6 +262,7 @@ function gc_theme_init() {
 	elgg_register_action("compound/add", "$action_path/compound/add.php");
 	elgg_register_action("compound/remove_exec_content", "$action_path/compound/remove_exec_content.php");
 	elgg_register_action("file/upload", "$action_path/file/upload.php");
+	elgg_register_action("file/upload2", "$action_path/file/upload2.php");
 	elgg_register_action("dashboard/activity_stream", "$action_path/dashboard/activity_stream.php");
 	elgg_register_action("dashboard/new_feeds", "$action_path/dashboard/new_feeds.php");
 	elgg_register_action("dashboard/new_messages", "$action_path/dashboard/new_messages.php");

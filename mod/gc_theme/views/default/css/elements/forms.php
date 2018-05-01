@@ -1,5 +1,11 @@
 <?php
 ?>
+#ckeditor_file_loader {
+	font-weight: bold;
+	position: relative;
+	left: 10%;
+	top: 10px;
+}
 #cbox-replace {
 	position: absolute;
 	top:15%;

@@ -12,7 +12,8 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 		"selected" => true
 	);
 	//$vars['class'] = 'dropzone';
-	$form_data = "<div id='compound_thewire'>";
+	$form_data = "<div id='ckeditor_file_loader'></div>";
+	$form_data .= "<div id='compound_thewire'>";
 	$form_data .= elgg_view_form('compound/add',$vars);
 	$form_data .= "</div>";
 } else {
@@ -32,7 +33,8 @@ if (!($owner instanceof ElggGroup)||($owner instanceof ElggGroup && $owner->thew
 		"selected" => true
 	);
 	//$vars['class'] = 'dropzone';
-	$form_data = "<div id='compound_page'>";
+	$form_data = "<div id='ckeditor_file_loader'></div>";
+	$form_data .= "<div id='compound_page'>";
 	$form_data .= elgg_view_form('pages/edit',array(),$vars);
 	$form_data .= "</div>";
 }
