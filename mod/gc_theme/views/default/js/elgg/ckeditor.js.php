@@ -1,6 +1,15 @@
+<?php
+/*
+						//} else {
+							//file_thumbnail = '<?php get_entity(;?>file_guid<?php )->getIconURL("tiny");?>';
+*/
+$extensions_settings = elgg_get_plugin_setting('allowed_extensions', 'file_tools');
+?>
 define(function(require) {
 	var elgg = require('elgg');
 	var $ = require('jquery'); require('jquery.ckeditor');
+	var allowed_extensions_settings = "<?php echo $extensions_settings;?>";
+	//alert(allowed_extensions_settings);
 	var CKEDITOR = require('ckeditor');
 	
 	CKEDITOR.plugins.addExternal('mediaembed', elgg.get_site_url() + 'mod/ckeditor_extended/vendors/plugins/mediaembed/', 'plugin.js');
@@ -124,10 +133,46 @@ define(function(require) {
 			});
 
 			e.on( 'paste', function( event ) {
-				//console.log(event);
+				console.log(event);
+				if (event.data.method != 'drop') {
+					return;
+				}
 				var fichier = event.data.dataTransfer.getFile(0);
 				//console.log(fichier);
-				if ( CKEDITOR.fileTools.isTypeSupported( fichier, /image\/(png|jpeg|gif)/ ) ) {
+				var type_fichier = fichier.type.split("/")[1];
+				//if ( CKEDITOR.fileTools.isTypeSupported( fichier, /image\/(png|jpeg|gif)/ ) ) {
+				if ((type_fichier == 'vnd.ms-powerpoint') ||
+				    (type_fichier == 'vnd.ms-powerpoint.presentation.macroenabled.12') ||
+				    (type_fichier == 'vnd.openxmlformats-officedocument.presentationml.presentation')) {
+					type_fichier = 'pptx';
+					icon = 'ppt';
+				} else if ((type_fichier == 'avi') ||
+					   (type_fichier == 'mov') ||
+					   (type_fichier == 'mp4')) {
+					  icon='video';
+				} else if ((type_fichier == 'msword') ||
+					   (type_fichier == 'vnd.openxmlformats-officedocument.wordprocessingml.document') ||
+					   (type_fichier == 'vnd.openxmlformats-officedocument.wordprocessingml.template')) {
+					  type_fichier = 'doc';
+					  icon='word';
+				} else if ((type_fichier == 'vnd.ms-excel') ||
+					   (type_fichier == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+					  type_fichier = 'xls';
+					  icon='excel';
+				} else if ((type_fichier == 'mp3') ||
+					   (type_fichier == 'midi')) {
+					  type_fichier = 'mp3';
+					  icon='music';
+				} else if (type_fichier == 'pdf') {
+					  type_fichier = 'pdf';
+					  icon='pdf';
+				} else if (type_fichier == 'plain') {
+					  type_fichier = 'txt';
+					  icon='text';
+				} else {
+					icon='general';
+				}
+				if ( allowed_extensions_settings.indexOf(type_fichier) != -1 ) {
 					var loader = e.uploadRepository.create( fichier );
 					loader.on( 'update', function() {
 						$('#ckeditor_file_loader').html('<font color="green">'+loader.status+'</font>');
@@ -150,12 +195,20 @@ define(function(require) {
 						var file_guid = file_parts[2];
 						var file_name = file_parts[3];
 						var file_url = site_url+loader.url;
-						var file_thumbnail = site_url+'mod/file/thumbnail.php?file_guid='+file_guid+'&size=large';
+						var file_thumbnail;
+						if (type_fichier == 'png' || type_fichier == 'jpeg' || type_fichier == 'gif') {
+							file_thumbnail = site_url+'mod/file/thumbnail.php?file_guid='+file_guid+'&size=large';
+						} else {
+							file_thumbnail = site_url+'mod/gc_theme/graphics/icons/'+icon+'.gif';
+						}
+http://10.20.28.150/elgg-1.10.5/mod/gc_theme/graphics/icons/pdf
 						var dom_element = '<a href="'+file_url+'" class="embed-insert"><img class="elgg-photo " src="'+file_thumbnail+'" alt="'+file_name+'"></a>';
 						var element = CKEDITOR.dom.element.createFromHtml( dom_element);
 						e.insertElement( element );
 						$('#ckeditor_file_loader').empty();
 					});
+				} else {
+					alert("File type is not allowed");
 				}
 			});
 
