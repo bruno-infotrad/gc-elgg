@@ -56,6 +56,8 @@ function gc_theme_init() {
 	$gc_wire_js = elgg_get_simplecache_url('js', 'gc_wire');
         elgg_register_simplecache_view('js/gc_wire');
         elgg_register_js('elgg.gc_wire', $gc_wire_js, 'footer');
+	// this way a simplecache JS file can be loaded from a .php file
+	elgg_register_simplecache_view("js/elgg/ckeditor.js");
 	//$dropzone = elgg_get_simplecache_url('js', 'dropzone');
         //elgg_register_simplecache_view('js/dropzone');
         //elgg_register_js('elgg.dropzone', $dropzone, 'footer');
