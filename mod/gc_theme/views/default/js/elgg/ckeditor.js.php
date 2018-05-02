@@ -183,9 +183,23 @@ define(function(require) {
 					var site_url = elgg.get_site_url();
 					var uploadURL = site_url+'action/file/upload2';
 					var __elgg_token = $( "input[name='__elgg_token']" )[1].value;
+					//console.log('__elgg_token'+__elgg_token);
 					var __elgg_ts = $( "input[name='__elgg_ts']" )[1].value;
+					//console.log('__elgg_ts'+__elgg_ts);
 					var container_guid = $( "input[name='container_guid']" )[1].value;
-					var access_id = $( "select[name='access_id']" )[1].value;
+					//console.log('container_guid'+container_guid);
+					var access0 = $( "select[name='access_id']" )[0];
+					var access1 = $( "select[name='access_id']" )[1];
+					var access_id;
+					if (access1) {
+						access_id = $( "select[name='access_id']" )[1].value;
+					} else if (access0) {
+						access_id = $( "select[name='access_id']" )[0].value;
+					} else {
+						access_id = '2';
+					}
+					//console.log('access_id'+access_id);
+
 					//console.log('container_guid='+container_guid);
 					var fullURL = uploadURL+'?__elgg_token='+__elgg_token+'&__elgg_ts='+__elgg_ts+'&container_guid='+container_guid+'&access_id='+access_id;
 					loader.loadAndUpload( fullURL );
