@@ -4,12 +4,20 @@
 							//file_thumbnail = '<?php get_entity(;?>file_guid<?php )->getIconURL("tiny");?>';
 */
 $extensions_settings = elgg_get_plugin_setting('allowed_extensions', 'file_tools');
+$extension_not_allowed = elgg_echo('gc_theme:file:not_allowed');
 ?>
 define(function(require) {
 	var elgg = require('elgg');
 	var $ = require('jquery'); require('jquery.ckeditor');
 	var allowed_extensions_settings = "<?php echo $extensions_settings;?>";
-	//alert(allowed_extensions_settings);
+	var re = new RegExp('Elgg_lang' + "=([^;]+)");
+	var lang = re.exec(document.cookie);
+	var extension_not_allowed;
+	if (lang[1] == 'fr') {
+		extension_not_allowed = "<?php echo elgg_echo('gc_theme:file:not_allowed',[],'fr');?>";
+	} else {
+		extension_not_allowed = "<?php echo elgg_echo('gc_theme:file:not_allowed',[],'en');?>";
+	}
 	var CKEDITOR = require('ckeditor');
 	
 	CKEDITOR.plugins.addExternal('mediaembed', elgg.get_site_url() + 'mod/ckeditor_extended/vendors/plugins/mediaembed/', 'plugin.js');
@@ -133,7 +141,7 @@ define(function(require) {
 			});
 
 			e.on( 'paste', function( event ) {
-				console.log(event);
+				//console.log(event);
 				if (event.data.method != 'drop') {
 					return;
 				}
@@ -222,7 +230,7 @@ http://10.20.28.150/elgg-1.10.5/mod/gc_theme/graphics/icons/pdf
 						$('#ckeditor_file_loader').empty();
 					});
 				} else {
-					alert("File type is not allowed");
+					alert(extension_not_allowed);
 				}
 			});
 
